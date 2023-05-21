@@ -13,6 +13,9 @@ import warehouse_gallery_05 from './assets/warehouses/warehouse_gallery_05.jpg'
 import warehouse_gallery_06 from './assets/warehouses/warehouse_gallery_06.jpg'
 import warehouse_gallery_07 from './assets/warehouses/warehouse_gallery_07.jpg'
 import warehouse_gallery_08 from './assets/warehouses/warehouse_gallery_08.jpg'
+import news_01 from './assets/news_01.png'
+import news_02 from './assets/news_02.webp'
+import Home_best from './assets/Home_best.png'
 import director from './assets/director.jpg'
 import logo from './assets/logo.png'
 import about_us_1 from './assets/warehouses/about_us_1.png'
@@ -41,6 +44,7 @@ export const assets={
         warehouse_gallery_07,
         warehouse_gallery_08,
     },
+    Home_best,
     about_us_1,
     about_us_2,
     director,
@@ -48,5 +52,7 @@ export const assets={
     warehouseProvider,
     RentAndLease,
     storageFacilities,
-    LogisticsService
+    LogisticsService,
+    news_01,
+    news_02,
 }

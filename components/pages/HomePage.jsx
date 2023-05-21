@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { assets } from '../assets'
 import ResponsiveDrawer from '../UI/ResponsiveDrawer'
 import Footer from '../UI/Footer'
-import { Agriculture, CarRental, Delete, FoodBank, Hardware, HealthAndSafety, Liquor, LocalDining, LocalShipping, MobileFriendly, Refresh, ShoppingCart, Warehouse } from '@mui/icons-material'
+import { Agriculture, ArticleOutlined, CarRental, Delete, FoodBank, Hardware, HealthAndSafety, Liquor, LocalDining, LocalShipping, MobileFriendly, Refresh, ShoppingCart, Warehouse } from '@mui/icons-material'
 import SplashScreen from '../SplashScreen'
 import Link from 'next/link'
+import { Paper } from '@mui/material'
 
 const HomePage = () => {
 
@@ -20,6 +21,23 @@ const HomePage = () => {
     }
   }, [])
 
+  const news=[
+    {
+      title:'Why Logistics service For Business',
+      para:'If you are looking for a reliable and efficient solution for your business warehousing and distribution needs.',
+      img:assets.news_01
+    },
+    {
+      title:'Why Business Need Storage Facilities?',
+      para:'Warehouse Services offer you to the rental or leasing of a commercial storage facility.',
+      img:assets.news_02
+    },
+    {
+      title:'What Are Warehousing Services?',
+      para:'Storage facilities are physical spaces where individuals or businesses can rent units to store their belongings or inventory. ',
+      img:assets.warehouse.warehouse_3
+    },
+  ]
 
   const warehouses=[
     {
@@ -44,18 +62,30 @@ const HomePage = () => {
     }
   ]
 
-  const Card1=({item})=>{
+  const Card2=({item})=>{
     return(
-      <div data-aos="zoom-in-down" className='col-span-1 bg-white rounded-2xl overflow-hidden shadow-xl '>
-      <div className=''>
-        <Image src={item.img} alt='Card' className='w-[100%] object-cover'></Image>
-        <div className='p-4 flex flex-col gap-4'>
-          <h3 Warehouse className='text-2xl text-secondary font-bold'>{item.title}</h3>
-          <p>{item.para}</p>
-          {/* <button className='p-2 w-32 bg-secondary  text-white mt-auto'>KNOW MORE</button> */}
+      <div data-aos="zoom-in-down" className='col-span-1 bg-white rounded-md overflow-hidden shadow-xl'>
+        <div className='p-3'>
+          <Image src={item.img} alt='Card' className='w-[100%] object-cover rounded-md h-44'></Image>
+          <div className='py-4 flex flex-col gap-4'>
+            <h3 Warehouse className='text-2xl text-secondary font-bold'>{item.title}</h3>
+            <p>{item.para} <Link className='text-primary underline' href="">Read More</Link> </p>
+          </div>
         </div>
       </div>
-    </div>
+    )
+  }
+  const Card1=({item})=>{
+    return(
+      <div data-aos="zoom-in-down" className='col-span-1 bg-white rounded-md overflow-hidden shadow-xl '>
+        <div className='p-3'>
+          <Image src={item.img} alt='Card' className='w-[100%] object-cover rounded-md'></Image>
+          <div className='py-4 flex flex-col gap-4'>
+            <h3 Warehouse className='text-2xl text-secondary font-bold'>{item.title}</h3>
+            <p>{item.para}</p>
+          </div>
+        </div>
+      </div>
     )
   }
   return (
@@ -93,18 +123,26 @@ const HomePage = () => {
         <Image data-aos='zoom-in-up' src={assets.bg_02} alt='Hero Section' className='w-[100%] object-cover overflow-x-hidden' />
         </div>
       </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 bg-white px-4 py-20 lg:px-40">
+        <div className='flex flex-col items-center gap-4 p-3 md:border-r-2 md:border-black m-1'><p className='text-5xl'>70+</p><p>WAREHOUSES (PAN INDIA)</p></div>
+        <div className='flex flex-col items-center gap-4 p-3 my-10 md:my-0 md:border-r-2 md:border-black m-1'><p className='text-5xl'>600000+</p><p>Sq.ft Area</p></div>
+        <div className='flex flex-col items-center gap-4 p-3 m-1'><p className='text-5xl'>1548+</p><p>Customer Locations</p></div>
+      </div>
 
       {/* Section 2 */}
       <div className='bg-white px-4 py-20 lg:px-40 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-x-hidden'>
         <div data-aos='fade-right' className='flex flex-col gap-4 overflow-x-hidden'>
-          <h2 className='text-4xl md:text-6xl font-bold'>Welcome to the</h2>
-          <h2 className='text-4xl md:text-6xl font-bold'>Warehouse Servicez</h2>
-          <h2 className='text-3xl md:text-5xl '>Where We Build Your Visions</h2>
-          <p>Welcome to Warehouse Servicez Company, your trusted partner in providing top-quality warehousing solutions for your business needs. Our company specializes in offering warehouse rental and leasing services to a wide range of businesses across different industries. With years of experience in the industry, we have built a solid reputation for providing reliable, secure, and cost-effective warehousing solutions to our clients. Our warehouses are strategically located to ensure easy access and efficient logistics operations. We understand the unique needs of each of our clients and strive to provide personalized services that meet their specific requirements. Whether you need short-term or long-term warehouse space, our team is dedicated to providing you with flexible solutions that are tailored to your needs. Contact us today and let us help you take your business to the next level with our exceptional warehousing services.</p>
-          <Link href='/services' className='bg-secondary text-white w-40 p-2 text-center'>KNOW MORE</Link>
+          <h2 className='text-4xl md:text-5xl font-bold'>Welcome to the</h2>
+          <h2 className='text-4xl md:text-5xl font-bold'>Warehouse Servicez</h2>
+          <h2 className='text-3xl md:text-3xl '>Where We Provide Best Warehouse Service Across India </h2>
+          <p>3PL Warehouse Servicez is one of the leading providers of warehousing solutions in India. With a strong focus on customer satisfaction, the company has been able to establish a reputation for providing top-quality services that are reliable and efficient.</p>
+          <p>They have a network of Warehouses across India, including major States  such as Uttarakhand, Uttarpradesh, Haryana, Punjab, Himachal Pradesh, Jammu and Some Parts of Other State. These Warehouses are strategically located to provide maximum reach and coverage to customers across the country.</p>
+          <p>3PL Warehouse Servicez has a highly trained and experienced team of professionals who are dedicated to providing the best possible service to their customers everyone is committed to ensuring that every client receives the highest level of service and support.</p>
+          <p>If you are looking for a reliable and efficient warehousing partner in India, then 3PL Warehouse Servicez is definitely worth considering.</p>
+          <Link href='/services' className='bg-secondary hover:text-gray-200 text-white w-40 p-2 text-center rounded-sm'>KNOW MORE</Link>
         </div>
         <div className='overflow-x-hidden' data-aos='fade-left'>
-        <Image alt='Hero Section' className='h-[100%] overflow-hidden object-cover ' src={assets.art_01} />
+        <Image alt='Hero Section' className='h-[100%] overflow-hidden object-cover rounded-md' src={assets.Home_best} />
         </div>
       </div>
 
@@ -123,25 +161,35 @@ const HomePage = () => {
           <h3 data-aos='fade-right' id='Ubuntu' className='text-3xl'>Provides High Performance Services For Multiple Industries And Technologies!</h3>
           <div data-aos='fade-left' className='flex flex-col gap-2'>
             <p className='text-gray-200'>Industic Engineering has been built on engineering excellence crafted through unstinted dedication to quality, innovation and a constant objective to serve the global market & decade young industry expertise.</p>
-            <Link href='/services' className='bg-secondary text-white w-40 p-2 text-center'>KNOW MORE</Link>
+            <Link href='/services' className='bg-primary rounded-sm text-white shadow-md hover:text-gray-300 w-40 p-2 text-center'>KNOW MORE</Link>
           </div>
         </div>
           <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><ShoppingCart sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>E-Commerce</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><LocalShipping sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Logistics</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><FoodBank sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>FMCG</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><HealthAndSafety sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Healthcare/Pharma</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><LocalDining sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Food Supply Chain</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><Hardware sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Hardware</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><CarRental sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Automobiles</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><Agriculture sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Agriculture</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><Warehouse sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>CA Cold Store</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><Liquor sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Liquor</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><MobileFriendly sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>E-Waste</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-xl text-black'><Delete sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Recycle</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><ShoppingCart sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>E-Commerce</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><LocalShipping sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Logistics</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><FoodBank sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>FMCG</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><HealthAndSafety sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Healthcare/Pharma</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><LocalDining sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Food Supply Chain</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Hardware sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Hardware</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><CarRental sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Automobiles</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Agriculture sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Agriculture</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Warehouse sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>CA Cold Store</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Liquor sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Liquor</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><MobileFriendly sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>E-Waste</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Delete sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Recycle</p></div>
           </div>
       </div>
       
+      {/* Section 6 */}
+      <div className='px-4 py-20 lg:px-40 bg-white'>
+        <h2 className='text-2xl font-bold w-fit m-auto flex mb-5'><ArticleOutlined sx={{color:'#764BA2'}} fontSize='large'/><p>News & Blog</p></h2>
+        <h2 className='text-4xl font-bold w-fit m-auto text-gray-900'>Our latest news post</h2>
+        <h2 className='text-4xl font-bold w-fit m-auto text-gray-900'>& articles</h2>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
+          {news.map((item,i)=><Card2 key={i} item={item}/>)}
+        </div>
+      </div>
+
       {/* Section 5 */}
 
       <div className="flex flex-col justify-center items-center bg-white text-black overflow-hidden">
