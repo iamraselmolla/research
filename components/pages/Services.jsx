@@ -34,7 +34,7 @@ const Services = () => {
             <div className="text-[#4A4A4A] text-lg flex flex-col">
               <Image
                 src={assets.warehouseProvider}
-                alt="Warehouse Provider"
+                alt="3PL Warehouse Provider"
                 className="rounded-md self-center w-[100%]"
               />
               <p className="mt-8">
@@ -42,7 +42,7 @@ const Services = () => {
                 refers to third-party logistics, which is the outsourcing of
                 logistics and distribution services to an external provider. One
                 of the key services offered by providers is warehouse services.
-                A warehouse Servicez is a company that offers warehousing
+                A 3PL warehouse Servicez is a company that offers warehousing
                 facilities for rent or lease to businesses in need of storage
                 and distribution services.
               </p>
@@ -71,10 +71,10 @@ const Services = () => {
               </p>
               <hr className="mt-8"></hr>
               <h1 className="text-2xl font-extrabold mt-8">
-                Benefits of Warehouse Service Provider for Your Business
+                Benefits of 3PL Warehouse Service Provider for Your Business
               </h1>
               <p className="mt-5">
-                warehouse services are a popular option for businesses we will
+                Warehouse services are a popular option for businesses we will
                 explore some of the benefits of using a warehouse provider.
               </p>
               <ul className="list-disc pl-10 mt-5 flex flex-col gap-2">

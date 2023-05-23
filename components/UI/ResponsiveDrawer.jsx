@@ -22,8 +22,8 @@ const ResponsiveDrawer = () => {
   }
 
   return (
-    <>
-    <div className='h-[100px] bg-white sticky w-[100%] top-0 flex justify-between items-center px-4 text-black z-10 '>
+    <div >
+    <div className='h-[100px]  sticky w-[100%] top-0 flex justify-between items-center px-4 text-black z-10 '>
     {/* <h2 id='LuckiestGuy' className='text-2xl md:text-4xl font-bold'>SIKKAWAREHOUSE</h2> */}
     <Link className='hover:scale-105 duration-200 ease-linear' href='/'><Image src={assets.logo} alt='Logo' className='w-[70%]' /></Link>
       <div className='flex gap-2'>
@@ -35,19 +35,19 @@ const ResponsiveDrawer = () => {
       </div>
     </div>
     <div className='relative'>
-    <div id='menu' className='fixed top-0 left-[-200px] w-[0%] h-[100vh] z-20 bg-white text-black duration-500 flex flex-col justify-center items-center'>
-      <button onClick={()=>closeMenuHandler()} className='absolute top-4 right-4 rounded-full bg-secondary p-2 cursor-pointer'><Close sx={{color:'white'}} fontSize='large'/></button>
-      <div className='flex flex-col gap-2 md:gap-4'>
-      {authCtx.isLoggedIn && <Link href='/dashboard'><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>DASHBOARD</button></Link>}
-      {authCtx.isLoggedIn && <Link href='/dashboard/addwarehouse'><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>ADD WAREHOUSE</button></Link>}
-      <Link href='/'><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>HOME</button></Link>
-      <Link href='/warehouses'><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>WAREHOUSES</button></Link>
-      <Link href='/services'><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>SERVICES</button></Link>
-      <Link href='/director'><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>DIRECTOR&apos;S MESSAGE</button></Link>
-      <Link href='/about'><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>ABOUT</button></Link>
-      <Link href='/contact'><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>CONTACT</button></Link>
-      <Link href='/gallery'><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>GALLERY</button></Link>
-      {authCtx.isLoggedIn &&<button onClick={()=>{authCtx.logout();toast.success("Logged out successfully");closeMenuHandler()}} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>LOGOUT</button>}
+    <div id='menu' className='fixed top-0 left-[-200px] w-[0%] h-[100vh] z-20 bg-gradient-to-tr from-primary  to-secondary text-black duration-500 flex flex-col justify-center items-center'>
+      <button onClick={()=>closeMenuHandler()} className='absolute top-4 right-4 rounded-full bg-primary p-2 cursor-pointer'><Close sx={{color:'white'}} fontSize='large'/></button>
+      <div className='flex flex-col gap-2 md:gap-4 text-black'>
+      {authCtx.isLoggedIn && <Link href='/dashboard'><button onClick={()=>closeMenuHandler()} className=' bg-white  p-2 hover:text-white hover:bg-secondary w-60'>DASHBOARD</button></Link>}
+      {authCtx.isLoggedIn && <Link href='/dashboard/addwarehouse'><button onClick={()=>closeMenuHandler()} className=' bg-white p-2 hover:text-white hover:bg-secondary w-60'>ADD WAREHOUSE</button></Link>}
+      <Link href='/'><button onClick={()=>closeMenuHandler()} className=' bg-white  p-2 hover:text-white hover:bg-secondary w-60'>HOME</button></Link>
+      <Link href='/warehouses'><button onClick={()=>closeMenuHandler()} className=' bg-white  p-2 hover:text-white hover:bg-secondary w-60'>WAREHOUSES</button></Link>
+      <Link href='/services'><button onClick={()=>closeMenuHandler()} className=' bg-white  p-2 hover:text-white hover:bg-secondary w-60'>SERVICES</button></Link>
+      <Link href='/director'><button onClick={()=>closeMenuHandler()} className=' bg-white  p-2 hover:text-white hover:bg-secondary w-60'>DIRECTOR&apos;S MESSAGE</button></Link>
+      <Link href='/about'><button onClick={()=>closeMenuHandler()} className=' bg-white  p-2 hover:text-white hover:bg-secondary w-60'>ABOUT</button></Link>
+      <Link href='/contact'><button onClick={()=>closeMenuHandler()} className=' bg-white  p-2 hover:text-white hover:bg-secondary w-60'>CONTACT</button></Link>
+      <Link href='/gallery'><button onClick={()=>closeMenuHandler()} className=' bg-white  p-2 hover:text-white hover:bg-secondary w-60'>GALLERY</button></Link>
+      {authCtx.isLoggedIn &&<button onClick={()=>{authCtx.logout();toast.success("Logged out successfully");closeMenuHandler()}} className=' bg-white  p-2 hover:text-white hover:bg-secondary w-60'>LOGOUT</button>}
       {/* <Link href=''><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>HOME</button></Link> */}
       {/* <Link href=''><button onClick={()=>closeMenuHandler()} className=' bg-primary text-white p-2 hover:bg-secondary w-60'>HOME</button></Link> */}
 
@@ -55,7 +55,7 @@ const ResponsiveDrawer = () => {
     </div>
     </div>
 
-    </>
+    </div>
   )
 }
 

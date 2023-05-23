@@ -28,12 +28,12 @@ const showPass=()=>{
 
   return (
     <div className={className}>
-        <label className=" text-slate-600 col-span-1 flex items-center" htmlFor={uni}>
+        <label className=" text-white col-span-1 flex items-center" htmlFor={uni}>
           {labelName}
         </label>
         <div className={`flex items-center space-x-2    rounded-lg `}>
         <Field
-          className={`p-2 w-[100%] bg-blue-200 text-black  rounded-lg ${inputClass} ${override ? 'h-10':''}`}
+          className={`p-2 w-[100%] bg-white ring-1 ring-black text-black  rounded-lg ${inputClass} ${override ? 'h-10':''}`}
           placeholder={placeholder}
           type={type!=='password' || type===undefined ? type : type==='password' && passVisibility ? 'text' : 'password'}
           id={uni}

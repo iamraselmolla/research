@@ -14,7 +14,7 @@ const Footer = () => {
     ]
     const currentYear=new Date().getFullYear();
   return (
-    <div className='bg-white text-black '>
+    <div className='bg-quat text-white '>
     <div className='fixed bottom-0 right-0 flex justify-end z-10 '>
         <a rel="noreferrer" target='_blank' href={`https://wa.me/+918191802837`} className='font-bold bg-green-500 w-16 h-16 dark:mb-10 m-4 rounded-full flex justify-center items-center'>
       <WhatsApp sx={{color:'white'}} fontSize='large'/>
@@ -22,12 +22,12 @@ const Footer = () => {
     </div>
     <footer id='footer' className=" w-[100%]  p-4 bg-pri    md:px-6 md:py-8">
 
-    <div id='Ubuntu' className=' py-8 grid grid-cols-1 md:grid-cols-3  gap-8 mdrev:grid-cols-1 text-black'>
+    <div id='Ubuntu' className=' py-8 grid grid-cols-1 md:grid-cols-3  gap-8 mdrev:grid-cols-1 '>
         <div className='flex  flex-col items justify-center gap-4 px-4'>
             <h4 className=' text-xl font-semibold text-center'>Contact Info</h4>
-            <div className='grid grid-cols-5'><Mail sx={{color:'#fd3368'}} fontSize='medium'/> <a href={`mailto:info@warehouseservicez.com`} className='hover:underline  font-semibold col-span-4'>info@warehouseservicez.com</a></div>
-            <div className='grid grid-cols-5'><Call sx={{color:'#fd3368'}} fontSize='medium'/> <a href={`tel:+918191802837`} className='hover:underline  font-semibold col-span-4'>+918191802837</a></div>
-            <div className='grid grid-cols-5'><LocationOn sx={{color:'#fd3368'}} fontSize='medium'/> <span className=' font-semibold col-span-4'>Kartikey Tower,1st Floor , Nr. KVIC Housing Society ,Opposite Kali Mandir Enclave , GMS Road , Dehradun</span></div>
+            <div className='grid grid-cols-5'><Mail sx={{color:'white'}} fontSize='medium'/> <a href={`mailto:info@warehouseservicez.com`} className='hover:underline  font-semibold col-span-4'>info@warehouseservicez.com</a></div>
+            <div className='grid grid-cols-5'><Call sx={{color:'white'}} fontSize='medium'/> <a href={`tel:+918191802837`} className='hover:underline  font-semibold col-span-4'>+918191802837</a></div>
+            <div className='grid grid-cols-5'><LocationOn sx={{color:'white'}} fontSize='medium'/> <span className=' font-semibold col-span-4'>Kartikey Tower,1st Floor , Nr. KVIC Housing Society ,Opposite Kali Mandir Enclave , GMS Road , Dehradun</span></div>
         </div>
 
         <div className='flex  flex-col  items-center px-4 gap-2 '>
@@ -43,9 +43,9 @@ const Footer = () => {
         <h4 className=' text-xl font-semibold'>Follow Us</h4>
         <div className='flex gap-2'>
             
-            <IconButton onClick={()=>{window.open("https://www.facebook.com/warehouseservicez", "_blank")}}><Facebook sx={{color:'#fd3368'}}/></IconButton>
-            <IconButton onClick={()=>{window.open("https://instagram.com/warehouse.services?igshid=NTc4MTIwNjQ2YQ==", "_blank")}}><Instagram sx={{color:'#fd3368'}}/></IconButton>
-            <IconButton onClick={()=>{window.open("https://twitter.com/warehouseservi3", "_blank")}}><Twitter sx={{color:'#fd3368'}}/></IconButton>
+            <IconButton onClick={()=>{window.open("https://www.facebook.com/warehouseservicez", "_blank")}}><Facebook sx={{color:'white'}}/></IconButton>
+            <IconButton onClick={()=>{window.open("https://instagram.com/warehouse.services?igshid=NTc4MTIwNjQ2YQ==", "_blank")}}><Instagram sx={{color:'white'}}/></IconButton>
+            <IconButton onClick={()=>{window.open("https://twitter.com/warehouseservi3", "_blank")}}><Twitter sx={{color:'white'}}/></IconButton>
         </div>
 
         </div>

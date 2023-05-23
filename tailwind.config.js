@@ -13,11 +13,11 @@ module.exports = {
       colors:{
         // primary:'#1D2671',
         // secondary:'#C33764',
-        primary:'#4267B2',
-        secondary:'#614385',
-        ter:'#fd3368',
-        quat:'#aa076b',
-        pent:'#61045f'
+        primary:'#D4145A',
+        secondary:'#FBB03B',
+        ter:'#903749',
+        quat:'#53354A',
+        pent:'#F39189'
       },
       screens:{
         'smrev':{'max':'600px'},

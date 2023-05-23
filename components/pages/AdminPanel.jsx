@@ -77,7 +77,7 @@ const AdminPanel = () => {
       {!authCtx.isLoggedIn ? (
         <>
         <ResponsiveDrawer/>
-        <div className="mt-16 flex justify-center items-center font-sans">
+        <div className="my-16 flex justify-center items-center font-sans">
           <div className="flex flex-col justify-center items-center w-[90vw]  md:w-[500px] md:m-auto  bg-primary text-white rounded-lg md:p-16 p-8">
             <h4 className="uppercase  text-2xl mb-4">Login</h4>
             <form className="w-full flex flex-col  space-y-4">

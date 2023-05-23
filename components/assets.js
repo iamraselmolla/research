@@ -24,6 +24,7 @@ import warehouseProvider from './assets/warehouseprovider.jpg'
 import RentAndLease from './assets/rentAndLease.png'
 import storageFacilities from './assets/rentAndLease.png'
 import LogisticsService from './assets/logisticsService.png'
+import topcard from './assets/topcard.webp'
 
 export const assets={
     bg_01,
@@ -55,4 +56,5 @@ export const assets={
     LogisticsService,
     news_01,
     news_02,
+    topcard
 }

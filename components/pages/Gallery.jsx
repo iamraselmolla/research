@@ -47,7 +47,7 @@ const Gallery = () => {
       </Container>
 
     </div>
-    {modal && <div onClick={()=>{setModal(false)}} className='fixed top-[80px] bottom-0 h-[100vh] w-[100%] backdrop-brightness-50'>
+    {modal && <div onClick={()=>{setModal(false)}} className='fixed  bottom-0 h-[100vh] w-[100%] backdrop-brightness-50'>
       <div className='w-[90%] md:w-[70%] h-[100%]  m-auto flex flex-col justify-center items-center relative '>
         <Image src={currentImage} className='w-[100%] h-[70%]  object-contain' alt='Greenwood hill school image' />
       </div>

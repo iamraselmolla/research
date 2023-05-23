@@ -123,14 +123,14 @@ const HomePage = () => {
         <Image data-aos='zoom-in-up' src={assets.bg_02} alt='Hero Section' className='w-[100%] object-cover overflow-x-hidden' />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 bg-white px-4 py-20 lg:px-40">
+      <div className="grid grid-cols-1 md:grid-cols-3 bg-white px-4 py-20 lg:px-40 border-b-[1px] border-black">
         <div className='flex flex-col items-center gap-4 p-3 md:border-r-2 md:border-black m-1'><p className='text-5xl'>70+</p><p>WAREHOUSES (PAN INDIA)</p></div>
         <div className='flex flex-col items-center gap-4 p-3 my-10 md:my-0 md:border-r-2 md:border-black m-1'><p className='text-5xl'>600000+</p><p>Sq.ft Area</p></div>
         <div className='flex flex-col items-center gap-4 p-3 m-1'><p className='text-5xl'>1548+</p><p>Customer Locations</p></div>
       </div>
 
       {/* Section 2 */}
-      <div className='bg-white px-4 py-20 lg:px-40 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-x-hidden'>
+      <div className='bg-white px-4 py-20 lg:px-40 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 overflow-x-hidden'>
         <div data-aos='fade-right' className='flex flex-col gap-4 overflow-x-hidden'>
           <h2 className='text-4xl md:text-5xl font-bold'>Welcome to the</h2>
           <h2 className='text-4xl md:text-5xl font-bold'>Warehouse Servicez</h2>
@@ -165,24 +165,24 @@ const HomePage = () => {
           </div>
         </div>
           <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><ShoppingCart sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>E-Commerce</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><LocalShipping sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Logistics</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><FoodBank sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>FMCG</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><HealthAndSafety sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Healthcare/Pharma</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><LocalDining sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Food Supply Chain</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Hardware sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Hardware</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><CarRental sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Automobiles</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Agriculture sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Agriculture</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Warehouse sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>CA Cold Store</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Liquor sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Liquor</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><MobileFriendly sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>E-Waste</p></div>
-            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Delete sx={{color:'#764BA2'}} fontSize='large'/><p className='uppercase font-bold'>Recycle</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><ShoppingCart sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>E-Commerce</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><LocalShipping sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>Logistics</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><FoodBank sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>FMCG</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><HealthAndSafety sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>Healthcare/Pharma</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><LocalDining sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>Food Supply Chain</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Hardware sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>Hardware</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><CarRental sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>Automobiles</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Agriculture sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>Agriculture</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Warehouse sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>CA Cold Store</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Liquor sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>Liquor</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><MobileFriendly sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>E-Waste</p></div>
+            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className='flex flex-col items-center bg-white p-4 py-16 rounded-md text-black shadow-md'><Delete sx={{color:'#E84545'}} fontSize='large'/><p className='uppercase font-bold'>Recycle</p></div>
           </div>
       </div>
       
       {/* Section 6 */}
       <div className='px-4 py-20 lg:px-40 bg-white'>
-        <h2 className='text-2xl font-bold w-fit m-auto flex mb-5'><ArticleOutlined sx={{color:'#764BA2'}} fontSize='large'/><p>News & Blog</p></h2>
+        <h2 className='text-2xl font-bold w-fit m-auto flex mb-5'><ArticleOutlined sx={{color:'#E84545'}} fontSize='large'/><p>News & Blog</p></h2>
         <h2 className='text-4xl font-bold w-fit m-auto text-gray-900'>Our latest news post</h2>
         <h2 className='text-4xl font-bold w-fit m-auto text-gray-900'>& articles</h2>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
@@ -196,10 +196,9 @@ const HomePage = () => {
         <h4 data-aos='zoom-out' className="text-4xl font-bold m-10 ">OUR LOCATION</h4>
         <iframe
           className="w-full h-[300px] md:h-[400px]" title="map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3444.2067707735296!2d78.0095323763292!3d30.31663590562165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092925e963de41%3A0xaa1fcaa43e5c52cb!2sWarehouse%20Servicez!5e0!3m2!1sen!2sin!4v1683894184725!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d215.26759734982963!2d78.01201234878606!3d30.314508218704926!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092bdeff7b7e3b%3A0x9bc4f9b9bf05109e!2s3PL%20Warehouse%20Servicez%20Private%20Limited!5e0!3m2!1sen!2sin!4v1684809085322!5m2!1sen!2sin"
         ></iframe>
       </div>
-
 
 
       {/* Footer */}

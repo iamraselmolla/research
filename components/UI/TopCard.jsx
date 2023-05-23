@@ -1,9 +1,12 @@
+import Image from 'next/image'
 import React from 'react'
+import { assets } from '../assets'
 
 const TopCard = ({title}) => {
   return (
-    <div className='bg-secondary h-80  flex flex-col justify-center items-center bg-gradient-to-tr from-[#61045f] to-[#aa076b]'>
-            <h2 className='text-4xl font-bold text-white uppercase text-center'>{title}</h2>
+    <div className=' h-80 flex flex-col justify-center items-center bg-[#6a697b] relative'>
+      <Image src={assets.topcard} className='h-[90%] w-auto' />
+      <h2 id='LuckiestGuy' className='text-4xl md:text-6xl font-bold text-white uppercase text-center absolute top-[40%]'>{title}</h2>
     </div>
   )
 }

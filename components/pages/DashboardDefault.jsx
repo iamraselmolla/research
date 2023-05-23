@@ -79,7 +79,7 @@ const DashboardDefault = () => {
       onChange={()=>handleDisableOrEnable(item?._id,item.enabled)}
       /></td>
       <td className='w-32 p-2 '><a href={`/dashboard/addwarehouse?id=${item?._id}`}><button  className={`w-[100%] ${'bg-primary'} text-white p-1 rounded-sm`}>View</button></a></td>
-      <td className='w-32 p-2 '><button onClick={()=>warehouseDeleteHandler(item._id)}  className={`w-[100%] ${'bg-red-400'} hover:bg-red-300 text-white p-1 rounded-sm`}>Delete</button></td>
+      <td className='w-32 p-2 '><button onClick={()=>warehouseDeleteHandler(item._id)}  className={`w-[100%] ${'bg-primary'} hover:bg-red-300 text-white p-1 rounded-sm`}>Delete</button></td>
     </tr>
     )
   }

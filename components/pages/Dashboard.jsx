@@ -98,10 +98,10 @@ const Dashboard = ({children}) => {
             <ListItemButton
               sx={{
                 width: 240,
-                background: "#614385",
+                background: "#FBB03B",
                 borderRadius: "8px",
                 color:'white',
-                ":hover": { background: '#614385' },
+                ":hover": { background:'#FBB03B' },
               }}
               onClick={()=>{authCtx.logout();toast.warn("Logged out successfully")}}
             >

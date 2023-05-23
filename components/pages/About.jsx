@@ -29,10 +29,10 @@ const About = () => {
     <>
     <ResponsiveDrawer/>
     <TopCard title='About'/>
-    <div className='py-20 bg-white text-black '>
+    <div className='py-20 bg-white text-white '>
       <Container>
         <div className='flex flex-col gap-8'>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-3 bg-white shadow-xl rounded-xl overflow-hidden'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-3 bg-pent shadow-xl rounded-xl overflow-hidden'>
           <Image className='col-span-1 bg-cover h-[100%] w-[100%]' alt='About us' src={assets.about_us_1} />
           <div className='col-span-1 md:col-span-2 p-4 md:p-8'>
             <h2 className='text-2xl font-bold'>We provide best warehouse services Across India</h2>
@@ -40,7 +40,7 @@ const About = () => {
           </div>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-3 bg-white shadow-xl rounded-xl overflow-hidden'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-3 bg-pent shadow-xl rounded-xl overflow-hidden'>
         <Image className='col-span-1 bg-cover h-[100%]' src={assets.about_us_2} />
           <div className='col-span-1 md:col-span-2 p-4 md:p-8'>
             <h2 className='text-2xl font-bold'>Why Choose Us</h2>
@@ -49,25 +49,25 @@ const About = () => {
         </div>
         </div>
         
-        <div className='grid grid-cols-1 md:grid-cols-3 my-10 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-3 my-10 gap-4 text-white'>
 
-          <div className='col-span-1 bg-white shadow-lg rounded-xl p-4 flex flex-col gap-2'>
+          <div className='col-span-1 bg-pent shadow-lg rounded-xl p-4 flex flex-col gap-2'>
             <LocationOn sx={{fontSize:40}}/>
-            <h2 className='text-xl font-bold text-primary'>Area Of Services</h2>
+            <h2 className='text-xl font-bold '>Area Of Services</h2>
             <p>At Presents We Have provided Warehouse In Different Locations: Uttarakhand, U.P, Haryana, Punjab, Himachal , Rajasthan, and some parts of other states.</p>
           </div>
 
 
-          <div className='col-span-1 bg-white shadow-lg rounded-xl p-4 flex flex-col gap-2'>
+          <div className='col-span-1 bg-pent shadow-lg rounded-xl p-4 flex flex-col gap-2'>
             <CurrencyRupeeIcon sx={{fontSize:40}}/>
-            <h2 className='text-xl font-bold text-primary'>Budget Friendly</h2>
+            <h2 className='text-xl font-bold '>Budget Friendly</h2>
             <p>At warehouse Servicez we know the trends are the liabilities , so our company&quot;s moto is &quot;Minimum the rental, longer the Survival&quot;</p>
           </div>
 
 
-          <div className='col-span-1 bg-white shadow-lg rounded-xl p-4 flex flex-col gap-2'>
+          <div className='col-span-1 bg-pent shadow-lg rounded-xl p-4 flex flex-col gap-2'>
             <PhonelinkIcon sx={{fontSize:40}}/>
-            <h2 className='text-xl font-bold text-primary'>Easy Assistance</h2>
+            <h2 className='text-xl font-bold '>Easy Assistance</h2>
             <p>Easy assistance on warehouse service can help streamline your operations and improve your bottom line</p>
           </div>
 
