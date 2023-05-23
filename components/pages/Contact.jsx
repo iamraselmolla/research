@@ -39,7 +39,7 @@ const Contact = () => {
 
     const onSubmitHandler=(values,{resetForm})=>{
       let body=`Name=${values.name}%0D%0A Contact no=${values.mobileNo}%0D%0A Message=${values.message}`
-      router.push(`mailto:info@warehouseservicez.com?subject=Contact&body=${body}`)
+      router.push(`mailto:info@3plwarehouseservicez.com?subject=Contact&body=${body}`)
       resetForm();
     }
 
@@ -65,7 +65,7 @@ const Contact = () => {
       <div className='col-span-1 bg-pent shadow-lg rounded-xl p-4 flex flex-col gap-2'>
         <Mail sx={{fontSize:40}}/>
         <h2 className='text-xl font-bold'>Mail us</h2>
-        <p>info@warehouseservicez.com</p>
+        <p>info@3plwarehouseservicez.com</p>
       </div>
 
 

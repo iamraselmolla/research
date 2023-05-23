@@ -25,7 +25,7 @@ const Footer = () => {
     <div id='Ubuntu' className=' py-8 grid grid-cols-1 md:grid-cols-3  gap-8 mdrev:grid-cols-1 '>
         <div className='flex  flex-col items justify-center gap-4 px-4'>
             <h4 className=' text-xl font-semibold text-center'>Contact Info</h4>
-            <div className='grid grid-cols-5'><Mail sx={{color:'white'}} fontSize='medium'/> <a href={`mailto:info@warehouseservicez.com`} className='hover:underline  font-semibold col-span-4'>info@warehouseservicez.com</a></div>
+            <div className='grid grid-cols-5'><Mail sx={{color:'white'}} fontSize='medium'/> <a href={`mailto:info@3plwarehouseservicez.com`} className='hover:underline  font-semibold col-span-4'>info@3plwarehouseservicez.com</a></div>
             <div className='grid grid-cols-5'><Call sx={{color:'white'}} fontSize='medium'/> <a href={`tel:+918191802837`} className='hover:underline  font-semibold col-span-4'>+918191802837</a></div>
             <div className='grid grid-cols-5'><LocationOn sx={{color:'white'}} fontSize='medium'/> <span className=' font-semibold col-span-4'>Kartikey Tower,1st Floor , Nr. KVIC Housing Society ,Opposite Kali Mandir Enclave , GMS Road , Dehradun</span></div>
         </div>
