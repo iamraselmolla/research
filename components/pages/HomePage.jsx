@@ -6,7 +6,7 @@ import Footer from '../UI/Footer'
 import { Agriculture, ArticleOutlined, CarRental, Delete, FoodBank, Hardware, HealthAndSafety, Liquor, LocalDining, LocalShipping, MobileFriendly, Refresh, ShoppingCart, Warehouse } from '@mui/icons-material'
 import SplashScreen from '../SplashScreen'
 import Link from 'next/link'
-import { Paper } from '@mui/material'
+import { TypeAnimation } from 'react-type-animation'
 
 const HomePage = () => {
 
@@ -116,24 +116,45 @@ const HomePage = () => {
 
       <ResponsiveDrawer/>
       {/* Section 1 */}
-      <div className='bg-gradient-to-tr from-primary to-secondary py-8 overflow-hidden' >
+      {/* <div className='bg-gradient-to-tr from-primary to-secondary py-8 overflow-hidden' >
         <h1 id='LuckiestGuy' className='text-5xl md:text-8xl text-white font-bold text-center overflow-x-hidden' data-aos="fade-right">MINIMUM THE RENTAL</h1>
         <h1 id='LuckiestGuy' className='text-5xl md:text-8xl text-white font-bold text-center overflow-x-hidden' data-aos="fade-left">LONGER THE SURVIVAL</h1>
         <div className='w-[90%] md:w-[720px] m-auto '>
         <Image data-aos='zoom-in-up' src={assets.bg_02} alt='Hero Section' className='w-[100%] object-cover overflow-x-hidden' />
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 bg-white px-4 py-20 lg:px-40 border-b-[1px] border-black">
+      </div> */}
+
+      <div id="main_slider" className='h-[600px] md:h-[720px] bg-cover flex flex-col justify-center items-center  bg-no-repeat bg-fixed  bg-secondary text-5xl md:text-8xl text-white font-bold text-center' >
+      {/* <h1 id='LuckiestGuy' className='text-5xl md:text-8xl text-white font-bold text-center overflow-x-hidden' data-aos="fade-right">MINIMUM THE RENTAL</h1> */}
+      {/* <h1 id='LuckiestGuy' className='text-5xl md:text-8xl text-secondary font-bold text-center overflow-x-hidden' data-aos="fade-left">LONGER THE SURVIVAL</h1> */}
+      <TypeAnimation
+      sequence={[
+        'MINIMUM THE RENTAL',
+        1000, 
+        'LONGER THE SURVIVAL',
+        2000, 
+        () => {
+        }
+      ]}
+      wrapper="span"
+      cursor={true}
+      repeat={Infinity}
+      style={{ fontFamily:'Luckiest Guy' }}
+    />
+    </div>
+
+      {/* Section */}
+      <div className="grid grid-cols-1 md:grid-cols-3 bg-white px-4 py-20 lg:px-40">
         <div className='flex flex-col items-center gap-4 p-3 md:border-r-2 md:border-black m-1'><p className='text-5xl'>70+</p><p>WAREHOUSES (PAN INDIA)</p></div>
         <div className='flex flex-col items-center gap-4 p-3 my-10 md:my-0 md:border-r-2 md:border-black m-1'><p className='text-5xl'>600000+</p><p>Sq.ft Area</p></div>
         <div className='flex flex-col items-center gap-4 p-3 m-1'><p className='text-5xl'>1548+</p><p>Customer Locations</p></div>
       </div>
 
       {/* Section 2 */}
-      <div className='bg-white px-4 py-20 lg:px-40 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 overflow-x-hidden'>
+      <div className='bg-gradient-to-tr from-primary  to-secondary text-white px-4 py-20 lg:px-40 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 overflow-x-hidden'>
         <div data-aos='fade-right' className='flex flex-col gap-4 overflow-x-hidden'>
           <h2 className='text-4xl md:text-5xl font-bold'>Welcome to the</h2>
-          <h2 className='text-4xl md:text-5xl font-bold'>Warehouse Servicez</h2>
+          <h2 className='text-4xl md:text-5xl font-bold'>3PL Warehouse Servicez</h2>
           <h2 className='text-3xl md:text-3xl '>Where We Provide Best Warehouse Service Across India </h2>
           <p>3PL Warehouse Servicez is one of the leading providers of warehousing solutions in India. With a strong focus on customer satisfaction, the company has been able to establish a reputation for providing top-quality services that are reliable and efficient.</p>
           <p>They have a network of Warehouses across India, including major States  such as Uttarakhand, Uttarpradesh, Haryana, Punjab, Himachal Pradesh, Jammu and Some Parts of Other State. These Warehouses are strategically located to provide maximum reach and coverage to customers across the country.</p>
@@ -147,9 +168,9 @@ const HomePage = () => {
       </div>
 
       {/* Section 3 */}
-      <div className='px-4 py-20 lg:px-40 bg-gradient-to-tr from-primary  to-secondary flex flex-col overflow-x-hidden'>
-      <h1 id='LuckiestGuy' className='text-5xl md:text-7xl text-white font-bold text-center' data-aos='zoom-out'>OUR SERVICES</h1>
-      <h2 id='Ubuntu' className='text-white text-2xl text-center mb-8' data-aos='zoom-in'>Our experts offer a full range of warehouse services</h2>
+      <div className='px-4 py-20 lg:px-40 bg-white text-black flex flex-col overflow-x-hidden'>
+      <h1 id='LuckiestGuy' className='text-5xl md:text-7xl  font-bold text-center' data-aos='zoom-out'>OUR SERVICES</h1>
+      <h2 id='Ubuntu' className=' text-2xl text-center mb-8' data-aos='zoom-in'>Our experts offer a full range of warehouse services</h2>
       <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
         {warehouses.map((item,i)=><Card1 key={i} item={item}/>)}
       </div>

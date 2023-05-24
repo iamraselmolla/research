@@ -9,7 +9,7 @@ const index = () => {
       <Head>
       <title>3PL Warehouse Servicez - Rent and lease</title>
         <meta charSet="utf-8" />
-        <link rel="icon" href="https://res.cloudinary.com/da75fckow/image/upload/v1683447238/sikka-warehouse/logo_ul5ndq.png" />
+        <link rel="icon" href="https://res.cloudinary.com/da75fckow/image/upload/v1684919760/sikka-warehouse/logo_e3zr7m.png" />
         <meta property="og:locale" content="en_US" />
         <meta name="description" content="Welcome to the Warehouse Services , where we build your visions." />
         <meta property="og:title" content="3PL Warehouse Servicez - Rent and lease" />
@@ -17,7 +17,7 @@ const index = () => {
 
         <meta property="og:url" content="https://3plwarehouseservicez.com/" />
         {/* <meta name="author" content="Your name here" /> */}
-        <meta property="og:image" itemProp="https://res.cloudinary.com/da75fckow/image/upload/v1683447238/sikka-warehouse/logo_ul5ndq.png"/>
+        <meta property="og:image" itemProp="https://res.cloudinary.com/da75fckow/image/upload/v1684919760/sikka-warehouse/logo_e3zr7m.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Type" content="text/html; charSet=utf-8" />
         <link rel="canonical" href="https://3plwarehouseservicez.com/" />
