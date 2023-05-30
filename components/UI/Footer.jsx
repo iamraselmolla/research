@@ -43,9 +43,9 @@ const Footer = () => {
         <h4 className=' text-xl font-semibold'>Follow Us</h4>
         <div className='flex gap-2'>
             
-            <IconButton onClick={()=>{window.open("https://www.facebook.com/warehouseservicez", "_blank")}}><Facebook sx={{color:'white'}}/></IconButton>
-            <IconButton onClick={()=>{window.open("https://instagram.com/warehouse.services?igshid=NTc4MTIwNjQ2YQ==", "_blank")}}><Instagram sx={{color:'white'}}/></IconButton>
-            <IconButton onClick={()=>{window.open("https://twitter.com/warehouseservi3", "_blank")}}><Twitter sx={{color:'white'}}/></IconButton>
+            <IconButton onClick={()=>{window.open()}}><Facebook sx={{color:'white'}}/></IconButton>
+            <IconButton onClick={()=>{window.open()}}><Instagram sx={{color:'white'}}/></IconButton>
+            <IconButton onClick={()=>{window.open()}}><Twitter sx={{color:'white'}}/></IconButton>
         </div>
 
         </div>
@@ -55,7 +55,7 @@ const Footer = () => {
 
     <hr className="my-6 border-white sm:mx-auto  lg:my-8" />
     <div className='flex flex-col gap-2 md:flex-row w-[100%] items-center justify-center '>
-    <p className="flex justify-center whitespace-nowrap">Copyright &copy; {currentYear} <Link href="/" className="hover:underline pl-1"> Warehouse Servicez</Link></p>
+    <p className="flex justify-center whitespace-nowrap">Copyright &copy; {currentYear} <Link href="/" className="hover:underline pl-1">Research</Link></p>
     <p className='text-center'>All Rights Reserved.</p>
     </div>
     <div className="flex justify-center gap-2"><span>Developed by </span><a target='_blank' rel="noreferrer"  href="https://arterns.in" className="hover:underline">Arterns Technologies</a> </div>
