@@ -35,12 +35,12 @@ const ResponsiveDrawer = () => {
     <Link className='hover:scale-105 duration-200 ease-linear' href='/'><Image src={assets.logo} alt='Logo' className='h-[50px] md:h-[60px] w-auto p-2' /></Link>
 
     {/* Row Menu */}
-    <div className='hidden lg:flex gap-2 '>
-      <Link href='/'><button className=' hover:underline  text-black p-2 '>HOME</button></Link>
-      <Link href='/warehouses'><button  className=' hover:underline  text-black p-2 '>WAREHOUSES</button></Link>
+    {/* <div className='hidden lg:flex gap-2 '> */}
+      {/* <Link href='/'><button className=' hover:underline  text-black p-2 '>HOME</button></Link> */}
+      {/* <Link href='/warehouses'><button  className=' hover:underline  text-black p-2 '>WAREHOUSES</button></Link> */}
 
 
-      {authCtx.isLoggedIn && <div className="group/parent relative group-hover/parent:bg-red-400  text-center h-[100%] flex flex-col items-center justify-center">
+      {/* {authCtx.isLoggedIn && <div className="group/parent relative group-hover/parent:bg-red-400  text-center h-[100%] flex flex-col items-center justify-center">
         <button  className="group/item border-b-2 border-transparent hover:border-black duration-500 h-10">ACCOUNT<KeyboardArrowDown/></button>
           <div className="group/item2 invisible absolute top-2 mt-8  group-hover/parent:visible space-y-1 flex flex-col " >
             <div className=" bg-white shadow-lg border-black w-[240px] flex flex-col">
@@ -51,7 +51,7 @@ const ResponsiveDrawer = () => {
           </div>
           </div>
       </div>
-      }
+      } */}
       {/* <div className="group/parent relative group-hover/parent:bg-red-400  text-center h-[100%] flex flex-col items-center justify-center">
         <button  className="group/item border-b-2 border-transparent hover:border-black duration-500 h-10">SERVICES<KeyboardArrowDown/></button>
           <div className="group/item2 invisible absolute top-2 mt-8  group-hover/parent:visible space-y-1 flex flex-col " >
@@ -63,11 +63,11 @@ const ResponsiveDrawer = () => {
           </div>
       </div> */}
 
-    </div>
+    {/* </div> */}
 
 
     {/* Hamburger Icon */}
-      <div className='flex lg:hidden gap-2'>
+      <div className='flex gap-2'>
         <IconButton onClick={()=>openMenuHandler()}><Menu fontSize='large'/></IconButton>
       </div>
     </div>
