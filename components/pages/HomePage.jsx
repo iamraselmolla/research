@@ -32,7 +32,7 @@ const HomePage = () => {
   const PublishCard = ({ head, data }) => {
     return (
       <>
-        <div className='flex flex-col justify-center w-48 items-center gap-3'>
+        <div className='flex flex-col justify-center items-center gap-3 max-w-xs'>
           <div className="rounded-full bg-lime-500 h-20 w-20"></div>
           <h2 className='font-bold text-2xl tracking-wider'>{head}</h2>
           <p className='text-sm'>{data}</p>
@@ -99,10 +99,28 @@ const HomePage = () => {
             <div className="w-[90%] md:w-[80%] m-auto py-10">
               <h2 className='tracking-wider text-3xl text-ter font-bold'>PUBLISH WITH US</h2>
               <p className="my-5">Become A <a href="#" className='text-blue-800'>#CLEVERAUTHOR</a> in 5 Simple Steps</p>
-              <div className='flex flex-wrap gap-5 justify-evenly items-start my-5'>
+              <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-8 sm:place-items-start place-items-center'>
                 {publishCardData.map((item, i) => (
                   <PublishCard head={item.head} data={item.data} />
                 ))}
+              </div>
+            </div>
+          </div>
+          <div className='bg-white flex flex-col gap-5'>
+            <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>AUTHOR BENEFITS</h2>
+            <p className='text-black text-center md:w-[50%] self-center'>Irrespective of whether you are a first-time publisher, or an experienced author, here is why Clever Fox Publishing is the perfect fit for you. </p>
+            <div className='flex bg-white text-black w-[97%] md:w-[80%] m-auto'>
+              <div className='bg-blue-500 w-full h-[80vh]'></div>
+              <div className='flex flex-col justify-center items-center min-w-[50%]'>
+                <ul className='flex flex-col gap-5 list-disc'>
+                  <li>Highest Royalty rates</li>
+                  <li>Live Royalty Track Dashboard</li>
+                  <li>Expeditious publishing process </li>
+                  <li>Expanded global distribution </li>
+                  <li>Physical store distribution Support </li>
+                  <li>Hand picked publishing team</li>
+                </ul>
+
               </div>
             </div>
           </div>
