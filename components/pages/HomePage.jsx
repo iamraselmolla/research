@@ -21,6 +21,26 @@ const HomePage = () => {
     }
   }, [])
 
+  const publishCardData = [
+    { head: "SIGN UP", data: "Create your author account and get exclusive access to Author Dashboard." },
+    { head: "CONTRACT", data: "On acceptance, finish up the author-publisher agreement in the dashboard." },
+    { head: "MARKETING", data: "Spreading the word is on us and you d be glad to do it with us." },
+    { head: "BOOK REVIEW", data: "Upon submitting your book, we will review it within 24 hours (guided publishing) and 120 hours (Partnered Publishing)." },
+    { head: "PUBLISH", data: "Time to experience hassle-free publishing with Cleverfox." },
+  ]
+
+  const PublishCard = ({ head, data }) => {
+    return (
+      <>
+        <div className='flex flex-col justify-center w-48 items-center gap-3'>
+          <div className="rounded-full bg-lime-500 h-20 w-20"></div>
+          <h2 className='font-bold text-2xl tracking-wider'>{head}</h2>
+          <p className='text-sm'>{data}</p>
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
       {loading ? <SplashScreen /> :
@@ -47,7 +67,7 @@ const HomePage = () => {
               </div>
               <div className="flex flex-col justify-center text-xl my-10 text-center">
                 <h2>SIGN UP TO START PUBLISHING NOW</h2>
-                <div className='grid grid-cols-1 md:grid-cols-4 md:gap-10 my-10 text-black'>
+                <div className='grid grid-cols-1 md:grid-cols-4 gap-5 place-items-center md:place-items-stretch my-10 text-black'>
                   <input type="text" className='w-52 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Name' />
                   <input type="text" className='w-52 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Number' />
                   <input type="text" className='w-52 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Email Address' />
@@ -58,7 +78,7 @@ const HomePage = () => {
                     <option value="ServiceD">ServiceD</option>
                   </select>
                   <textarea className='w-52 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Message' rows={1} />
-                  <button type='submit' className='bg-primary text-white rounded-sm'>SUBMIT</button>
+                  <button type='submit' className='bg-primary text-white rounded-sm w-44'>SUBMIT</button>
                 </div>
               </div>
             </div>
@@ -74,14 +94,19 @@ const HomePage = () => {
               <div className='border-2 py-4 px-2 border-ter text-left rounded-sm'>In Guided Self Publishing our dedicated team of book experts will work with you every step of the way to help bring your vision to life. We’ll help you refine your manuscript, design a book that works, and build a platform to sell and promote your book. And once publishing is complete, you can sit back and relax as your book is sold all over the world across 40,000+ stores.</div>
             </div>
           </div>
-          
+
           <div className="bg-white text-black text-center">
             <div className="w-[90%] md:w-[80%] m-auto py-10">
               <h2 className='tracking-wider text-3xl text-ter font-bold'>PUBLISH WITH US</h2>
               <p className="my-5">Become A <a href="#" className='text-blue-800'>#CLEVERAUTHOR</a> in 5 Simple Steps</p>
+              <div className='flex flex-wrap gap-5 justify-evenly items-start my-5'>
+                {publishCardData.map((item, i) => (
+                  <PublishCard head={item.head} data={item.data} />
+                ))}
+              </div>
             </div>
           </div>
-          
+
           <Footer />
         </div>
       }
