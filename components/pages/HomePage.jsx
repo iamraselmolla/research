@@ -73,7 +73,7 @@ const HomePage = () => {
         <div>
           <ResponsiveDrawer />
           <div className='bg-white'>
-            <div className='flex bg-white text-black w-[97%] md:w-[80%] m-auto'>
+            <div className='flex flex-col md:flex-row gap-5 bg-white text-black w-[97%] md:w-[80%] m-auto'>
               <div className='flex flex-col justify-center gap-4'>
                 <p className='tracking-widest text-2xl'>Bringing your adult BOOK TO LIFE</p>
                 <p className='font-extrabold tracking-tight text-2xl'>Join the India’s Fastest Growing Book Publishing Platform!</p>
@@ -94,16 +94,16 @@ const HomePage = () => {
               <div className="flex flex-col justify-center text-xl my-10 text-center">
                 <h2>SIGN UP TO START PUBLISHING NOW</h2>
                 <div className='grid grid-cols-1 md:grid-cols-4 gap-5 place-items-center md:place-items-stretch my-10 text-black'>
-                  <input type="text" className='w-52 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Name' />
-                  <input type="text" className='w-52 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Number' />
-                  <input type="text" className='w-52 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Email Address' />
-                  <select name="Services" id="services" className='w-52 md:w-[unset] bg-white border-2 border-gray-100 rounded-sm p-1'>
+                  <input type="text" className='w-64 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Name' />
+                  <input type="text" className='w-64 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Number' />
+                  <input type="text" className='w-64 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Email Address' />
+                  <select name="Services" id="services" className='w-64 md:w-[unset] bg-white border-2 border-gray-100 rounded-sm p-1'>
                     <option value="ServiceA">ServiceA</option>
                     <option value="ServiceB">ServiceB</option>
                     <option value="ServiceC">ServiceC</option>
                     <option value="ServiceD">ServiceD</option>
                   </select>
-                  <textarea className='w-52 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Message' rows={1} />
+                  <textarea className='w-64 md:w-[unset] bg-white border-2 border-gray-200 rounded-sm p-1' placeholder='Message' rows={1} />
                   <button type='submit' className='bg-primary text-white rounded-sm w-44'>SUBMIT</button>
                 </div>
               </div>
@@ -135,9 +135,9 @@ const HomePage = () => {
           <div className='bg-white flex flex-col gap-5'>
             <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>AUTHOR BENEFITS</h2>
             <p className='text-black text-center md:w-[50%] self-center'>Irrespective of whether you are a first-time publisher, or an experienced author, here is why Clever Fox Publishing is the perfect fit for you. </p>
-            <div className='flex bg-white text-black w-[97%] md:w-[80%] m-auto'>
-              <div className='bg-blue-500 w-full h-[80vh]'></div>
-              <div className='flex flex-col justify-center items-center min-w-[50%]'>
+            <div className='flex md:flex-row flex-col bg-white text-black w-[97%] md:w-[80%] m-auto'>
+              <div className='bg-blue-500 min-w-[50%] h-[80vh]'></div>
+              <div className='flex flex-col justify-center p-10 md:p-0 md:items-center md:w-[50%]'>
                 <ul className='flex flex-col gap-5 list-disc'>
                   <li>Highest Royalty rates</li>
                   <li>Live Royalty Track Dashboard</li>
@@ -183,9 +183,9 @@ const HomePage = () => {
               comforts:
             </p>
             <div className='flex w-[96%] md:w-[80%] m-auto overflow-x-hidden items-center'>
-              <div className='flex bg-white text-black w-full m-auto'>
+              <div className='flex flex-col md:flex-row bg-white text-black w-full m-auto'>
                 <div className='bg-blue-500 w-full h-[50vh] rounded-md'></div>
-                <div className='flex flex-col items-center min-w-[50%]'>
+                <div className='flex flex-col p-10 md:p-0 md:items-center min-w-[50%]'>
                   <ul className='flex flex-col gap-5 list-disc'>
                     <li>Highest Royalty rates</li>
                     <li>Live Royalty Track Dashboard</li>
@@ -226,8 +226,8 @@ const HomePage = () => {
             <p className='text-black text-center md:w-[50%] self-center'>
               Get real-time numbers on your sales and track the order status.
             </p>
-            <div className='flex bg-white text-black w-[96%] md:w-[80%] m-auto'>
-              <div className='flex flex-col items-center min-w-[50%]'>
+            <div className='flex md:flex-row flex-col-reverse bg-white text-black w-[96%] md:w-[80%] m-auto'>
+              <div className='flex flex-col md:items-center m-10 md:m-0 min-w-[50%]'>
                 <ul className='flex flex-col gap-5'>
                   <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 border-blue-700 p-2 w-56'>Sales Tracker {">>"}</button>
                   <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 text-blue-700 p-2 w-56'>Instant Order {">>"}</button>
@@ -258,7 +258,7 @@ const HomePage = () => {
               We are the best at books. But don’t take the word for it. Hear directly
               from the authors who experienced the transforming publishing journey.
             </p>
-            <div className='grid place-items-center md:grid-cols-8 sm:grid-cols-5 grid-cols-3 gap-5 bg-white text-black w-[96%] md:w-[80%] m-auto'>
+            <div className='grid place-items-center md:grid-cols-8 sm:grid-cols-5 grid-cols-2 gap-5 bg-white text-black w-[96%] md:w-[80%] m-auto'>
               <div className='rounded-full bg-green-700 h-24 w-24' />
               <div className='rounded-full bg-green-700 h-24 w-24' />
               <div className='rounded-full bg-green-700 h-24 w-24' />
