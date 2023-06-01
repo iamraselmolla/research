@@ -7,7 +7,6 @@ import { Agriculture, ArticleOutlined, CarRental, Delete, FoodBank, Hardware, He
 import SplashScreen from '../SplashScreen'
 import Link from 'next/link'
 import { TypeAnimation } from 'react-type-animation'
-
 const HomePage = () => {
 
   const [loading, setLoading] = useState(true);
@@ -22,18 +21,20 @@ const HomePage = () => {
   }, [])
 
   const publishCardData = [
-    { head: "SIGN UP", data: "Create your author account and get exclusive access to Author Dashboard." },
-    { head: "CONTRACT", data: "On acceptance, finish up the author-publisher agreement in the dashboard." },
-    { head: "MARKETING", data: "Spreading the word is on us and you d be glad to do it with us." },
-    { head: "BOOK REVIEW", data: "Upon submitting your book, we will review it within 24 hours (guided publishing) and 120 hours (Partnered Publishing)." },
-    { head: "PUBLISH", data: "Time to experience hassle-free publishing with Cleverfox." },
+    { image: assets.icons.signUp, head: "SIGN UP", data: "Create your author account and get exclusive access to Author Dashboard." },
+    { image: assets.icons.contract, head: "CONTRACT", data: "On acceptance, finish up the author-publisher agreement in the dashboard." },
+    { image: assets.icons.marketing, head: "MARKETING", data: "Spreading the word is on us and you d be glad to do it with us." },
+    { image: assets.icons.review, head: "BOOK REVIEW", data: "Upon submitting your book, we will review it within 24 hours (guided publishing) and 120 hours (Partnered Publishing)." },
+    { image: assets.icons.publish, head: "PUBLISH", data: "Time to experience hassle-free publishing with Cleverfox." },
   ]
 
-  const PublishCard = ({ head, data }) => {
+  const PublishCard = ({ head, data, image }) => {
     return (
       <>
         <div className='flex flex-col justify-center items-center gap-3 max-w-xs'>
-          <div className="rounded-full bg-lime-500 h-20 w-20"></div>
+          <div className="h-20 w-20 p-1">
+            <Image src={image} className='w-full h-full m-auto opacity-80' />
+          </div>
           <h2 className='font-bold text-2xl tracking-wider'>{head}</h2>
           <p className='text-sm'>{data}</p>
         </div>
@@ -79,7 +80,7 @@ const HomePage = () => {
                 <p className='font-extrabold tracking-tight text-2xl'>Join the India’s Fastest Growing Book Publishing Platform!</p>
                 <button type='button' className='w-48 bg-secondary rounded-md p-2 text-white tracking-widest drop-shadow-md'>GET STARTED</button>
               </div>
-              <div className='bg-blue-500 w-full h-[80vh]'></div>
+              <Image src={assets.books} className='md:max-w-[70%] w-full'></Image>
             </div>
           </div>
 
@@ -127,7 +128,7 @@ const HomePage = () => {
               <p className="my-5">Become A <a href="#" className='text-blue-800'>#CLEVERAUTHOR</a> in 5 Simple Steps</p>
               <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-8 sm:place-items-start place-items-center'>
                 {publishCardData.map((item, i) => (
-                  <PublishCard head={item.head} data={item.data} />
+                  <PublishCard head={item.head} data={item.data} image={item.image} />
                 ))}
               </div>
             </div>
@@ -136,7 +137,7 @@ const HomePage = () => {
             <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>AUTHOR BENEFITS</h2>
             <p className='text-black text-center md:w-[50%] self-center'>Irrespective of whether you are a first-time publisher, or an experienced author, here is why Clever Fox Publishing is the perfect fit for you. </p>
             <div className='flex md:flex-row flex-col bg-white text-black w-[97%] md:w-[80%] m-auto'>
-              <div className='bg-blue-500 min-w-[50%] h-[80vh]'></div>
+              <Image src={assets.benefits} className='rounded-xl w-full md:max-w-[50%]'></Image>
               <div className='flex flex-col justify-center p-10 md:p-0 md:items-center md:w-[50%]'>
                 <ul className='flex flex-col gap-5 list-disc'>
                   <li>Highest Royalty rates</li>
@@ -182,9 +183,9 @@ const HomePage = () => {
               Clever Fox, authors of all stages and genres can avail the following
               comforts:
             </p>
-            <div className='flex w-[96%] md:w-[80%] m-auto overflow-x-hidden items-center'>
-              <div className='flex flex-col md:flex-row bg-white text-black w-full m-auto'>
-                <div className='bg-blue-500 w-full h-[50vh] rounded-md'></div>
+            <div className='flex w-[96%] md:w-[80%] m-auto items-center'>
+              <div className='flex flex-col md:flex-row bg-white text-black w-full m-auto items-center'>
+                <Image src={assets.whyChoose} className='w-full md:max-w-[50%]' />
                 <div className='flex flex-col p-10 md:p-0 md:items-center min-w-[50%]'>
                   <ul className='flex flex-col gap-5 list-disc'>
                     <li>Highest Royalty rates</li>
@@ -227,7 +228,7 @@ const HomePage = () => {
               Get real-time numbers on your sales and track the order status.
             </p>
             <div className='flex md:flex-row flex-col-reverse bg-white text-black w-[96%] md:w-[80%] m-auto'>
-              <div className='flex flex-col md:items-center m-10 md:m-0 min-w-[50%]'>
+              <div className='flex flex-col md:items-center md:justify-center m-10 md:m-0 min-w-[50%]'>
                 <ul className='flex flex-col gap-5'>
                   <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 border-blue-700 p-2 w-56'>Sales Tracker {">>"}</button>
                   <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 text-blue-700 p-2 w-56'>Instant Order {">>"}</button>
@@ -235,7 +236,7 @@ const HomePage = () => {
                   <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 text-blue-700 p-2 w-56'>Postsales Analysis {">>"}</button>
                 </ul>
               </div>
-              <div className='bg-blue-500 w-full h-[50vh] rounded-md'></div>
+              <Image src={assets.dashboard} className='w-full md:max-w-[50%]' />
             </div>
           </div>
           <div className='bg-white flex flex-col gap-5 py-20'>
