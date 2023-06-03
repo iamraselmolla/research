@@ -12,7 +12,7 @@ import Footer from '../UI/Footer';
 import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup'
 
-const Login = () => {
+const Signup = () => {
   const [loading, setLoading] = useState(true);
   const [buttonLoading, setButtonLoading] = useState(false);
   useEffect(() => {
@@ -31,48 +31,17 @@ const Login = () => {
       toast.warn('Already Logged In');
     }
   }, []);
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
-  const formHandler = async (e) => {
-    e.preventDefault();
-    if (!formData.username || !formData.password) {
-      toast.warn('All fields are required')
-      return;
-    }
-    try {
-      setButtonLoading(true);
-      const response = await axios.post(
-        '/api/login',
-        {
-          username: formData.username,
-          password: formData.password,
-        }
-      );
-      if (response.status === 200) {
-        toast.success('Signed in uccessfully');
-        setFormData({
-          username: '',
-          password: ''
-        });
-        authCtx.login(response.data.user._id, response.data.user.token, 'admin');
-        router.push('/dashboard');
-      }
-    } catch (err) {
-      console.log(err);
-      const message = err.response.data.message;
-      toast.warn(message);
-    }
-    setButtonLoading(false);
-  };
   const initialValues = {
+    firstname: '',
+    lastname: '',
     username: '',
     password: ''
   }
   const loginSchema = yup.object().shape({
-    username: yup.string().required('Username is required'),
-    password: yup.string().min(8, 'Too Short!!').required('Password is required'),
+    firstname: yup.string().required('Enter First Name'),
+    lastname: yup.string().required('Enter Last Name'),
+    username: yup.string().required('Enter Username'),
+    password: yup.string().min(8, "Too Short!!").required('Enter Password'),
   })
 
   return (
@@ -87,7 +56,7 @@ const Login = () => {
                 <div className='bg-white py-10'>
                   <div className='flex justify-center items-center font-sans' >
                     <div className='flex flex-col justify-center items-center w-[90vw]  md:w-[500px] md:m-auto  bg-ter text-white rounded-lg md:p-16 p-8'>
-                      <h4 className='uppercase  text-2xl mb-4'>Login</h4>
+                      <h4 className='uppercase  text-2xl mb-4'>Sign Up</h4>
                       <Formik
                         initialValues={initialValues}
                         validationSchema={loginSchema}
@@ -97,6 +66,30 @@ const Login = () => {
                       >
                         {({ errors, touched }) => (
                           <Form className='w-full flex flex-col  space-y-4'>
+                            <div className='grid grid-cols-2 gap-4'>
+                            </div>
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                              <div className='flex flex-col gap-2'>
+                                <label htmlFor="firstname">*First Name</label>
+                                <Field
+                                  name="firstname"
+                                  id="firstname"
+                                  className='bg-white rounded-sm w-full h-10 text-black p-4' />
+                                {errors.firstname && touched.firstname ? (
+                                  <div className='text-red-500'>{errors.firstname}</div>
+                                ) : null}
+                              </div>
+                              <div className='flex flex-col gap-2'>
+                                <label htmlFor="lastname">*Last Name</label>
+                                <Field
+                                  name="lastname"
+                                  id="lastname"
+                                  className='bg-white rounded-sm w-full h-10 text-black p-4' />
+                                {errors.lastname && touched.lastname ? (
+                                  <div className='text-red-500'>{errors.lastname}</div>
+                                ) : null}
+                              </div>
+                            </div>
                             <div className='flex flex-col space-y-2 text-md'>
                               <label htmlFor='username'>Username</label >
                               <Field
@@ -114,7 +107,7 @@ const Login = () => {
                                 id="password"
                                 className=' bg-white rounded-sm w-full h-10 text-black p-4'
                               />
-                              {errors.password ? (
+                              {errors.password && touched.password ? (
                                 <div className='text-red-500'>{errors.password}</div>
                               ) : null}
                             </div>
@@ -124,7 +117,7 @@ const Login = () => {
                                   className={`bg-white text-black w-40 h-10  hover:bg-quaternary`}
                                   type="submit"
                                 >
-                                  SIGN IN
+                                  SIGN UP
                                 </button>
                               ) : (
                                 <Spinner size={60} />
@@ -135,10 +128,10 @@ const Login = () => {
 
                       </Formik>
                       <div>
-                        Does not have an account?&nbsp;
-                        <Link href=' /signup' passHref >
+                        Existing User&nbsp; 
+                        <Link href=' /login' passHref >
                           <button className='mt-2 text-blue-300 underline'>
-                          Sign UP
+                           Sign in? 
                           </button >
                         </Link >
                       </div>
@@ -157,4 +150,4 @@ const Login = () => {
   );
 }
 
-export default Login
+export default Signup 
