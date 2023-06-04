@@ -11,6 +11,7 @@ import ResponsiveDrawer from '../UI/ResponsiveDrawer';
 import Footer from '../UI/Footer';
 import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup'
+import InputField, { } from '../UI/InputField'
 
 const Login = () => {
   const [loading, setLoading] = useState(true);
@@ -35,37 +36,37 @@ const Login = () => {
     username: '',
     password: '',
   });
-  const formHandler = async (e) => {
-    e.preventDefault();
-    if (!formData.username || !formData.password) {
-      toast.warn('All fields are required')
-      return;
-    }
-    try {
-      setButtonLoading(true);
-      const response = await axios.post(
-        '/api/login',
-        {
-          username: formData.username,
-          password: formData.password,
-        }
-      );
-      if (response.status === 200) {
-        toast.success('Signed in uccessfully');
-        setFormData({
-          username: '',
-          password: ''
-        });
-        authCtx.login(response.data.user._id, response.data.user.token, 'admin');
-        router.push('/dashboard');
-      }
-    } catch (err) {
-      console.log(err);
-      const message = err.response.data.message;
-      toast.warn(message);
-    }
-    setButtonLoading(false);
-  };
+  // const formHandler = async (e) => {
+  //   e.preventDefault();
+  //   if (!formData.username || !formData.password) {
+  //     toast.warn('All fields are required')
+  //     return;
+  //   }
+  //   try {
+  //     setButtonLoading(true);
+  //     const response = await axios.post(
+  //       '/api/login',
+  //       {
+  //         username: formData.username,
+  //         password: formData.password,
+  //       }
+  //     );
+  //     if (response.status === 200) {
+  //       toast.success('Signed in uccessfully');
+  //       setFormData({
+  //         username: '',
+  //         password: ''
+  //       });
+  //       authCtx.login(response.data.user._id, response.data.user.token, 'admin');
+  //       router.push('/dashboard');
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     const message = err.response.data.message;
+  //     toast.warn(message);
+  //   }
+  //   setButtonLoading(false);
+  // };
   const initialValues = {
     username: '',
     password: ''
@@ -95,50 +96,32 @@ const Login = () => {
                           console.log(values);
                         }}
                       >
-                        {({ errors, touched }) => (
-                          <Form className='w-full flex flex-col  space-y-4'>
-                            <div className='flex flex-col space-y-2 text-md'>
-                              <label htmlFor='username'>Username</label >
-                              <Field
-                                name="username"
-                                id="username"
-                                className='bg-white rounded-sm w-full h-10 text-black p-4' />
-                              {errors.username && touched.username ? (
-                                <div className='text-red-500'>{errors.username}</div>
-                              ) : null}
-                            </div>
-                            <div className='flex flex-col space-y-2 text-md'>
-                              <label htmlFor='password'>Password</label >
-                              <Field
-                                name="password"
-                                id="password"
-                                className=' bg-white rounded-sm w-full h-10 text-black p-4'
-                              />
-                              {errors.password ? (
-                                <div className='text-red-500'>{errors.password}</div>
-                              ) : null}
-                            </div>
-                            <div className=' flex justify-center space-y-2'>
-                              {!buttonLoading ? (
-                                <button
-                                  className={`bg-white text-black w-40 h-10  hover:bg-quaternary`}
-                                  type="submit"
-                                >
-                                  SIGN IN
-                                </button>
-                              ) : (
-                                <Spinner size={60} />
-                              )}
-                            </div>
-                          </Form >
-                        )}
-
+                        <Form className='w-full flex flex-col  space-y-4'>
+                          <div className='flex flex-col space-y-2 text-md'>
+                            <InputField labelName='Username' type='text' uni='username' placeholder='Username' />
+                          </div>
+                          <div className='flex flex-col space-y-2 text-md'>
+                            <InputField labelName='Password' type='password' uni='password' placeholder='Password' />
+                          </div>
+                          <div className=' flex justify-center space-y-2'>
+                            {!buttonLoading ? (
+                              <button
+                                className={`bg-white text-black w-40 h-10  hover:bg-quaternary`}
+                                type="submit"
+                              >
+                                SIGN IN
+                              </button>
+                            ) : (
+                              <Spinner size={60} />
+                            )}
+                          </div>
+                        </Form >
                       </Formik>
                       <div>
                         Does not have an account?&nbsp;
                         <Link href=' /signup' passHref >
                           <button className='mt-2 text-blue-300 underline'>
-                          Sign UP
+                            Sign UP
                           </button >
                         </Link >
                       </div>

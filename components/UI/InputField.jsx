@@ -1,7 +1,6 @@
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ErrorMessage, Field } from "formik";
 import React, { useState } from "react";
-import { IconButton } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const InputField = ({
   labelName,
@@ -12,39 +11,43 @@ const InputField = ({
   inputClass,
   labelClass,
   className,
+  min,
+  fieldRequired,
+  as,
   override,
   children,
-  as
+  disabled
 }) => {
 
-  const [passVisibility,setPassVisibility]=useState(false);
-  const hidePass=()=>{
+  const [passVisibility, setPassVisibility] = useState(false);
+  const hidePass = () => {
     setPassVisibility(false);
-}
+  }
 
-const showPass=()=>{
+  const showPass = () => {
     setPassVisibility(true);
-}
+  }
 
   return (
     <div className={className}>
-        <label className=" text-white col-span-1 flex items-center" htmlFor={uni}>
-          {labelName}
-        </label>
-        <div className={`flex items-center space-x-2    rounded-lg `}>
+      <label className=" text-slate-100  flex items-center" htmlFor={uni}>
+        {labelName} {fieldRequired && <span className="text-red-500 ">*</span>}
+      </label>
+      <div className={`flex items-center space-x-2  rounded-sm  ${disabled ? 'bg-red-100' : 'bg-white'}`}>
         <Field
-          className={`p-2 w-[100%] bg-white ring-1 ring-black text-black  rounded-lg ${inputClass} ${override ? 'h-10':''}`}
+          disabled={disabled}
+          className={`p-2 w-full text-black rounded-sm ${inputClass} ${disabled ? 'bg-red-100' : 'bg-white'}`}
           placeholder={placeholder}
-          type={type!=='password' || type===undefined ? type : type==='password' && passVisibility ? 'text' : 'password'}
+          type={type !== 'password' || type === undefined ? type : type === 'password' && passVisibility ? 'text' : 'password'}
           id={uni}
-          as={as}
           name={uni}
+          as={as}
+          min={min}
         >{override ? children : null}</Field>
-      {type==='password' && passVisibility && <IconButton onClick={()=>hidePass()} className="p-1 cursor-pointer" ><VisibilityOff/></IconButton>}
-      {type==='password' && !passVisibility && <IconButton onClick={()=>showPass()} className="p-1 cursor-pointer" ><Visibility/></IconButton>}
-
+        {type === 'password' && passVisibility && <VisibilityOff onClick={() => hidePass()} className="p-1 text-black cursor-pointer" />}
+        {type === 'password' && !passVisibility && <Visibility onClick={() => showPass()} className="p-1 text-black cursor-pointer" />}
       </div>
-      <ErrorMessage name={uni} component={(props)=><div className="text-red-500">{props.children}</div>} />
+      <ErrorMessage name={uni} component={(props) => <div className="text-red-500">{props.children}</div>} />
 
     </div>
   );

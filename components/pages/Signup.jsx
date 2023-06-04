@@ -11,6 +11,7 @@ import ResponsiveDrawer from '../UI/ResponsiveDrawer';
 import Footer from '../UI/Footer';
 import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup'
+import InputField, { } from '../UI/InputField'
 
 const Signup = () => {
   const [loading, setLoading] = useState(true);
@@ -70,46 +71,17 @@ const Signup = () => {
                             </div>
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                               <div className='flex flex-col gap-2'>
-                                <label htmlFor="firstname">*First Name</label>
-                                <Field
-                                  name="firstname"
-                                  id="firstname"
-                                  className='bg-white rounded-sm w-full h-10 text-black p-4' />
-                                {errors.firstname && touched.firstname ? (
-                                  <div className='text-red-500'>{errors.firstname}</div>
-                                ) : null}
+                                <InputField labelName='*First Name' type='text' uni='firstname' placeholder='First Name' />
                               </div>
                               <div className='flex flex-col gap-2'>
-                                <label htmlFor="lastname">*Last Name</label>
-                                <Field
-                                  name="lastname"
-                                  id="lastname"
-                                  className='bg-white rounded-sm w-full h-10 text-black p-4' />
-                                {errors.lastname && touched.lastname ? (
-                                  <div className='text-red-500'>{errors.lastname}</div>
-                                ) : null}
+                                <InputField labelName='*Last Name' type='text' uni='lastname' placeholder='Last Name' />
                               </div>
                             </div>
                             <div className='flex flex-col space-y-2 text-md'>
-                              <label htmlFor='username'>Username</label >
-                              <Field
-                                name="username"
-                                id="username"
-                                className='bg-white rounded-sm w-full h-10 text-black p-4' />
-                              {errors.username && touched.username ? (
-                                <div className='text-red-500'>{errors.username}</div>
-                              ) : null}
+                              <InputField labelName='*Username' type='text' uni='username' placeholder='Username' />
                             </div>
                             <div className='flex flex-col space-y-2 text-md'>
-                              <label htmlFor='password'>Password</label >
-                              <Field
-                                name="password"
-                                id="password"
-                                className=' bg-white rounded-sm w-full h-10 text-black p-4'
-                              />
-                              {errors.password && touched.password ? (
-                                <div className='text-red-500'>{errors.password}</div>
-                              ) : null}
+                              <InputField labelName='*Password' type='password' uni='password' placeholder='Password' />
                             </div>
                             <div className=' flex justify-center space-y-2'>
                               {!buttonLoading ? (
@@ -128,10 +100,10 @@ const Signup = () => {
 
                       </Formik>
                       <div>
-                        Existing User&nbsp; 
+                        Existing User&nbsp;
                         <Link href=' /login' passHref >
                           <button className='mt-2 text-blue-300 underline'>
-                           Sign in? 
+                            Sign in?
                           </button >
                         </Link >
                       </div>
