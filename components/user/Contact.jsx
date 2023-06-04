@@ -1,11 +1,11 @@
 import React from 'react'
 import Dashboard from '../pages/Dashboard'
 import PersonalDetailsNavigation from '../UI/PersonalDetailsNavigation'
+import * as yup from 'yup'
 import { Form, Formik } from 'formik'
 import InputFieldDark from '../UI/InputFieldDark'
-import * as yup from "yup"
 
-const PersonalDetails = () => {
+const Contact = () => {
   const fields = [
     { placeholder: "First Name", labelName: "First Name", uni: "firstname", initialValue: "", type: "text", fieldrequired: true },
     { placeholder: "Last Name", labelName: "Last Name", uni: "Lastname", initialValue: "", type: "text", fieldrequired: true },
@@ -19,11 +19,10 @@ const PersonalDetails = () => {
   fields.map(item => { initialValues[item.uni] = item.initialValue })
   fields.map(item => { details[item.uni] = item.fieldrequired ? yup.string().required("Field Can't be empty") : yup.string() })
 
-
   const detailSchema = yup.object().shape({ ...details })
   return (
     <Dashboard>
-      <PersonalDetailsNavigation activePage="personal" />
+      <PersonalDetailsNavigation activePage="contact" />
       <div>
         <Formik
           initialValues={initialValues}
@@ -46,4 +45,4 @@ const PersonalDetails = () => {
   )
 }
 
-export default PersonalDetails
+export default Contact
