@@ -67,21 +67,20 @@ const Signup = () => {
                       >
                         {({ errors, touched }) => (
                           <Form className='w-full flex flex-col  space-y-4'>
-                            <div className='grid grid-cols-2 gap-4'>
+
+                            <div className='grid grid-cols-1  gap-2'>
+                              <InputField labelName='First Name' type='text' uni='firstname' placeholder='First Name' fieldRequired={true} />
+                              <InputField labelName='Last Name' type='text' uni='lastname' placeholder='Last Name' fieldRequired={true} />
+                              <InputField labelName='Username' type='text' uni='username' placeholder='Username' fieldRequired={true} />
+                              <InputField labelName='Password' type='password' uni='password' placeholder='Password' fieldRequired={true} />
                             </div>
-                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                              <div className='flex flex-col gap-2'>
-                                <InputField labelName='*First Name' type='text' uni='firstname' placeholder='First Name' />
-                              </div>
-                              <div className='flex flex-col gap-2'>
-                                <InputField labelName='*Last Name' type='text' uni='lastname' placeholder='Last Name' />
-                              </div>
-                            </div>
-                            <div className='flex flex-col space-y-2 text-md'>
-                              <InputField labelName='*Username' type='text' uni='username' placeholder='Username' />
-                            </div>
-                            <div className='flex flex-col space-y-2 text-md'>
-                              <InputField labelName='*Password' type='password' uni='password' placeholder='Password' />
+                            <div>
+                              Already have an account ?&nbsp;
+                              <Link href=' /login' passHref >
+                                <button className='mt-2 text-blue-300 underline'>
+                                  Sign in
+                                </button >
+                              </Link >
                             </div>
                             <div className=' flex justify-center space-y-2'>
                               {!buttonLoading ? (
@@ -99,14 +98,7 @@ const Signup = () => {
                         )}
 
                       </Formik>
-                      <div>
-                        Existing User&nbsp;
-                        <Link href=' /login' passHref >
-                          <button className='mt-2 text-blue-300 underline'>
-                            Sign in?
-                          </button >
-                        </Link >
-                      </div>
+
                     </div >
                   </div >
                 </div>

@@ -32,7 +32,7 @@ const HomePage = () => {
     return (
       <>
         <div className='flex flex-col justify-center items-center gap-3 max-w-xs'>
-          <div className="h-20 w-20 p-1">
+          <div className="h-28 w-28 p-1">
             <Image src={image} className='w-full h-full m-auto opacity-80' />
           </div>
           <h2 className='font-bold text-2xl tracking-wider'>{head}</h2>
@@ -84,9 +84,9 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="bg-white">
+          <div className="bg-primary text-white">
             <div className="flex flex-col w-[97%] md:w-[80%] m-auto">
-              <div className="flex flex-col md:flex-row text-black justify-between gap-10 my-10">
+              <div className="flex flex-col md:flex-row  justify-between gap-10 my-10">
                 <div className='text-center'><h2 className='font-extrabold text-4xl'>21000+</h2><p className='text-md'>Community Members</p></div>
                 <div className='text-center'><h2 className='font-extrabold text-4xl'>2000+</h2><p className='text-md'>Books</p></div>
                 <div className='text-center'><h2 className='font-extrabold text-4xl'>150+</h2><p className='text-md'>Countries Reach</p></div>
@@ -122,18 +122,19 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="bg-white text-black text-center">
+          <div className="bg-orange-500 text-white text-center">
             <div className="w-[90%] md:w-[80%] m-auto py-10">
-              <h2 className='tracking-wider text-3xl text-ter font-bold'>PUBLISH WITH US</h2>
-              <p className="my-5">Become A <a href="#" className='text-blue-800'>#CLEVERAUTHOR</a> in 5 Simple Steps</p>
-              <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-8 sm:place-items-start place-items-center'>
+              <h2 className='tracking-wider text-3xl   font-bold'>PUBLISH WITH US</h2>
+              <p className="my-5">Become an Author in 5 Simple Steps</p>
+              <div className='grid grid-cols-1 sm:grid-cols-3  gap-8 sm:place-items-start place-items-center'>
                 {publishCardData.map((item, i) => (
                   <PublishCard head={item.head} data={item.data} image={item.image} />
                 ))}
               </div>
             </div>
           </div>
-          <div className='bg-white flex flex-col gap-5'>
+
+          <div className='bg-white flex flex-col gap-5 py-20 '>
             <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>AUTHOR BENEFITS</h2>
             <p className='text-black text-center md:w-[50%] self-center'>Irrespective of whether you are a first-time publisher, or an experienced author, here is why Clever Fox Publishing is the perfect fit for you. </p>
             <div className='flex md:flex-row flex-col bg-white text-black w-[97%] md:w-[80%] m-auto'>
@@ -152,7 +153,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className='bg-white flex flex-col gap-5 py-10'>
+          {/* <div className='bg-white flex flex-col gap-5 py-10'>
             <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>AUTHOR COMMUNITY</h2>
             <p className='text-black text-center md:w-[50%] self-center'>Become one of the <a className='text-blue-500'>#CLEVERAUTHOR</a> by publishing your Paperback,
               E-Book & sell globally in 140+ countries, earning 100% of the profit with
@@ -175,8 +176,10 @@ const HomePage = () => {
               </div>
               <button type='button' className='text-black'>{">"}</button>
             </div>
-          </div>
-          <div className='bg-white flex flex-col gap-5 py-10'>
+          </div> */}
+
+          
+          {/* <div className='bg-white shadow-xl flex flex-col gap-5 py-10'>
             <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>WHY CLEVER FOX?</h2>
             <p className='text-black text-center md:w-[50%] self-center'>
               It is one thing to be an author and it is another thing to be a <a className='text-blue-500'>#CLEVERAUTHOR</a> We have a blind eye towards your experience. At
@@ -199,15 +202,17 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className='bg-white flex flex-col gap-5 py-20'>
-            <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>PRODUCTS</h2>
-            <p className='text-black text-center md:w-[50%] self-center'>
+          </div> */}
+
+
+          <div className='bg-pink-500 flex flex-col gap-5 py-10 text-white '>
+            <h2 className='tracking-wider text-3xl  font-bold text-center'>PRODUCTS</h2>
+            <p className=' text-center md:w-[50%] self-center'>
               Read the collections of our top trending <b>Self Publishing</b> and <b>Partnered Publishing books</b>
             </p>
             <div className='w-[96%] md:w-[80%] m-auto overflow-x-hidden flex flex-col items-center gap-5'>
               <div className='flex w-[96%] m-auto overflow-x-hidden items-center'>
-                <div className='inline-flex gap-2 bg-white text-black'>
+                <div className='inline-flex gap-2 '>
                   <ProductCard />
                   <ProductCard />
                   <ProductCard />
@@ -222,6 +227,7 @@ const HomePage = () => {
               <button type='button' className='text-white bg-ter w-32 p-2 rounded-md drop-shadow-sm'>See More</button>
             </div>
           </div>
+
           <div className='bg-white flex flex-col gap-5 py-20'>
             <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>AUTHOR DASHBOARD</h2>
             <p className='text-black text-center md:w-[50%] self-center'>
@@ -239,6 +245,7 @@ const HomePage = () => {
               <Image src={assets.dashboard} className='w-full md:max-w-[50%]' />
             </div>
           </div>
+
           <div className='bg-white flex flex-col gap-5 py-20'>
             <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>TESTIMONIALS</h2>
             <p className='text-black text-center md:w-[50%] self-center'>
@@ -253,7 +260,8 @@ const HomePage = () => {
             </div>
             <button className='text-black border-2 border-primary w-40 m-auto rounded-sm p-2 hover:bg-primary'>Read More</button>
           </div>
-          <div className='bg-white flex flex-col gap-5 py-4'>
+
+          {/* <div className='bg-white flex flex-col gap-5 py-4'>
             <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>PARTNERS</h2>
             <p className='text-black text-center md:w-[50%] self-center'>
               We are the best at books. But don’t take the word for it. Hear directly
@@ -270,12 +278,14 @@ const HomePage = () => {
               <div className='rounded-full bg-green-700 h-24 w-24' />
               <div className='rounded-full bg-green-700 h-24 w-24' />
             </div>
-          </div>
-          <div className='bg-white flex flex-col gap-5 py-4'>
+          </div> */}
+
+
+          {/* <div className='bg-white flex flex-col gap-5 py-4'>
             <h2 className='tracking-wider text-2xl text-ter font-bold text-center'>We are a member of the Federation of Indian Publishers</h2>
             <div className='bg-green-700 w-[60%] h-40 m-auto shadow-xl'>
             </div>
-          </div>
+          </div> */}
 
           <Footer />
         </div>

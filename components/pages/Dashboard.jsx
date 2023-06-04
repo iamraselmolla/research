@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { assets } from "../assets";
 import Image from "next/image";
+import { Person } from "@mui/icons-material";
 
 export const adminMenu = [
   {
@@ -22,9 +23,9 @@ export const adminMenu = [
     showAlways: false,
   },
   {
-    name: "Add Warehouse",
-    pageLink: '/dashboard/addwarehouse',
-    icon: <WarehouseIcon />,
+    name: "Personal Details",
+    pageLink: '/dashboard/personal_details',
+    icon: <Person />,
     showAlways: false,
   },
 ];
@@ -35,10 +36,10 @@ const Dashboard = ({children}) => {
   const [loading,setLoading]=useState(true);
 
   useEffect(() => {
-  if(!authCtx.isLoggedIn){
-    toast.warn("User not logged in")
-    route.push('/adminpanel');
-  }
+  // if(!authCtx.isLoggedIn){
+  //   toast.warn("User not logged in")
+  //   route.push('/adminpanel');
+  // }
   }, [authCtx])
   
 
@@ -65,12 +66,12 @@ const Dashboard = ({children}) => {
       <div className="flex flex-row h-[calc(100vh_-_120px)] max-w-[100%] md:h-[calc(100vh_-_120px)] pb-8  bg-primary">
         <div className="min-w-[300px]  h-[calc(100vh_-_150px)] mdrev:hidden bg-white  overflow-y-auto rounded-xl mt-4 ml-4">
           <div className="flex flex-col items-center  p-4 gap-1">
-            <div className="bg-white  w-[200px] h-[200px]  rounded-full overflow-hidden shadow-lg">
+            <div className="bg-white  w-[160px] h-[160px]  rounded-full overflow-hidden shadow-lg">
               <Image src={assets.director} className='w-[100%] h-[100%] '/>
             </div>
             <h1 className="font-bold  mt-4 text-black">Harish Sikka</h1>
             <h1 className="bg-sec text-white p-1 rounded-sm bg-primary">
-              Admin
+              Student
             </h1>
           </div>
 
