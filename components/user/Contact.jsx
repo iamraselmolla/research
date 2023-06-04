@@ -7,10 +7,11 @@ import InputFieldDark from '../UI/InputFieldDark'
 
 const Contact = () => {
   const fields = [
-    { placeholder: "First Name", labelName: "First Name", uni: "firstname", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "Last Name", labelName: "Last Name", uni: "Lastname", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "DOB", labelName: "DOB", uni: "dob", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "Gender", labelName: "Gender", uni: "gender", initialValue: "", type: "text", fieldrequired: true },
+    { placeholder: "Email", labelName: "Email", uni: "email", initialValue: "", type: "text", fieldrequired: true },
+    { placeholder: "Mobile I", labelName: "Mobile I", uni: "mobileI", initialValue: "", type: "text", fieldrequired: true },
+    { placeholder: "Mobile II", labelName: "Mobile II", uni: "mobileII", initialValue: "", type: "text", fieldrequired: true },
+    { placeholder: "Address Line I", labelName: "Address Line I", uni: "addressLineI", initialValue: "", type: "text", fieldrequired: true },
+    { placeholder: "Address Line II", labelName: "Address Line II", uni: "addressLineII", initialValue: "", type: "text", fieldrequired: true },
   ]
 
   const initialValues = {}
