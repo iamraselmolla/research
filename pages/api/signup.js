@@ -7,6 +7,7 @@ export default async function signup(req, res) {
             "POST":
             {
                 try {
+                    console.log(req.body)
                     const { firstName, lastName, username, password, role } = req.body;
                     await dbConnect();
                     const existingUser = await User.findOne({ username: username });
