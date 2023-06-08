@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+/backend/.next
 .pnp.js
 
 # testing
