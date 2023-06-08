@@ -33,17 +33,36 @@ const Signup = () => {
     }
   }, []);
   const initialValues = {
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     username: '',
     password: ''
   }
   const loginSchema = yup.object().shape({
-    firstname: yup.string().required('Enter First Name'),
-    lastname: yup.string().required('Enter Last Name'),
+    firstName: yup.string().required('Enter First Name'),
+    lastName: yup.string().required('Enter Last Name'),
     username: yup.string().required('Enter Username'),
     password: yup.string().min(8, "Too Short!!").required('Enter Password'),
   })
+  const handleSubmit = async (values) => {
+    // values.preventDefault();
+    try {
+     
+      console.log(values)
+      setButtonLoading(true);
+      const response = await axios.post('/api/signup', values); // Assuming your API endpoint is '/api/signup'
+      // Handle the response
+      console.log(response.data);
+      toast.success('Signup successful!');
+    } catch (error) {
+      // Handle errors
+      console.error(error);
+      toast.error('Signup failed.');
+    } finally {
+      setButtonLoading(false);
+    }
+  };
+
 
   return (
     <>
@@ -61,16 +80,15 @@ const Signup = () => {
                       <Formik
                         initialValues={initialValues}
                         validationSchema={loginSchema}
-                        onSubmit={values => {
-                          console.log(values);
-                        }}
+                        onSubmit={handleSubmit}
+                        
                       >
                         {({ errors, touched }) => (
-                          <Form className='w-full flex flex-col  space-y-4'>
+                          <Form  className='w-full flex flex-col  space-y-4'>
 
                             <div className='grid grid-cols-1  gap-2'>
-                              <InputField labelName='First Name' type='text' uni='firstname' placeholder='First Name' fieldRequired={true} />
-                              <InputField labelName='Last Name' type='text' uni='lastname' placeholder='Last Name' fieldRequired={true} />
+                              <InputField labelName='First Name' type='text' uni='firstName' placeholder='First Name' fieldRequired={true} />
+                              <InputField labelName='Last Name' type='text' uni='lastName' placeholder='Last Name' fieldRequired={true} />
                               <InputField labelName='Username' type='text' uni='username' placeholder='Username' fieldRequired={true} />
                               <InputField labelName='Password' type='password' uni='password' placeholder='Password' fieldRequired={true} />
                             </div>

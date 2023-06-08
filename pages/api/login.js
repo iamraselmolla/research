@@ -1,6 +1,9 @@
 import dbConnect from "../../utils/dbConnect";
 import User from "../../models/User";
 import jwt from "jsonwebtoken";
+
+const secretKey = "f4c1e7001409121f1db8aa18f8dc841c4a861fb03e116717abb1ef95b5f4cd609046109907876726261eeb21b4dcd57a0b97849fb090abb74e2c10e1"
+
 export default async function handler(req, res) {
 
     switch (req.method) {
@@ -9,16 +12,21 @@ export default async function handler(req, res) {
                 try {
                     let { username, password } = req.body;
                     await dbConnect();
-                    username=username.toLowerCase();
-                    const user = await User.findOne({ username });
-                    if (!user) return res.status(404).json({ message: 'User not found' });
-
-                    if(user.password===password){
-                        const token=jwt.sign({username},'thisIsALongSecretKey');
-                        return res.status(200).json({ message: 'Logged in Successfully',user:{username,token,_id:user._id} });
+                    const matchFind = await User.findOne({ username: username }).select("password");
+                    if (!matchFind) {
+                        return res.status(401).json({ message: "User not found" })
+                    } else {
+                        // const passCheck = await compareHashPass(password, matchFind.password);
+                        if (matchFind.password === password) {
+                            const tokenData = {
+                                username
+                            };
+                            const token = jwt.sign(tokenData, secretKey);
+                            return res.status(200).json({ message: "Logged In Successfully", token })
+                        } else {
+                            return res.status(401).json({ message: "Invalid  password" })
+                        }
                     }
-
-                    return res.status(401).json({ message: 'Wrong password' });
                 }
                 catch (err) {
                     return res.status(500).json({ message: 'Server error' })

@@ -33,10 +33,7 @@ const Login = () => {
       toast.warn('Already Logged In');
     }
   }, []);
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
+
   // const formHandler = async (e) => {
   //   e.preventDefault();
   //   if (!formData.username || !formData.password) {
@@ -68,6 +65,7 @@ const Login = () => {
   //   }
   //   setButtonLoading(false);
   // };
+  
   const initialValues = {
     username: '',
     password: ''
@@ -75,7 +73,26 @@ const Login = () => {
   const loginSchema = yup.object().shape({
     username: yup.string().required('Username is required'),
     password: yup.string().min(8, 'Too Short!!').required('Password is required'),
-  })
+  });
+
+  const handleLogin = async (values) => {
+    // values.preventDefault();
+    try {
+     
+      console.log(values)
+      setButtonLoading(true);
+      const response = await axios.post('/api/login', values); 
+      // Handle the response
+      console.log(response.data);
+      toast.success('Login successful!');
+    } catch (error) {
+      // Handle errors
+      console.error(error);
+      toast.error('Login failed.');
+    } finally {
+      setButtonLoading(false);
+    }
+  };
 
   return (
     <>
@@ -93,9 +110,7 @@ const Login = () => {
                       <Formik
                         initialValues={initialValues}
                         validationSchema={loginSchema}
-                        onSubmit={values => {
-                          console.log(values);
-                        }}
+                        onSubmit={handleLogin}
                       >
                         <Form className='w-full flex flex-col  space-y-4'>
                           <div className='grid grid-cols-1 gap-2'>
