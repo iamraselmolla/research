@@ -50,7 +50,7 @@ const Signup = () => {
      
       console.log(values)
       setButtonLoading(true);
-      const response = await axios.post('/api/signup', values); // Assuming your API endpoint is '/api/signup'
+      const response = await axios.post('/api/signup', values); 
       // Handle the response
       console.log(response.data);
       toast.success('Signup successful!');

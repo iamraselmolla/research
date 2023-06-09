@@ -13,7 +13,7 @@ export default async function handler(req, res) {
                 try {
                     let { username, password } = req.body;
                     await dbConnect();
-                    const matchFind = await User.findOne({ username: username }).select("password");
+                    const matchFind = await User.findOne({ username: username.toLowerCase() }).select("password");
                     if (!matchFind) {
                         return res.status(401).json({ message: "User not found" })
                     } else {
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
                                 username
                             };
                             const token = jwt.sign(tokenData, secretKey);
-                            return res.status(200).json({ message: "Logged In Successfully", token })
+                            return res.status(200).json({ message: "Logged In Successfully", token, _id:matchFind._id })
                         } else {
                             return res.status(401).json({ message: "Invalid  password" })
                         }

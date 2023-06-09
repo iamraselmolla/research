@@ -33,39 +33,26 @@ const Login = () => {
       toast.warn('Already Logged In');
     }
   }, []);
+console.log(authCtx)
+  const formHandler = async (values, e) => {
+   
+    try {
+      setButtonLoading(true);
+      const response = await axios.post('/api/login', values);
+     
+      if (response.status === 200) {
+        toast.success('Signed in uccessfully');
+        authCtx.login(response.data._id, response.data.token, 'admin');
+        router.push('/dashboard');
+      }
+    } catch (err) {
+      console.log(err);
+      const message = err.response.data.message;
+      toast.warn(message);
+    }
+    setButtonLoading(false);
+  };
 
-  // const formHandler = async (e) => {
-  //   e.preventDefault();
-  //   if (!formData.username || !formData.password) {
-  //     toast.warn('All fields are required')
-  //     return;
-  //   }
-  //   try {
-  //     setButtonLoading(true);
-  //     const response = await axios.post(
-  //       '/api/login',
-  //       {
-  //         username: formData.username,
-  //         password: formData.password,
-  //       }
-  //     );
-  //     if (response.status === 200) {
-  //       toast.success('Signed in uccessfully');
-  //       setFormData({
-  //         username: '',
-  //         password: ''
-  //       });
-  //       authCtx.login(response.data.user._id, response.data.user.token, 'admin');
-  //       router.push('/dashboard');
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //     const message = err.response.data.message;
-  //     toast.warn(message);
-  //   }
-  //   setButtonLoading(false);
-  // };
-  
   const initialValues = {
     username: '',
     password: ''
@@ -74,25 +61,6 @@ const Login = () => {
     username: yup.string().required('Username is required'),
     password: yup.string().min(8, 'Too Short!!').required('Password is required'),
   });
-
-  const handleLogin = async (values) => {
-    // values.preventDefault();
-    try {
-     
-      console.log(values)
-      setButtonLoading(true);
-      const response = await axios.post('/api/login', values); 
-      // Handle the response
-      console.log(response.data);
-      toast.success('Login successful!');
-    } catch (error) {
-      // Handle errors
-      console.error(error);
-      toast.error('Login failed.');
-    } finally {
-      setButtonLoading(false);
-    }
-  };
 
   return (
     <>
@@ -110,7 +78,7 @@ const Login = () => {
                       <Formik
                         initialValues={initialValues}
                         validationSchema={loginSchema}
-                        onSubmit={handleLogin}
+                        onSubmit={formHandler}
                       >
                         <Form className='w-full flex flex-col  space-y-4'>
                           <div className='grid grid-cols-1 gap-2'>

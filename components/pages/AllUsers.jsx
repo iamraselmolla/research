@@ -4,7 +4,7 @@ import React from 'react'
 const AllUsers = () => {
   return (
     <Dashboard>
-        all the users
+        la;dfdsfj
     </Dashboard>
   )
 }

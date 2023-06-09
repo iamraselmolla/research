@@ -15,9 +15,9 @@ export default async function signup(req, res) {
                     if (existingUser) {
                         return res.status(409).json({ error: 'Username already exists' });
                     }
-
+                    const lowerCaseUser = username.toLowerCase()
                     const securePass = await hashPassGenerate(password);
-                    const newUser = new User({ firstName, lastName, username, password:securePass, role: "user" });
+                    const newUser = new User({ firstName, lastName, username: lowerCaseUser, password:securePass, role: "user" });
                     const result = await newUser.save();
 
                     return res.status(200).json({ message: "User Created Successfully", data: result });
