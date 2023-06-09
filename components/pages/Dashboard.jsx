@@ -35,12 +35,12 @@ const Dashboard = ({children}) => {
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const [loading,setLoading]=useState(true);
 
-  useEffect(() => {
+  // useEffect(() => {
   // if(!authCtx.isLoggedIn){
   //   toast.warn("User not logged in")
-  //   route.push('/adminpanel');
+  //   route.push('/login');
   // }
-  }, [authCtx])
+  // }, [authCtx])
   
 
   useEffect(() => {
