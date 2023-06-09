@@ -1,5 +1,6 @@
 import dbConnect from "../../utils/dbConnect";
 import User from "../../models/User";
+import { hashPassGenerate } from "../../utils/bcrypt";
 
 export default async function signup(req, res) {
     switch (req.method) {
@@ -15,8 +16,8 @@ export default async function signup(req, res) {
                         return res.status(409).json({ error: 'Username already exists' });
                     }
 
-                    // const securePass = await hasGeneratePass(password);
-                    const newUser = new User({ firstName, lastName, username, password, role: "user" });
+                    const securePass = await hashPassGenerate(password);
+                    const newUser = new User({ firstName, lastName, username, password:securePass, role: "user" });
                     const result = await newUser.save();
 
                     return res.status(200).json({ message: "User Created Successfully", data: result });

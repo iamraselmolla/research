@@ -1,4 +1,5 @@
 import User from "../../models/User";
+import { compareHashPass } from "../../utils/bcrypt";
 import dbConnect from "../../utils/dbConnect";
 import jwt from "jsonwebtoken";
 
@@ -16,8 +17,8 @@ export default async function handler(req, res) {
                     if (!matchFind) {
                         return res.status(401).json({ message: "User not found" })
                     } else {
-                        // const passCheck = await compareHashPass(password, matchFind.password);
-                        if (matchFind.password === password) {
+                        const passCheck = await compareHashPass(password, matchFind.password);
+                        if (passCheck) {
                             const tokenData = {
                                 username
                             };
