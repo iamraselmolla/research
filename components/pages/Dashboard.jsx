@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+
 import LogoutIcon from "@mui/icons-material/Logout";
 import { List, ListItemButton, ListItemIcon } from "@mui/material";
 import { useState } from "react";
@@ -60,7 +61,7 @@ const Dashboard = ({children}) => {
     <div className='relative'>
     {loading ? <SplashScreen/> :
     <>
-    {authCtx.isLoggedIn ?
+    {/* {authCtx.isLoggedIn ? */}
     <>
     <ResponsiveDrawer/>
       <div className="flex flex-row h-[calc(100vh_-_120px)] max-w-[100%] md:h-[calc(100vh_-_120px)] pb-8  bg-primary">
@@ -119,8 +120,8 @@ const Dashboard = ({children}) => {
 
       </div>
     </>
-    :<div></div>
-    }
+    {/* :<div></div>
+    } */}
     </>
     }
     </div>
