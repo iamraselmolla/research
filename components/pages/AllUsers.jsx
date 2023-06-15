@@ -36,7 +36,7 @@ const AllUsers = () => {
   return (
     <Dashboard>
       <div className="w-full">
-        <table className="w-full bg-white border border-black">
+        <table className="w-full bg-white border border-black overflow-auto">
           <thead>
             <tr className="bg-secondary text-white">
               <th className="px-4 py-2 text-black border border-black text-center align-middle">SL. No.</th>

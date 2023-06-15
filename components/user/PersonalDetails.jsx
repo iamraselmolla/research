@@ -4,6 +4,7 @@ import PersonalDetailsNavigation from '../UI/PersonalDetailsNavigation'
 import { Form, Formik } from 'formik'
 import InputField from '../UI/InputField'
 import * as yup from "yup"
+import Gap from '../UI/Gap'
 
 const PersonalDetails = () => {
   const fields = [
@@ -29,7 +30,7 @@ const PersonalDetails = () => {
   const detailSchema = yup.object().shape({ ...details })
   return (
     <Dashboard>
-      <PersonalDetailsNavigation activePage="personal" />
+      {/* <PersonalDetailsNavigation activePage="personal" /> */}
       <div>
         <Formik
           initialValues={initialValues}
@@ -39,12 +40,13 @@ const PersonalDetails = () => {
           }}
         >
           <Form className='flex flex-col'>
+            <Gap>Personal Details</Gap>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:my-5' >
               {fields.map((item, i) => (
                 <InputField key={item.uni} {...item} />
               ))}
             </div>
-            <button type="submit" className=' bg-primary self-end rounded-sm p-1 md: w-28'>Submit</button>
+            <button type="submit" className=' bg-primary self-end rounded-sm p-1 md: w-28 text-white'>Submit</button>
           </Form >
         </Formik>
       </div>

@@ -38,7 +38,7 @@ const Events = () => {
     organiser,
   }) => {
     return (
-      <div className="text-black border-2 overflow-hidden rounded-md max-w-[290px] border-gray-400 flex flex-col gap-3">
+      <div className="text-black  overflow-hidden rounded-md w-full border-[1px] border-black flex flex-col gap-3">
         <div className="px-2 text-center bg-primary bg-opacity-80 w-fit text-xl mb-[-68px] z-10 text-white relative">
           <div className="text-sm">{date.split("-")[1]}</div>
           <div className="text-3xl">{date.split("-")[0]}</div>
@@ -65,8 +65,8 @@ const Events = () => {
               Read More
             </Link>
           </div>
-          <button className="bg-secondary text-white drop-shadow-md p-1 font-bold text-2xl rounded-sm">
-            Get Started
+          <button className="bg-secondary text-white drop-shadow-md p-1 font-bold  rounded-sm">
+            View
           </button>
         </div>
       </div>
@@ -75,7 +75,7 @@ const Events = () => {
 
   return (
     <Dashboard>
-      <div className="flex gap-2 flex-wrap">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {eventList.map((item, i) => (
           <EventCard
             title={item.title}

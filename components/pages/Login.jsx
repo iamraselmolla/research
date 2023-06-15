@@ -82,8 +82,8 @@ console.log(authCtx)
                       >
                         <Form className='w-full flex flex-col  space-y-4'>
                           <div className='grid grid-cols-1 gap-2'>
-                            <InputField labelName='Username' type='text' uni='username' placeholder='Username' />
-                            <InputField labelName='Password' type='password' uni='password' placeholder='Password' />
+                            <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Username' type='text' uni='username' placeholder='Username' />
+                            <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Password' type='password' uni='password' placeholder='Password' />
                           </div>
                           <div>
                             Does not have an account?&nbsp;

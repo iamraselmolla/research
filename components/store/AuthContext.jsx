@@ -25,8 +25,7 @@ export const AuthContextProvider=(props)=>{
   const [token,setToken]=useState(initialToken);
   const [localid,setLocalId]=useState(initialId);
   const [role,setRole]=useState(initialRole);
-  // const [isLoggedIn,setLoggedIn]=useState(!!token);
-  const [isLoggedIn,setLoggedIn]=useState(false);
+  const [isLoggedIn,setLoggedIn]=useState(!!token);
 
 
   const loginHandler=(localid,token,role)=>{

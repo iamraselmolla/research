@@ -44,7 +44,7 @@ const Signup = () => {
     username: yup.string().required('Enter Username'),
     password: yup.string().min(8, "Too Short!!").required('Enter Password'),
   })
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values,{resetForm}) => {
     // values.preventDefault();
     try {
      
@@ -54,6 +54,8 @@ const Signup = () => {
       // Handle the response
       console.log(response.data);
       toast.success('Signup successful!');
+      resetForm({values:''})
+      router.push('/login')
     } catch (error) {
       // Handle errors
       console.error(error);
@@ -87,10 +89,10 @@ const Signup = () => {
                           <Form  className='w-full flex flex-col  space-y-4'>
 
                             <div className='grid grid-cols-1  gap-2'>
-                              <InputField labelName='First Name' type='text' uni='firstName' placeholder='First Name' fieldRequired={true} />
-                              <InputField labelName='Last Name' type='text' uni='lastName' placeholder='Last Name' fieldRequired={true} />
-                              <InputField labelName='Username' type='text' uni='username' placeholder='Username' fieldRequired={true} />
-                              <InputField labelName='Password' type='password' uni='password' placeholder='Password' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='First Name' type='text' uni='firstName' placeholder='First Name' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Last Name' type='text' uni='lastName' placeholder='Last Name' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Username' type='text' uni='username' placeholder='Username' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Password' type='password' uni='password' placeholder='Password' fieldRequired={true} />
                             </div>
                             <div>
                               Already have an account ?&nbsp;

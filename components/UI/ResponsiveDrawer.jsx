@@ -12,6 +12,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { IconButton, Typography } from '@mui/material';
 import { Menu } from '@mui/icons-material';
+import Link from 'next/link';
 
 export default function ResponsiveDrawer() {
   const [state, setState] = React.useState({
@@ -74,8 +75,10 @@ export default function ResponsiveDrawer() {
         <React.Fragment key={anchor}>
           <div className='flex justify-between'>
           <Typography variant='body1'>RESEARCH</Typography>
-          <div className='hidden md:flex'>
-            <Button>HOME</Button>
+          <div className='hidden md:flex gap-2'>
+            <Link className='hover:underline' href='/'>HOME</Link>
+            <Link className='hover:underline' href='/login'>LOGIN</Link>
+            <Link className='hover:underline' href='/signup'>SIGNUP</Link>
           </div>
           <div className='flex md:hidden'>
           <IconButton onClick={toggleDrawer(anchor,true)}><Menu fontSize='large' /></IconButton>
