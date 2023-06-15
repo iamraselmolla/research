@@ -8,11 +8,26 @@ export default async function conferenceCreate(req, res) {
             "POST":
             {
                 try {
-                    
+
                     await dbConnect();
-                    const {organizationName, organizationAddress, organizationCity, organizationState,organizationCountry,committeeChair,committeeMembers,conferenceName,conferenceLocation,conferenceDate,conferenceType,conferenceTheme,speakers,registrationOpenDate,registrationCloseDate,registrationFee,registrationLink,schedule,createdAt,updatedAt} = req.body
-                    const newEvent = new Conference({organizationName, organizationAddress, organizationCity, organizationState,organizationCountry,committeeChair,committeeMembers,conferenceName,conferenceLocation,conferenceDate,conferenceType,conferenceTheme,speakers,registrationOpenDate,registrationCloseDate,registrationFee,registrationLink,schedule,createdAt,updatedAt});
+                    const { organizationName, organizationAddress, organizationCity, organizationState, organizationCountry, conferenceName, conferenceLocation, conferenceDate, startTime, endTime, conferenceType, conferenceTheme, committeeChair, committeeMembers, speakers, registrationOpenDate, registrationCloseDate, registrationFee, registrationLink } = req.body;
+
+                    const organisationInfo = {
+                        organizationName, organizationAddress, organizationCity, organizationState, organizationCountry
+                    }
+                    const conferenceInfo = {
+                        conferenceName, conferenceLocation, conferenceDate, conferenceTheme, startTime, endTime, conferenceType
+                    }
+                    const committeeInfo = {
+                        committeeChair, committeeMembers
+                    }
+
+                    const registrationInfo = {
+                        registrationOpenDate, registrationCloseDate, registrationFee, registrationLink
+                    }
+                    const newEvent = new Conference({organisationInfo, conferenceInfo, committeeInfo, speakers,registrationInfo, verified:false  });
                     const result = await newEvent.save();
+                    
 
                     return res.status(200).json({ message: "Conference Created Successfully", data: result });
 
