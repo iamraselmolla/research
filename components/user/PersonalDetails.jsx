@@ -7,6 +7,8 @@ import * as Yup from "yup"
 import Gap from '../UI/Gap'
 import { IconButton } from '@mui/material'
 import { Delete } from '@mui/icons-material'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const PersonalDetails = () => {
   const initialValues = {
@@ -39,8 +41,8 @@ const PersonalDetails = () => {
 
   const contactInfo=[
     { placeholder: "Email", labelName: "Email", uni: "contactInfo.email", type: "text", fieldRequired: true },
-    { placeholder: "Mobile 1", labelName: "Mobile 1", uni: "contactInfo.mobileNo1", type: "text", fieldRequired: true },
-    { placeholder: "Mobile 2", labelName: "Mobile 2", uni: "contactInfo.mobileNo2", type: "text",  },
+    { placeholder: "Mobile 1", labelName: "Mobile 1", uni: "contactInfo.mobileNo1", type: "number", fieldRequired: true },
+    { placeholder: "Mobile 2", labelName: "Mobile 2", uni: "contactInfo.mobileNo2", type: "number",  },
   ]
 
 
@@ -65,8 +67,18 @@ const PersonalDetails = () => {
     )
   });
 
-  const onSubmitHandler=(values,{resetForm})=>{
-    console.log(values)
+  const onSubmitHandler= async (values,{resetForm})=>{
+    try{
+
+      console.log(values)
+      const response = await axios.post("/api/personaldetails", values);
+      toast.success("Personal details are added successfully");
+      resetForm({values:''})
+    }
+    catch(err){
+        console.log(err);
+        toast.error("Something Wrong")
+    }
   }
 
 

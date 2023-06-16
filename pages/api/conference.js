@@ -16,7 +16,7 @@ export default async function conferenceCreate(req, res) {
                         organizationName, organizationAddress, organizationCity, organizationState, organizationCountry
                     }
                     const conferenceInfo = {
-                        conferenceName,conferenceDescription, conferenceLocation, conferenceDate, conferenceTheme, startTime, endTime, conferenceType
+                        conferenceName, conferenceLocation, conferenceDate, conferenceTheme, startTime, endTime, conferenceType,conferenceDescription
                     }
                     const committeeInfo = {
                         committeeChair, committeeMembers
