@@ -14,12 +14,19 @@ import { IconButton, Typography } from "@mui/material";
 import {
   AccountTree,
   AppRegistration,
+  Dashboard,
   Home,
   KeyboardArrowDown,
   KeyboardArrowUp,
   Login,
+  Logout,
+  ManageAccounts,
   Menu,
+  People,
+  Security,
   Shield,
+  VideoCall,
+  Videocam,
 } from "@mui/icons-material";
 import Link from "next/link";
 import AuthContext from "../store/AuthContext";
@@ -89,129 +96,240 @@ export default function ResponsiveDrawer() {
       role="presentation"
     >
       <List>
-        {navigationList.map((navigate) => (
+        {/* {navigationList.map((navigate) => ( */}
+        {/* <> */}
+        {/* {navigate.display === "always" ? ( */}
+        {/* <> */}
+        {/* {navigate.type && navigate.type === "dropdown" ? ( */}
+        {/* <> */}
+        {/* <ListItem key={navigate.nav} disablePadding> */}
+        {/* <ListItemButton */}
+        {/* onClick={() => { */}
+        {/* if (dropDown !== navigate.nav) */}
+        {/* setDropdown(navigate.nav); */}
+        {/* else setDropdown(""); */}
+        {/* }} */}
+        {/* > */}
+        {/* <ListItemIcon> */}
+        {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+        {/* {navigate.icon} */}
+        {/* </ListItemIcon> */}
+        {/* <ListItemText primary={navigate.nav} /> */}
+        {/* {dropDown === navigate.nav ? ( */}
+        {/* <KeyboardArrowUp /> */}
+        {/* ) : ( */}
+        {/* <KeyboardArrowDown /> */}
+        {/* )} */}
+        {/* </ListItemButton> */}
+        {/* </ListItem> */}
+        {/* <div className="flex flex-col"> */}
+        {/* {dropDown === navigate.nav ? ( */}
+        {/* <> */}
+        {/* {navigate.subLinks.map((subItem) => ( */}
+        {/* <Link */}
+        {/* href={subItem.link} */}
+        {/* className="px-20 p-2 hover:bg-blue-100 w-full" */}
+        {/* > */}
+        {/* {subItem.nav} */}
+        {/* </Link> */}
+        {/* ))} */}
+        {/* </> */}
+        {/* ) : ( */}
+        {/* <></> */}
+        {/* )} */}
+        {/* </div> */}
+        {/* </> */}
+        {/* ) : ( */}
+        {/* <ListItem */}
+        {/* key={navigate.nav} */}
+        {/* disablePadding */}
+        {/* onClick={toggleDrawer(anchor, false)} */}
+        {/* onKeyDown={toggleDrawer(anchor, false)} */}
+        {/* > */}
+        {/* <ListItemButton href={navigate.link}> */}
+        {/* <ListItemIcon> */}
+        {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+        {/* {navigate.icon} */}
+        {/* </ListItemIcon> */}
+        {/* <ListItemText primary={navigate.nav} /> */}
+        {/* </ListItemButton> */}
+        {/* </ListItem> */}
+        {/* )} */}
+        {/* </> */}
+        {/* ) : navigate.display ? ( */}
+        {/* <> */}
+        {/* {navigate.type && navigate.type === "dropdown" ? ( */}
+        {/* <> */}
+        {/* <ListItem key={navigate.nav} disablePadding> */}
+        {/* <ListItemButton */}
+        {/* onClick={() => { */}
+        {/* if (dropDown !== navigate.nav) */}
+        {/* setDropdown(navigate.nav); */}
+        {/* else setDropdown(""); */}
+        {/* }} */}
+        {/* > */}
+        {/* <ListItemIcon> */}
+        {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+        {/* {navigate.icon} */}
+        {/* </ListItemIcon> */}
+        {/* <ListItemText primary={navigate.nav} /> */}
+        {/* {dropDown === navigate.nav ? ( */}
+        {/* <KeyboardArrowUp /> */}
+        {/* ) : ( */}
+        {/* <KeyboardArrowDown /> */}
+        {/* )} */}
+        {/* </ListItemButton> */}
+        {/* </ListItem> */}
+        {/* <div className="flex flex-col"> */}
+        {/* {dropDown === navigate.nav ? ( */}
+        {/* <> */}
+        {/* {navigate.subLinks.map((subItem) => ( */}
+        {/* <Link */}
+        {/* href={subItem.link} */}
+        {/* className="px-20 p-2 hover:bg-blue-100 w-full" */}
+        {/* > */}
+        {/* {subItem.nav} */}
+        {/* </Link> */}
+        {/* ))} */}
+        {/* </> */}
+        {/* ) : ( */}
+        {/* <></> */}
+        {/* )} */}
+        {/* </div> */}
+        {/* </> */}
+        {/* ) : ( */}
+        {/* <ListItem */}
+        {/* key={navigate.nav} */}
+        {/* disablePadding */}
+        {/* onClick={toggleDrawer(anchor, false)} */}
+        {/* onKeyDown={toggleDrawer(anchor, false)} */}
+        {/* > */}
+        {/* <ListItemButton href={navigate.link}> */}
+        {/* <ListItemIcon> */}
+        {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+        {/* {navigate.icon} */}
+        {/* </ListItemIcon> */}
+        {/* <ListItemText primary={navigate.nav} /> */}
+        {/* </ListItemButton> */}
+        {/* </ListItem> */}
+        {/* )} */}
+        {/* </> */}
+        {/* ) : ( */}
+        {/* <></> */}
+        {/* )} */}
+        {/* </> */}
+        {/* ))} */}
+        <ListItem>
+          <ListItemButton href="/">
+            <ListItemIcon>
+              <Home />
+            </ListItemIcon>
+            <ListItemText primary="HOME" />
+          </ListItemButton>
+        </ListItem>
+        {authCtx.isLoggedIn ? (
           <>
-            {navigate.display === "always" ? (
-              <>
-                {navigate.type && navigate.type === "dropdown" ? (
-                  <>
-                    <ListItem key={navigate.nav} disablePadding>
-                      <ListItemButton
-                        onClick={() => {
-                          if (dropDown !== navigate.nav)
-                            setDropdown(navigate.nav);
-                          else setDropdown("");
-                        }}
-                      >
-                        <ListItemIcon>
-                          {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                          {navigate.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={navigate.nav} />
-                        {dropDown === navigate.nav ? (
-                          <KeyboardArrowUp />
-                        ) : (
-                          <KeyboardArrowDown />
-                        )}
-                      </ListItemButton>
-                    </ListItem>
-                    <div className="flex flex-col">
-                      {dropDown === navigate.nav ? (
-                        <>
-                          {navigate.subLinks.map((subItem) => (
-                            <Link
-                              href={subItem.link}
-                              className="px-20 p-2 hover:bg-blue-100 w-full"
-                            >
-                              {subItem.nav}
-                            </Link>
-                          ))}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  </>
+            <ListItem>
+              <ListItemButton
+                onClick={() => {
+                  if (dropDown === "") setDropdown("account");
+                  else setDropdown("");
+                }}
+              >
+                <ListItemIcon>
+                  <AccountTree />
+                </ListItemIcon>
+                <ListItemText primary="ACCOUNT" />
+                {dropDown === "account" ? (
+                  <KeyboardArrowUp />
                 ) : (
-                  <ListItem
-                    key={navigate.nav}
-                    disablePadding
-                    onClick={toggleDrawer(anchor, false)}
-                    onKeyDown={toggleDrawer(anchor, false)}
-                  >
-                    <ListItemButton href={navigate.link}>
-                      <ListItemIcon>
-                        {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                        {navigate.icon}
-                      </ListItemIcon>
-                      <ListItemText primary={navigate.nav} />
-                    </ListItemButton>
-                  </ListItem>
+                  <KeyboardArrowDown />
                 )}
-              </>
-            ) : navigate.display ? (
-              <>
-                {navigate.type && navigate.type === "dropdown" ? (
-                  <>
-                    <ListItem key={navigate.nav} disablePadding>
-                      <ListItemButton
-                        onClick={() => {
-                          if (dropDown !== navigate.nav)
-                            setDropdown(navigate.nav);
-                          else setDropdown("");
-                        }}
-                      >
-                        <ListItemIcon>
-                          {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                          {navigate.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={navigate.nav} />
-                        {dropDown === navigate.nav ? (
-                          <KeyboardArrowUp />
-                        ) : (
-                          <KeyboardArrowDown />
-                        )}
-                      </ListItemButton>
-                    </ListItem>
-                    <div className="flex flex-col">
-                      {dropDown === navigate.nav ? (
-                        <>
-                          {navigate.subLinks.map((subItem) => (
-                            <Link
-                              href={subItem.link}
-                              className="px-20 p-2 hover:bg-blue-100 w-full"
-                            >
-                              {subItem.nav}
-                            </Link>
-                          ))}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <ListItem
-                    key={navigate.nav}
-                    disablePadding
-                    onClick={toggleDrawer(anchor, false)}
-                    onKeyDown={toggleDrawer(anchor, false)}
-                  >
-                    <ListItemButton href={navigate.link}>
-                      <ListItemIcon>
-                        {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                        {navigate.icon}
-                      </ListItemIcon>
-                      <ListItemText primary={navigate.nav} />
-                    </ListItemButton>
-                  </ListItem>
-                )}
-              </>
+              </ListItemButton>
+            </ListItem>
+            {dropDown === "account" ? (
+              <div className="bg-blue-100 mx-5 px-4">
+                <div>
+                  <ListItemButton href="/dashboard">
+                    <ListItemIcon>
+                      <Dashboard />
+                    </ListItemIcon>
+                    <ListItemText primary="Dashboard" />
+                  </ListItemButton>
+                </div>
+                <div>
+                  <ListItemButton href="/dashboard/allusers">
+                    <ListItemIcon>
+                      <People />
+                    </ListItemIcon>
+                    <ListItemText primary="All Users" />
+                  </ListItemButton>
+                </div>
+                <div >
+                  <ListItemButton href="/dashboard/all-conference">
+                    <ListItemIcon>
+                      <Videocam />
+                    </ListItemIcon>
+                    <ListItemText primary="All Conferences" />
+                  </ListItemButton>
+                </div>
+                <div >
+                  <ListItemButton href="/dashboard/add-conference">
+                    <ListItemIcon>
+                      <VideoCall />
+                    </ListItemIcon>
+                    <ListItemText primary="Add Conference" />
+                  </ListItemButton>
+                </div>
+                <div >
+                  <ListItemButton href="/dashboard/personal_details">
+                    <ListItemIcon>
+                      <ManageAccounts />
+                    </ListItemIcon>
+                    <ListItemText primary="Personal Details" />
+                  </ListItemButton>
+                </div>
+              </div>
             ) : (
-              <></>
+              <div></div>
             )}
+            <ListItem>
+              <ListItemButton href="/">
+                <ListItemIcon>
+                  <Security />
+                </ListItemIcon>
+                <ListItemText primary="VERIFICATION" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton href="/">
+                <ListItemIcon>
+                  <Logout />
+                </ListItemIcon>
+                <ListItemText primary="LOGOUT" />
+              </ListItemButton>
+            </ListItem>
           </>
-        ))}
+        ) : (
+          <>
+            <ListItem>
+              <ListItemButton href="/">
+                <ListItemIcon>
+                  <Login />
+                </ListItemIcon>
+                <ListItemText primary="LOGIN" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton href="/">
+                <ListItemIcon>
+                  <AppRegistration />
+                </ListItemIcon>
+                <ListItemText primary="SIGNUP" />
+              </ListItemButton>
+            </ListItem>
+          </>
+        )}
       </List>
       {/* <Divider />
       <List>
@@ -236,7 +354,7 @@ export default function ResponsiveDrawer() {
           <div className="flex justify-between items-center h-12">
             <Typography variant="body2">RESEARCH</Typography>
             <div className="hidden md:flex gap-4">
-              {navigationList.map((item) => (
+              {/* {navigationList.map((item) => (
                 <>
                   {!item.type ? (
                     <>
@@ -265,7 +383,67 @@ export default function ResponsiveDrawer() {
                     </>
                   )}
                 </>
-              ))}
+              ))} */}
+              <Link className="hover:underline" href="/">
+                HOME
+              </Link>
+              <div className="group/parent">
+                <Link href="/dashboard" className="flex group/item">
+                  <div>ACCOUNT</div>
+                  <KeyboardArrowDown />
+                </Link>
+                <div className="hidden absolute group-hover/parent:flex flex-col gap-1 rounded-sm overflow-hidden bg-blue-50 w-36">
+                  <Link
+                    href="/dashboard/allusers"
+                    className="p-2 hover:bg-blue-100 w-full"
+                  >
+                    All Users
+                  </Link>
+                  <Link
+                    href="/dashboard"
+                    className="p-2 hover:bg-blue-100 w-full"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/dashboard/add-conference"
+                    className="p-2 hover:bg-blue-100 w-full"
+                  >
+                    Add Conference
+                  </Link>
+                  <Link
+                    href="/dashboard/all-conferences"
+                    className="p-2 hover:bg-blue-100 w-full"
+                  >
+                    All Conferences
+                  </Link>
+                  <Link
+                    href="/dashboard/personal_details"
+                    className="p-2 hover:bg-blue-100 w-full"
+                  >
+                    Personal Details
+                  </Link>
+                </div>
+              </div>
+              {authCtx.isLoggedIn ? (
+                <>
+                  <Link className="hover:underline" href="/verification">
+                    VERIFICATION
+                  </Link>
+                  <Link className="hover:underline" href="/login">
+                    LOGOUT
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link className="hover:underline" href="/signup">
+                    SIGNUP
+                  </Link>
+                  <Link className="hover:underline" href="/login">
+                    LOGIN
+                  </Link>
+                </>
+              )}
             </div>
             <div className="flex md:hidden">
               <IconButton onClick={toggleDrawer(anchor, true)}>
