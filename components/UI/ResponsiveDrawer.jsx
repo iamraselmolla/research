@@ -430,7 +430,7 @@ export default function ResponsiveDrawer() {
                   <Link className="hover:underline" href="/verification">
                     VERIFICATION
                   </Link>
-                  <Link className="hover:underline" href="/login">
+                  <Link className="hover:underline rounded-full bg-primary px-2 text-white" href="/login">
                     LOGOUT
                   </Link>
                 </>
