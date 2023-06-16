@@ -17,6 +17,7 @@ const ConferenceSchema = new Schema({
       type: String,
       required: true
     },
+    conferenceDescription: String,
     conferenceLocation: String,
     conferenceDate: Date,
     conferenceType: {
@@ -48,6 +49,11 @@ const ConferenceSchema = new Schema({
   verified: {
     type: Boolean,
     default: false
+  },
+  status:{
+    type: String,
+    enum: ['pending','approved','rejected'],
+
   },
   createdAt: {
     type: Date,
