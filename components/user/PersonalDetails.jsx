@@ -1,53 +1,133 @@
 import React from 'react'
 import Dashboard from '../pages/Dashboard'
 import PersonalDetailsNavigation from '../UI/PersonalDetailsNavigation'
-import { Form, Formik } from 'formik'
+import { FieldArray, Form, Formik } from 'formik'
 import InputField from '../UI/InputField'
-import * as yup from "yup"
+import * as Yup from "yup"
 import Gap from '../UI/Gap'
+import { IconButton } from '@mui/material'
+import { Delete } from '@mui/icons-material'
 
 const PersonalDetails = () => {
-  const fields = [
-    { placeholder: "First Name", labelName: "First Name", uni: "firstname", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "Last Name", labelName: "Last Name", uni: "Lastname", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "DOB", labelName: "DOB", uni: "dob", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "Gender", labelName: "Gender", uni: "gender", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "Nickname", labelName: "Nickname", uni: "nickname", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "University Name", labelName: "University Name", uni: "universityName", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "Text", labelName: "Course Name", uni: "courseName", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "Text", labelName: "Branch", uni: "branch", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "Select", labelName: "Year Of Passing", uni: "yop", initialValue: "", type: "text", fieldrequired: true },
-    { placeholder: "Text", labelName: "CGPA", uni: "cgpa", initialValue: "", type: "text", fieldrequired: true },
+  const initialValues = {
+    basicInfo:{
+      firstName: '',
+      lastName: '',
+      dob: '',
+      gender: '',
+    },
+    contactInfo:{
+      email: '',
+      mobileNo1: '',
+      mobileNo2:''
+    },
+    education:[
+      {
+        title:'',
+        completion:'',
+        institute:''
+      }
+    ]
+
+  }
+
+  const basicInfo = [
+    { placeholder: "First Name", labelName: "First Name", uni: "basicInfo.firstName", type: "text", fieldRequired: true },
+    { placeholder: "Last Name", labelName: "Last Name", uni: "basicInfo.lastName", type: "text", fieldRequired: true },
+    { placeholder: "DOB", labelName: "DOB", uni: "basicInfo.dob", type: "date", fieldRequired: true },
   ]
 
-  const initialValues = {}
-  const details = {}
+  const contactInfo=[
+    { placeholder: "Email", labelName: "Email", uni: "contactInfo.email", type: "text", fieldRequired: true },
+    { placeholder: "Mobile 1", labelName: "Mobile 1", uni: "contactInfo.mobileNo1", type: "text", fieldRequired: true },
+    { placeholder: "Mobile 2", labelName: "Mobile 2", uni: "contactInfo.mobileNo2", type: "text",  },
+  ]
 
-  fields.map(item => { initialValues[item.uni] = item.initialValue })
-  fields.map(item => { details[item.uni] = item.fieldrequired ? yup.string().required("Field Can't be empty") : yup.string() })
+
+  const validationSchema = Yup.object().shape({
+    basicInfo: Yup.object().shape({
+      firstName: Yup.string().required('First name is required'),
+      lastName: Yup.string().required('Last name is required'),
+      dob: Yup.date().required('Date of birth is required'),
+      gender: Yup.string().required('Gender is required'),
+    }),
+    contactInfo: Yup.object().shape({
+      email: Yup.string().email('Invalid email').required('Email is required'),
+      mobileNo1: Yup.string().required('Mobile number 1 is required'),
+      mobileNo2: Yup.string()
+    }),
+    education: Yup.array().of(
+      Yup.object().shape({
+        title: Yup.string().required('Education title is required'),
+        completion: Yup.string().required('Completion date is required'),
+        institute: Yup.string().required('Institute name is required')
+      })
+    )
+  });
+
+  const onSubmitHandler=(values,{resetForm})=>{
+    console.log(values)
+  }
 
 
-  const detailSchema = yup.object().shape({ ...details })
+
+
+
   return (
     <Dashboard>
       {/* <PersonalDetailsNavigation activePage="personal" /> */}
       <div>
         <Formik
           initialValues={initialValues}
-          validationSchema={detailSchema}
-          onSubmit={values => {
-            console.log(values);
-          }}
-        >
+          validationSchema={validationSchema}
+          onSubmit={onSubmitHandler}>
+          {({values})=>
           <Form className='flex flex-col'>
-            <Gap>Personal Details</Gap>
+            <Gap>Basic Info</Gap>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:my-5' >
-              {fields.map((item, i) => (
-                <InputField key={item.uni} {...item} />
+              {basicInfo.map((item, i) => (
+                <InputField key={i} {...item} />
+              ))}
+              <InputField fieldRequired={true} uni={'basicInfo.gender'} labelName={'Gender'} as={'select'} override={true}>
+                <option value='' disabled={true}>Select</option>
+                <option value='Male'>Male</option>
+                <option value='Female'>Female</option>
+                <option value='Other'>Other</option>
+              </InputField>
+            </div>
+
+            <Gap>Contact Info</Gap>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:my-5' >
+              {contactInfo.map((item, i) => (
+                <InputField key={i} {...item} />
               ))}
             </div>
-            <button type="submit" className=' bg-primary self-end rounded-sm p-1 md: w-28 text-white'>Submit</button>
+
+            <Gap>Education Details</Gap>
+              <FieldArray name='education'>
+                {({ push, remove }) =>
+                  <div className='flex flex-col'>
+                    {values.education.map((item, i) =>
+                      <div key={i} className='relative flex flex-col'>
+                        {values.education.length > 1 && <IconButton onClick={() => remove(i)} className='absolute top-2 right-2 self-end'><Delete /></IconButton>}
+                        <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:my-5 ' >
+                          <InputField fieldRequired={true} uni={`education.${i}.institute`} placeholder='Institute' labelName={`Education ${i + 1} Institute`} />
+                          <InputField fieldRequired={true} uni={`education.${i}.title`} placeholder='Alex' labelName={`Education ${i + 1} Title`} />
+                          <InputField fieldRequired={true} uni={`education.${i}.completion`} type={'date'} placeholder='Technology' labelName={`Education ${i + 1} Year of Completion`} />
+                        </div>
+                      </div>
+                    )}
+                    <button type='button' onClick={() => {
+                      push(initialValues.education[0])
+                    }} className='bg-primary text-white px-2 py-1 self-end mt-4'>ADD</button>
+                    {/* {values.speakers.map((item,i)=><div>TEST</div>)} */}
+                  </div>
+                }
+              </FieldArray>
+
+            <button type="submit" className=' bg-primary self-end rounded-sm p-1 md: w-28 text-white mt-4'>Submit</button>
           </Form >
+          }
         </Formik>
       </div>
     </Dashboard>

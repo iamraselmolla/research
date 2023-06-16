@@ -33,6 +33,7 @@ export default async function conferenceCreate(req, res) {
 
                 }
                 catch (err) {
+                    console.log(err)
                     return res.status(500).json({
                         message: 'Something went wrong',
                         error: err.message,

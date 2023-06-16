@@ -5,7 +5,7 @@ import Image from "next/image";
 import { AccessTimeOutlined, LocationOnOutlined } from "@mui/icons-material";
 import Link from "next/link";
 
-const Events = () => {
+const AllConferences = () => {
   const eventList = [
     {
       title: "Sing Along",
@@ -92,4 +92,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default AllConferences;

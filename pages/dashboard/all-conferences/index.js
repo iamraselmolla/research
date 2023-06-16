@@ -1,6 +1,6 @@
 import Head from "next/head";
-import DashboardDefault from "../../components/pages/DashboardDefault";
-import Events from "../../components/pages/Events";
+import DashboardDefault from "../../../components/pages/DashboardDefault";
+import AllConferences from "../../../components/pages/AllConferences";
 
 export default function index() {
   return (
@@ -30,7 +30,7 @@ export default function index() {
         <meta property="og:description" content="research_description" />
         <meta property="og:site_name" content="Research" />
       </Head>
-      <Events />
+      <AllConferences/>
     </>
   );
 }

@@ -36,13 +36,14 @@ const InputField = ({
       <div className={`flex items-center space-x-2  rounded-lg  ${disabled ? 'bg-red-100' : 'bg-white'}`}>
         <Field
           disabled={disabled}
-          className={`p-2 w-full text-black rounded-lg ${inputClass} ${disabled ? 'bg-red-100' : 'bg-blue-200'}`}
+          className={`p-2 w-full text-black rounded-lg  ${inputClass} ${disabled ? 'bg-red-100' : 'bg-blue-200'} ${as==='textarea' ? 'h-40 resize-none': ''}`}
           placeholder={placeholder}
           type={type !== 'password' || type === undefined ? type : type === 'password' && passVisibility ? 'text' : 'password'}
           id={uni}
           name={uni}
           as={as}
           min={min}
+          
         >{override ? children : null}</Field>
         {type === 'password' && passVisibility && <VisibilityOff onClick={() => hidePass()} className="p-1 text-black cursor-pointer" />}
         {type === 'password' && !passVisibility && <Visibility onClick={() => showPass()} className="p-1 text-black cursor-pointer" />}

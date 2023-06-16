@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
 import LogoutIcon from "@mui/icons-material/Logout";
-import { List, ListItemButton, ListItemIcon } from "@mui/material";
+import {  Grid, List, ListItemButton, ListItemIcon } from "@mui/material";
 import { useState } from "react";
 import Link from "next/link";
 import ResponsiveDrawer from "../UI/ResponsiveDrawer";
@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { assets } from "../assets";
 import Image from "next/image";
-import { Person, Videocam } from "@mui/icons-material";
+import { Duo, Person, Videocam } from "@mui/icons-material";
 import { ALL_LINKS } from "../constants/constant";
 
 export const adminMenu = [
@@ -31,8 +31,15 @@ export const adminMenu = [
     showAlways: false,
   },
   {
-    name: "Conference Details",
-    pageLink: ALL_LINKS.dashboard+ALL_LINKS.conferenceDetails,
+    name: "All Conferences",
+    pageLink: ALL_LINKS.dashboard+ALL_LINKS.allConference,
+    icon: <Duo />,
+    showAlways: false,
+  },
+
+  {
+    name: "Add Conference",
+    pageLink: ALL_LINKS.dashboard+ALL_LINKS.addConference,
     icon: <Videocam />,
     showAlways: false,
   },

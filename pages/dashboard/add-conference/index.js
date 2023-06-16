@@ -1,5 +1,5 @@
 import Head from "next/head";
-import CreateConference from "../../../components/pages/CreateConference";
+import AddConference from "../../../components/pages/AddConference";
 
 export default function index() {
   return (
@@ -26,9 +26,7 @@ export default function index() {
 
 
     {/* Put page content here */}
-    <CreateConference>
-      
-    </CreateConference>
+    <AddConference/>
     </>
   )
 }

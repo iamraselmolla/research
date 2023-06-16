@@ -10,7 +10,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 
-const CreateConference = () => {
+const AddConference = () => {
     const validationSchema = yup.object().shape({
         organizationName: yup.string().required('Organization name is required'),
         conferenceName: yup.string().required('Conference name is required'),
@@ -25,6 +25,7 @@ const CreateConference = () => {
         conferenceName: '',
         conferenceLocation: '',
         conferenceDate: '',
+        conferenceDescription:'',
         startTime: '',
         endTime: '',
         conferenceType: '',
@@ -47,7 +48,7 @@ const CreateConference = () => {
     const details = {}
 
     const organisationFields = [
-        { placeholder: "Organization Name", labelName: "Organization Name", uni: "organizationName", initialValue: "", type: "text", fieldrequired: true },
+        { placeholder: "Organization Name", labelName: "Organization Name", uni: "organizationName", initialValue: "", type: "text", fieldRequired: true },
         { placeholder: "Organization Address", labelName: "Organization Address", uni: "organizationAddress", initialValue: "", type: "text" },
         { placeholder: "Organization City", labelName: "Organization City", uni: "organizationCity", initialValue: "", type: "text" },
         { placeholder: "Organization State", labelName: "Organization State", uni: "organizationState", initialValue: "", type: "text" },
@@ -55,12 +56,12 @@ const CreateConference = () => {
     ]
 
     const conferenceFields = [
-        { placeholder: "Conference Name", labelName: "Conference Name", uni: "conferenceName", initialValue: "", type: "text", fieldrequired: true },
+        { placeholder: "Conference Name", labelName: "Conference Name", uni: "conferenceName", initialValue: "", type: "text", fieldRequired: true },
         { placeholder: "Conference Location", labelName: "Conference Location", uni: "conferenceLocation", initialValue: "", type: "text" },
         { placeholder: "Conference Date", labelName: "Conference Date", uni: "conferenceDate", initialValue: "", type: "date" },
         { placeholder: "Conference Start Time", labelName: "Conference Start Time", uni: "startTime", initialValue: "", type: "time" },
         { placeholder: "Conference End Time", labelName: "Conference End Time", uni: "endTime", initialValue: "", type: "time" },
-        { placeholder: "Conference type", labelName: "Conference Type", uni: "conferenceType", initialValue: "", type: "text", fieldrequired: true },
+        // { placeholder: "Conference type", labelName: "Conference Type", uni: "conferenceType", initialValue: "", type: "text", fieldRequired: true },
         { placeholder: "Conference Theme", labelName: "Conference Theme", uni: "conferenceTheme", initialValue: "", type: "text" },
     ]
 
@@ -88,7 +89,7 @@ const CreateConference = () => {
         try {
             console.log(values);
             const result = await axios.post('/api/conference', values);
-            toast.success('Conference Created successful!');
+            toast.success('Conference Created successfully!');
             resetForm({values:''})
         }
         catch (error) {
@@ -121,7 +122,14 @@ const CreateConference = () => {
                                 {conferenceFields.map((item, i) => (
                                     <InputField key={i} {...item} />
                                 ))}
+                                <InputField uni={'conferenceType'} labelName={'Conference Type'} as={'select'} override={true}>
+                                    <option value='' disabled={true}>Select</option>
+                                    <option value='Online'>Online</option>
+                                    <option value='Offline'>Offline</option>
+                                    <option value='Hybrid'>Hybrid</option>
+                                </InputField>
                             </div>
+                            <InputField uni='conferenceDescription' labelName={'Conference Description'} as={'textarea'} placeholder={'Description'} />
 
                             <Gap>Committee</Gap>
                             <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:my-5' >
@@ -169,4 +177,4 @@ const CreateConference = () => {
     );
 };
 
-export default CreateConference;
+export default AddConference;
