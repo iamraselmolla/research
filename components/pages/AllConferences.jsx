@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Dashboard from "./Dashboard";
 import { assets } from "../assets";
 import Image from "next/image";
@@ -6,6 +6,8 @@ import { AccessTimeOutlined, LocationOnOutlined } from "@mui/icons-material";
 import Link from "next/link";
 
 const AllConferences = () => {
+const [allUsers, serUsers] = useState(null)
+
   const eventList = [
     {
       title: "Sing Along",

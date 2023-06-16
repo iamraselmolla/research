@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import Dashboard from "./Dashboard"
 import AuthContext from "../store/AuthContext";
 import axios from "axios";
-import Spinner2 from "./Spinner2";
 import Delete from "@mui/icons-material/Delete";
 import BlockIcon  from "@mui/icons-material/Block";
 const AllUsers = () => {
