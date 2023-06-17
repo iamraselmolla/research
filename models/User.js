@@ -19,6 +19,10 @@ const UserSchema =  new Schema({
     },
     role: {
         type: String
+    },
+    personalDetails: {
+        type: Schema.Types.ObjectId,
+        ref: 'PersonalDetails'
     }
 })
 
