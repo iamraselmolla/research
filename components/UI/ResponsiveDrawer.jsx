@@ -248,7 +248,7 @@ export default function ResponsiveDrawer() {
               </ListItemButton>
             </ListItem>
             {dropDown === "account" ? (
-              <div className="bg-blue-100 mx-5 px-4">
+              <div className="bg-white mx-5 px-4">
                 <div>
                   <ListItemButton href="/dashboard">
                     <ListItemIcon>
@@ -258,7 +258,7 @@ export default function ResponsiveDrawer() {
                   </ListItemButton>
                 </div>
                 <div>
-                  <ListItemButton href="/dashboard/allusers">
+                  <ListItemButton href="/dashboard/all-users">
                     <ListItemIcon>
                       <People />
                     </ListItemIcon>
@@ -348,42 +348,13 @@ export default function ResponsiveDrawer() {
   );
 
   return (
-    <div className="p-2 bg-slate-100 text-black">
+    <div className="p-2 bg-primary  text-white h-[80px] flex flex-col justify-center">
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           <div className="flex justify-between items-center h-12">
-            <Typography variant="body2">RESEARCH</Typography>
-            <div className="hidden md:flex gap-4">
-              {/* {navigationList.map((item) => (
-                <>
-                  {!item.type ? (
-                    <>
-                      <Link className="hover:underline" href={item.link}>
-                        {item.nav.toUpperCase()}
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <div className="group/parent">
-                        <button className="flex group/item">
-                          <div>ACCOUNT</div>
-                          <KeyboardArrowDown />
-                        </button>
-                        <div className="hidden absolute group-hover/parent:flex flex-col gap-1 rounded-sm overflow-hidden bg-blue-50 w-36">
-                          {item.subLinks.map((subItem) => (
-                            <Link
-                              href={subItem.link}
-                              className="p-2 hover:bg-blue-100 w-full"
-                            >
-                              {subItem.nav}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </>
-              ))} */}
+            <Typography variant="h6">RESEARCH</Typography>
+            <div className="hidden md:flex gap-4 items-center justify-center">
+
               <Link className="hover:underline" href="/">
                 HOME
               </Link>
@@ -392,34 +363,34 @@ export default function ResponsiveDrawer() {
                   <div>ACCOUNT</div>
                   <KeyboardArrowDown />
                 </Link>
-                <div className="hidden absolute group-hover/parent:flex flex-col gap-1 rounded-sm overflow-hidden bg-blue-50 w-36">
+                <div className="hidden absolute group-hover/parent:flex flex-col gap-1 rounded-sm overflow-hidden text-black bg-white w-36">
                   <Link
-                    href="/dashboard/allusers"
-                    className="p-2 hover:bg-blue-100 w-full"
+                    href="/dashboard/all-users"
+                    className="p-2 hover:bg-secondary hover:text-white w-full"
                   >
                     All Users
                   </Link>
                   <Link
                     href="/dashboard"
-                    className="p-2 hover:bg-blue-100 w-full"
+                    className="p-2 hover:bg-secondary hover:text-white w-full"
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/dashboard/add-conference"
-                    className="p-2 hover:bg-blue-100 w-full"
+                    className="p-2 hover:bg-secondary hover:text-white w-full"
                   >
                     Add Conference
                   </Link>
                   <Link
                     href="/dashboard/all-conferences"
-                    className="p-2 hover:bg-blue-100 w-full"
+                    className="p-2 hover:bg-secondary hover:text-white w-full"
                   >
                     All Conferences
                   </Link>
                   <Link
                     href="/dashboard/personal_details"
-                    className="p-2 hover:bg-blue-100 w-full"
+                    className="p-2 hover:bg-secondary hover:text-white w-full"
                   >
                     Personal Details
                   </Link>
@@ -430,9 +401,9 @@ export default function ResponsiveDrawer() {
                   <Link className="hover:underline" href="/verification">
                     VERIFICATION
                   </Link>
-                  <Link className="hover:underline rounded-full bg-primary px-2 text-white" href="/login">
+                  <button onClick={()=>authCtx.logout()} className="hover:underline rounded-lg bg-primary p-2 text-white">
                     LOGOUT
-                  </Link>
+                  </button>
                 </>
               ) : (
                 <>
@@ -447,7 +418,7 @@ export default function ResponsiveDrawer() {
             </div>
             <div className="flex md:hidden">
               <IconButton onClick={toggleDrawer(anchor, true)}>
-                <Menu fontSize="large" />
+                <Menu sx={{color:'white'}} fontSize="large" />
               </IconButton>
             </div>
           </div>

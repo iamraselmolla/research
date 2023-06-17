@@ -14,14 +14,21 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { assets } from "../assets";
 import Image from "next/image";
-import { Duo, Person, Videocam } from "@mui/icons-material";
+import { Duo, People, Person, Videocam } from "@mui/icons-material";
 import { ALL_LINKS } from "../constants/constant";
+import {usePathname} from 'next/navigation'
 
 export const adminMenu = [
   {
     name: "Dashboard",
     pageLink: ALL_LINKS.dashboard,
     icon: <DashboardIcon />,
+    showAlways: false,
+  },
+  {
+    name: "All Users",
+    pageLink: ALL_LINKS.dashboard+ALL_LINKS.allUsers,
+    icon: <People />,
     showAlways: false,
   },
   {
@@ -43,6 +50,7 @@ export const adminMenu = [
     icon: <Videocam />,
     showAlways: false,
   },
+  
 ];
 const Dashboard = ({children}) => {
   const authCtx=useContext(AuthContext);
@@ -73,15 +81,16 @@ const Dashboard = ({children}) => {
   // if(!authCtx.isLoggedIn)
   // return(<div></div>)
 
+  const currentRoute = usePathname();
+
   return (
     <div className='relative'>
     {loading ? <SplashScreen/> :
     <>
     {/* {authCtx.isLoggedIn ? */}
-
     <ResponsiveDrawer/>
-      <div className="flex flex-row h-[calc(100vh_-_120px)] max-w-[100%] md:h-[calc(100vh_-_120px)] pb-8  bg-primary">
-        <div className="min-w-[300px]  h-[calc(100vh_-_150px)] mdrev:hidden bg-white  overflow-y-auto rounded-xl mt-4 ml-4">
+      <div className="flex flex-row h-[calc(100vh_-_80px)] max-w-[100%] md:h-[calc(100vh_-_80px)]  bg-ligh">
+        <div className="min-w-[300px]  h-[calc(100vh_-80px)] mdrev:hidden bg-white  overflow-y-auto  ">
           <div className="flex flex-col items-center  p-4 gap-1">
             <div className="bg-white  w-[160px] h-[160px]  rounded-full overflow-hidden shadow-lg">
               {/* <Image alt='Logo' src={assets.director} className='w-[100%] h-[100%] '/> */}
@@ -97,9 +106,9 @@ const Dashboard = ({children}) => {
               <Link
                 href={item.pageLink}
                 key={index}
-                className="bg-secondary rounded-lg text-white"
+                className={`bg-secondary  text-white w-full ${currentRoute===item.pageLink ? 'border-r-[10px] border-r-red-500': ''}`}
               >
-                <ListItemButton sx={{ width: 240 }}>
+                <ListItemButton sx={{ width: '100%' , }}>
                   <ListItemIcon
                     sx={{
                       color:'white'
@@ -115,11 +124,10 @@ const Dashboard = ({children}) => {
 
             <ListItemButton
               sx={{
-                width: 240,
+                width: '100%',
                 background: "#FBB03B",
-                borderRadius: "8px",
                 color:'white',
-                ":hover": { background:'#FBB03B' },
+                ":hover": { background:'red' },
               }}
               onClick={()=>{authCtx.logout();toast.warn("Logged out successfully")}}
             >

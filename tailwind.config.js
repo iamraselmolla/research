@@ -17,7 +17,8 @@ module.exports = {
         secondary:'#FBB03B',
         ter:'#903749',
         quat:'#53354A',
-        pent:'#F39189'
+        pent:'#F39189',
+        lightBackground:'#EEEEEE'
       },
       screens:{
         'smrev':{'max':'600px'},
