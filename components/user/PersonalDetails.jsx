@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Dashboard from '../pages/Dashboard'
 import PersonalDetailsNavigation from '../UI/PersonalDetailsNavigation'
 import { FieldArray, Form, Formik } from 'formik'
@@ -9,8 +9,10 @@ import { IconButton } from '@mui/material'
 import { Delete } from '@mui/icons-material'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import AuthContext from '../store/AuthContext'
 
 const PersonalDetails = () => {
+  const authCtx=useContext(AuthContext);
   const initialValues = {
     basicInfo:{
       firstName: '',
@@ -71,7 +73,7 @@ const PersonalDetails = () => {
     try{
 
       console.log(values)
-      const response = await axios.post("/api/personaldetails", values);
+      const response = await axios.post("/api/personaldetails", {...values,userId:authCtx.localid});
       toast.success("Personal details are added successfully");
       resetForm({values:''})
     }

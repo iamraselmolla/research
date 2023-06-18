@@ -11,11 +11,13 @@ export default async function personalDetails(req, res) {
 
                     await dbConnect();
 
-                    const { basicInfo, contactInfo, education } = req.body;
-                    const resultFound = await User.findOne({ firstName: basicInfo.firstName, lastName: basicInfo.lastName });
+                    const { basicInfo, contactInfo, education,userId } = req.body;
+                    const resultFound = await User.findOne({ _id:userId});
+                    console.log(resultFound)
                     if (resultFound) {
-                        const newInfo = new PersonalDetails({ basicInfo, contactInfo, education });
-
+                    const newInfo = new PersonalDetails({ basicInfo, contactInfo, education });
+                    resultFound.personalDetails=newInfo._id;
+                    await resultFound.save();
                      const newInfoSaved = await  newInfo.save();
                      return res.status(200).json({ message: "Personal Details saved Successfully", newInfoSaved });
                         
