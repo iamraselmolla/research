@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Field, FieldArray, Form, Formik } from 'formik'
 import InputField from '../UI/InputField'
 import * as yup from "yup"
@@ -8,6 +8,7 @@ import { IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import AuthContext from '../store/AuthContext';
 
 
 const AddConference = () => {
@@ -84,11 +85,11 @@ const AddConference = () => {
         { placeholder: "Registration Fee", labelName: "Registration Fee", uni: "registrationFee", initialValue: "", type: "number" },
         { placeholder: "Registration Link", labelName: "Registration Link", uni: "registrationLink", initialValue: "", type: "text" },
     ]
-
+const authCtx = useContext(AuthContext)
     const handleFormSubmit = async (values, {resetForm}) => {
         try {
             console.log(values);
-            const result = await axios.post('/api/conference', values);
+            const result = await axios.post('/api/conference', {...values, userId: authCtx.localid});
             toast.success('Conference Created successfully!');
             resetForm({values:''})
         }

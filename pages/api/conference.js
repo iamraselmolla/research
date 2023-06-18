@@ -10,7 +10,7 @@ export default async function conferenceCreate(req, res) {
                 try {
 
                     await dbConnect();
-                    const { organizationName, organizationAddress, organizationCity, organizationState, organizationCountry, conferenceName, conferenceLocation,conferenceDescription, conferenceDate, startTime, endTime, conferenceType, conferenceTheme, committeeChair, committeeMembers, speakers, registrationOpenDate, registrationCloseDate, registrationFee, registrationLink } = req.body;
+                    const { organizationName, organizationAddress, organizationCity, organizationState, organizationCountry, conferenceName, conferenceLocation,conferenceDescription, conferenceDate, startTime, endTime, conferenceType, conferenceTheme, committeeChair, committeeMembers, speakers, registrationOpenDate, registrationCloseDate, registrationFee, registrationLink,userId } = req.body;
 
                     const organisationInfo = {
                         organizationName, organizationAddress, organizationCity, organizationState, organizationCountry
@@ -25,7 +25,7 @@ export default async function conferenceCreate(req, res) {
                     const registrationInfo = {
                         registrationOpenDate, registrationCloseDate, registrationFee, registrationLink
                     }
-                    const newEvent = new Conference({organisationInfo, conferenceInfo, committeeInfo, speakers,registrationInfo, verified:false, status: 'pending'  });
+                    const newEvent = new Conference({organisationInfo, conferenceInfo, committeeInfo, speakers,registrationInfo, verified:false, status: 'pending', user:userId });
                     const result = await newEvent.save();
                     
 
