@@ -12,6 +12,8 @@ import Footer from '../UI/Footer';
 import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup'
 import InputField, { } from '../UI/InputField'
+import Image from 'next/image';
+import { assets } from '../assets';
 
 const Signup = () => {
   const [loading, setLoading] = useState(true);
@@ -96,8 +98,8 @@ const Signup = () => {
                 <ResponsiveDrawer />
                 <div className='bg-white py-10'>
                   <div className='flex justify-center items-center font-sans' >
-                    <div className='flex flex-col justify-center items-center w-[90vw]  md:w-[500px] md:m-auto  bg-ter text-white rounded-lg md:p-16 p-8'>
-                      <h4 className='uppercase  text-2xl mb-4'>Sign Up</h4>
+                    <div className='flex flex-col border-2 border-gray-700 justify-center items-center w-[90vw]  md:w-[80%] max-w-[80rem] md:m-auto text-black rounded-lg md:p-16 p-8'>
+                      <h4 className='text-2xl font-bold mb-4'>Signup Here</h4>
                       <Formik
                         initialValues={initialValues}
                         validationSchema={loginSchema}
@@ -105,13 +107,13 @@ const Signup = () => {
 
                       >
                         {({ errors, touched }) => (
-                          <Form className='w-full flex flex-col  space-y-4'>
+                          <Form  className='w-full flex flex-col  space-y-4'>
 
                             <div className='grid grid-cols-1  gap-2'>
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='First Name' type='text' uni='basicInfo.firstName' placeholder='First Name' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Last Name' type='text' uni='basicInfo.lastName' placeholder='Last Name' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Username' type='text' uni='basicInfo.username' placeholder='Username' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Password' type='password' uni='basicInfo.password' placeholder='Password' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='First Name' type='text' uni='firstName' placeholder='First Name' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Last Name' type='text' uni='lastName' placeholder='Last Name' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Username' type='text' uni='username' placeholder='Username' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Password' type='password' uni='password' placeholder='Password' fieldRequired={true} />
                             </div>
                             <div>
                               Already have an account ?&nbsp;
@@ -123,12 +125,20 @@ const Signup = () => {
                             </div>
                             <div className=' flex justify-center space-y-2'>
                               {!buttonLoading ? (
-                                <button
-                                  className={`bg-white text-black w-40 h-10  hover:bg-quaternary`}
-                                  type="submit"
-                                >
-                                  SIGN UP
-                                </button>
+                                <>
+                                  <button
+                                    className={`bg-black text-white font-bold w-full h-10  hover:bg-quaternary`}
+                                    type="submit"
+                                  >
+                                    Signup As An Faculty
+                                  </button>
+                                  <button
+                                    className={`bg-black text-white font-bold w-full h-10  hover:bg-quaternary`}
+                                    type="submit"
+                                  >
+                                    Signup As A Customer
+                                  </button>
+                                </>
                               ) : (
                                 <Spinner size={60} />
                               )}

@@ -8,6 +8,7 @@ import publish from './assets/publish.png'
 import benefits from './assets/benefits.jpg'
 import whyChoose from './assets/whyChoose.jpg'
 import dashboard from './assets/dashboard.jpg'
+import signupPage from './assets/signupPage.png'
 
 export const assets = {
     books,
@@ -22,4 +23,5 @@ export const assets = {
         publish,
     },
     art_01,
+    signupPage
 }
