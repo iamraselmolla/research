@@ -22,7 +22,8 @@ const UserSchema =  new Schema({
     },
     personalDetails: {
         type: Schema.Types.ObjectId,
-        ref: 'PersonalDetails'
+        ref: 'PersonalDetails',
+        default:null
     }
 })
 

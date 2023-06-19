@@ -13,7 +13,7 @@ export default async function handler(req, res) {
                 try {
                     let { username, password } = req.body;
                     await dbConnect();
-                    const matchFind = await User.findOne({ username: username.toLowerCase() }).select("password").populate('personalDetails');
+                    const matchFind = await User.findOne({ username: username.toLowerCase() }).select("password");
                     if (!matchFind) {
                         return res.status(401).json({ message: "User not found" })
                     } else {
@@ -30,6 +30,7 @@ export default async function handler(req, res) {
                     }
                 }
                 catch (err) {
+                    console.log(err)
                     return res.status(500).json({ message: 'Server error' })
                 }
                 break;

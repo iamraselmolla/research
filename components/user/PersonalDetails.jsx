@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Dashboard from '../pages/Dashboard'
 import PersonalDetailsNavigation from '../UI/PersonalDetailsNavigation'
 import { FieldArray, Form, Formik } from 'formik'
@@ -10,13 +10,17 @@ import { Delete } from '@mui/icons-material'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import AuthContext from '../store/AuthContext'
+import { useSelector } from 'react-redux'
 
 const PersonalDetails = () => {
   const authCtx=useContext(AuthContext);
+  const user=useSelector(state=>state.user.user);
+  console.log(user)
+  const [fetchedValues,setFetchedValues]=useState({})
   const initialValues = {
     basicInfo:{
-      firstName: '',
-      lastName: '',
+      firstName: user.firstName,
+      lastName: user.lastName,
       dob: '',
       gender: '',
     },
@@ -32,12 +36,34 @@ const PersonalDetails = () => {
         institute:''
       }
     ]
-
   }
 
+  useEffect(()=>{
+    setFetchedValues({
+      basicInfo:{
+        firstName: '',
+        lastName: '',
+        dob: '',
+        gender: '',
+      },
+      contactInfo:{
+        email: '',
+        mpobileNo1: '',
+        mobileNo2:''
+      },
+      education:[
+        {
+          title:'',
+          completion:'',
+          institute:''
+        }
+      ]
+    })
+  },[])
+
   const basicInfo = [
-    { placeholder: "First Name", labelName: "First Name", uni: "basicInfo.firstName", type: "text", fieldRequired: true },
-    { placeholder: "Last Name", labelName: "Last Name", uni: "basicInfo.lastName", type: "text", fieldRequired: true },
+    { placeholder: "First Name", labelName: "First Name", uni: "basicInfo.firstName", type: "text", fieldRequired: true,disabled:true },
+    { placeholder: "Last Name", labelName: "Last Name", uni: "basicInfo.lastName", type: "text", fieldRequired: true,disabled:true },
     { placeholder: "DOB", labelName: "DOB", uni: "basicInfo.dob", type: "date", fieldRequired: true },
   ]
 

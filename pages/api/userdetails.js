@@ -4,9 +4,9 @@ export default async function userDetails(req, res) {
     switch (req.method) {
         case "GET": {
             try {
-
-                const id = req.query.id;
-                const getResult = await User.findOne({ _id: id });
+                const userId = req.headers['user-id'];
+                console.log(userId);
+                const getResult = await User.findOne({ _id: userId })?.populate('personalDetails');
                 if (getResult) {
                     res.send(getResult);
                 }
