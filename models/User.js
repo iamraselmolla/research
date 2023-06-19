@@ -1,29 +1,61 @@
 const { model, Schema, default: mongoose } = require("mongoose");
 
 const UserSchema =  new Schema({
-    firstName: {
-        type: String,
-        required: true
+    
+    basicInfo:{
+        firstName:{
+            type: String,
+            required: true
+        },
+        lastName:{
+            type: String,
+            required: true
+        },
+        username: {
+            type: String,
+            required: true
+        },
+        password: {
+            type: String,
+            required: true
+        },
+        dob:{
+            type: Date
+        },
+        gender:{
+            type: String,
+            enum: ['Male', 'Female', 'Other']
+        }
     },
-    lastName: {
-        type: String,
-        required: true
+    contactInfo:{
+        email: {
+            type: String,
+            unique: true
+        },
+        mobileNo1: {
+            type: String
+        },
+        mobileNo2: {
+            type: String
+        }
     },
-    username: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
+    education:[
+        {
+            title:{
+                type: String
+            },
+            completion:{
+                type: Date
+            },
+            institute:{
+                type: String
+            },
+        }
+    ],    
+   
+   
     role: {
         type: String
-    },
-    personalDetails: {
-        type: Schema.Types.ObjectId,
-        ref: 'PersonalDetails',
-        default:null
     }
 })
 

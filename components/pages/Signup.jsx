@@ -33,28 +33,47 @@ const Signup = () => {
     }
   }, []);
   const initialValues = {
-    firstName: '',
-    lastName: '',
-    username: '',
-    password: ''
+    basicInfo: {
+      firstName: '',
+      lastName: '',
+      username: '',
+      password: '',
+      dob: '',
+      gender: 'Other'
+    },
+    contactInfo: {
+      email: '',
+      mobileNo1: '',
+      mobileNo2: ''
+    },
+    education: [
+      {
+        title: '',
+        completion: '',
+        institute: ''
+      }
+    ]
+
   }
   const loginSchema = yup.object().shape({
-    firstName: yup.string().required('Enter First Name'),
-    lastName: yup.string().required('Enter Last Name'),
-    username: yup.string().required('Enter Username'),
-    password: yup.string().min(8, "Too Short!!").required('Enter Password'),
+    basicInfo: yup.object().shape({
+
+      firstName: yup.string().required('Enter First Name'),
+      lastName: yup.string().required('Enter Last Name'),
+      username: yup.string().required('Enter Username'),
+      password: yup.string().min(8, "Too Short!!").required('Enter Password'),
+    })
   })
-  const handleSubmit = async (values,{resetForm}) => {
-    // values.preventDefault();
+  const handleSubmit = async (values, { resetForm }) => {
+
+    console.log(values)
     try {
-     
-      console.log(values)
       setButtonLoading(true);
-      const response = await axios.post('/api/signup', values); 
+      const response = await axios.post('/api/signup', values);
       // Handle the response
       console.log(response.data);
       toast.success('Signup successful!');
-      resetForm({values:''})
+      resetForm({ values: '' })
       router.push('/login')
     } catch (error) {
       // Handle errors
@@ -83,16 +102,16 @@ const Signup = () => {
                         initialValues={initialValues}
                         validationSchema={loginSchema}
                         onSubmit={handleSubmit}
-                        
+
                       >
                         {({ errors, touched }) => (
-                          <Form  className='w-full flex flex-col  space-y-4'>
+                          <Form className='w-full flex flex-col  space-y-4'>
 
                             <div className='grid grid-cols-1  gap-2'>
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='First Name' type='text' uni='firstName' placeholder='First Name' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Last Name' type='text' uni='lastName' placeholder='Last Name' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Username' type='text' uni='username' placeholder='Username' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Password' type='password' uni='password' placeholder='Password' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='First Name' type='text' uni='basicInfo.firstName' placeholder='First Name' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Last Name' type='text' uni='basicInfo.lastName' placeholder='Last Name' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Username' type='text' uni='basicInfo.username' placeholder='Username' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Password' type='password' uni='basicInfo.password' placeholder='Password' fieldRequired={true} />
                             </div>
                             <div>
                               Already have an account ?&nbsp;
