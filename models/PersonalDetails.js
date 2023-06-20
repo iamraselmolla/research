@@ -53,4 +53,4 @@ const PersonalSchema = new Schema({
     ]
 });
 
-export default mongoose.models.PersonalDetails || mongoose.model("PersonalDetail", PersonalSchema)
+export default mongoose.models.PersonalDetail || mongoose.model("PersonalDetail", PersonalSchema)

@@ -6,17 +6,18 @@ import axios from "axios";
 import Delete from "@mui/icons-material/Delete";
 import BlockIcon  from "@mui/icons-material/Block";
 const AllUsers = () => {
-  const authCtx = useContext(AuthContext);
+  const {token} = useContext(AuthContext);
 
 
   const [allUsers, setAllUser] = useState(null);
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     const fetchData = async () => {
+     
       setLoading(true)
 
       try {
-        const getUsers = await axios.get('/api/allusers');
+        const getUsers = await axios.get(`/api/allusers?token=${token}`);
         setAllUser(getUsers.data);
         setLoading(false)
       } catch (error) {
@@ -51,9 +52,9 @@ const AllUsers = () => {
               return (
                 <tr key={index}>
                   <td className="px-4 py-2 text-black border border-black text-center align-middle">{index + 1}</td>
-                  <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.firstName}</td>
-                  <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.lastName}</td>
-                  <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.username}</td>
+                  <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.basicInfo.firstName}</td>
+                  <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.basicInfo.lastName}</td>
+                  <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.basicInfo.username}</td>
                   <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.role}</td>
                   <td className="px-4 py-2 text-black border border-black text-center align-middle">
 
