@@ -110,10 +110,10 @@ const Signup = () => {
                           <Form  className='w-full flex flex-col  space-y-4'>
 
                             <div className='grid grid-cols-1  gap-2'>
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='First Name' type='text' uni='firstName' placeholder='First Name' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Last Name' type='text' uni='lastName' placeholder='Last Name' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Username' type='text' uni='username' placeholder='Username' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Password' type='password' uni='password' placeholder='Password' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='First Name' type='text' uni='basicInfo.firstName' placeholder='First Name' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Last Name' type='text' uni='basicInfo.lastName' placeholder='Last Name' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Username' type='text' uni='basicInfo.username' placeholder='Username' fieldRequired={true} />
+                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Password' type='password' uni='basicInfo.password' placeholder='Password' fieldRequired={true} />
                             </div>
                             <div>
                               Already have an account ?&nbsp;

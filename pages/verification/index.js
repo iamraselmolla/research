@@ -6,7 +6,7 @@ export default function index() {
   return (
     <>
     <Head>
-    <title>Research - Login</title>
+    <title>Research - Verification</title>
     <meta charSet="utf-8" />
     <link rel="icon" href='https://res.cloudinary.com/da75fckow/image/upload/v1684919760/sikka-warehouse/logo_e3zr7m.png' />
     <meta property="og:locale" content="en_US" />

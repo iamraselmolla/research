@@ -56,6 +56,9 @@ const UserSchema =  new Schema({
    
     role: {
         type: String
+    },
+    verification:{
+        type: String
     }
 })
 

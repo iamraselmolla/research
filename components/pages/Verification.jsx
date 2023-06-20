@@ -1,18 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
 import { CameraAltOutlined, CloudDone, UploadFile } from '@mui/icons-material'
+import axios from 'axios';
+import { useContext } from 'react';
+import AuthContext from '../store/AuthContext';
+import { toast } from 'react-toastify';
 
 const Verification = () => {
+  const {localid}  = useContext(AuthContext)
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState();
   const [file, setFile] = useState()
-  const onSelectImage = (e) => {
+  const onSelectImage = async (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setImage(undefined)
       return
     }
+    e.preventDefault()
     // console.log(e.target.files[0])
-    setImage(e.target.files[0])
+    setImage(e.target.files[0]);
+    const formData = new FormData();
+    const verifyImage = e.target.files[0];
+    formData.append('file', verifyImage);
+    formData.append("upload_preset", "ml_default");
+    formData.append("cloud_name", "iamraselmolla");
+    const response = await axios.post(
+      'https://api.cloudinary.com/v1_1/iamraselmolla/image/upload',
+      formData
+    );
+    if(response.data.url){
+      const result = await axios.put("/api/verification", {
+        verification: response.data.url,
+        localid
+      });
+      if(result.status === 200){
+        toast.success("Verification Image added successfully");
+      }
+      
+    }
   }
   useEffect(() => {
     if (!image) {
@@ -22,7 +47,6 @@ const Verification = () => {
 
     let selectedImage = URL.createObjectURL(image)
     setImagePreview(selectedImage)
-    console.log(imagePreview)
 
   }, [image])
   return (
