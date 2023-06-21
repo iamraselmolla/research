@@ -58,7 +58,12 @@ const UserSchema =  new Schema({
         type: String
     },
     verification:{
-        type: String
+        img:{
+            type: String
+        },
+        file: {
+            type: String
+        }
     }
 })
 

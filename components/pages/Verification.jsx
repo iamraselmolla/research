@@ -21,6 +21,9 @@ const Verification = () => {
     setImage(e.target.files[0]);
     const formData = new FormData();
     const verifyImage = e.target.files[0];
+    if(!verifyImage.type.startsWith("image/")){
+      return toast.error("Please select valid type of image")
+    }
     formData.append('file', verifyImage);
     formData.append("upload_preset", "ml_default");
     formData.append("cloud_name", "iamraselmolla");

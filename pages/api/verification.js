@@ -11,8 +11,9 @@ export default async function signup(req, res) {
                     await dbConnect();
                     const { verification, localid } = req.body;
                     const userFound = await User.findOne({ _id: localid });
+                    
                     if (userFound) {
-                        userFound.verification = verification;
+                        userFound.verification.img = verification;
 
                         // Save the updated user
                         await userFound.save();
