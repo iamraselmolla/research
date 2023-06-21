@@ -9,7 +9,7 @@ export default async function signup(req, res) {
             {
                 try {
                     const { username, password } = req.body.basicInfo;
-                    
+
                     await dbConnect();
                     const existingUser = await User.findOne({ 'basicInfo.username': username });
                     if (existingUser) {
@@ -17,7 +17,12 @@ export default async function signup(req, res) {
                     }
                     const lowerCaseUser = username.toLowerCase()
                     const securePass = await hashPassGenerate(password);
-                    const newUser = new User({...req.body, role: 'user'});
+                    const { basicInfo, contactInfo, education, verification } = req.body;
+                    basicInfo.password = securePass;
+                    basicInfo.username = lowerCaseUser;
+
+                  
+                    const newUser = new User({ basicInfo,contactInfo,education, verification, role: 'user' });
                     const result = await newUser.save();
 
                     return res.status(200).json({ message: "User Created Successfully", data: result });

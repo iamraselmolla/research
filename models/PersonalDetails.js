@@ -23,8 +23,9 @@ const PersonalSchema = new Schema({
     contactInfo:{
         email: {
             type: String,
-            required: true,
-            unique: true
+
+            // required: true,
+            // unique: true
         },
         mobileNo1: {
             type: String,

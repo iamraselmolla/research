@@ -41,7 +41,7 @@ console.log(authCtx)
       const response = await axios.post('/api/login', values);
      
       if (response.status === 200) {
-        toast.success('Signed in uccessfully');
+        toast.success('Signed in Successfully');
         authCtx.login(response.data._id, response.data.token, 'admin');
         router.push('/dashboard');
       }

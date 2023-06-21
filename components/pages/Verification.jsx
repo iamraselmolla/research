@@ -7,10 +7,40 @@ import AuthContext from '../store/AuthContext';
 import { toast } from 'react-toastify';
 
 const Verification = () => {
-  const {localid}  = useContext(AuthContext)
+  const { localid } = useContext(AuthContext)
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState();
-  const [file, setFile] = useState()
+  const [file, setFile] = useState(null);
+
+  const handleFileUpload = async (fileToUpload) => {
+    const formData = new FormData();
+    formData.append('file', fileToUpload);
+    formData.append('upload_preset', 'ml_default');
+    formData.append('cloud_name', 'iamraselmolla');
+    try {
+      const response = await axios.post(
+        'https://api.cloudinary.com/v1_1/iamraselmolla/auto/upload',
+        formData
+      );
+
+      if (response.data.url) {
+        const result = await axios.put('/api/verification?type=file', {
+          verification: response.data.url,
+          localid,
+        });
+
+        if (result.status === 200) {
+          toast.success('Verification File successfully');
+        }
+      }
+    } catch (error) {
+      console.error('Error during upload:', error);
+      toast.error('An error occurred during file upload.');
+    }
+  }
+
+
+
   const onSelectImage = async (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setImage(undefined)
@@ -21,7 +51,7 @@ const Verification = () => {
     setImage(e.target.files[0]);
     const formData = new FormData();
     const verifyImage = e.target.files[0];
-    if(!verifyImage.type.startsWith("image/")){
+    if (!verifyImage.type.startsWith("image/")) {
       return toast.error("Please select valid type of image")
     }
     formData.append('file', verifyImage);
@@ -31,17 +61,27 @@ const Verification = () => {
       'https://api.cloudinary.com/v1_1/iamraselmolla/image/upload',
       formData
     );
-    if(response.data.url){
+    if (response.data.url) {
       const result = await axios.put("/api/verification", {
         verification: response.data.url,
         localid
       });
-      if(result.status === 200){
+      if (result.status === 200) {
         toast.success("Verification Image added successfully");
       }
-      
+
     }
   }
+  const handleFileSelection = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setFile(null);
+      return;
+    }
+
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    handleFileUpload(selectedFile);
+  };
   useEffect(() => {
     if (!image) {
       setImagePreview(undefined)
@@ -66,7 +106,7 @@ const Verification = () => {
           </div>
           <div className='rounded-md border-2 border-dotted min-h-[15rem] bg-blue-200'>
             <label className='cursor-pointer w-full h-full flex gap-5 justify-center items-center'>
-              <input type='file' className='hidden' onChange={(e) => setFile(e.target.value)} />
+              <input type='file' className='hidden' onChange={handleFileSelection} />
               {file ?
                 <CloudDone color='success' fontSize='large' />
                 :

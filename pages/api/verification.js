@@ -11,14 +11,23 @@ export default async function signup(req, res) {
                     await dbConnect();
                     const { verification, localid } = req.body;
                     const userFound = await User.findOne({ _id: localid });
-                    
+
                     if (userFound) {
-                        userFound.verification.img = verification;
+                        if (req.query.type === "file") {
+                            userFound.verification.file = verification;
 
-                        // Save the updated user
-                        await userFound.save();
+                            // Save the updated user
+                            await userFound.save();
 
-                        return res.status(200).json({ message: "User verification added successfully", data: userFound });
+                            return res.status(200).json({ message: "User verification added successfully", data: userFound });
+                        } else {
+                            userFound.verification.img = verification;
+
+                            // Save the updated user
+                            await userFound.save();
+
+                            return res.status(200).json({ message: "User verification added successfully", data: userFound });
+                        }
                     } else {
                     }
                     console.log(userFound)
