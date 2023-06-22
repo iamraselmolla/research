@@ -67,7 +67,7 @@ export default function ResponsiveDrawer() {
         { nav: "All Users", link: "/dashboard/allusers" },
         { nav: "All Conferences", link: "/dashboard/all-conferences" },
         { nav: "Add Conference", link: "/dashboard/add-conference" },
-        { nav: "Personal Details", link: "/dashboard/personal_details" },
+        { nav: "Personal Details", link: "/dashboard/personal-details" },
       ],
     },
     {
@@ -282,7 +282,7 @@ export default function ResponsiveDrawer() {
                   </ListItemButton>
                 </div>
                 <div >
-                  <ListItemButton href="/dashboard/personal_details">
+                  <ListItemButton href="/dashboard/personal-details">
                     <ListItemIcon>
                       <ManageAccounts />
                     </ListItemIcon>
@@ -389,7 +389,7 @@ export default function ResponsiveDrawer() {
                     All Conferences
                   </Link>
                   <Link
-                    href="/dashboard/personal_details"
+                    href="/dashboard/personal-details"
                     className="p-2 hover:bg-secondary hover:text-white w-full"
                   >
                     Personal Details

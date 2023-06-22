@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchUserDetails } from "../services/userServices";
 import { userActions } from "./userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 let logoutTimer;
 const AuthContext = React.createContext({
   token: "",
@@ -28,6 +28,7 @@ export const AuthContextProvider = (props) => {
   const [localid, setLocalId] = useState(initialId);
   const [role, setRole] = useState(initialRole);
   const [isLoggedIn, setLoggedIn] = useState(!!token);
+  const refresh=useSelector(state=>state.user.refresh)
 
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export const AuthContextProvider = (props) => {
 
     if (isLoggedIn) fetchData();
 
-  }, [isLoggedIn])
+  }, [isLoggedIn,refresh])
 
   const loginHandler = (localid, token, role) => {
     setToken(token);
@@ -51,7 +52,7 @@ export const AuthContextProvider = (props) => {
     setLoggedIn(true);
     localStorage.setItem('token', token);
     localStorage.setItem('localid', localid);
-    localStorage.setItem('role', role);
+    localStorage.setItem('role', role)
   }
 
   const logoutHandler = () => {

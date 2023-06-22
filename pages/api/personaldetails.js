@@ -1,4 +1,3 @@
-import PersonalDetails from "../../models/PersonalDetails";
 import User from "../../models/User";
 import dbConnect from "../../utils/dbConnect";
 import { toast } from "react-toastify";

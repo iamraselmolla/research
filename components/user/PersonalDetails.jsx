@@ -10,14 +10,35 @@ import { Delete } from '@mui/icons-material'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import AuthContext from '../store/AuthContext'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { putPersonalDetails } from '../services/userServices'
 import { formatDate } from '../utils/Date'
+import { userActions } from '../store/userSlice'
 
 const PersonalDetails = () => {
   const authCtx=useContext(AuthContext);
+  const dispatch=useDispatch();
   const user=useSelector(state=>state.user.user);
-  const [fetchedValues,setFetchedValues]=useState({})
+  const [fetchedValues,setFetchedValues]=useState({
+    basicInfo:{
+      firstName: '',
+      lastName: '',
+      dob: '',
+      gender: '',
+    },
+    contactInfo:{
+      email: '',
+      mobileNo1: '',
+      mobileNo2:''
+    },
+    education:[
+      {
+        title:'',
+        completion:'',
+        institute:''
+      }
+    ]
+  })
   const initialValues = {
     basicInfo:{
       firstName: '',
@@ -38,7 +59,7 @@ const PersonalDetails = () => {
       }
     ]
   }
-
+console.log(user)
   useEffect(()=>{
     if(user?.basicInfo?.firstName){
     setFetchedValues({
@@ -90,6 +111,7 @@ const PersonalDetails = () => {
     try{
       const response = await putPersonalDetails({...values});
       toast.success("Personal details are updated successfully");
+      dispatch(userActions.refreshDetails());
     }
     catch(err){
         console.log(err);

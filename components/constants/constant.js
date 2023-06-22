@@ -3,5 +3,7 @@ export const ALL_LINKS={
     addConference:'/add-conference',
     allConference:'/all-conferences',
     allUsers:'/all-users',
-    personalDetails:'/personal-details'
+    personalDetails:'/personal-details',
+    signupFaculty:'/signup/faculty',
+    signupStudent:'/signup/student',
 }

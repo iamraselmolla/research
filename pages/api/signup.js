@@ -8,7 +8,7 @@ export default async function signup(req, res) {
             "POST":
             {
                 try {
-                    const { username, password, basicInfo, contactInfo,education } = req.body;
+                    const { username, password, firstName,lastName,role} = req.body;
                     console.log(req.body)
 
                     await dbConnect();
@@ -18,10 +18,18 @@ export default async function signup(req, res) {
                     }
                     const lowerCaseUserUsername = username.toLowerCase()
                     const securePass = await hashPassGenerate(password);
-                 
 
-                  
-                    const newUser = new User({username:lowerCaseUserUsername, password: securePass, basicInfo,contactInfo,education:[], role: 'user' });
+
+
+                    const newUser = new User({
+                        username: lowerCaseUserUsername,
+                        password: securePass,
+                        basicInfo: {
+                            firstName: firstName,
+                            lastName: lastName
+                        },
+                        role: role
+                    });
                     const result = await newUser.save();
 
                     return res.status(200).json({ message: "User Created Successfully", data: result });

@@ -17,42 +17,60 @@ import Image from "next/image";
 import { Duo, People, Person, Videocam } from "@mui/icons-material";
 import { ALL_LINKS } from "../constants/constant";
 import {usePathname} from 'next/navigation'
+import { useSelector } from "react-redux";
 
-export const adminMenu = [
-  {
+export const menuItems = {
+  
+  dashboard:{
     name: "Dashboard",
     pageLink: ALL_LINKS.dashboard,
     icon: <DashboardIcon />,
     showAlways: false,
   },
-  {
+  allUsers:{
     name: "All Users",
     pageLink: ALL_LINKS.dashboard+ALL_LINKS.allUsers,
     icon: <People />,
     showAlways: false,
   },
-  {
+  personalDetails:{
     name: "Personal Details",
     pageLink: ALL_LINKS.dashboard+ALL_LINKS.personalDetails,
     icon: <Person />,
     showAlways: false,
   },
-  {
+  allConferences:{
     name: "All Conferences",
     pageLink: ALL_LINKS.dashboard+ALL_LINKS.allConference,
     icon: <Duo />,
     showAlways: false,
   },
 
-  {
+  addConference:{
     name: "Add Conference",
     pageLink: ALL_LINKS.dashboard+ALL_LINKS.addConference,
     icon: <Videocam />,
     showAlways: false,
   },
   
-];
+};
 const Dashboard = ({children}) => {
+  const user=useSelector(state=>state.user.user);
+  
+  let menu=[];
+  
+  if(user.role==='faculty'){
+    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.addConference];
+  }
+  else if(user.role==='student'){
+    menu=[menuItems.dashboard,menuItems.personalDetails];
+  }
+  else if(user.role==='admin'){
+    menu=[menuItems.dashboard,menuItems.allUsers,menuItems.allConferences];
+  }else{
+
+  }
+
   const authCtx=useContext(AuthContext);
   const route=useRouter();
   const [highlightIndex, setHighlightIndex] = useState(-1);
@@ -95,14 +113,14 @@ const Dashboard = ({children}) => {
             <div className="bg-white  w-[160px] h-[160px]  rounded-full overflow-hidden shadow-lg">
               {/* <Image alt='Logo' src={assets.director} className='w-[100%] h-[100%] '/> */}
             </div>
-            <h1 className="font-bold  mt-4 text-black">Harish Sikka</h1>
-            <h1 className="bg-sec text-white p-1 rounded-sm bg-primary">
-              Student
+            <h1 className="font-bold  mt-4 text-black">{user.basicInfo.firstName} {user.basicInfo.lastName}</h1>
+            <h1 className="bg-sec text-white p-1 rounded-sm bg-primary uppercase">
+              {user.role}
             </h1>
           </div>
 
           <List className="flex flex-col items-center gap-4">
-            {adminMenu.map((item, index) => (
+            {menu.map((item, index) => (
               <Link
                 href={item.pageLink}
                 key={index}
