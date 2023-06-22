@@ -8,21 +8,20 @@ export default async function signup(req, res) {
             "POST":
             {
                 try {
-                    const { username, password } = req.body.basicInfo;
+                    const { username, password, firstName, lastName } = req.body;
 
                     await dbConnect();
-                    const existingUser = await User.findOne({ 'basicInfo.username': username });
+                    const existingUser = await User.findOne({ username: username });
                     if (existingUser) {
                         return res.status(409).json({ error: 'Username already exists' });
                     }
-                    const lowerCaseUser = username.toLowerCase()
+                    const lowerCaseUserUsername = username.toLowerCase()
                     const securePass = await hashPassGenerate(password);
                     const { basicInfo, contactInfo, education, verification } = req.body;
-                    basicInfo.password = securePass;
-                    basicInfo.username = lowerCaseUser;
+                 
 
                   
-                    const newUser = new User({ basicInfo,contactInfo,education, verification, role: 'user' });
+                    const newUser = new User({username:lowerCaseUserUsername, password: securePass, basicInfo,contactInfo,education, verification, role: 'user' });
                     const result = await newUser.save();
 
                     return res.status(200).json({ message: "User Created Successfully", data: result });

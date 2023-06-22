@@ -2,6 +2,15 @@ const { model, Schema, default: mongoose } = require("mongoose");
 
 const UserSchema =  new Schema({
     
+    
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     basicInfo:{
         firstName:{
             type: String,
@@ -11,14 +20,7 @@ const UserSchema =  new Schema({
             type: String,
             required: true
         },
-        username: {
-            type: String,
-            required: true
-        },
-        password: {
-            type: String,
-            required: true
-        },
+        
         dob:{
             type: Date
         },
