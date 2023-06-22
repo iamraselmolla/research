@@ -4,32 +4,35 @@ import { assets } from "../assets";
 import Image from "next/image";
 import { AccessTimeOutlined, LocationOnOutlined } from "@mui/icons-material";
 import Link from "next/link";
+import { useEffect } from "react";
+import axios from "axios";
 
 const AllConferences = () => {
-const [allUsers, serUsers] = useState(null)
+  const [allUsers, serUsers] = useState(null);
+  const [allConference, setAllConference] = useState(null);
 
-  const eventList = [
-    {
-      title: "Sing Along",
-      image: assets.whyChoose,
-      date: "10-Jun-2023",
-      time: "10:00 AM 12:00 PM",
-      location: "Delhi",
-      description:
-        "This is a description of the event, The maximum characters shown in card is 50",
-      organiser: "John Doe",
-    },
-    {
-      title: "Sing Along",
-      image: assets.whyChoose,
-      date: "10-Jun-2023",
-      time: "10:00 AM 12:00 PM",
-      location: "Delhi",
-      description:
-        "This is a description of the event, The maximum characters shown in card is 50",
-      organiser: "John Doe",
-    },
-  ];
+  useEffect(() => {
+    const getUsers = async () => {
+      const allConferences = await axios.get('/api/allconferences');
+      setAllConference(allConferences.data)
+
+    }
+    getUsers();
+  }, [])
+
+
+  // const eventList = [
+  //      {
+  //     title: "Sing Along",
+  //     image: assets.whyChoose,
+  //     date: "10-Jun-2023",
+  //     time: "10:00 AM 12:00 PM",
+  //     location: "Delhi",
+  //     description:
+  //       "This is a description of the event, The maximum characters shown in card is 50",
+  //     organiser: "John Doe",
+  //   },
+  // ];
   const EventCard = ({
     title,
     image,
@@ -42,7 +45,10 @@ const [allUsers, serUsers] = useState(null)
     return (
       <div className="text-black  overflow-hidden rounded-md w-full border-[1px] border-black flex flex-col gap-3">
         <div className="px-2 text-center bg-primary bg-opacity-80 w-fit text-xl mb-[-68px] z-10 text-white relative">
-          <div className="text-sm">{date.split("-")[1]}</div>
+          <div className="text-sm">{new Date(date).toLocaleString('en-US', {
+            month: 'long',
+            day: 'numeric',
+          })}</div>
           <div className="text-3xl">{date.split("-")[0]}</div>
         </div>
         <Image src={image} className="w-full" />
@@ -58,7 +64,8 @@ const [allUsers, serUsers] = useState(null)
             </div>
             <div className="bg-primary text-white flex gap-1 items-center rounded-full px-2 p-[1px]">
               <AccessTimeOutlined />
-              {time}
+              {time[0]} - {time[1]}
+              {console.log(time)}
             </div>
           </div>
           <div className="text-slate-400">
@@ -78,15 +85,16 @@ const [allUsers, serUsers] = useState(null)
   return (
     <Dashboard>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {eventList.map((item, i) => (
+        {allConference && allConference.map((conference, index) => (
           <EventCard
-            title={item.title}
-            image={item.image}
-            date={item.date}
-            time={item.time}
-            location={item.location}
-            description={item.description}
-            organiser={item.organiser}
+            key={index}
+            title={conference.conferenceInfo.conferenceName}
+            image={assets.whyChoose}
+            date={conference.conferenceInfo.conferenceDate}
+            time={[conference.conferenceInfo.startTime, conference.conferenceInfo.endTime,]}
+            location={conference.conferenceInfo.conferenceLocation}
+            description={conference.conferenceInfo.conferenceDescription}
+            organiser={conference.organisationInfo.organizationName}
           />
         ))}
       </div>

@@ -8,7 +8,8 @@ export default async function signup(req, res) {
             "POST":
             {
                 try {
-                    const { username, password, firstName, lastName } = req.body;
+                    const { username, password, basicInfo, contactInfo,education } = req.body;
+                    console.log(req.body)
 
                     await dbConnect();
                     const existingUser = await User.findOne({ username: username });
@@ -17,7 +18,6 @@ export default async function signup(req, res) {
                     }
                     const lowerCaseUserUsername = username.toLowerCase()
                     const securePass = await hashPassGenerate(password);
-                    const { basicInfo, contactInfo, education, verification } = req.body;
                  
 
                   
