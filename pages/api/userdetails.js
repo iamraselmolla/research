@@ -6,12 +6,12 @@ export default async function userDetails(req, res) {
             try {
                 const userId = req.headers['user-id'];
                 console.log(userId);
-                const getResult = await User.findOne({ _id: userId })?.populate('personalDetails');
+                const getResult = await User.findOne({ _id: userId });
                 if (getResult) {
                     res.send(getResult);
                 }
             } catch (err) {
-                console.log("Something went wrong", err);
+                console.log(err);
                 res.status(500).send("Internal Server Error");
             }
         }

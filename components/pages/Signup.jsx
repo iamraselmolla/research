@@ -35,46 +35,28 @@ const Signup = () => {
     }
   }, []);
   const initialValues = {
+    firstName: '',
+    lastName: '',
     username: '',
-    password: '',
-    basicInfo: {
-      firstName: '',
-      lastName: '',
-      dob: '',
-      gender: 'Other'
-    },
-    contactInfo: {
-      email: '',
-      mobileNo1: '',
-      mobileNo2: ''
-    },
-    education: [
-      {
-        title: '',
-        completion: '',
-        institute: ''
-      }
-    ]
-
+    password: ''
   }
   const loginSchema = yup.object().shape({
-    basicInfo: yup.object().shape({
-      firstName: yup.string().required('Enter First Name'),
-      lastName: yup.string().required('Enter Last Name'),
-    }),
+    firstName: yup.string().required('Enter First Name'),
+    lastName: yup.string().required('Enter Last Name'),
     username: yup.string().required('Enter Username'),
-    password: yup.string().min(8, 'Too Short!!').required('Enter Password'),
-  });
-  const handleSubmit = async (values, { resetForm }) => {
-
-    console.log(values)
+    password: yup.string().min(8, "Too Short!!").required('Enter Password'),
+  })
+  const handleSubmit = async (values,{resetForm}) => {
+    // values.preventDefault();
     try {
+     
+      console.log(values)
       setButtonLoading(true);
-      const response = await axios.post('/api/signup', values);
+      const response = await axios.post('/api/signup', values); 
       // Handle the response
       console.log(response.data);
       toast.success('Signup successful!');
-      resetForm({ values: '' })
+      resetForm({values:''})
       router.push('/login')
     } catch (error) {
       // Handle errors
@@ -103,26 +85,28 @@ const Signup = () => {
                         initialValues={initialValues}
                         validationSchema={loginSchema}
                         onSubmit={handleSubmit}
-
+                        
                       >
                         {({ errors, touched }) => (
-                          <Form className='w-full flex flex-col  space-y-4'>
-
-                            <div className='grid grid-cols-1  gap-2'>
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='First Name' type='text' uni='basicInfo.firstName' placeholder='First Name' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Last Name' type='text' uni='basicInfo.lastName' placeholder='Last Name' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Username' type='text' uni='username' placeholder='Username' fieldRequired={true} />
-                              <InputField labelClass='text-white' inputClass={'bg-white '} labelName='Password' type='password' uni='password' placeholder='Password' fieldRequired={true} />
+                          <Form  className='w-full flex flex-col  space-y-4'>
+                            <div className='flex gap-2'>
+                              <div style={{background: `url(${assets.signupPage.src}) no-repeat center center/cover`}} className='md:flex hidden w-[50%]' />
+                              <div className='grid grid-cols-1 w-full md:w-[40%] gap-2 md:border-2 md:border-gray-600 rounded-md p-5'>
+                                <InputField labelClass='text-black' inputClass={'bg-white border-2 border-gray-500 '} labelName='First Name' type='text' uni='firstName' placeholder='First Name' fieldRequired={true} />
+                                <InputField labelClass='text-black' inputClass={'bg-white border-2 border-gray-500 '} labelName='Last Name' type='text' uni='lastName' placeholder='Last Name' fieldRequired={true} />
+                                <InputField labelClass='text-black' inputClass={'bg-white border-2 border-gray-500 '} labelName='Username' type='text' uni='username' placeholder='Username' fieldRequired={true} />
+                                <InputField labelClass='text-black' inputClass={'bg-white border-2 border-gray-500 '} labelName='Password' type='password' uni='password' placeholder='Password' fieldRequired={true} />
+                                <div>
+                                  Already have an account ?&nbsp;
+                                  <Link href=' /login' passHref >
+                                    <button className='mt-2 text-blue-600 font-semibold underline'>
+                                      Sign in
+                                    </button >
+                                  </Link >
+                                </div>
+                              </div>
                             </div>
-                            <div>
-                              Already have an account ?&nbsp;
-                              <Link href=' /login' passHref >
-                                <button className='mt-2 text-blue-300 underline'>
-                                  Sign in
-                                </button >
-                              </Link >
-                            </div>
-                            <div className=' flex justify-center space-y-2'>
+                            <div className='flex flex-col justify-center space-y-2'>
                               {!buttonLoading ? (
                                 <>
                                   <button

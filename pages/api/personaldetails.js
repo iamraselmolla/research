@@ -5,27 +5,24 @@ import { toast } from "react-toastify";
 
 export default async function personalDetails(req, res) {
     switch (req.method) {
-        case "POST":
+        case "PUT":
             {
                 try {
-
                     await dbConnect();
-
-                    const { basicInfo, contactInfo, education,userId } = req.body;
+                    const userId = req.headers['user-id'];
+                    const { basicInfo, contactInfo, education } = req.body;
                     const resultFound = await User.findOne({ _id:userId});
-                    console.log(resultFound)
+                    console.log("PERSONAL DETAILS API "+resultFound)
                     if (resultFound) {
-                    const newInfo = new PersonalDetails({ basicInfo, contactInfo, education });
-                    resultFound.personalDetails=newInfo._id;
-                    await resultFound.save();
-                     const newInfoSaved = await  newInfo.save();
-                     return res.status(200).json({ message: "Personal Details saved Successfully", newInfoSaved });
+                        resultFound.basicInfo=basicInfo;
+                        resultFound.contactInfo=contactInfo;
+                        resultFound.education=education;
+                        await resultFound.save();
+                     return res.status(200).json({ message: "Personal Details saved Successfully", resultFound });
                         
                     }else{
-                        toast.error("Something Wrong. User not found")
+                        return res.status(200).json({ message: "User not found"});
                     }
-
-
                 }
                 catch (err) {
                     console.log(err)

@@ -11,16 +11,17 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import AuthContext from '../store/AuthContext'
 import { useSelector } from 'react-redux'
+import { putPersonalDetails } from '../services/userServices'
+import { formatDate } from '../utils/Date'
 
 const PersonalDetails = () => {
   const authCtx=useContext(AuthContext);
   const user=useSelector(state=>state.user.user);
-  console.log(user)
   const [fetchedValues,setFetchedValues]=useState({})
   const initialValues = {
     basicInfo:{
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: '',
+      lastName: '',
       dob: '',
       gender: '',
     },
@@ -39,27 +40,17 @@ const PersonalDetails = () => {
   }
 
   useEffect(()=>{
+    if(user?.basicInfo?.firstName){
     setFetchedValues({
       basicInfo:{
-        firstName: '',
-        lastName: '',
-        dob: '',
-        gender: '',
+        ...user.basicInfo,
+        dob:formatDate(user.basicInfo.dob)
       },
-      contactInfo:{
-        email: '',
-        mpobileNo1: '',
-        mobileNo2:''
-      },
-      education:[
-        {
-          title:'',
-          completion:'',
-          institute:''
-        }
-      ]
+      contactInfo:user.contactInfo,
+      education:user.education
     })
-  },[])
+  }
+  },[user])
 
   const basicInfo = [
     { placeholder: "First Name", labelName: "First Name", uni: "basicInfo.firstName", type: "text", fieldRequired: true,disabled:true },
@@ -97,11 +88,8 @@ const PersonalDetails = () => {
 
   const onSubmitHandler= async (values,{resetForm})=>{
     try{
-
-      console.log(values)
-      const response = await axios.post("/api/personaldetails", {...values,userId:authCtx.localid});
-      toast.success("Personal details are added successfully");
-      resetForm({values:''})
+      const response = await putPersonalDetails({...values});
+      toast.success("Personal details are updated successfully");
     }
     catch(err){
         console.log(err);
@@ -118,9 +106,11 @@ const PersonalDetails = () => {
       {/* <PersonalDetailsNavigation activePage="personal" /> */}
       <div>
         <Formik
-          initialValues={initialValues}
+          initialValues={fetchedValues || initialValues}
           validationSchema={validationSchema}
-          onSubmit={onSubmitHandler}>
+          onSubmit={onSubmitHandler}
+          enableReinitialize
+          >
           {({values})=>
           <Form className='flex flex-col'>
             <Gap>Basic Info</Gap>

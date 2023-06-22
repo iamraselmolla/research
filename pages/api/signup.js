@@ -21,7 +21,7 @@ export default async function signup(req, res) {
                  
 
                   
-                    const newUser = new User({username:lowerCaseUserUsername, password: securePass, basicInfo,contactInfo,education, verification, role: 'user' });
+                    const newUser = new User({username:lowerCaseUserUsername, password: securePass, basicInfo,contactInfo,education:[], role: 'user' });
                     const result = await newUser.save();
 
                     return res.status(200).json({ message: "User Created Successfully", data: result });
