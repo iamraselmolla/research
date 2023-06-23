@@ -56,6 +56,7 @@ export const menuItems = {
 };
 const Dashboard = ({children}) => {
   const user=useSelector(state=>state.user.user);
+  console.log(user)
   
   let menu=[];
   

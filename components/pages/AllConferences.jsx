@@ -6,6 +6,7 @@ import { AccessTimeOutlined, LocationOnOutlined } from "@mui/icons-material";
 import Link from "next/link";
 import { useEffect } from "react";
 import axios from "axios";
+import { Switch } from "@mui/material";
 
 const AllConferences = () => {
   const [allUsers, serUsers] = useState(null);
@@ -51,6 +52,11 @@ const AllConferences = () => {
           })}</div>
           <div className="text-3xl">{date.split("-")[0]}</div>
         </div>
+        <Switch
+          checked={checked}
+          onChange={handleChange}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
         <Image src={image} className="w-full" />
         <div className="p-2 gap-2 flex flex-col">
           <div>

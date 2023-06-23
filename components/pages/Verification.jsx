@@ -5,16 +5,25 @@ import axios from 'axios';
 import { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
 import { toast } from 'react-toastify';
+import { CircularProgress } from '@mui/material';
 
 const Verification = () => {
   const { localid } = useContext(AuthContext)
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState();
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [FileUploading, setFileUploading] = useState(false)
 
-  const handleFileUpload = async (fileToUpload) => {
+  const handleFileUpload = async () => {
+    if(!file){
+      setFileUploading(false);
+      toast.error("Please select a file");
+      return;
+    }
+    setFileUploading(true)
     const formData = new FormData();
-    formData.append('file', fileToUpload);
+    formData.append('file', file);
     formData.append('upload_preset', 'ml_default');
     formData.append('cloud_name', 'iamraselmolla');
     try {
@@ -30,47 +39,66 @@ const Verification = () => {
         });
 
         if (result.status === 200) {
-          toast.success('Verification File successfully');
+          toast.success('Verification File uploaded successfully');
+          setFileUploading(false)
         }
       }
     } catch (error) {
+      setFileUploading(false)
       console.error('Error during upload:', error);
       toast.error('An error occurred during file upload.');
     }
   }
 
 
+  const handleImageUpload = async () => {
+    if(!image){
+      setLoading(false);
+      toast.error("Please select an Image");
+      return;
+    }
+    setLoading(true)
+    const formData = new FormData();
+    if (!image.type.startsWith("image/")) {
+      setLoading(false)
+      return toast.error("Please select valid type of image");
+    }
+    try {
+      formData.append('file', image);
+      formData.append("upload_preset", "ml_default");
+      formData.append("cloud_name", "iamraselmolla");
+      const response = await axios.post(
+        'https://api.cloudinary.com/v1_1/iamraselmolla/image/upload',
+        formData
+      );
+      if (response.data.url) {
+        const result = await axios.put("/api/verification", {
+          verification: response.data.url,
+          localid
+        });
+        if (result.status === 200) {
+          toast.success("Verification Image added successfully");
+          setLoading(false)
+        }
 
+      }
+    }
+    catch (err) {
+      setLoading(false)
+      console.error('Error during upload:', error);
+      toast.error('An error occurred during file upload.');
+    }
+
+  }
   const onSelectImage = async (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setImage(undefined)
-      return
+      return;
     }
     e.preventDefault()
     // console.log(e.target.files[0])
     setImage(e.target.files[0]);
-    const formData = new FormData();
-    const verifyImage = e.target.files[0];
-    if (!verifyImage.type.startsWith("image/")) {
-      return toast.error("Please select valid type of image")
-    }
-    formData.append('file', verifyImage);
-    formData.append("upload_preset", "ml_default");
-    formData.append("cloud_name", "iamraselmolla");
-    const response = await axios.post(
-      'https://api.cloudinary.com/v1_1/iamraselmolla/image/upload',
-      formData
-    );
-    if (response.data.url) {
-      const result = await axios.put("/api/verification", {
-        verification: response.data.url,
-        localid
-      });
-      if (result.status === 200) {
-        toast.success("Verification Image added successfully");
-      }
 
-    }
   }
   const handleFileSelection = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -80,7 +108,7 @@ const Verification = () => {
 
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
-    handleFileUpload(selectedFile);
+
   };
   useEffect(() => {
     if (!image) {
@@ -117,6 +145,12 @@ const Verification = () => {
               }
             </label>
           </div>
+          <button onClick={handleImageUpload} type='button' className='bg-primary text-white px-2 py-2 self-end mt-2'>
+            {!loading ? "ADD IMAGE" : <CircularProgress />}
+            </button>
+          <button onClick={handleFileUpload} type='button' className='bg-primary text-white px-2 py-2 self-end mt-2'>
+          {!FileUploading ? "ADD FILE" : <CircularProgress />}
+            </button>
         </div>
       </Dashboard>
     </>
