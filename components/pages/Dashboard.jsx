@@ -114,9 +114,9 @@ const Dashboard = ({children}) => {
             <div className="bg-white  w-[160px] h-[160px]  rounded-full overflow-hidden shadow-lg">
               {/* <Image alt='Logo' src={assets.director} className='w-[100%] h-[100%] '/> */}
             </div>
-            {/* <h1 className="font-bold  mt-4 text-black">{user.basicInfo.firstName} {user.basicInfo.lastName}</h1> */}
+            <h1 className="font-bold  mt-4 text-black">{user.basicInfo.firstName} {user.basicInfo.lastName}</h1>
             <h1 className="bg-sec text-white p-1 rounded-sm bg-primary uppercase">
-              {/* {user.role} */}
+              {user.role}
             </h1>
           </div>
 
