@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import Dashboard from "./Dashboard";
 import { assets } from "../assets";
 import Image from "next/image";
-import { AccessTimeOutlined, LocationOnOutlined } from "@mui/icons-material";
+import { AccessTimeOutlined, LocationOnOutlined, CheckCircle,NotInterested  } from "@mui/icons-material";
 import Link from "next/link";
 import { useEffect } from "react";
 import axios from "axios";
-import { Switch } from "@mui/material";
+import { FormControlLabel, Switch } from "@mui/material";
 
 const AllConferences = () => {
   const [allUsers, serUsers] = useState(null);
   const [allConference, setAllConference] = useState(null);
+  const [verified, setVerified] = useState(false);
+
+  const handleChange = () => {
+    setVerified(!verified);
+  };
 
   useEffect(() => {
     const getUsers = async () => {
@@ -45,18 +50,22 @@ const AllConferences = () => {
   }) => {
     return (
       <div className="text-black  overflow-hidden rounded-md w-full border-[1px] border-black flex flex-col gap-3">
-        <div className="px-2 text-center bg-primary bg-opacity-80 w-fit text-xl mb-[-68px] z-10 text-white relative">
-          <div className="text-sm">{new Date(date).toLocaleString('en-US', {
-            month: 'long',
-            day: 'numeric',
-          })}</div>
-          <div className="text-3xl">{date.split("-")[0]}</div>
+        <div className="flex justify-between	">
+          <div className="px-2 text-center bg-primary bg-opacity-80 w-fit text-xl mb-[-68px] z-10 text-white relative">
+            <div>
+              <div className="text-sm">{new Date(date).toLocaleString('en-US', {
+                month: 'long',
+                day: 'numeric',
+              })}</div>
+              <div className="text-3xl">{date.split("-")[0]}</div>
+            </div>
+          </div>
+          <div className="verified-status pe-2">
+            <NotInterested fontSize="small" /><Switch  onChange={handleChange} checked={verified} size="small"/><CheckCircle fontSize="small" title="Verified" />
+          </div>
         </div>
-        <Switch
-          checked={checked}
-          onChange={handleChange}
-          inputProps={{ 'aria-label': 'controlled' }}
-        />
+
+
         <Image src={image} className="w-full" />
         <div className="p-2 gap-2 flex flex-col">
           <div>
