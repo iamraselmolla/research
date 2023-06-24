@@ -30,7 +30,6 @@ export default async function signup(req, res) {
                         }
                     } else {
                     }
-                    console.log(userFound)
 
                     // return res.status(200).json({ message: "User Created Successfully", data: result });
 

@@ -1,6 +1,5 @@
 import Head from "next/head";
-
-import Verification from "../../components/pages/Verification";
+import Verification from "../../../components/pages/Verification";
 
 export default function index() {
   return (
@@ -24,7 +23,7 @@ export default function index() {
     <meta property="og:description" content="research_description" />
     <meta property="og:site_name" content="Research" />
     </Head>
-    <Verification />
+    <Verification/>
     </>
   )
 }

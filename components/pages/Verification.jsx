@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
-import { CameraAltOutlined, CloudDone, UploadFile } from '@mui/icons-material'
+import { CameraAltOutlined, Check, CloudDone, Delete, UploadFile } from '@mui/icons-material'
 import axios from 'axios';
 import { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
 import { toast } from 'react-toastify';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, IconButton } from '@mui/material';
 
 const Verification = () => {
   const { localid } = useContext(AuthContext)
   const [image, setImage] = useState("");
-  const [imagePreview, setImagePreview] = useState();
+  const [imagePreview, setImagePreview] = useState("");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [FileUploading, setFileUploading] = useState(false)
 
+  console.log(file)
+  console.log(image)
   const handleFileUpload = async () => {
     if(!file){
       setFileUploading(false);
@@ -124,33 +126,64 @@ const Verification = () => {
     <>
       <Dashboard>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-          <div className={`rounded-md border-2 ${!image ? "border-dotted" : ""} min-h-[15rem] overflow-hidden`} style={{ background: `url(${imagePreview}) no-repeat center center/cover` }}>
+          <div className='flex flex-col gap-4 '>
+          <div className={`rounded-md border-2 h-full min-h-[15rem] ${!image ? "border-dotted" : ""}  overflow-hidden`} style={{ background: `url(${imagePreview}) no-repeat center center/cover` }}>
             {/* <div className='bg-black h-full w-full relative z-0' /> */}
-            <label className={`cursor-pointer w-full relative z-10 h-full flex gap-5 justify-center items-center ${image ? 'bg-black bg-opacity-70 text-white' : 'bg-blue-200 text-black'}`}>
+            <label className={`cursor-pointer w-full relative z-10 h-full flex gap-5 justify-center items-center ${image ? 'bg-black bg-opacity-25 text-white' : 'bg-blue-200 text-black'}`}>
               <input type='file' className='hidden' onChange={onSelectImage} />
               <CameraAltOutlined className='text-primary' fontSize='large' />
               <div>{image ? "Upload Another" : "Upload Image"}</div>
             </label>
           </div>
+          {image && 
+          <div className='flex justify-between'>
+          <div className='flex gap-2'>
+          <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{color:'green'}}/></div>
+          {image.name}
+          </div>
+          <IconButton onClick={()=>{
+            setImage("");
+            setImagePreview("")
+          }}><Delete /></IconButton>
+          </div>
+          }
+
+          <button disabled={loading} onClick={handleImageUpload} type='button' className='w-full bg-primary text-white px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
+            {!loading ? "SAVE" : <CircularProgress size={16} sx={{color:'white'}} />}
+            </button>
+
+          </div>
+
+          <div className='flex flex-col gap-4'>
           <div className='rounded-md border-2 border-dotted min-h-[15rem] bg-blue-200'>
             <label className='cursor-pointer w-full h-full flex gap-5 justify-center items-center'>
               <input type='file' className='hidden' onChange={handleFileSelection} />
-              {file ?
-                <CloudDone color='success' fontSize='large' />
-                :
-                <>
+
                   <UploadFile className='text-primary' fontSize='large' />
                   <div className='text-black'>{file ? "Upload Another" : "Upload File"}</div>
-                </>
-              }
             </label>
+         
           </div>
-          <button onClick={handleImageUpload} type='button' className='bg-primary text-white px-2 py-2 self-end mt-2'>
-            {!loading ? "ADD IMAGE" : <CircularProgress />}
-            </button>
-          <button onClick={handleFileUpload} type='button' className='bg-primary text-white px-2 py-2 self-end mt-2'>
-          {!FileUploading ? "ADD FILE" : <CircularProgress />}
-            </button>
+
+          {file && 
+          <div className='flex justify-between'>
+          <div className='flex gap-2'>
+          <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{color:'green'}}/></div>
+          {file.name}
+          </div>
+          <IconButton onClick={()=>{
+            setFile(null);
+          }}><Delete /></IconButton>
+          </div>
+          }
+          
+          <button onClick={handleFileUpload} type='button' className='bg-primary text-white w-full px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
+          {!FileUploading ? "SAVE" : <CircularProgress size={16} sx={{color:'white'}} />}
+          </button>
+          </div>
+
+
+
         </div>
       </Dashboard>
     </>

@@ -6,4 +6,6 @@ export const ALL_LINKS={
     personalDetails:'/personal-details',
     signupFaculty:'/signup/faculty',
     signupStudent:'/signup/student',
+    verification:'/verification',
+    addResearchPaper:'/add-research-paper'
 }

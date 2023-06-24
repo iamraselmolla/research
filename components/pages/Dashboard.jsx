@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { assets } from "../assets";
 import Image from "next/image";
-import { Duo, People, Person, Videocam } from "@mui/icons-material";
+import { Description, Duo, People, Person, Videocam, WorkspacePremium } from "@mui/icons-material";
 import { ALL_LINKS } from "../constants/constant";
 import {usePathname} from 'next/navigation'
 import { useSelector } from "react-redux";
@@ -45,18 +45,29 @@ export const menuItems = {
     icon: <Duo />,
     showAlways: false,
   },
-
   addConference:{
     name: "Add Conference",
     pageLink: ALL_LINKS.dashboard+ALL_LINKS.addConference,
     icon: <Videocam />,
     showAlways: false,
   },
+  verification:{
+    name: "Verification",
+    pageLink: ALL_LINKS.dashboard+ALL_LINKS.verification,
+    icon: <WorkspacePremium />,
+    showAlways: false,
+  },
+  addResearchPaper:{
+    name: "Add Research Paper",
+    pageLink: ALL_LINKS.dashboard+ALL_LINKS.addResearchPaper,
+    icon: <Description />,
+    showAlways: false,
+  },
+
   
 };
 const Dashboard = ({children}) => {
   const user=useSelector(state=>state.user.user);
-  console.log(user)
   
   let menu=[];
   
@@ -64,7 +75,7 @@ const Dashboard = ({children}) => {
     menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.addConference];
   }
   else if(user.role==='student'){
-    menu=[menuItems.dashboard,menuItems.personalDetails];
+    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.verification,menuItems.addResearchPaper];
   }
   else if(user.role==='admin'){
     menu=[menuItems.dashboard,menuItems.allUsers,menuItems.allConferences];
@@ -114,7 +125,7 @@ const Dashboard = ({children}) => {
             <div className="bg-white  w-[160px] h-[160px]  rounded-full overflow-hidden shadow-lg">
               {/* <Image alt='Logo' src={assets.director} className='w-[100%] h-[100%] '/> */}
             </div>
-            <h1 className="font-bold  mt-4 text-black">{user.basicInfo.firstName} {user.basicInfo.lastName}</h1>
+            <h1 className="font-bold  mt-4 text-black">{user?.basicInfo?.firstName} {user?.basicInfo?.lastName}</h1>
             <h1 className="bg-sec text-white p-1 rounded-sm bg-primary uppercase">
               {user.role}
             </h1>
