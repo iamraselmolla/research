@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import Dashboard from "./Dashboard";
 import { useState } from "react";
-import { CameraAltOutlined, CloudDone, UploadFile } from "@mui/icons-material";
-import { CircularProgress } from "@mui/material";
+import { CameraAltOutlined, Check, CloudDone, Delete, UploadFile } from "@mui/icons-material";
+import { CircularProgress, IconButton } from "@mui/material";
 import { toast } from "react-toastify";
 
 
@@ -53,38 +53,70 @@ const AddResearchPaper = () => {
 
     }, [image])
     return (
-        <Dashboard>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-                <div className='rounded-md border-2 border-dotted min-h-[15rem] bg-blue-200'>
-                    <label className='cursor-pointer w-full h-full flex gap-5 justify-center items-center'>
-                        <input type='file' className='hidden' onChange={handleFileSelection} />
-                        {file ?
-                            <CloudDone color='success' fontSize='large' />
-                            :
-                            <>
-                                <UploadFile className='text-primary' fontSize='large' />
-                                <div className='text-black'>{file ? "Upload Another" : "Upload Research File"}</div>
-                            </>
-                        }
-                    </label>
-                </div>
-                <div className={`rounded-md border-2 ${!image ? "border-dotted" : ""} min-h-[15rem] overflow-hidden`} style={{ background: `url(${imagePreview}) no-repeat center center/cover` }}>
-                    {/* <div className='bg-black h-full w-full relative z-0' /> */}
-                    <label className={`cursor-pointer w-full relative z-10 h-full flex gap-5 justify-center items-center ${image ? 'bg-black bg-opacity-70 text-white' : 'bg-blue-200 text-black'}`}>
-                        <input type='file' className='hidden' onChange={onSelectImage} />
-                        <CameraAltOutlined className='text-primary' fontSize='large' />
-                        <div>{image ? "Upload Another" : "Upload Student ID Card"}</div>
-                    </label>
-                </div>
+        <>
+      <Dashboard>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+          <div className='flex flex-col gap-4 '>
+          <div className={`rounded-md border-2 h-full min-h-[15rem] ${!image ? "border-dotted" : ""}  overflow-hidden`} style={{ background: `url(${imagePreview}) no-repeat center center/cover` }}>
+            {/* <div className='bg-black h-full w-full relative z-0' /> */}
+            <label className={`cursor-pointer w-full relative z-10 h-full flex gap-5 justify-center items-center ${image ? 'bg-black bg-opacity-25 text-white' : 'bg-blue-200 text-black'}`}>
+              <input type='file' className='hidden' onChange={onSelectImage} />
+              <CameraAltOutlined className='text-primary' fontSize='large' />
+              <div>{image ? "Upload Another" : "Upload Image"}</div>
+            </label>
+          </div>
+          {image && 
+          <div className='flex bg-green-500 items-center pl-1 justify-between'>
+          <div className='flex gap-2'>
+          <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{color:'green'}}/></div>
+          {image.name}
+          </div>
+          <IconButton onClick={()=>{
+            setImage("");
+            setImagePreview("")
+          }}><Delete /></IconButton>
+          </div>
+          }
 
-                <button type='button' className='bg-primary text-white px-2 py-2 self-end mt-2'>
-                    {!loading ? "UPLOAD FILE" : <CircularProgress />}
-                </button>
-                <button type='button' className='bg-primary text-white px-2 py-2 self-end mt-2'>
-                    {!FileUploading ? "UPLOAD ID" : <CircularProgress />}
-                </button>
-            </div>
-        </Dashboard>
+          <button disabled={loading}  type='button' className='w-full bg-primary text-white px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
+            {!loading ? "SAVE" : <CircularProgress size={16} sx={{color:'white'}} />}
+            </button>
+
+          </div>
+
+          <div className='flex flex-col gap-4'>
+          <div className='rounded-md border-2 border-dotted min-h-[15rem] bg-blue-200'>
+            <label className='cursor-pointer w-full h-full flex gap-5 justify-center items-center'>
+              <input type='file' className='hidden' onChange={handleFileSelection} />
+
+                  <UploadFile className='text-primary' fontSize='large' />
+                  <div className='text-black'>{file ? "Upload Another" : "Upload File"}</div>
+            </label>
+         
+          </div>
+
+          {file && 
+          <div className='flex bg-green-500 items-center pl-1 justify-between'>
+          <div className='flex gap-2'>
+          <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{color:'green'}}/></div>
+          {file.name}
+          </div>
+          <IconButton onClick={()=>{
+            setFile(null);
+          }}><Delete /></IconButton>
+          </div>
+          }
+          
+          <button  type='button' className='bg-primary text-white w-full px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
+          {!FileUploading ? "SAVE" : <CircularProgress size={16} sx={{color:'white'}} />}
+          </button>
+          </div>
+
+
+
+        </div>
+      </Dashboard>
+    </>
     );
 };
 
