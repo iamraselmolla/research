@@ -53,17 +53,23 @@ const UserSchema =  new Schema({
             },
         }
     ],    
-   
+    profilePic: {
+        type: String,
+        default: './user.png'
+    },
    
     role: {
-        type: String
+        type: String,
+        enum: ['student', 'faculty', 'admin']
     },
     verification:{
         img:{
-            type: String
+            type: String,
+            status: "pending"
         },
         file: {
-            type: String
+            type: String,
+            status: "pending"
         }
     }
 })
