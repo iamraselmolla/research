@@ -68,7 +68,14 @@ console.log(user)
         dob:formatDate(user.basicInfo.dob)
       },
       contactInfo:user.contactInfo,
-      education:user.education
+      education:user.education.length>0 ? user.education : 
+      [
+        {
+          title:'',
+          completion:'',
+          institute:''
+        }
+      ]
     })
   }
   },[user])

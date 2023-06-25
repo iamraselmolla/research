@@ -2,9 +2,10 @@
 import { useContext, useEffect, useState } from "react";
 import Dashboard from "./Dashboard"
 import AuthContext from "../store/AuthContext";
-import axios from "axios";
 import Delete from "@mui/icons-material/Delete";
 import BlockIcon  from "@mui/icons-material/Block";
+import { fetchAllUsers } from "../services/userServices";
+import { toast } from "react-toastify";
 const AllUsers = () => {
   const {token} = useContext(AuthContext);
 
@@ -17,12 +18,12 @@ const AllUsers = () => {
       setLoading(true)
 
       try {
-        const getUsers = await axios.get(`/api/allusers?token=${token}`);
+        const getUsers = await fetchAllUsers();
         setAllUser(getUsers.data);
         setLoading(false)
       } catch (error) {
         setLoading(false)
-        console.error(error);
+        toast.error(error.response.data)
       } finally {
         setLoading(false)
 
