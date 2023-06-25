@@ -19,6 +19,7 @@ import { ALL_LINKS } from '../constants/constant';
 const Signup = () => {
   const [loading, setLoading] = useState(true);
   const authCtx = useContext(AuthContext);
+  const router = useRouter();
 
   useEffect(() => {
     const timer = setTimeout(() => {
