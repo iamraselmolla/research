@@ -1,3 +1,4 @@
+import isStudent from "../../middlewares/user";
 import User from "../../models/User";
 import dbConnect from "../../utils/dbConnect";
 
@@ -12,9 +13,15 @@ export default async function userDetails(req, res) {
                     res.send(getResult);
                 }
             } catch (err) {
-                console.log(err);
                 res.status(500).send("Internal Server Error");
             }
         }
     }
 }
+
+export const config = {
+    api: {
+      bodyParser: false, 
+    },
+    middleware: [isStudent],
+  };

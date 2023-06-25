@@ -33,7 +33,6 @@ const Login = () => {
       toast.warn('Already Logged In');
     }
   }, []);
-console.log(authCtx)
   const formHandler = async (values, e) => {
    
     try {
@@ -41,8 +40,7 @@ console.log(authCtx)
       const response = await axios.post('/api/login', values);
      
       if (response.status === 200) {
-        toast.success('Signed in Successfully');
-        authCtx.login(response.data._id, response.data.token, 'admin');
+        authCtx.login(response.data._id, response.data.token, response.data.role);
         router.push('/dashboard');
       }
     } catch (err) {

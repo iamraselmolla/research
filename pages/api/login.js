@@ -14,7 +14,7 @@ export default async function handler(req, res) {
                 try {
                     let { username, password } = req.body;
                     await dbConnect();
-                    const matchFind = await User.findOne({ username: username.toLowerCase() }).select("password");
+                    const matchFind = await User.findOne({ username: username.toLowerCase() }).select("password role");
                     if (!matchFind) {
                         return res.status(401).json({ message: "User not found" })
                     } else {
@@ -22,10 +22,11 @@ export default async function handler(req, res) {
                         const passCheck = await compareHashPass(password, matchFind.password);
                         if (passCheck) {
                             const tokenData = {
-                                username
+                                id:matchFind._id,
+                                role:matchFind.role
                             };
                             const token = jwt.sign(tokenData, secretKey);
-                            return res.status(200).json({ message: "Logged In Successfully", token, _id: matchFind._id, matchFind })
+                            return res.status(200).json({ message: "Logged In Successfully", token, _id: matchFind._id, role:matchFind.role })
                         } else {
                             return res.status(401).json({ message: "Invalid  password" })
                         }

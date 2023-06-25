@@ -29,7 +29,6 @@ const Contact = () => {
           initialValues={initialValues}
           validationSchema={detailSchema}
           onSubmit={values => {
-            console.log(values);
           }}
         >
           <Form className='flex flex-col'>

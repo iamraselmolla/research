@@ -67,26 +67,28 @@ export const menuItems = {
   
 };
 const Dashboard = ({children}) => {
-  const user=useSelector(state=>state.user.user);
-  
-  let menu=[];
-  
-  if(user.role==='faculty'){
-    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.addConference];
-  }
-  else if(user.role==='student'){
-    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.verification,menuItems.addResearchPaper];
-  }
-  else if(user.role==='admin'){
-    menu=[menuItems.dashboard,menuItems.allUsers,menuItems.allConferences];
-  }else{
-
-  }
 
   const authCtx=useContext(AuthContext);
   const route=useRouter();
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const [loading,setLoading]=useState(true);
+  const user=useSelector(state=>state.user.user);
+  
+  let menu=[];
+  
+  if(authCtx.role==='faculty'){
+    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.addConference];
+  }
+  else if(authCtx.role==='student'){
+    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.verification,menuItems.addResearchPaper];
+  }
+  else if(authCtx.role==='admin'){
+    menu=[menuItems.dashboard,menuItems.allUsers,menuItems.allConferences];
+  }else{
+
+  }
+
+  
 
   useEffect(() => {
   if(!authCtx.isLoggedIn){

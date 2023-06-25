@@ -50,11 +50,9 @@ const SignupConditional = ({role}) => {
     // values.preventDefault();
     try {
      
-      console.log(values)
       setButtonLoading(true);
       const response = await axios.post('/api/signup', values); 
       // Handle the response
-      console.log(response.data);
       toast.success('Signup successful!');
       resetForm({values:''})
       router.push('/login')

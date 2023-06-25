@@ -9,7 +9,6 @@ const verifyUser = async (req, res, next) => {
     };
     const decodedToken = jwt.verify(token, secretKey);
     const userType = await User.findOne({ 'basicInfo.username': decodedToken.username }).select("role");
-    console.log(userType)
     if (userType.role === "user") {
         next()
     }

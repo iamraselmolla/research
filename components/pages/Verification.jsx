@@ -15,8 +15,6 @@ const Verification = () => {
   const [loading, setLoading] = useState(false);
   const [FileUploading, setFileUploading] = useState(false)
 
-  console.log(file)
-  console.log(image)
   const handleFileUpload = async () => {
     if(!file){
       setFileUploading(false);

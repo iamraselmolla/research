@@ -66,7 +66,7 @@ const AddResearchPaper = () => {
             </label>
           </div>
           {image && 
-          <div className='flex bg-green-500 items-center pl-1 justify-between'>
+          <div className='flex  items-center pl-1 justify-between'>
           <div className='flex gap-2'>
           <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{color:'green'}}/></div>
           {image.name}
@@ -96,7 +96,7 @@ const AddResearchPaper = () => {
           </div>
 
           {file && 
-          <div className='flex bg-green-500 items-center pl-1 justify-between'>
+          <div className='flex  items-center pl-1 justify-between'>
           <div className='flex gap-2'>
           <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{color:'green'}}/></div>
           {file.name}

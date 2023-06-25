@@ -9,3 +9,9 @@ export const ALL_LINKS={
     verification:'/verification',
     addResearchPaper:'/add-research-paper'
 }
+
+export const SITE_INFO={
+    mobileNo1:'+919876543210',
+    email1:'research@gmail.com',
+    address1:'Dehradun , Uttarakhand'
+}

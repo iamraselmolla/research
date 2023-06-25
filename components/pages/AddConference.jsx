@@ -88,7 +88,6 @@ const AddConference = () => {
 const authCtx = useContext(AuthContext)
     const handleFormSubmit = async (values, {resetForm}) => {
         try {
-            console.log(values);
             const result = await axios.post('/api/conference', {...values, userId: authCtx.localid});
             toast.success('Conference Created successfully!');
             resetForm({values:''})

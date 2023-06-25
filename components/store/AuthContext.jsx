@@ -49,6 +49,7 @@ export const AuthContextProvider = (props) => {
   const loginHandler = (localid, token, role) => {
     setToken(token);
     setLocalId(localid);
+    setRole(role);
     setLoggedIn(true);
     localStorage.setItem('token', token);
     localStorage.setItem('localid', localid);

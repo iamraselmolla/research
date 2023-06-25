@@ -11,7 +11,6 @@ export default async function personalDetails(req, res) {
                     const userId = req.headers['user-id'];
                     const { basicInfo, contactInfo, education } = req.body;
                     const resultFound = await User.findOne({ _id:userId});
-                    console.log("PERSONAL DETAILS API "+resultFound)
                     if (resultFound) {
                         resultFound.basicInfo=basicInfo;
                         resultFound.contactInfo=contactInfo;
