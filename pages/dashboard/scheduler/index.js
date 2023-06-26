@@ -1,5 +1,5 @@
 import Head from "next/head";
-import DateTimePickerComponent from "../../../components/pages/DateTimePickerComponent";
+import Scheduler from "../../../components/pages/Scheduler";
 
 export default function index() {
     return (
@@ -23,7 +23,7 @@ export default function index() {
                 <meta property="og:description" content="research_description" />
                 <meta property="og:site_name" content="Research" />
             </Head>
-            <DateTimePickerComponent />
+            <Scheduler />
         </>
     )
 }

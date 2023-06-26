@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { assets } from "../assets";
 import Image from "next/image";
-import { Description, Duo, People, Person, Videocam, WorkspacePremium } from "@mui/icons-material";
+import { CalendarMonth, Description, Duo, People, Person, Videocam, WorkspacePremium } from "@mui/icons-material";
 import { ALL_LINKS } from "../constants/constant";
 import {usePathname} from 'next/navigation'
 import { useSelector } from "react-redux";
@@ -63,6 +63,12 @@ export const menuItems = {
     icon: <Description />,
     showAlways: false,
   },
+  scheduler:{
+    name: "Scheduler",
+    pageLink: ALL_LINKS.dashboard+ALL_LINKS.scheduler,
+    icon: <CalendarMonth />,
+    showAlways: false,
+  },
 
   
 };
@@ -77,7 +83,7 @@ const Dashboard = ({children}) => {
   let menu=[];
   
   if(authCtx.role==='faculty'){
-    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.addConference];
+    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.scheduler,menuItems.addConference, ];
   }
   else if(authCtx.role==='student'){
     menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.verification,menuItems.addResearchPaper];
