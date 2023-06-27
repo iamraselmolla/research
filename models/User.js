@@ -71,7 +71,23 @@ const UserSchema =  new Schema({
             type: String,
             status: "pending"
         }
-    }
+    },
+    research: [
+        {
+          file: {
+            type: String,
+            status: "pending",
+          },
+          img: {
+            type: String,
+            status: "pending"
+          },
+          uploadedAt: {
+            type: Date,
+            default: Date.now
+          }
+        }
+      ]
 })
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

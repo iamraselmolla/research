@@ -16,7 +16,7 @@ const Verification = () => {
   const [FileUploading, setFileUploading] = useState(false)
 
   const handleFileUpload = async () => {
-    if(!file){
+    if (!file) {
       setFileUploading(false);
       toast.error("Please select a file");
       return;
@@ -52,7 +52,7 @@ const Verification = () => {
 
 
   const handleImageUpload = async () => {
-    if(!image){
+    if (!image) {
       setLoading(false);
       toast.error("Please select an Image");
       return;
@@ -125,59 +125,59 @@ const Verification = () => {
       <Dashboard>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
           <div className='flex flex-col gap-4 '>
-          <div className={`rounded-md border-2 h-full min-h-[15rem] ${!image ? "border-dotted" : ""}  overflow-hidden`} style={{ background: `url(${imagePreview}) no-repeat center center/cover` }}>
-            {/* <div className='bg-black h-full w-full relative z-0' /> */}
-            <label className={`cursor-pointer w-full relative z-10 h-full flex gap-5 justify-center items-center ${image ? 'bg-black bg-opacity-25 text-white' : 'bg-blue-200 text-black'}`}>
-              <input type='file' className='hidden' onChange={onSelectImage} />
-              <CameraAltOutlined className='text-primary' fontSize='large' />
-              <div>{image ? "Upload Another" : "Upload Image"}</div>
-            </label>
-          </div>
-          {image && 
-          <div className='flex bg-green-500 items-center pl-1 justify-between'>
-          <div className='flex gap-2'>
-          <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{color:'green'}}/></div>
-          {image.name}
-          </div>
-          <IconButton onClick={()=>{
-            setImage("");
-            setImagePreview("")
-          }}><Delete /></IconButton>
-          </div>
-          }
+            <div className={`rounded-md border-2 h-full min-h-[15rem] ${!image ? "border-dotted" : ""}  overflow-hidden`} style={{ background: `url(${imagePreview}) no-repeat center center/cover` }}>
+              {/* <div className='bg-black h-full w-full relative z-0' /> */}
+              <label className={`cursor-pointer w-full relative z-10 h-full flex gap-5 justify-center items-center ${image ? 'bg-black bg-opacity-25 text-white' : 'bg-blue-200 text-black'}`}>
+                <input type='file' className='hidden' onChange={onSelectImage} />
+                <CameraAltOutlined className='text-primary' fontSize='large' />
+                <div>{image ? "Upload Another" : "Upload Image"}</div>
+              </label>
+            </div>
+            {image &&
+              <div className='flex bg-green-500 items-center pl-1 justify-between'>
+                <div className='flex gap-2'>
+                  <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{ color: 'green' }} /></div>
+                  {image.name}
+                </div>
+                <IconButton onClick={() => {
+                  setImage("");
+                  setImagePreview("")
+                }}><Delete /></IconButton>
+              </div>
+            }
 
-          <button disabled={loading} onClick={handleImageUpload} type='button' className='w-full bg-primary text-white px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
-            {!loading ? "SAVE" : <CircularProgress size={16} sx={{color:'white'}} />}
+            <button disabled={loading} onClick={handleImageUpload} type='button' className='w-full bg-primary text-white px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
+              {!loading ? "SAVE" : <CircularProgress size={16} sx={{ color: 'white' }} />}
             </button>
 
           </div>
 
           <div className='flex flex-col gap-4'>
-          <div className='rounded-md border-2 border-dotted min-h-[15rem] bg-blue-200'>
-            <label className='cursor-pointer w-full h-full flex gap-5 justify-center items-center'>
-              <input type='file' className='hidden' onChange={handleFileSelection} />
+            <div className='rounded-md border-2 border-dotted min-h-[15rem] bg-blue-200'>
+              <label className='cursor-pointer w-full h-full flex gap-5 justify-center items-center'>
+                <input type='file' className='hidden' onChange={handleFileSelection} />
 
-                  <UploadFile className='text-primary' fontSize='large' />
-                  <div className='text-black'>{file ? "Upload Another" : "Upload File"}</div>
-            </label>
-         
-          </div>
+                <UploadFile className='text-primary' fontSize='large' />
+                <div className='text-black'>{file ? "Upload Another" : "Upload File"}</div>
+              </label>
 
-          {file && 
-          <div className='flex bg-green-500 items-center pl-1 justify-between'>
-          <div className='flex gap-2'>
-          <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{color:'green'}}/></div>
-          {file.name}
-          </div>
-          <IconButton onClick={()=>{
-            setFile(null);
-          }}><Delete /></IconButton>
-          </div>
-          }
-          
-          <button onClick={handleFileUpload} type='button' className='bg-primary text-white w-full px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
-          {!FileUploading ? "SAVE" : <CircularProgress size={16} sx={{color:'white'}} />}
-          </button>
+            </div>
+
+            {file &&
+              <div className='flex bg-green-500 items-center pl-1 justify-between'>
+                <div className='flex gap-2'>
+                  <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{ color: 'green' }} /></div>
+                  {file.name}
+                </div>
+                <IconButton onClick={() => {
+                  setFile(null);
+                }}><Delete /></IconButton>
+              </div>
+            }
+
+            <button onClick={handleFileUpload} type='button' className='bg-primary text-white w-full px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
+              {!FileUploading ? "SAVE" : <CircularProgress size={16} sx={{ color: 'white' }} />}
+            </button>
           </div>
 
 
