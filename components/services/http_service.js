@@ -14,12 +14,13 @@ http_create.interceptors.request.use(
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('localid');
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers.authorization = `Bearer ${token}`;
         }
         if (userId) {
             config.headers['user-id'] = userId;
         }
     }
+    console.log(config)
         return config;
     },
     (error) => {

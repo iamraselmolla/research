@@ -4,14 +4,17 @@ import InputField from '../UI/InputField'
 import * as yup from "yup"
 import Dashboard from "./Dashboard";
 import Gap from '../UI/Gap';
-import { IconButton } from '@mui/material';
+import { CircularProgress, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import AuthContext from '../store/AuthContext';
+import { addConferenceFromForm } from '../services/userServices';
+import { useState } from 'react';
 
 
 const AddConference = () => {
+    const [loading, setLoading] = useState(false)
     const validationSchema = yup.object().shape({
         organizationName: yup.string().required('Organization name is required'),
         conferenceName: yup.string().required('Conference name is required'),
@@ -26,7 +29,7 @@ const AddConference = () => {
         conferenceName: '',
         conferenceLocation: '',
         conferenceDate: '',
-        conferenceDescription:'',
+        conferenceDescription: '',
         startTime: '',
         endTime: '',
         conferenceType: '',
@@ -85,15 +88,21 @@ const AddConference = () => {
         { placeholder: "Registration Fee", labelName: "Registration Fee", uni: "registrationFee", initialValue: "", type: "number" },
         { placeholder: "Registration Link", labelName: "Registration Link", uni: "registrationLink", initialValue: "", type: "text" },
     ]
-const authCtx = useContext(AuthContext)
-    const handleFormSubmit = async (values, {resetForm}) => {
+    const authCtx = useContext(AuthContext)
+    const handleFormSubmit = async (values, { resetForm }) => {
         try {
-            const result = await axios.post('/api/conference', {...values, userId: authCtx.localid});
-            toast.success('Conference Created successfully!');
-            resetForm({values:''})
+            setLoading(true)
+            const result = await addConferenceFromForm({ ...values, userId: authCtx.localid })
+            
+            if (result) {
+                toast.success('Conference Created successfully!');
+                resetForm({ values: '' })
+                setLoading(false)
+            }
         }
         catch (error) {
-            console.log(error)
+            console.log(error);
+            setLoading(false)
         }
     }
 
@@ -168,7 +177,9 @@ const authCtx = useContext(AuthContext)
                             </FieldArray>
 
 
-                            <button type="submit" className=' bg-primary self-end rounded-sm p-1 text-white md: w-28 mt-4'>Submit</button>
+                            <button type="submit" className=' bg-primary self-end rounded-sm p-1 text-white md: w-28 mt-4'>{
+                                !loading ? "Submit" : <CircularProgress size={16} sx={{ color: 'white' }} />
+                            }</button>
                         </Form >
                     )
                 }}

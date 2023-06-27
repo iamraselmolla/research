@@ -13,6 +13,7 @@ import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup'
 import InputField, { } from '../UI/InputField'
 import { assets } from '../assets';
+import { createUser } from '../services/userServices';
 
 const SignupConditional = ({role}) => {
   const [loading, setLoading] = useState(true);
@@ -51,7 +52,7 @@ const SignupConditional = ({role}) => {
     try {
      
       setButtonLoading(true);
-      const response = await axios.post('/api/signup', values); 
+      const response = await createUser(values); 
       // Handle the response
       toast.success('Signup successful!');
       resetForm({values:''})

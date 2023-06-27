@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
 import { toast } from 'react-toastify';
 import { CircularProgress, IconButton } from '@mui/material';
+import { cloudinaryAPILink, verificationFile, verificationImage } from '../services/userServices';
 
 const Verification = () => {
   const { localid } = useContext(AuthContext)
@@ -28,15 +29,16 @@ const Verification = () => {
     formData.append('cloud_name', 'iamraselmolla');
     try {
       const response = await axios.post(
-        'https://api.cloudinary.com/v1_1/iamraselmolla/auto/upload',
+        cloudinaryAPILink,
         formData
       );
 
       if (response.data.url) {
-        const result = await axios.put('/api/verification?type=file', {
+        const result = await verificationFile({
           verification: response.data.url,
           localid,
-        });
+        }
+        );
 
         if (result.status === 200) {
           toast.success('Verification File uploaded successfully');
@@ -67,15 +69,15 @@ const Verification = () => {
       formData.append('file', image);
       formData.append("upload_preset", "ml_default");
       formData.append("cloud_name", "iamraselmolla");
-      const response = await axios.post(
-        'https://api.cloudinary.com/v1_1/iamraselmolla/image/upload',
+      const response = await axios.post(cloudinaryAPILink,
         formData
       );
       if (response.data.url) {
-        const result = await axios.put("/api/verification", {
-          verification: response.data.url,
-          localid
-        });
+        const result = await verificationImage(
+          {
+            verification: response.data.url,
+            localid
+          });
         if (result.status === 200) {
           toast.success("Verification Image added successfully");
           setLoading(false)

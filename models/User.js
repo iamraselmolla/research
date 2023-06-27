@@ -1,7 +1,7 @@
 const { model, Schema, default: mongoose } = require("mongoose");
 
-const UserSchema =  new Schema({
-    
+const UserSchema = new Schema({
+
     username: {
         type: String,
         required: true
@@ -10,26 +10,26 @@ const UserSchema =  new Schema({
         type: String,
         required: true
     },
-    basicInfo:{
-        firstName:{
+    basicInfo: {
+        firstName: {
             type: String,
             required: true
         },
-        lastName:{
+        lastName: {
             type: String,
             required: true
         },
-        
-        dob:{
+
+        dob: {
             type: Date
         },
-        gender:{
+        gender: {
             type: String,
-            default:'',
-            enum: ['','Male', 'Female', 'Other']
+            default: '',
+            enum: ['', 'Male', 'Female', 'Other']
         }
     },
-    contactInfo:{
+    contactInfo: {
         email: {
             type: String
         },
@@ -40,30 +40,30 @@ const UserSchema =  new Schema({
             type: String
         }
     },
-    education:[
+    education: [
         {
-            title:{
+            title: {
                 type: String
             },
-            completion:{
+            completion: {
                 type: Date
             },
-            institute:{
+            institute: {
                 type: String
             },
         }
-    ],    
+    ],
     profilePic: {
         type: String,
         default: './user.png'
     },
-   
+
     role: {
         type: String,
         enum: ['student', 'faculty', 'admin']
     },
-    verification:{
-        img:{
+    verification: {
+        img: {
             type: String,
             status: "pending"
         },
@@ -74,20 +74,21 @@ const UserSchema =  new Schema({
     },
     research: [
         {
-          file: {
-            type: String,
-            status: "pending",
-          },
-          img: {
-            type: String,
-            status: "pending"
-          },
-          uploadedAt: {
-            type: Date,
-            default: Date.now
-          }
+            file: {
+                type: String,
+                status: "pending",
+            },
+            img: {
+                type: String,
+                status: "pending"
+            }
         }
-      ]
-})
+    ],
+
+},
+    {
+        timestamps: true
+    }
+)
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

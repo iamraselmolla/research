@@ -23,8 +23,8 @@ export const isStudent=(req, res, next)=> {
 
 export const  isAdmin=(req, res, next)=> {
   const authHeader = req.headers.authorization;
+  console.log(req.headers)
   const token = authHeader && authHeader.split(' ')[1];
-  console.log(token)
   jwt.verify(token,secretKey,(err,decoded)=>{
     if(err){
       return res.status(401).json({ error: err });
