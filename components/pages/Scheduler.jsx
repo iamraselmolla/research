@@ -26,7 +26,7 @@ const Scheduler = () => {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div className='m-1 flex flex-col gap-2'>
           <InfoProvider info='Faculties can build their own flexible schedule , by choosing the date and time from below.' />
-          <Gap>Available TIming</Gap>
+          <Gap>Available Timing</Gap>
           <Formik initialValues={initialValues} onSubmit={(values)=>console.log(values.timing)}>
             {({ values,setFieldValue }) => (
               <Form className='flex flex-col'>

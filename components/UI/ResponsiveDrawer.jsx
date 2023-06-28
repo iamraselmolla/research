@@ -398,7 +398,7 @@ export default function ResponsiveDrawer() {
               </div>
               {authCtx.isLoggedIn ? (
                 <>
-                  <Link className="hover:underline" href="/verification">
+                  <Link className="hover:underline" href="/dashboard/verification">
                     VERIFICATION
                   </Link>
                   <button onClick={()=>authCtx.logout()} className="hover:underline rounded-lg bg-primary p-2 text-white">

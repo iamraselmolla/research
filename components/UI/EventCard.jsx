@@ -14,12 +14,15 @@ const EventCard = ({
     location,
     description,
     organiser,
+    verified
 }) => {
 
-    const [verified, setVerified] = useState(false);
+    const [checkVerified, setVerified] = useState(verified);
 
     const handleChange = () => {
-        setVerified(!verified);
+        setVerified(!checkVerified);
+        
+
     };
     return (
         <div className="text-black  overflow-hidden rounded-md w-full border-[1px] border-black flex flex-col gap-3">
@@ -34,7 +37,7 @@ const EventCard = ({
                     </div>
                 </div>
                 <div className="verified-status pe-2">
-                    <NotInterested fontSize="small" /><Switch onChange={handleChange} checked={verified} size="small" /><CheckCircle fontSize="small" title="Verified" />
+                    <NotInterested className={`${!checkVerified ? "text-red-400" : 'ok' }`} fontSize="small" /><Switch onChange={handleChange} checked={checkVerified} size="small" /><CheckCircle className={`${checkVerified ? 'text-green-400' : ''}`} fontSize="small" title="Verified" />
                 </div>
             </div>
 
