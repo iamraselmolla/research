@@ -4,15 +4,24 @@ import { assets } from "../assets";
 import { useEffect } from "react";
 import { getAllConferences } from "../services/userServices";
 import EventCard from "../UI/EventCard";
+import { CircularProgress } from "@mui/material";
 
 const AllConferences = () => {
   const [allConference, setAllConference] = useState(null);
-  
+  const [error, setError] = useState(null)
+
 
   useEffect(() => {
     const getUsers = async () => {
-      const allConferences = await getAllConferences();
-      setAllConference(allConferences.data)
+      try {
+        const allConferences = await getAllConferences();
+        setAllConference(allConferences.data)
+
+      }
+      catch (err) {
+        setAllConference([]);
+        setError("No data found")
+      }
 
     }
     getUsers();
@@ -31,12 +40,12 @@ const AllConferences = () => {
   //     organiser: "John Doe",
   //   },
   // ];
- 
+
 
   return (
     <Dashboard>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-        {allConference && allConference.map((conference, index) => (
+      {allConference && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+        {allConference && allConference?.map((conference, index) => (
           <EventCard
             key={index}
             title={conference.conferenceInfo.conferenceName}
@@ -49,7 +58,17 @@ const AllConferences = () => {
             verified={conference.verified}
           />
         ))}
-      </div>
+      </div>}
+      {!allConference &&
+        <div className="flex justify-center overflow-hidden">
+          <CircularProgress size={50} sx={{ color: 'red' }} />
+        </div>
+      }
+      {
+        error && <h1 className="text-red-500 ">
+          {error}
+        </h1>
+      }
     </Dashboard>
   );
 };
