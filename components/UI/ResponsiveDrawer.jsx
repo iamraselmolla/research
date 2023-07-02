@@ -15,6 +15,7 @@ import {
   AccountTree,
   AppRegistration,
   Dashboard,
+  Grade,
   Home,
   KeyboardArrowDown,
   KeyboardArrowUp,
@@ -227,6 +228,14 @@ export default function ResponsiveDrawer() {
             <ListItemText primary="HOME" />
           </ListItemButton>
         </ListItem>
+        <ListItem>
+          <ListItemButton href="/all-faculty">
+            <ListItemIcon>
+              <Grade/>
+            </ListItemIcon>
+            <ListItemText primary="All Faculty" />
+          </ListItemButton>
+        </ListItem>
         {authCtx.isLoggedIn ? (
           <>
             <ListItem>
@@ -357,6 +366,9 @@ export default function ResponsiveDrawer() {
 
               <Link className="hover:underline" href="/">
                 HOME
+              </Link>
+              <Link className="hover:underline" href="/all-faculty">
+                ALL FACULTY
               </Link>
               <div className="group/parent">
                 <Link href="/dashboard" className="flex group/item">

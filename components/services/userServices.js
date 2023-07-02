@@ -7,11 +7,15 @@ const BASE_URL={
     verificationFileLink: '/api/verification?type=file',
     verificationImageLink: '/api/verification',
     addConference: '/api/conference',
-    allConferences: '/api/allconferences'
+    allConferences: '/api/allconferences',
+    getAllFaculty : '/api/allfaculty'
   }
 
 export function fetchUserDetails() {
   return http.get(BASE_URL.userDetails);
+}
+export function fetchAllFaculty() {
+  return http.get(BASE_URL.getAllFaculty);
 }
 export function getAllConferences (){
   return http.get(BASE_URL.allConferences)

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { assets } from '../assets'
 import ResponsiveDrawer from '../UI/ResponsiveDrawer'
 import Footer from '../UI/Footer'
-import { Agriculture, ArticleOutlined, CarRental, Delete, FoodBank, Hardware, HealthAndSafety, Liquor, LocalDining, LocalShipping, MobileFriendly, Refresh, ShoppingCart, Warehouse,CheckCircleOutline } from '@mui/icons-material'
+import { Agriculture, ArticleOutlined, CarRental, Delete, FoodBank, Hardware, HealthAndSafety, Liquor, LocalDining, LocalShipping, MobileFriendly, Refresh, ShoppingCart, Warehouse, CheckCircleOutline } from '@mui/icons-material'
 import SplashScreen from '../SplashScreen'
 import Link from 'next/link'
 import { TypeAnimation } from 'react-type-animation'
@@ -74,11 +74,11 @@ const HomePage = () => {
       {loading ? <SplashScreen /> :
         <div>
           <ResponsiveDrawer />
-          <div className='bg-white'>
+          <div className='bg-white py-20'>
             <div className='flex flex-col md:flex-row gap-5 bg-white text-black w-[97%] md:w-[80%] m-auto'>
               <div className='flex flex-col justify-center gap-4'>
-                <p className='tracking-widest text-2xl'>Dive into a World of <br/>
-                <strong> RESEARCHES AND  EVENTS</strong></p>
+                <p className='tracking-widest text-2xl'>Dive into a World of <br />
+                  <strong> RESEARCHES AND  EVENTS</strong></p>
                 <p className='font-extrabold tracking-tight text-2xl'>Mark your calendar and attend conferences that inspire and connect you with leading experts in your field. Don't miss to submit your research paper here</p>
                 <button type='button' className='w-48 bg-secondary rounded-md p-2 text-white tracking-widest drop-shadow-md'>GET STARTED</button>
               </div>
@@ -115,12 +115,12 @@ const HomePage = () => {
 
           <div className='bg-white text-black text-center '>
             <div className='w-[90%] md:w-[80%] m-auto py-10'>
-              <h2 className='text-3xl tracking-wider'>OUR BOOK PUBLISHING SERVICES</h2>
+              <h2 className='text-3xl tracking-wider'>ACADEMIC EVENTS AND CONFERENCES</h2>
               <div className='flex justify-center gap-5 my-5'>
-                <button type="button" className='shadow-md font-bold tracking-wide bg-primary text-white p-2 w-56 rounded-sm'>Guided Self Publishing</button>
-                <button type="button" className='shadow-md font-bold tracking-wide border-2 border-secondary p-2 w-56 rounded-sm'>Partnered Publishing</button>
+                <button type="button" className='shadow-md font-bold tracking-wide bg-primary text-white p-2 w-56 rounded-sm'>Send Research</button>
+                <button type="button" className='shadow-md font-bold tracking-wide border-2 border-secondary p-2 w-56 rounded-sm'>Join an event</button>
               </div>
-              <div className='border-2 py-4 px-2 border-ter text-left rounded-sm'>In Guided Self Publishing our dedicated team of book experts will work with you every step of the way to help bring your vision to life. We’ll help you refine your manuscript, design a book that works, and build a platform to sell and promote your book. And once publishing is complete, you can sit back and relax as your book is sold all over the world across 40,000+ stores.</div>
+              <div className='border-2 py-4 px-2 border-ter text-left rounded-sm'>We are dedicated to fostering a vibrant community of researchers and academics. Whether you are looking to share your latest research findings, submit a paper for publication, or find relevant academic events and conferences, you have come to the right place.</div>
             </div>
           </div>
 
@@ -137,21 +137,22 @@ const HomePage = () => {
           </div>
 
           <div className='bg-white flex flex-col gap-5 py-20 '>
-            <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>Faculty Benefits: Empowering Academic Excellence</h2>
-            <p className='text-black text-center md:w-[50%] self-center'>Irrespective of whether you are a first-time publisher, or an experienced author, here is why Clever Fox Publishing is the perfect fit for you. </p>
+            <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>FACULTY BENEFITS: EMPOWERING ACADEMIC EXCELLENCE</h2>
+            <p className='text-black text-center md:w-[50%] self-center'>We are committed to empowering academic excellence and providing a nurturing environment for faculty members to thrive. Join our community and unleash your full potential as a distinguished academic. </p>
             <div className='flex md:flex-row flex-col bg-white text-black w-[97%] md:w-[80%] m-auto'>
               <Image src={assets.benefits} className='rounded-xl w-full md:max-w-[50%]'></Image>
               <div className='flex flex-col justify-center p-10 md:p-0 md:items-center md:w-[50%]'>
                 <ul className='flex flex-col gap-5 list-none list-disc'>
-                  <li><CheckCircleOutline/> Amplify Your Research</li>
-                  <li><CheckCircleOutline/> Foster Collaboration</li>
-                  <li><CheckCircleOutline/> Recognition and Publication </li>
-                  <li><CheckCircleOutline/> Professional Development </li>
-                  <li><CheckCircleOutline/> Networking and Events</li>
-                  <li><CheckCircleOutline/> Funding Opportunities</li>
-                  <li><CheckCircleOutline/> Personalized Support</li>
-                  <li><CheckCircleOutline/> Personalized Support</li>
+                  <li><CheckCircleOutline /> Amplify Your Research</li>
+                  <li><CheckCircleOutline /> Foster Collaboration</li>
+                  <li><CheckCircleOutline /> Recognition and Publication </li>
+                  <li><CheckCircleOutline /> Professional Development </li>
+                  <li><CheckCircleOutline /> Networking and Events</li>
+                  <li><CheckCircleOutline /> Funding Opportunities</li>
+                  <li><CheckCircleOutline /> Personalized Support</li>
+                  <li><CheckCircleOutline /> Recognition and Awards</li>
                 </ul>
+                <button type="button" className='shadow-md mt-5 font-bold tracking-wide border-2 border-secondary p-2 w-56 rounded-sm'>See all Faculty</button>
 
               </div>
             </div>
@@ -182,7 +183,7 @@ const HomePage = () => {
             </div>
           </div> */}
 
-          
+
           {/* <div className='bg-white shadow-xl flex flex-col gap-5 py-10'>
             <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>WHY CLEVER FOX?</h2>
             <p className='text-black text-center md:w-[50%] self-center'>
@@ -210,7 +211,7 @@ const HomePage = () => {
 
 
           <div className='bg-pink-500 flex flex-col gap-5 py-10 text-white '>
-            <h2 className='tracking-wider text-3xl  font-bold text-center'>SOME OF OUR RECENT ACTIVITIES</h2>
+            <h2 className='tracking-wider text-3xl  font-bold text-center'>SOME OF OUR RECENT EVENTS</h2>
             <p className=' text-center md:w-[50%] self-center'>
               Read some of our  reviewed <b>Research</b> and <b>arranged events</b>
             </p>
@@ -233,17 +234,16 @@ const HomePage = () => {
           </div>
 
           <div className='bg-white flex flex-col gap-5 py-20'>
-            <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>ADMIN DASHBOARD</h2>
+            <h2 className='tracking-wider text-3xl text-ter font-bold text-center'>STUDENT DASHBOARD</h2>
             <p className='text-black text-center md:w-[50%] self-center'>
-              Get real-time numbers on your sales and track the order status.
-            </p>
+              Get the Student dashboard and access your research world            </p>
             <div className='flex md:flex-row flex-col-reverse bg-white text-black w-[96%] md:w-[80%] m-auto'>
               <div className='flex flex-col md:items-center md:justify-center m-10 md:m-0 min-w-[50%]'>
                 <ul className='flex flex-col gap-5'>
-                  <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 border-blue-700 p-2 w-56'>All Users Info {">>"}</button>
-                  <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 text-blue-700 p-2 w-56'>All Event Management {">>"}</button>
-                  <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 text-blue-700 p-2 w-56'>Approve Faculty Account {">>"}</button>
-                  <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 text-blue-700 p-2 w-56'>Application Status {">>"}</button>
+                  <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 border-blue-700 p-2 w-56'>Verification {">>"}</button>
+                  <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 text-blue-700 p-2 w-56'>Join Events {">>"}</button>
+                  <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 text-blue-700 p-2 w-56'>Get all events notification{">>"}</button>
+                  <button type="button" className='bg-blue-200 rounded-tr-md rounded-tl-md border-b-2 text-blue-700 p-2 w-56'>Submit Research {">>"}</button>
                 </ul>
               </div>
               <Image src={assets.dashboard} className='w-full md:max-w-[50%]' />
