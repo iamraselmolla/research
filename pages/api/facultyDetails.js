@@ -19,5 +19,7 @@ export default async function getFacultyDetails(req, res){
             }
             break;
         }
+        default:
+            return res.status(500).json({ message: "API NOT FOUND" })
     }
 }

@@ -20,7 +20,7 @@ const FacultyCard = ({data}) => {
                                     </div> */}
                                     <div className="team-info p-4">
                                         <h4 className="text-xl font-bold mb-2">
-                                        <Link href={`/all-faculty/${data._id}`}>
+                                        <Link href={`/all-faculty/${data?._id}`}>
                                         {data?.basicInfo.firstName} {data?.basicInfo.lastName}
                                         </Link>
                                         </h4>
