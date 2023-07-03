@@ -361,7 +361,9 @@ export default function ResponsiveDrawer() {
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           <div className="flex justify-between items-center h-12">
+            <Link href={"/"}>
             <Typography variant="h6">RESEARCH</Typography>
+            </Link>
             <div className="hidden md:flex gap-4 items-center justify-center">
 
               <Link className="hover:underline" href="/">

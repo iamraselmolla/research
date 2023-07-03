@@ -152,7 +152,9 @@ const HomePage = () => {
                   <li><CheckCircleOutline /> Personalized Support</li>
                   <li><CheckCircleOutline /> Recognition and Awards</li>
                 </ul>
+                <Link href={'/all-faculty'}>
                 <button type="button" className='shadow-md mt-5 font-bold tracking-wide border-2 border-secondary p-2 w-56 rounded-sm'>See all Faculty</button>
+                </Link>
 
               </div>
             </div>
@@ -291,7 +293,7 @@ const HomePage = () => {
             </div>
           </div> */}
 
-          {/* <Footer /> */}
+          <Footer />
         </div>
       }
     </>

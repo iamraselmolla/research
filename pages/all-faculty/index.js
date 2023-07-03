@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Head from 'next/head';
-import FacultyCard from '../../components/UI/FacultyCard';
+import FacultyCards from '../../components/pages/FacultyCards';
 import ResponsiveDrawer from '../../components/UI/ResponsiveDrawer';
 
 const index = () => {
@@ -34,7 +34,7 @@ const index = () => {
             <div className="banner bg-white font-extrabold py-20 text-4xl text-black text-center mb-10">
                 OUR ALL HONURABLE FACULTY MEMBERS
             </div>
-            <FacultyCard />
+            <FacultyCards />
             </>
         </>
     );

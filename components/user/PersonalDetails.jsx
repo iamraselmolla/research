@@ -119,6 +119,7 @@ console.log(user)
       const response = await putPersonalDetails({...values});
       toast.success("Personal details are updated successfully");
       dispatch(userActions.refreshDetails());
+      
     }
     catch(err){
         console.log(err);
