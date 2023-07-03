@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
 import ResponsiveDrawer from "../../components/UI/ResponsiveDrawer";
+import { Cake, ConnectWithoutContact, Email, InfoOutlined, People, Phone, School } from "@mui/icons-material";
 
 export default function Page() {
     const [faculty, setFaculty] = useState(null);
@@ -52,75 +53,80 @@ export default function Page() {
             <ResponsiveDrawer />
 
             {!faculty ? "Loading" : <>
+                <h1 className="bg-white text-black text-center font-extrabold text-4xl py-20">{`${faculty.basicInfo.firstName} ${faculty.basicInfo.lastName}`}</h1>
                 <div className="container mx-auto px-4 py-8">
-                    <div className=" rounded-lg shadow-md p-8">
-                        {/* Faculty Name */}
-                        <h1 className="text-2xl font-bold mb-4">{`${faculty.basicInfo.firstName} ${faculty.basicInfo.lastName}`}</h1>
+                    <h1 title={`${faculty.basicInfo.firstName} ${faculty.basicInfo.lastName}`} className="font-bold text-4xl text-center mb-5">
+                        Faculty Personal Details
+                    </h1>
+                    <div className=" rounded-lg text-center shadow-md p-8">
 
-                        {/* Profile Picture */}
-                        <div className="flex justify-center mb-6">
-                            <img src={faculty.profilePic} alt="Profile Picture" className="w-24 h-24 rounded-full" />
+                        <div className="flex justify-between gap-2">
+                            <div className="w-30">
+                                <div className="border-4 text-center p-4"><InfoOutlined style={{ fontSize: "60px" }}></InfoOutlined></div>
+                                <table class="min-w-full mt-5 border border-gray-300">
+                                    <thead>
+                                        <tr>
+                                            <th class="p-2 border">Date of Birth</th>
+                                            <th class="p-2 border">Gender</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="p-2 border">{new Date(faculty.basicInfo.dob).toLocaleDateString() || "Not provided"}</td>
+                                            <td class="p-2 border">{faculty.basicInfo.gender || "Not Provided"}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="w-30">
+                                <div className="border-4 text-center p-4">
+                                    <ConnectWithoutContact title="Contact Info" style={{ fontSize: "60px" }}></ConnectWithoutContact>
+                                </div>
+                              
+                                <table class="min-w-full mt-5 border border-gray-300">
+                                    <thead>
+                                        <tr>
+                                            <th class="p-2 border">Email</th>
+                                            <th class="p-2 border">Mobile 1</th>
+                                            <th class="p-2 border">Mobile 2</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="p-2 border">{faculty.contactInfo?.email|| "Not Provided"}</td>
+                                            <td class="p-2 border"> {faculty.contactInfo?.mobileNo1|| "Not Provided"}</td>
+                                            <td class="p-2 border"> {faculty.contactInfo?.mobileNo2|| "Not Provided"}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="w-30">
+                                <div className="border-4 text-center p-4">
+                                    <School style={{ fontSize: "60px" }}></School>
+                                </div>
+                                <table class="min-w-full mt-5 border border-gray-300">
+                                    <thead>
+                                        <tr>
+                                            <th class="p-2 border">Title</th>
+                                            <th class="p-2 border">Completion Date</th>
+                                            <th class="p-2 border">Institute</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {faculty.education.map((edu, index) => (
+                                            <tr>
+                                                <td class="p-2 border">{edu.title|| "Not Provided"}</td>
+                                                <td class="p-2 border">{new Date(edu.completion).toLocaleDateString()|| "Not Provided"}</td>
+                                                <td class="p-2 border">{edu.institute|| "Not Provided"}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
-                        {/* Basic Information */}
-                        <div className="mb-6">
-                            <h2 className="text-lg font-semibold">Basic Information</h2>
-                            <ul className="list-disc ml-6 mt-2">
-                                <li>
-                                    <span className="font-semibold">Username:</span> {faculty.username}
-                                </li>
-                                <li>
-                                    <span className="font-semibold">Date of Birth:</span> {new Date(faculty.basicInfo.dob).toLocaleDateString()}
-                                </li>
-                                <li>
-                                    <span className="font-semibold">Gender:</span> {faculty.basicInfo.gender}
-                                </li>
-                            </ul>
-                        </div>
 
-                        {/* Contact Information */}
-                        <div className="mb-6">
-                            <h2 className="text-lg font-semibold">Contact Information</h2>
-                            <ul className="list-disc ml-6 mt-2">
-                                <li>
-                                    <span className="font-semibold">Email:</span> {faculty.contactInfo?.email}
-                                </li>
-                                <li>
-                                    <span className="font-semibold">Mobile No 1:</span> {faculty.contactInfo?.mobileNo1}
-                                </li>
-                                <li>
-                                    <span className="font-semibold">Mobile No 2:</span> {faculty.contactInfo?.mobileNo2}
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Education */}
-                        <div className="mb-6">
-                            <h2 className="text-lg font-semibold">Education</h2>
-                            <ul className="list-disc ml-6 mt-2">
-                                {faculty.education.map((edu, index) => (
-                                    <li key={index}>
-                                        <span className="font-semibold">Title:</span> {edu.title}<br />
-                                        <span className="font-semibold">Completion:</span> {edu.completion}<br />
-                                        <span className="font-semibold">Institute:</span> {edu.institute}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Verification Status */}
-                        <div className="mb-6">
-                            <h2 className="text-lg font-semibold">Verification Status</h2>
-                            <ul className="list-disc ml-6 mt-2">
-                                <li>
-                                    <span className="font-semibold">Image:</span> {faculty.verification?.img.status}<br />
-                                    <span className="font-semibold">File:</span> {faculty.verification?.file.status}
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Research */}
-                        <div>
+                        {/* <div>
                             <h2 className="text-lg font-semibold">Research</h2>
                             <ul className="list-disc ml-6 mt-2">
                                 {faculty.research?.map((res, index) => (
@@ -130,7 +136,7 @@ export default function Page() {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </>
