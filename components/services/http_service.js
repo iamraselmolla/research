@@ -20,7 +20,6 @@ http_create.interceptors.request.use(
             config.headers['user-id'] = userId;
         }
     }
-    console.log(config)
         return config;
     },
     (error) => {

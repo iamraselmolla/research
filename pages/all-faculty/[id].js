@@ -1,6 +1,7 @@
 import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router"
+import Spinner from "../../components/UI/Spinner"
 import { useEffect, useState } from "react";
 import ResponsiveDrawer from "../../components/UI/ResponsiveDrawer";
 import { Cake, ConnectWithoutContact, Email, InfoOutlined, People, Phone, School } from "@mui/icons-material";
@@ -10,23 +11,24 @@ export default function Page() {
     const [reload, setReload] = useState(false)
     const router = useRouter();
     const id = router.query.id;
+    console.log(id)
     useEffect(() => {
         const getAllFaculty = async () => {
             try {
+             
                 setReload(true)
                 const findFaculty = await axios.get(`/api/facultyDetails?id=${id}`);
-                setFaculty(findFaculty.data)
+                setFaculty(findFaculty?.data)
+                console.log(faculty)
                 setReload(false)
+               
             } catch (err) {
                 setReload(false)
             }
         }
         getAllFaculty()
-    }, []);
-    if (reload) {
-        return
-    }
-    console.log(faculty)
+    }, [id]);
+    
     return (
         <div>
             <Head>
@@ -52,8 +54,12 @@ export default function Page() {
 
             <ResponsiveDrawer />
 
-            {!faculty ? "Loading" : <>
-                <h1 className="bg-white text-black text-center font-extrabold text-4xl py-20">{`${faculty.basicInfo.firstName} ${faculty.basicInfo.lastName}`}</h1>
+            {!faculty ? <>
+                <div className="flex items-center justify-center h-screen">
+                <Spinner size={60} />
+                </div>
+            </> : <>
+            <h1 className="bg-white text-black text-center font-extrabold text-4xl py-20">{`${faculty.basicInfo.firstName} ${faculty.basicInfo.lastName}`}</h1>
                 <div className="container mx-auto px-4 py-8">
                     <h1 title={`${faculty.basicInfo.firstName} ${faculty.basicInfo.lastName}`} className="font-bold text-4xl text-center mb-5">
                         Faculty Personal Details
@@ -63,17 +69,17 @@ export default function Page() {
                         <div className="flex justify-between gap-2">
                             <div className="w-30">
                                 <div className="border-4 text-center p-4"><InfoOutlined style={{ fontSize: "60px" }}></InfoOutlined></div>
-                                <table class="min-w-full mt-5 border border-gray-300">
+                                <table className="min-w-full mt-5 border border-gray-300">
                                     <thead>
                                         <tr>
-                                            <th class="p-2 border">Date of Birth</th>
-                                            <th class="p-2 border">Gender</th>
+                                            <th className="p-2 border">Date of Birth</th>
+                                            <th className="p-2 border">Gender</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="p-2 border">{new Date(faculty.basicInfo.dob).toLocaleDateString() || "Not provided"}</td>
-                                            <td class="p-2 border">{faculty.basicInfo.gender || "Not Provided"}</td>
+                                            <td className="p-2 border">{new Date(faculty.basicInfo.dob).toLocaleDateString() || "Not provided"}</td>
+                                            <td className="p-2 border">{faculty.basicInfo.gender || "Not Provided"}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -83,19 +89,19 @@ export default function Page() {
                                     <ConnectWithoutContact title="Contact Info" style={{ fontSize: "60px" }}></ConnectWithoutContact>
                                 </div>
                               
-                                <table class="min-w-full mt-5 border border-gray-300">
+                                <table className="min-w-full mt-5 border border-gray-300">
                                     <thead>
                                         <tr>
-                                            <th class="p-2 border">Email</th>
-                                            <th class="p-2 border">Mobile 1</th>
-                                            <th class="p-2 border">Mobile 2</th>
+                                            <th className="p-2 border">Email</th>
+                                            <th className="p-2 border">Mobile 1</th>
+                                            <th className="p-2 border">Mobile 2</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="p-2 border">{faculty.contactInfo?.email|| "Not Provided"}</td>
-                                            <td class="p-2 border"> {faculty.contactInfo?.mobileNo1|| "Not Provided"}</td>
-                                            <td class="p-2 border"> {faculty.contactInfo?.mobileNo2|| "Not Provided"}</td>
+                                            <td className="p-2 border">{faculty.contactInfo?.email|| "Not Provided"}</td>
+                                            <td className="p-2 border"> {faculty.contactInfo?.mobileNo1|| "Not Provided"}</td>
+                                            <td className="p-2 border"> {faculty.contactInfo?.mobileNo2|| "Not Provided"}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -104,20 +110,20 @@ export default function Page() {
                                 <div className="border-4 text-center p-4">
                                     <School style={{ fontSize: "60px" }}></School>
                                 </div>
-                                <table class="min-w-full mt-5 border border-gray-300">
+                                <table className="min-w-full mt-5 border border-gray-300">
                                     <thead>
                                         <tr>
-                                            <th class="p-2 border">Title</th>
-                                            <th class="p-2 border">Completion Date</th>
-                                            <th class="p-2 border">Institute</th>
+                                            <th className="p-2 border">Title</th>
+                                            <th className="p-2 border">Completion Date</th>
+                                            <th className="p-2 border">Institute</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {faculty.education.map((edu, index) => (
                                             <tr>
-                                                <td class="p-2 border">{edu.title|| "Not Provided"}</td>
-                                                <td class="p-2 border">{new Date(edu.completion).toLocaleDateString()|| "Not Provided"}</td>
-                                                <td class="p-2 border">{edu.institute|| "Not Provided"}</td>
+                                                <td className="p-2 border">{edu.title|| "Not Provided"}</td>
+                                                <td className="p-2 border">{new Date(edu.completion).toLocaleDateString()|| "Not Provided"}</td>
+                                                <td className="p-2 border">{edu.institute|| "Not Provided"}</td>
                                             </tr>
                                         ))}
                                     </tbody>
