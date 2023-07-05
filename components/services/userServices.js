@@ -8,7 +8,8 @@ const BASE_URL={
     verificationImageLink: '/api/verification',
     addConference: '/api/conference',
     allConferences: '/api/allconferences',
-    getAllFaculty : '/api/allfaculty'
+    getAllFaculty : '/api/allfaculty',
+    reserchPaper:'/api/addresearch'
   }
 
 export function fetchUserDetails() {
@@ -33,6 +34,10 @@ export function fetchAllUsers() {
 }
 export function verificationFile (data){
   return http.put(BASE_URL.verificationFileLink, data)
+}
+export function researchPaper (data){
+  console.log(data)
+  return http.put(BASE_URL.addresearch, data)
 }
 export function verificationImage (data){
   return http.put(BASE_URL.verificationImageLink, data)

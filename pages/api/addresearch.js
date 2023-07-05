@@ -7,9 +7,8 @@ export default async function addResearch (req, res){
         {
             try{
                 await dbConnect();
-                const userId = req.query.id
-                const findUser = await User.findOne({_id: userId});
-                const {fileLink} = req.body
+                const findUser = await User.findOne({_id: localid});
+                const {fileLink,localid} = req.body
                 if(findUser){
                     const newResearchPaper = {
                         file: fileLink,
@@ -26,6 +25,7 @@ export default async function addResearch (req, res){
                 console.log(req.body)
             }
             catch(err){
+                console.log()
                 return res.status(500).json({
                     message: 'Something went wrong',
                     error: err.message,

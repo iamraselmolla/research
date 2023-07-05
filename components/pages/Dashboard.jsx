@@ -69,6 +69,12 @@ export const menuItems = {
     icon: <CalendarMonth />,
     showAlways: false,
   },
+  newPage:{
+    name: "New Page",
+    pageLink: ALL_LINKS.dashboard+ALL_LINKS.scheduler,
+    icon: <CalendarMonth />,
+    showAlways: false,
+  },
 
   
 };

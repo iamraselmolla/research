@@ -8,12 +8,14 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        select:false
     },
     basicInfo: {
         firstName: {
             type: String,
-            required: true
+            required: true,
+           
         },
         lastName: {
             type: String,
@@ -21,7 +23,7 @@ const UserSchema = new Schema({
         },
 
         dob: {
-            type: Date
+            type: Date,
         },
         gender: {
             type: String,

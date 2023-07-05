@@ -7,6 +7,8 @@ import AuthContext from '../store/AuthContext';
 import { toast } from 'react-toastify';
 import { CircularProgress, IconButton } from '@mui/material';
 import { cloudinaryAPILink, verificationFile, verificationImage } from '../services/userServices';
+import Image from 'next/image';
+import { useSelector } from 'react-redux';
 
 const Verification = () => {
   const { localid } = useContext(AuthContext)
@@ -15,6 +17,8 @@ const Verification = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [FileUploading, setFileUploading] = useState(false)
+  const user=useSelector(state=>state.user.user);
+  console.log(user)
 
   const handleFileUpload = async () => {
     if (!file) {
@@ -125,6 +129,10 @@ const Verification = () => {
   return (
     <>
       <Dashboard>
+        {/* <div>
+          <h4 className='text-xl'>Previous Upload</h4>
+          <Image width={600} height={400} className='w-full' src={user?.verification?.img} />
+        </div> */}
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
           <div className='flex flex-col gap-4 '>
             <div className={`rounded-md border-2 h-full min-h-[15rem] ${!image ? "border-dotted" : ""}  overflow-hidden`} style={{ background: `url(${imagePreview}) no-repeat center center/cover` }}>
@@ -177,7 +185,7 @@ const Verification = () => {
               </div>
             }
 
-            <button onClick={handleFileUpload} type='button' className='bg-primary text-white w-full px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
+            <button disabled={FileUploading} onClick={handleFileUpload} type='button' className='bg-primary text-white w-full px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
               {!FileUploading ? "SAVE" : <CircularProgress size={16} sx={{ color: 'white' }} />}
             </button>
           </div>

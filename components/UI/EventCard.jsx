@@ -36,9 +36,7 @@ const EventCard = ({
                         <div className="text-3xl">{date.split("-")[0]}</div>
                     </div>
                 </div>
-                <div className="verified-status pe-2">
-                    <NotInterested className={`${!checkVerified ? "text-red-400" : 'ok' }`} fontSize="small" /><Switch onChange={handleChange} checked={checkVerified} size="small" /><CheckCircle className={`${checkVerified ? 'text-green-400' : ''}`} fontSize="small" title="Verified" />
-                </div>
+  
             </div>
 
 
@@ -65,10 +63,14 @@ const EventCard = ({
                         Read More
                     </Link>
                 </div>
-                <button className="bg-secondary text-white drop-shadow-md p-1 font-bold  rounded-sm">
+            <div className="verified-status h-10">
+                    <NotInterested className={`${!checkVerified ? "text-red-400" : 'ok' }`} fontSize="medium" /><Switch  onChange={handleChange} checked={checkVerified} size="medium" /><CheckCircle className={`${checkVerified ? 'text-green-400' : ''}`} fontSize="small" title="Verified" />
+                </div>
+                <button className="bg-secondary text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90">
                     View
                 </button>
             </div>
+
         </div>
     );
 };

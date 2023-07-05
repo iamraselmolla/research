@@ -369,7 +369,7 @@ export default function ResponsiveDrawer() {
               <Link className="hover:underline" href="/">
                 HOME
               </Link>
-              <Link className="hover:underline" href="/all-faculty">
+              <Link className="hover:underline" href="/faculties">
                 ALL FACULTY
               </Link>
               <div className="group/parent">

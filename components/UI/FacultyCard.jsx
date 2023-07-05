@@ -1,47 +1,18 @@
 import React from 'react';
-import { FacebookOutlined, Instagram, Twitter } from '@mui/icons-material';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import Image from 'next/image';
+import { assets } from '../assets';
 
-const FacultyCard = ({data}) => {
-    
+const FacultyCard = ({ item }) => {
+    console.log(item)
+
     return (
-        <div className="col-span-1">
-                            <div className="col-span-12  md:col-span-6 lg:col-span-4 xl:col-span-3">
-                                <div className="bg-white py-10 rounded-lg shadow-lg mb-8">
-                                    {/* <div className="team-thumb">
-                                        <div className="brd">
-                                            <a href="https://wpdemo.zcubethemes.com/qeducato/team/howard-holmes/">
-                                                <img decoding="async" src="https://wpdemo.zcubethemes.com/qeducato/wp-content/uploads/2023/03/team09.png" alt="https://wpdemo.zcubethemes.com/qeducato/wp-content/uploads/2023/03/team09.png" />
-                                            </a>
-                                        </div>
-                                    </div> */}
-                                    <div className="team-info p-4">
-                                        <h4 className="text-xl font-bold mb-2">
-                                        <Link href={`/all-faculty/${data?._id}`}>
-                                        {data?.basicInfo.firstName} {data?.basicInfo.lastName}
-                                        </Link>
-                                        </h4>
-                                        <p>{(data?.role.toUpperCase())}</p>
-                                        <div className="team-social">
-                                            <ul className="flex justify-center">
-                                                <li className="mr-2">
-                                                    <a href="#"><FacebookOutlined></FacebookOutlined></a>
-                                                </li>
-                                                <li className="mr-2">
-                                                    <a href="#"><Instagram></Instagram></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><Twitter></Twitter></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div className='bg-green-400 hover:bg-primary hover:text-white hover:cursor-pointer rounded-lg shadow-sm p-8 flex flex-col gap-4'>
+            <Image className='rounded-full w-40 h-40 m-auto' src={assets.art_01} alt='Faculty'/>
+            <h4 className='text-2xl font-bold text-center text-white'>{item.basicInfo.firstName} {item.basicInfo.lastName}</h4>
+            
+        </div>
     );
 };
 

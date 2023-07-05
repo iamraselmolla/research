@@ -1,8 +1,7 @@
 import React from 'react';
 
 import Head from 'next/head';
-import FacultyCards from '../../components/pages/FacultyCards';
-import ResponsiveDrawer from '../../components/UI/ResponsiveDrawer';
+import FacultiesPage from '../../components/pages/FacultiesPage';
 
 const index = () => {
 
@@ -29,13 +28,7 @@ const index = () => {
                 <meta property="og:description" content="research_description" />
                 <meta property="og:site_name" content="Research" />
             </Head>
-            <>
-            <ResponsiveDrawer />
-            <div className="banner bg-white font-extrabold py-20 text-4xl text-black text-center mb-10">
-                OUR ALL HONURABLE FACULTY MEMBERS
-            </div>
-            <FacultyCards />
-            </>
+            <FacultiesPage />
         </>
     );
 };

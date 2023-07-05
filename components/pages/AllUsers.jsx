@@ -58,7 +58,7 @@ const AllUsers = () => {
                     <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.basicInfo.firstName}</td>
                     <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.basicInfo.lastName}</td>
                     <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.username}</td>
-                    <td className="px-4 py-2 text-black border border-black text-center align-middle">{user.role}</td>
+                    <td className={`px-4 py-2 text-black border border-black text-center align-middle text-white ${user.role==='student' && 'bg-green-500'} ${user.role==='faculty' && 'bg-orange-500'}`}>{user.role}</td>
                     <td className="px-4 py-2 text-black border border-black text-center align-middle">
 
                       <Delete />
