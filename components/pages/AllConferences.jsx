@@ -56,6 +56,8 @@ const AllConferences = () => {
             description={conference.conferenceInfo.conferenceDescription}
             organiser={conference.organisationInfo.organizationName}
             verified={conference.verified}
+            id={conference._id}
+            status={conference.status}
           />
         ))}
       </div>}

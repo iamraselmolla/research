@@ -9,9 +9,17 @@ const BASE_URL={
     addConference: '/api/conference',
     allConferences: '/api/allconferences',
     getAllFaculty : '/api/allfaculty',
-    reserchPaper:'/api/addresearch'
+    reserchPaper:'/api/addresearch',
+    login: '/api/login',
+    verifyConference : '/api/verifyConference',
   }
 
+export function verifyConferenceByAdmin(id){
+  return http.put(BASE_URL.verifyConference, id)
+}
+export function userLogin(values){
+  return http.post(BASE_URL.login,values);
+}
 export function fetchUserDetails() {
   return http.get(BASE_URL.userDetails);
 }
@@ -35,9 +43,8 @@ export function fetchAllUsers() {
 export function verificationFile (data){
   return http.put(BASE_URL.verificationFileLink, data)
 }
-export function researchPaper (data){
-  console.log(data)
-  return http.put(BASE_URL.addresearch, data)
+export function addResearchPaperFile (data){
+  return http.put(BASE_URL.reserchPaper, data)
 }
 export function verificationImage (data){
   return http.put(BASE_URL.verificationImageLink, data)
@@ -45,5 +52,7 @@ export function verificationImage (data){
 export function addConferenceFromForm (data){
   return http.post(BASE_URL.addConference, data)
 }
+
+
 
 export const cloudinaryAPILink = 'https://api.cloudinary.com/v1_1/iamraselmolla/image/upload';

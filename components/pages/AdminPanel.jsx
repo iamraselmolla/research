@@ -10,6 +10,7 @@ import AuthContext from '../store/AuthContext';
 import SplashScreen from '../SplashScreen';
 import ResponsiveDrawer from '../UI/ResponsiveDrawer';
 import Footer from '../UI/Footer';
+import { userLogin } from '../services/userServices';
 
 const AdminPanel = () => {
     const [loading,setLoading]=useState(true);
@@ -46,13 +47,17 @@ const AdminPanel = () => {
 
     try {
       setButtonLoading(true);
-      const response = await axios.post(
-        '/api/login',
-        {
-          username: formData.username,
-          password: formData.password,
-        }
-      );
+      const response = await userLogin( {
+            username: formData.username,
+            password: formData.password,
+          });
+      // const response = await axios.post(
+      //   '/api/login',
+      //   {
+      //     username: formData.username,
+      //     password: formData.password,
+      //   }
+      // );
       if (response.status === 200) {
         toast.success('Signed in Successfully');
         setFormData({

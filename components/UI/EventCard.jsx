@@ -6,22 +6,34 @@ import axios from "axios";
 import { FormControlLabel, Switch } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
+import { verifyConferenceByAdmin } from "../services/userServices";
+import { toast } from "react-toastify";
 const EventCard = ({
     title,
+    id,
     image,
     date,
     time,
     location,
     description,
     organiser,
-    verified
+    verified,
+    status
 }) => {
+    const [approved, setApproved] = useState(status === 'approved' ? true : false);
+    const handleChange = async () => {
+        if(status !== 'approved'){
+            const result = await verifyConferenceByAdmin({id});
+            if(result){
+                toast.success("Approved",{ position: toast.POSITION.TOP_CENTER });
+                setApproved(true);
+            }else{
+                toast.error("Something Wrong",{ position: toast.POSITION.TOP_CENTER })
+            }
+        }else{
+            return;
+        }
 
-    const [checkVerified, setVerified] = useState(verified);
-
-    const handleChange = () => {
-        setVerified(!checkVerified);
-        
 
     };
     return (
@@ -36,7 +48,7 @@ const EventCard = ({
                         <div className="text-3xl">{date.split("-")[0]}</div>
                     </div>
                 </div>
-  
+
             </div>
 
 
@@ -54,7 +66,6 @@ const EventCard = ({
                     <div className="bg-primary text-white flex gap-1 items-center rounded-full px-2 p-[1px]">
                         <AccessTimeOutlined />
                         {time[0]} - {time[1]}
-                        {console.log(time)}
                     </div>
                 </div>
                 <div className="text-slate-400">
@@ -63,8 +74,8 @@ const EventCard = ({
                         Read More
                     </Link>
                 </div>
-            <div className="verified-status h-10">
-                    <NotInterested className={`${!checkVerified ? "text-red-400" : 'ok' }`} fontSize="medium" /><Switch  onChange={handleChange} checked={checkVerified} size="medium" /><CheckCircle className={`${checkVerified ? 'text-green-400' : ''}`} fontSize="small" title="Verified" />
+                <div className="verified-status h-10">
+                    <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" /><Switch onChange={handleChange} checked={approved} size="medium" /><CheckCircle className={`${approved ? 'text-green-400' : ''}`} fontSize="small" title="Approved" />
                 </div>
                 <button className="bg-secondary text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90">
                     View

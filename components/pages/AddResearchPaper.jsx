@@ -6,9 +6,12 @@ import { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
 import { toast } from 'react-toastify';
 import { CircularProgress, IconButton } from '@mui/material';
-import { cloudinaryAPILink, researchPaper, verificationFile, verificationImage } from '../services/userServices';
+import { addResearchPaperFile, cloudinaryAPILink } from '../services/userServices';
+import { useSelector } from 'react-redux';
 
 const AddResearchPaper = () => {
+  const user=useSelector(state=>state.user.user);
+  console.log(user.research)
   const { localid } = useContext(AuthContext)
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState("");
@@ -25,20 +28,23 @@ const AddResearchPaper = () => {
     setFileUploading(true)
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'ml_default');
+    formData.append('upload_preset', 'research');
     formData.append('cloud_name', 'iamraselmolla');
     try {
       const response = await axios.post(
-        cloudinaryAPILink,
+        'https://api.cloudinary.com/v1_1/iamraselmolla/image/upload',
         formData
       );
 
       if (response.data.url) {
-        const result = await verificationFile({
-          verification: response.data.url,
-          localid,
+        const data = {
+          fileLink: response.data.url,
+          localid
         }
-        );
+        const result = await addResearchPaperFile(data);
+        // researchPaper({
+
+        // }
 
         if (result.status === 200) {
           toast.success('Verification File uploaded successfully');

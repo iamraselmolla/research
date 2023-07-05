@@ -13,6 +13,7 @@ import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup'
 import InputField, { } from '../UI/InputField'
 import FormWrapper from '../UI/FormWrapper';
+import { userLogin } from '../services/userServices';
 
 const Login = () => {
   const [loading, setLoading] = useState(true);
@@ -37,7 +38,9 @@ const Login = () => {
    
     try {
       setButtonLoading(true);
-      const response = await axios.post('/api/login', values);
+      console.log(values)
+      // const response = await axios.post('/api/login', values);
+      const response = await userLogin( values);
      
       if (response.status === 200) {
         authCtx.login(response.data._id, response.data.token, response.data.role);

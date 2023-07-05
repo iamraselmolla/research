@@ -1,14 +1,14 @@
 import User from "../../models/User";
 import dbConnect from "../../utils/dbConnect";
 
-export default async function addResearch (req, res){
+export default async function addResearchPaper (req, res){
     switch(req.method){
         case "PUT" : 
         {
             try{
                 await dbConnect();
-                const findUser = await User.findOne({_id: localid});
                 const {fileLink,localid} = req.body
+                const findUser = await User.findOne({_id: localid});
                 if(findUser){
                     const newResearchPaper = {
                         file: fileLink,
