@@ -22,16 +22,21 @@ const EventCard = ({
 }) => {
     const [approved, setApproved] = useState(status === 'approved' ? true : false);
     const handleChange = async () => {
-        if(status !== 'approved'){
-            const result = await verifyConferenceByAdmin({id});
-            if(result){
-                toast.success("Approved",{ position: toast.POSITION.TOP_CENTER });
-                setApproved(true);
-            }else{
-                toast.error("Something Wrong",{ position: toast.POSITION.TOP_CENTER })
+        try{
+            if(status !== 'approved'){
+                const result = await verifyConferenceByAdmin({id});
+                if(result){
+                    console.log(result)
+                    toast.success("Approved",{ position: toast.POSITION.TOP_CENTER });
+                    setApproved(true);
+                }else{
+                    toast.error("Something Wrong",{ position: toast.POSITION.TOP_CENTER })
+                    return;
+                }
             }
-        }else{
-            return;
+        }catch(err){
+            console.log(err);
+            return
         }
 
 

@@ -7,12 +7,12 @@ export default async function getAllConferences(req, res) {
         case "GET":
             {
                 try {
-                    isAdmin(req, res, async (req,res,next,decoded) => {
+                    // isAdmin(req, res, async (req,res,next,decoded) => {
                         await dbConnect();
                         const allConferences = await Conference.find();
 
                         return res.status(200).json(allConferences)
-                    })
+                    // })
                 }
                 catch (err) {
                     return res.status(500).json({

@@ -1,49 +1,32 @@
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { getAllConferences } from '../../components/services/userServices';
-import EventCard from '../../components/UI/EventCard';
-import { assets } from '../../components/assets';
+import Head from 'next/head';
+import AllConferences2 from '../../components/pages/AllConferences2';
 
 const index = () => {
-    const [allConference, setAllConference] = useState(null);
-    const [error, setError] = useState(null)
-
-
-    useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const allConferences = await getAllConferences();
-                setAllConference(allConferences.data)
-
-            }
-            catch (err) {
-                setAllConference([]);
-                setError("No data found")
-            }
-
-        }
-        getUsers();
-    }, [])
+    
     return (
         <>
-            {allConference && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
-                {allConference && allConference?.map((conference, index) => (
-                    <EventCard
-                        key={index}
-                        title={conference.conferenceInfo.conferenceName}
-                        image={assets.whyChoose}
-                        date={conference.conferenceInfo.conferenceDate}
-                        time={[conference.conferenceInfo.startTime, conference.conferenceInfo.endTime,]}
-                        location={conference.conferenceInfo.conferenceLocation}
-                        description={conference.conferenceInfo.conferenceDescription}
-                        organiser={conference.organisationInfo.organizationName}
-                        verified={conference.verified}
-                        id={conference._id}
-                        status={conference.status}
-                    />
-                ))}
-            </div>}
+           
+            <Head>
+                <title>Research - All Conferences</title>
+                <meta charSet="utf-8" />
+                <link rel="icon" href='https://res.cloudinary.com/da75fckow/image/upload/v1684919760/sikka-warehouse/logo_e3zr7m.png' />
+                <meta property="og:locale" content="en_US" />
+                <meta name="description" content="research_description" />
+                <meta property="og:title" content="Research - Login" />
+                <meta name="keywords" content="research_keywords" />
+
+                <meta property="og:url" content="reseasrch_url" />
+                {/* <meta name="author" content="Your name here" /> */}
+                <meta property="og:image" itemProp='https://res.cloudinary.com/da75fckow/image/upload/v1684919760/sikka-warehouse/logo_e3zr7m.png' />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta httpEquiv="Content-Type" content="text/html; charSet=utf-8" />
+                <link rel="canonical" href="https://3plwarehouseservicez.com/" />
+                <meta property="og:type" content="website" />
+                <meta property="og:description" content="research_description" />
+                <meta property="og:site_name" content="Research" />
+            </Head>
+            <AllConferences2></AllConferences2>
         </>
     );
 };

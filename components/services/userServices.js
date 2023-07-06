@@ -13,7 +13,11 @@ const BASE_URL={
     login: '/api/login',
     verifyConference : '/api/verifyConference',
   }
+// const cloudinaryAPILink = "https://api.cloudinary.com/v1_1/iamraselmolla/image/upload";
 
+// export function submitResearchFile (data) {
+//   return http.post(cloudinaryAPILink, data)
+// }
 export function verifyConferenceByAdmin(id){
   return http.put(BASE_URL.verifyConference, id)
 }
@@ -55,4 +59,3 @@ export function addConferenceFromForm (data){
 
 
 
-export const cloudinaryAPILink = 'https://api.cloudinary.com/v1_1/iamraselmolla/image/upload';
