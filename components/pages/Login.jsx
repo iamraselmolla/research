@@ -38,7 +38,6 @@ const Login = () => {
    
     try {
       setButtonLoading(true);
-      console.log(values)
       // const response = await axios.post('/api/login', values);
       const response = await userLogin( values);
      

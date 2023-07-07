@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
-import { CameraAltOutlined, Check, CloudDone, Delete, UploadFile } from '@mui/icons-material'
+import {  Check, CloudDone, Delete, UploadFile } from '@mui/icons-material'
 import axios from 'axios';
 import { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
@@ -8,23 +8,31 @@ import { toast } from 'react-toastify';
 import { CircularProgress, IconButton } from '@mui/material';
 import { addResearchPaperFile } from '../services/userServices';
 import { useSelector } from 'react-redux';
+import ResearchCard from '../UI/ResearchCard';
 
 const AddResearchPaper = () => {
-  const user=useSelector(state=>state.user.user);
-  console.log(user?.research);
+  const user = useSelector(state => state.user.user);
+  const allResearch = useSelector(state => state.user.research)
   const { localid } = useContext(AuthContext);
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [FileUploading, setFileUploading] = useState(false)
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
-  const handleFileUpload = async () => {
+  const handleFileUpload = async (e) => {
+    e.preventDefault()
     if (!file) {
       setFileUploading(false);
       toast.error("Please select a file");
       return;
     }
+    if (!title) {
+      return toast.error("Please input research title")
+    }
+
     setFileUploading(true)
     const formData = new FormData();
     formData.append('file', file);
@@ -39,16 +47,18 @@ const AddResearchPaper = () => {
 
       if (response.data.url) {
         const data = {
-          fileLink: response.data.url,
-          localid
+          title: title,
+          description: description,
+          file: response.data.url
         }
         const result = await addResearchPaperFile(data);
-        // researchPaper({
 
-        // }
 
         if (result.status === 200) {
-          toast.success('Verification File uploaded successfully', {position: toast.POSITION.TOP_CENTER});
+          setTitle("");
+          setDescription("");
+          setFile(null)
+          toast.success("Research paper submitted successfully");
           setFileUploading(false)
         }
       }
@@ -132,8 +142,8 @@ const AddResearchPaper = () => {
   return (
     <>
       <Dashboard>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-          {/* <div className='flex flex-col gap-4 '>
+
+        {/* <div className='flex flex-col gap-4 '>
             <div className={`rounded-md border-2 h-full min-h-[15rem] ${!image ? "border-dotted" : ""}  overflow-hidden`} style={{ background: `url(${imagePreview}) no-repeat center center/cover` }}>
               <label className={`cursor-pointer w-full relative z-10 h-full flex gap-5 justify-center items-center ${image ? 'bg-black bg-opacity-25 text-white' : 'bg-blue-200 text-black'}`}>
                 <input type='file' className='hidden' onChange={onSelectImage} />
@@ -146,7 +156,7 @@ const AddResearchPaper = () => {
                 <div className='flex gap-2'>
                   <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{ color: 'green' }} /></div>
                   {image.name}
-                </div>
+                  </div>
                 <IconButton onClick={() => {
                   setImage("");
                   setImagePreview("")
@@ -156,38 +166,68 @@ const AddResearchPaper = () => {
 
             <button disabled={loading} onClick={handleImageUpload} type='button' className='w-full bg-primary text-white px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
               {!loading ? "SAVE" : <CircularProgress size={16} sx={{ color: 'white' }} />}
-            </button>
+              </button>
+              
+            </div> */}
+        <div className='mb-8 pt-7'>
+          <h1 className="font-bold text-center text-4xl text-black ">
+            Add Research paper
+          </h1>
+        </div>
+        <form onSubmit={handleFileUpload}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <div className="mb-4">
+               
+                <input value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="bg-blue-200 block border border-gray-300 dark:border-gray-600 font-bold p-2.5 rounded-lg text-gray-900 text-sm w-full" name="title"
+                  type="text"
+                  placeholder="Title" />
+              </div>
+              <div className="mb-4">
+                
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  name='description' rows="7" className="bg-blue-200 block border border-gray-300 dark:border-gray-600 font-bold p-2.5 rounded-lg text-gray-900 text-sm w-full" placeholder="Write about research description..."></textarea>
 
-          </div> */}
+              </div>
+            </div>
+            <div>
+              <div className='bg-blue-200 border border-gray-300 dark:border-gray-600 flex items-center justify-center min-h-[14rem] rounded-md'>
+                <label className='cursor-pointer w-full h-full flex gap-5 justify-center items-center'>
+                  <input type='file' className='hidden ' onChange={handleFileSelection} />
 
-          <div className='flex flex-col gap-4'>
-            <div className='rounded-md border-2 border-dotted min-h-[15rem] bg-blue-200'>
-              <label className='cursor-pointer w-full h-full flex gap-5 justify-center items-center'>
-                <input type='file' className='hidden' onChange={handleFileSelection} />
+                  <UploadFile className='text-primary' fontSize='large' />
+                  <div className='text-black'>{file ? "Upload Another" : "Upload File"}</div>
+                </label>
 
-                <UploadFile className='text-primary' fontSize='large' />
-                <div className='text-black'>{file ? "Upload Another" : "Upload File"}</div>
-              </label>
+              </div>
+
+              {file &&
+                <div className='flex bg-green-500 items-center pl-1 justify-between'>
+                  <div className='flex gap-2'>
+                    <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{ color: 'green' }} /></div>
+                    {file.name}
+                  </div>
+                  <IconButton onClick={() => {
+                    setFile(null);
+                  }}><Delete /></IconButton>
+                </div>
+              }
+
 
             </div>
-
-            {file &&
-              <div className='flex bg-green-500 items-center pl-1 justify-between'>
-                <div className='flex gap-2'>
-                  <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{ color: 'green' }} /></div>
-                  {file.name}
-                </div>
-                <IconButton onClick={() => {
-                  setFile(null);
-                }}><Delete /></IconButton>
-              </div>
-            }
-
-            <button disabled={FileUploading} onClick={handleFileUpload} type='button' className='bg-primary text-white w-full px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
-              {!FileUploading ? "SAVE" : <CircularProgress size={16} sx={{ color: 'white' }} />}
-            </button>
           </div>
+          <button disabled={FileUploading} onClick={handleFileUpload} type='submit' className='bg-primary text-white w-full px-2 py-2 self-end mt-2 disabled:bg-gray-500'>
+            {!FileUploading ? "SAVE" : <CircularProgress size={16} sx={{ color: 'white' }} />}
+          </button>
+        </form>
 
+        <div className="research-papers mt-10">
+         {allResearch && allResearch.length>0 && 
+          allResearch?.map((research, index) => <ResearchCard data={research} index={index}></ResearchCard>)}
 
 
         </div>

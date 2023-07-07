@@ -11,7 +11,6 @@ export default function Page() {
     const [reload, setReload] = useState(false)
     const router = useRouter();
     const id = router.query.id;
-    console.log(id)
     useEffect(() => {
         const getAllFaculty = async () => {
             try {

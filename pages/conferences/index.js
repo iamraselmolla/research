@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import AllConferences2 from '../../components/pages/AllConferences2';
 import AllConferenceHome from '../../components/pages/AllConferenceHome';
 
 const index = () => {
@@ -27,7 +26,6 @@ const index = () => {
                 <meta property="og:description" content="research_description" />
                 <meta property="og:site_name" content="Research" />
             </Head>
-            {/* <AllConferences2></AllConferences2> */}
             <AllConferenceHome></AllConferenceHome>
         </>
     );

@@ -141,7 +141,7 @@ const Dashboard = ({children}) => {
             </div>
             <h1 className="font-bold  mt-4 text-black">{user?.basicInfo?.firstName} {user?.basicInfo?.lastName}</h1>
             <h1 className="bg-sec text-white p-1 rounded-sm bg-primary uppercase">
-              {user.role}
+              {user?.role}
             </h1>
           </div>
 

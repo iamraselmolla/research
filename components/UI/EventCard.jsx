@@ -26,11 +26,10 @@ const EventCard = ({
             if(status !== 'approved'){
                 const result = await verifyConferenceByAdmin({id});
                 if(result){
-                    console.log(result)
-                    toast.success("Approved",{ position: toast.POSITION.TOP_CENTER });
+                    toast.success("Approved");
                     setApproved(true);
                 }else{
-                    toast.error("Something Wrong",{ position: toast.POSITION.TOP_CENTER })
+                    toast.error("Something Wrong")
                     return;
                 }
             }

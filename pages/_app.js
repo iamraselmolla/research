@@ -11,6 +11,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react'
 const MyApp=({ Component, pageProps })=>{
+  const toastConfig = {
+    position: "top-center",
+  };
 useEffect(()=>{
   AOS.init();
   AOS.init({
@@ -21,7 +24,7 @@ useEffect(()=>{
   <>
   <Provider store={store}>
   <AuthContextProvider>
-  <ToastContainer/>
+  <ToastContainer position={toastConfig.position}/>
   <Head>
   <link rel="preconnect" href="https://fonts.googleapis.com"></link>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin></link>

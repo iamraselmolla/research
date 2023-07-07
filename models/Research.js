@@ -5,7 +5,8 @@ const ResearchSchema = new Schema(
         {
             file: {
                 type: String,
-                status: "pending",
+                required: true
+                
             },
             title:{
                 type: String,
@@ -16,10 +17,17 @@ const ResearchSchema = new Schema(
             },
             user: {
                 type: Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'User',
+                required: true
+              },
+              status: {
+                type: String,
+                default: 'pending',
+                enum: ['pending', 'approved', 'rejected'],
+                required: true
               }
 
-        }
+        },
     ],
     {
         timestamps: true

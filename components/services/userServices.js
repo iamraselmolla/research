@@ -12,12 +12,16 @@ const BASE_URL={
     reserchPaper:'/api/addresearch',
     login: '/api/login',
     verifyConference : '/api/verifyConference',
+    userResearch: '/api/userResearches',
   }
-// const cloudinaryAPILink = "https://api.cloudinary.com/v1_1/iamraselmolla/image/upload";
+
 
 // export function submitResearchFile (data) {
 //   return http.post(cloudinaryAPILink, data)
 // }
+export function getUserResearchFile (){
+  return http.get(BASE_URL.userResearch)
+}
 export function verifyConferenceByAdmin(id){
   return http.put(BASE_URL.verifyConference, id)
 }

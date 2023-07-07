@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { fetchUserDetails } from "../services/userServices";
+import { fetchUserDetails, getUserResearchFile } from "../services/userServices";
 import { userActions } from "./userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 let logoutTimer;
 const AuthContext = React.createContext({
   token: "",
@@ -36,6 +37,8 @@ export const AuthContextProvider = (props) => {
       try {
         const response = await fetchUserDetails();
         dispatch(userActions.setUserDetails(response.data))
+        const response2 = await getUserResearchFile()
+        dispatch(userActions.setUserResearchs(response2.data))
       }
       catch (err) {
         console.log(err);

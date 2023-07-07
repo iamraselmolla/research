@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
 import { toast } from 'react-toastify';
 import { CircularProgress, IconButton } from '@mui/material';
-import { cloudinaryAPILink, verificationFile, verificationImage } from '../services/userServices';
+import { verificationFile, verificationImage } from '../services/userServices';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 
@@ -18,7 +18,6 @@ const Verification = () => {
   const [loading, setLoading] = useState(false);
   const [FileUploading, setFileUploading] = useState(false)
   const user=useSelector(state=>state.user.user);
-  console.log(user)
 
   const handleFileUpload = async () => {
     if (!file) {
@@ -29,18 +28,17 @@ const Verification = () => {
     setFileUploading(true)
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'ml_default');
+    formData.append('upload_preset', 'research');
     formData.append('cloud_name', 'iamraselmolla');
     try {
       const response = await axios.post(
-        cloudinaryAPILink,
+        "https://api.cloudinary.com/v1_1/iamraselmolla/image/upload",
         formData
       );
 
       if (response.data.url) {
         const result = await verificationFile({
-          verification: response.data.url,
-          localid,
+          verification: response.data.url
         }
         );
 
@@ -71,16 +69,15 @@ const Verification = () => {
     }
     try {
       formData.append('file', image);
-      formData.append("upload_preset", "ml_default");
+      formData.append("upload_preset", "research");
       formData.append("cloud_name", "iamraselmolla");
-      const response = await axios.post(cloudinaryAPILink,
+      const response = await axios.post("https://api.cloudinary.com/v1_1/iamraselmolla/image/upload",
         formData
       );
       if (response.data.url) {
         const result = await verificationImage(
           {
-            verification: response.data.url,
-            localid
+            verification: response.data.url
           });
         if (result.status === 200) {
           toast.success("Verification Image added successfully");
@@ -89,7 +86,7 @@ const Verification = () => {
 
       }
     }
-    catch (err) {
+    catch (error) {
       setLoading(false)
       console.error('Error during upload:', error);
       toast.error('An error occurred during file upload.');

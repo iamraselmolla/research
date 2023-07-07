@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { assets } from '../assets';
 
 const FacultyCard = ({ item }) => {
-    console.log(item)
 
     return (
         <div className='bg-green-400 hover:bg-primary hover:text-white hover:cursor-pointer rounded-lg shadow-sm p-8 flex flex-col gap-4'>

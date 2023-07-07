@@ -1,6 +1,7 @@
 import dbConnect from "../../utils/dbConnect";
 import User from "../../models/User";
 import { hashPassGenerate } from "../../utils/bcrypt";
+import { isStudent } from "../../middlewares/user";
 
 export default async function signup(req, res) {
     switch (req.method) {
@@ -8,30 +9,31 @@ export default async function signup(req, res) {
             "PUT":
             {
                 try {
-                    await dbConnect();
-                    const { verification, localid } = req.body;
-                    const userFound = await User.findOne({ _id: localid });
+                    isStudent(req, res, async (req, res, next, decoded) => {
+                        await dbConnect();
+                        const id = decoded.id
+                        const { verification } = req.body;
+                        const userFound = await User.findOne({ _id: id });
 
-                    if (userFound) {
-                        if (req.query.type === "file") {
-                            userFound.verification.file = verification;
+                        if (userFound) {
+                            if (req.query.type === "file") {
+                                userFound.verification.file = verification;
 
-                            // Save the updated user
-                            await userFound.save();
+                                // Save the updated user
+                                await userFound.save();
 
-                            return res.status(200).json({ message: "User verification added successfully", data: userFound });
-                        } else {
-                            userFound.verification.img = verification;
+                                return res.status(200).json({ message: "User verification added successfully", data: userFound });
+                            } else {
+                                userFound.verification.img = verification;
 
-                            // Save the updated user
-                            await userFound.save();
+                                // Save the updated user
+                                await userFound.save();
 
-                            return res.status(200).json({ message: "User verification added successfully", data: userFound });
+                                return res.status(200).json({ message: "User verification added successfully", data: userFound });
+                            }
                         }
-                    } else {
-                    }
+                    })
 
-                    // return res.status(200).json({ message: "User Created Successfully", data: result });
 
                 }
                 catch (err) {
@@ -41,6 +43,7 @@ export default async function signup(req, res) {
                     });
                 }
             }
+            break;
         default:
             return res.status(500).json({ message: "API NOT FOUND" })
 
