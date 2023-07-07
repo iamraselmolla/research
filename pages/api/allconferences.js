@@ -9,7 +9,7 @@ export default async function getAllConferences(req, res) {
                 try {
                     // isAdmin(req, res, async (req,res,next,decoded) => {
                         await dbConnect();
-                        const allConferences = await Conference.find();
+                        const allConferences = await Conference.find({status: "approved"});
 
                         return res.status(200).json(allConferences)
                     // })

@@ -35,11 +35,11 @@ const ConferenceSchema = new Schema({
     committeeMembers: [String],
   },
 
-    speakers: [{
-      name: String,
-      affiliation: String,
-      bio: String
-    }],
+  speakers: [{
+    name: String,
+    affiliation: String,
+    bio: String
+  }],
   registrationInfo: {
     registrationOpenDate: Date,
     registrationCloseDate: Date,
@@ -50,9 +50,9 @@ const ConferenceSchema = new Schema({
     type: Boolean,
     default: false
   },
-  status:{
+  status: {
     type: String,
-    enum: ['pending','approved','rejected'],
+    enum: ['pending', 'approved', 'rejected'],
 
   },
   createdAt: {
@@ -66,7 +66,7 @@ const ConferenceSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-}
+  }
 })
 
 export default mongoose.models.Conference || mongoose.model('Conference', ConferenceSchema);

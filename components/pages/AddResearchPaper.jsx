@@ -11,8 +11,8 @@ import { useSelector } from 'react-redux';
 
 const AddResearchPaper = () => {
   const user=useSelector(state=>state.user.user);
-  console.log(user.research)
-  const { localid } = useContext(AuthContext)
+  console.log(user?.research);
+  const { localid } = useContext(AuthContext);
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [file, setFile] = useState(null);
@@ -48,7 +48,7 @@ const AddResearchPaper = () => {
         // }
 
         if (result.status === 200) {
-          toast.success('Verification File uploaded successfully');
+          toast.success('Verification File uploaded successfully', {position: toast.POSITION.TOP_CENTER});
           setFileUploading(false)
         }
       }
@@ -60,55 +60,55 @@ const AddResearchPaper = () => {
   }
 
 
-  const handleImageUpload = async () => {
-    if (!image) {
-      setLoading(false);
-      toast.error("Please select an Image");
-      return;
-    }
-    setLoading(true)
-    const formData = new FormData();
-    if (!image.type.startsWith("image/")) {
-      setLoading(false)
-      return toast.error("Please select valid type of image");
-    }
-    try {
-      formData.append('file', image);
-      formData.append("upload_preset", "ml_default");
-      formData.append("cloud_name", "iamraselmolla");
-      const response = await axios.post(cloudinaryAPILink,
-        formData
-      );
-      if (response.data.url) {
-        const result = await researchPaper(
-          {
-            verification: response.data.url,
-            localid
-          });
-        if (result.status === 200) {
-          toast.success("Research Paper added successfully");
-          setLoading(false)
-        }
+  // const handleImageUpload = async () => {
+  //   if (!image) {
+  //     setLoading(false);
+  //     toast.error("Please select an Image");
+  //     return;
+  //   }
+  //   setLoading(true)
+  //   const formData = new FormData();
+  //   if (!image.type.startsWith("image/")) {
+  //     setLoading(false)
+  //     return toast.error("Please select valid type of image");
+  //   }
+  //   try {
+  //     formData.append('file', image);
+  //     formData.append("upload_preset", "ml_default");
+  //     formData.append("cloud_name", "iamraselmolla");
+  //     const response = await axios.post(cloudinaryAPILink,
+  //       formData
+  //     );
+  //     if (response.data.url) {
+  //       const result = await researchPaper(
+  //         {
+  //           verification: response.data.url,
+  //           localid
+  //         });
+  //       if (result.status === 200) {
+  //         toast.success("Research Paper added successfully");
+  //         setLoading(false)
+  //       }
 
-      }
-    }
-    catch (err) {
-      setLoading(false)
-      console.error('Error during upload:', error);
-      toast.error('An error occurred during file upload.');
-    }
+  //     }
+  //   }
+  //   catch (err) {
+  //     setLoading(false)
+  //     console.error('Error during upload:', error);
+  //     toast.error('An error occurred during file upload.');
+  //   }
 
-  }
-  const onSelectImage = async (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setImage(undefined)
-      return;
-    }
-    e.preventDefault()
-    // console.log(e.target.files[0])
-    setImage(e.target.files[0]);
+  // }
+  // const onSelectImage = async (e) => {
+  //   if (!e.target.files || e.target.files.length === 0) {
+  //     setImage(undefined)
+  //     return;
+  //   }
+  //   e.preventDefault()
+  //   // console.log(e.target.files[0])
+  //   setImage(e.target.files[0]);
 
-  }
+  // }
   const handleFileSelection = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setFile(null);

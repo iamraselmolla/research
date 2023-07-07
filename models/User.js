@@ -9,13 +9,13 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true,
-        select:false
+        select: false
     },
     basicInfo: {
         firstName: {
             type: String,
             required: true,
-           
+
         },
         lastName: {
             type: String,
@@ -74,18 +74,18 @@ const UserSchema = new Schema({
             status: "pending"
         }
     },
-    research: [
-        {
-            file: {
-                type: String,
-                status: "pending",
-            },
-            img: {
-                type: String,
-                status: "pending"
-            }
-        }
-    ],
+    // research: [
+    //     {
+    //         file: {
+    //             type: String,
+    //             status: "pending",
+    //         },
+    //         img: {
+    //             type: String,
+    //             status: "pending"
+    //         }
+    //     }
+    // ],
 
 },
     {

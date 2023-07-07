@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import AllConferences2 from '../../components/pages/AllConferences2';
+import AllConferenceHome from '../../components/pages/AllConferenceHome';
 
 const index = () => {
     
@@ -8,7 +9,7 @@ const index = () => {
         <>
            
             <Head>
-                <title>Research - All Conferences</title>
+                <title>Research - Conferences</title>
                 <meta charSet="utf-8" />
                 <link rel="icon" href='https://res.cloudinary.com/da75fckow/image/upload/v1684919760/sikka-warehouse/logo_e3zr7m.png' />
                 <meta property="og:locale" content="en_US" />
@@ -26,7 +27,8 @@ const index = () => {
                 <meta property="og:description" content="research_description" />
                 <meta property="og:site_name" content="Research" />
             </Head>
-            <AllConferences2></AllConferences2>
+            {/* <AllConferences2></AllConferences2> */}
+            <AllConferenceHome></AllConferenceHome>
         </>
     );
 };
