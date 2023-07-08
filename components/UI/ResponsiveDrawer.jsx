@@ -66,7 +66,7 @@ export default function ResponsiveDrawer() {
       subLinks: [
         { nav: "Dashboard", link: "/dashboard" },
         { nav: "All Users", link: "/dashboard/allusers" },
-        { nav: "All Conferences", link: "/dashboard/all-conferences" },
+        { nav: "All Conferences", link: "/dashboard/conferences" },
         { nav: "Add Conference", link: "/dashboard/add-conference" },
         { nav: "Personal Details", link: "/dashboard/personal-details" },
       ],
@@ -229,7 +229,7 @@ export default function ResponsiveDrawer() {
           </ListItemButton>
         </ListItem>
         <ListItem>
-          <ListItemButton href="/all-faculty">
+          <ListItemButton href="/faculties">
             <ListItemIcon>
               <Grade/>
             </ListItemIcon>
@@ -369,10 +369,10 @@ export default function ResponsiveDrawer() {
               <Link className="hover:underline" href="/">
                 HOME
               </Link>
-              <Link className="hover:underline" href="/all-conferences">
+              <Link className="hover:underline" href="/conferences">
                 ALL CONFERENCES
               </Link>
-              <Link className="hover:underline" href="/all-conferences">
+              <Link className="hover:underline" href="/faculties">
                 ALL FACULTY
               </Link>
               <div className="group/parent">
@@ -400,7 +400,7 @@ export default function ResponsiveDrawer() {
                     Add Conference
                   </Link>
                   <Link
-                    href="/dashboard/all-conferences"
+                    href="/dashboard/conferences"
                     className="p-2 hover:bg-secondary hover:text-white w-full"
                   >
                     All Conferences
