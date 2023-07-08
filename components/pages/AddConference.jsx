@@ -97,13 +97,17 @@ const AddConference = () => {
             if (result) {
                 toast.success('Conference Created successfully!');
                 resetForm({ values: '' })
-                setLoading(false)
             }
         }
         catch (error) {
-            console.log(error);
+            console.log(error.response.data.error)
+            const message=error.response.data.error || "Something went wrong";
+            toast.error(message)
+        }
+        finally{
             setLoading(false)
         }
+
     }
 
 

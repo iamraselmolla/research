@@ -32,7 +32,26 @@ export const  isAdmin=(req, res, next)=> {
         next(req,res,next,decoded);
       }
       else{
-        return res.status(401).json('You are not an admin');
+        return res.status(401).json({error:'Unauthorized'});
+      }
+    }
+  })
+
+}
+
+export const  isFaculty=(req, res, next)=> {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+  jwt.verify(token,secretKey,(err,decoded)=>{
+    if(err){
+      return res.status(401).json({ error: err });
+    }
+    else{
+      if(decoded.role==='faculty'){
+        next(req,res,next,decoded);
+      }
+      else{
+        return res.status(401).json({error:'Unauthorized'});
       }
     }
   })

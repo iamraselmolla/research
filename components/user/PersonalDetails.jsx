@@ -59,7 +59,6 @@ const PersonalDetails = () => {
       }
     ]
   }
-console.log(user)
   useEffect(()=>{
     if(user?.basicInfo?.firstName){
     setFetchedValues({

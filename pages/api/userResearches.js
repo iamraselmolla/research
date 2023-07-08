@@ -1,4 +1,4 @@
-import { isStudent } from "../../middlewares/user";
+import { isAdmin, isStudent } from "../../middlewares/user";
 import Research from "../../models/Research";
 import dbConnect from "../../utils/dbConnect";
 

@@ -16,6 +16,7 @@ const AllConferences = () => {
       try {
         const allConferences = await getAllConferences();
         setAllConference(allConferences.data)
+        console.log(allConference)
 
       }
       catch (err) {

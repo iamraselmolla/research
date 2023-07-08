@@ -7,8 +7,9 @@ import AuthContext from '../store/AuthContext';
 import { toast } from 'react-toastify';
 import { CircularProgress, IconButton } from '@mui/material';
 import { addResearchPaperFile } from '../services/userServices';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ResearchCard from '../UI/ResearchCard';
+import { userActions } from '../store/userSlice';
 
 const AddResearchPaper = () => {
   const user = useSelector(state => state.user.user);
@@ -21,6 +22,7 @@ const AddResearchPaper = () => {
   const [FileUploading, setFileUploading] = useState(false)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const dispatch=useDispatch();
 
   const handleFileUpload = async (e) => {
     e.preventDefault()
@@ -59,6 +61,7 @@ const AddResearchPaper = () => {
           setDescription("");
           setFile(null)
           toast.success("Research paper submitted successfully");
+          dispatch(userActions.refreshDetails());
           setFileUploading(false)
         }
       }
@@ -169,7 +172,7 @@ const AddResearchPaper = () => {
               </button>
               
             </div> */}
-        <div className='mb-8 pt-7'>
+        <div className='py-4'>
           <h1 className="font-bold text-center text-4xl text-black ">
             Add Research paper
           </h1>
@@ -194,8 +197,8 @@ const AddResearchPaper = () => {
 
               </div>
             </div>
-            <div>
-              <div className='bg-blue-200 border border-gray-300 dark:border-gray-600 flex items-center justify-center min-h-[14rem] rounded-md'>
+            <div className='flex gap-2 flex-col'>
+              <div className='bg-blue-200 border border-gray-300 dark:border-gray-600 flex items-center justify-center min-h-[14rem] rounded-md '>
                 <label className='cursor-pointer w-full h-full flex gap-5 justify-center items-center'>
                   <input type='file' className='hidden ' onChange={handleFileSelection} />
 
@@ -206,7 +209,7 @@ const AddResearchPaper = () => {
               </div>
 
               {file &&
-                <div className='flex bg-green-500 items-center pl-1 justify-between'>
+                <div className='flex bg-green-500 items-center p-1 justify-between'>
                   <div className='flex gap-2'>
                     <div className='h-6 w-6 flex flex-col items-center justify-center bg-white rounded-full'><Check sx={{ color: 'green' }} /></div>
                     {file.name}
@@ -225,7 +228,7 @@ const AddResearchPaper = () => {
           </button>
         </form>
 
-        <div className="research-papers mt-10">
+        <div className="research-papers mt-10 flex flex-col gap-2 ">
          {allResearch && allResearch.length>0 && 
           allResearch?.map((research, index) => <ResearchCard data={research} index={index}></ResearchCard>)}
 

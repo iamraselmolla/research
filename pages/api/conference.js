@@ -1,4 +1,4 @@
-import { isAdmin } from "../../middlewares/user";
+import { isFaculty } from "../../middlewares/user";
 import Conference from "../../models/Conference";
 import dbConnect from "../../utils/dbConnect";
 
@@ -10,7 +10,7 @@ export default async function conferenceCreate(req, res) {
             {
                 try {
 
-                    isAdmin(req, res, async () => {
+                    isFaculty(req, res, async () => {
                         await dbConnect();
                         const { organizationName, organizationAddress, organizationCity, organizationState, organizationCountry, conferenceName, conferenceLocation, conferenceDescription, conferenceDate, startTime, endTime, conferenceType, conferenceTheme, committeeChair, committeeMembers, speakers, registrationOpenDate, registrationCloseDate, registrationFee, registrationLink, userId } = req.body;
 
@@ -31,7 +31,7 @@ export default async function conferenceCreate(req, res) {
                         const result = await newEvent.save();
 
 
-                        return res.status(200).json({ message: "Conference Created Successfully", data: result });
+                        return res.status(200).json({ message: "Conference Submitted Successfully", data: result });
                     })
 
                 }
