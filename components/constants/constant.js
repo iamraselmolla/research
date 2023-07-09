@@ -8,7 +8,8 @@ export const ALL_LINKS={
     signupStudent:'/signup/student',
     verification:'/verification',
     addResearchPaper:'/add-research-paper',
-    scheduler:'/scheduler'
+    scheduler:'/scheduler',
+    allResearches : '/all-researches'
 }
 
 export const SITE_INFO={

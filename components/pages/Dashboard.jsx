@@ -51,6 +51,12 @@ export const menuItems = {
     icon: <Videocam />,
     showAlways: false,
   },
+  allResearchesPapers:{
+    name: "All Researches",
+    pageLink: ALL_LINKS.dashboard+ALL_LINKS.allResearches,
+    icon: <Videocam />,
+    showAlways: false,
+  },
   verification:{
     name: "Verification",
     pageLink: ALL_LINKS.dashboard+ALL_LINKS.verification,
@@ -95,7 +101,7 @@ const Dashboard = ({children}) => {
     menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.verification,menuItems.addResearchPaper];
   }
   else if(authCtx.role==='admin'){
-    menu=[menuItems.dashboard,menuItems.allUsers,menuItems.allConferences];
+    menu=[menuItems.dashboard,menuItems.allUsers,menuItems.allConferences, menuItems.allResearchesPapers];
   }else{
 
   }

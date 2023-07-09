@@ -13,14 +13,17 @@ const BASE_URL={
     login: '/api/login',
     verifyConference : '/api/verifyConference',
     userResearch: '/api/userResearches',
-    researchReference : '/api/addResearchPaperReference'
+    researchReference : '/api/addResearchPaperReference',
+    getAllResearches : '/api/allResearchPapers'
   }
 
 
 // export function submitResearchFile (data) {
 //   return http.post(cloudinaryAPILink, data)
 // }
-
+export function fetchAllResearchs (){
+  return http.get(BASE_URL.getAllResearches);
+}
 export function addResearchPaperRef (id){
   return http.put(BASE_URL.researchReference + `?id=${id}`);
 }
