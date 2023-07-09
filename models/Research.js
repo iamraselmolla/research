@@ -25,6 +25,9 @@ const ResearchSchema = new Schema(
                 default: 'pending',
                 enum: ['pending', 'approved', 'rejected'],
                 required: true
+              },
+              remarks: {
+                String
               }
 
         },

@@ -7,12 +7,21 @@ export default async function getAllConferences(req, res) {
         case "GET":
             {
                 try {
-                    // isAdmin(req, res, async (req,res,next,decoded) => {
-                        await dbConnect();
-                        const allConferences = await Conference.find({status: "approved"});
+                    let allConference;
+                    await dbConnect();
+                    const userType = req.query.user;
+                    if (userType === 'user') {
 
-                        return res.status(200).json(allConferences)
-                    // })
+                        allConference = await Conference.find({ status: "approved" });
+                        return res.status(200).json(allConference)
+                    }
+                    if (userType === 'admin') {
+                        isAdmin(req, res, async (req, res, next, decoded) => {
+                            allConference = await Conference.find();
+                            return res.status(200).json(allConference)
+                        })
+                    }
+
                 }
                 catch (err) {
                     return res.status(500).json({

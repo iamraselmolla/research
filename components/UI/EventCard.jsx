@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { verifyConferenceByAdmin } from "../services/userServices";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../store/userSlice";
 const EventCard = ({
     title,
     id,
@@ -21,11 +23,13 @@ const EventCard = ({
     status
 }) => {
     const [approved, setApproved] = useState(status === 'approved' ? true : false);
+    const dispatch = useDispatch();
     const handleChange = async () => {
         try{
             if(status !== 'approved'){
                 const result = await verifyConferenceByAdmin({id});
                 if(result){
+                    dispatch(userActions.refreshDetails());
                     toast.success("Approved");
                     setApproved(true);
                 }else{

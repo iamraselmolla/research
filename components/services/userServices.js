@@ -34,8 +34,8 @@ export function fetchUserDetails() {
 export function fetchAllFaculty() {
   return http.get(BASE_URL.getAllFaculty);
 }
-export function getAllConferences (){
-  return http.get(BASE_URL.allConferences)
+export function getAllConferences (userType){
+  return http.get(BASE_URL.allConferences + `?user=${userType}`)
 }
 export function createUser(data){
   return http.post(BASE_URL.createUser, data)

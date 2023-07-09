@@ -6,16 +6,20 @@ import { Container } from '@mui/system';
 import { getAllConferences } from '../services/userServices';
 import { assets } from '../assets';
 import EventCard from '../UI/EventCard';
+import { useSelector } from 'react-redux';
 const AllConferenceHome = () => {
     const [allConference, setAllConference] = useState(null);
     const [error, setError] = useState(null);
     const [fetchEnd, setFetchEnd] = useState(false)
+    const refresh = useSelector(state => state.user.refresh)
+
 
 
     useEffect(() => {
         const getUsers = async () => {
             try {
-                const allConferences = await getAllConferences();
+                // You have to provide either admin or user in the getAllConferences function or api will break
+                const allConferences = await getAllConferences("user");
                 setAllConference(allConferences.data);
                 setFetchEnd(true)
 
@@ -28,7 +32,7 @@ const AllConferenceHome = () => {
 
         }
         getUsers();
-    }, [])
+    }, [refresh])
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -49,7 +53,7 @@ const AllConferenceHome = () => {
                     {fetchEnd && !allConference.length > 0 &&
                         <div className="banner bg-black">
                             <h2 className="h2 py-20 text-white text-center font-bold text-4xl">
-                                "No Conference Found"
+                                No Conference Found
                             </h2>
                         </div>
                     }

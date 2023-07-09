@@ -5,18 +5,20 @@ import { useEffect } from "react";
 import { getAllConferences } from "../services/userServices";
 import EventCard from "../UI/EventCard";
 import { CircularProgress } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const AllConferences = () => {
   const [allConference, setAllConference] = useState(null);
   const [error, setError] = useState(null)
+  const refresh = useSelector(state => state.user.refresh);
+
 
 
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const allConferences = await getAllConferences();
-        setAllConference(allConferences.data)
-        console.log(allConference)
+        const allConferences = await getAllConferences("admin");
+        setAllConference(allConferences?.data)
 
       }
       catch (err) {
@@ -26,7 +28,7 @@ const AllConferences = () => {
 
     }
     getUsers();
-  }, [])
+  }, [refresh])
 
 
   // const eventList = [

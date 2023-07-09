@@ -57,3 +57,21 @@ export const  isFaculty=(req, res, next)=> {
   })
 
 }
+export const  isUser=(req, res, next)=> {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+  jwt.verify(token,secretKey,(err,decoded)=>{
+    if(err){
+      return res.status(401).json({ error: err });
+    }
+    else{
+      if(decoded.role==='faculty' || 'admin' || 'student'){
+        next(req,res,next,decoded);
+      }
+      else{
+        return res.status(401).json({error:'Unauthorized'});
+      }
+    }
+  })
+
+}

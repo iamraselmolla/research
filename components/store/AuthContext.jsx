@@ -29,7 +29,7 @@ export const AuthContextProvider = (props) => {
   const [localid, setLocalId] = useState(initialId);
   const [role, setRole] = useState(initialRole);
   const [isLoggedIn, setLoggedIn] = useState(!!token);
-  const refresh=useSelector(state=>state.user.refresh)
+  const refresh = useSelector(state => state.user.refresh)
 
 
   useEffect(() => {
@@ -37,8 +37,11 @@ export const AuthContextProvider = (props) => {
       try {
         const response = await fetchUserDetails();
         dispatch(userActions.setUserDetails(response.data))
-        const response2 = await getUserResearchFile()
-        dispatch(userActions.setUserResearchs(response2.data))
+
+        if (role === 'student') {
+          const response2 = await getUserResearchFile()
+          dispatch(userActions.setUserResearchs(response2.data))
+        }
       }
       catch (err) {
         console.log(err);
@@ -47,7 +50,7 @@ export const AuthContextProvider = (props) => {
 
     if (isLoggedIn) fetchData();
 
-  }, [isLoggedIn,refresh])
+  }, [isLoggedIn, refresh])
 
   const loginHandler = (localid, token, role) => {
     setToken(token);
