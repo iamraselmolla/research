@@ -27,7 +27,7 @@ const ResearchSchema = new Schema(
                 required: true
               },
               remarks: {
-                String
+                type: String
               }
 
         },

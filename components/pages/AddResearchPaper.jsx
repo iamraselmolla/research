@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
-import {  Check, CloudDone, Delete, UploadFile } from '@mui/icons-material'
+import { Check, CloudDone, Delete, UploadFile } from '@mui/icons-material'
 import axios from 'axios';
 import { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
 import { toast } from 'react-toastify';
 import { CircularProgress, IconButton } from '@mui/material';
-import { addResearchPaperFile } from '../services/userServices';
+import { addResearchPaperFile, addResearchPaperRef } from '../services/userServices';
 import { useDispatch, useSelector } from 'react-redux';
 import ResearchCard from '../UI/ResearchCard';
 import { userActions } from '../store/userSlice';
@@ -19,10 +19,12 @@ const AddResearchPaper = () => {
   const [imagePreview, setImagePreview] = useState("");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [researchId, setResearchId] = useState(null)
+
   const [FileUploading, setFileUploading] = useState(false)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const handleFileUpload = async (e) => {
     e.preventDefault()
@@ -57,12 +59,18 @@ const AddResearchPaper = () => {
 
 
         if (result.status === 200) {
-          setTitle("");
-          setDescription("");
-          setFile(null)
-          toast.success("Research paper submitted successfully");
-          dispatch(userActions.refreshDetails());
-          setFileUploading(false)
+          if (result.data.saveResearch._id) {
+            const setResearchReference = await addResearchPaperRef(result.data.saveResearch._id)
+            if (setResearchReference.status === 200) {
+              setTitle("");
+              setDescription("");
+              setFile(null)             
+              toast.success("Research paper submitted successfully");
+              dispatch(userActions.refreshDetails());
+              setFileUploading(false)
+            }
+
+          }
         }
       }
     } catch (error) {
@@ -181,7 +189,7 @@ const AddResearchPaper = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <div className="mb-4">
-               
+
                 <input value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   className="bg-blue-200 block border border-gray-300 dark:border-gray-600 font-bold p-2.5 rounded-lg text-gray-900 text-sm w-full" name="title"
@@ -189,7 +197,7 @@ const AddResearchPaper = () => {
                   placeholder="Title" />
               </div>
               <div className="mb-4">
-                
+
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -229,8 +237,8 @@ const AddResearchPaper = () => {
         </form>
 
         <div className="research-papers mt-10 flex flex-col gap-2 ">
-         {allResearch && allResearch.length>0 && 
-          allResearch?.map((research, index) => <ResearchCard data={research} index={index}></ResearchCard>)}
+          {allResearch && allResearch.length > 0 &&
+            allResearch?.map((research, index) => <ResearchCard key={research?._id} data={research} index={index}></ResearchCard>)}
 
 
         </div>

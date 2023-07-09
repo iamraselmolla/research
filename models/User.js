@@ -74,18 +74,12 @@ const UserSchema = new Schema({
             status: "pending"
         }
     },
-    // research: [
-    //     {
-    //         file: {
-    //             type: String,
-    //             status: "pending",
-    //         },
-    //         img: {
-    //             type: String,
-    //             status: "pending"
-    //         }
-    //     }
-    // ],
+    research: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Research',
+        }
+    ],
 
 },
     {

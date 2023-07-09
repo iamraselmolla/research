@@ -11,17 +11,17 @@ export default async function addResearchPaper(req, res) {
                         const id = decoded.id
                         await dbConnect();
                         const { title, description, file } = req.body
-                        const findUser = await Research({ title, description, file, user: id })
-                        if (findUser) {
+                        const saveResearch = await Research({ title, description, file, user: id })
+                        if (saveResearch) {
                             // const newResearchPaper = {
                             //     file: fileLink,
                             //     status: 'pending'
                             //   };
                             //   findUser.research.push(newResearchPaper);
 
-                            await findUser.save();
+                            await saveResearch.save();
 
-                            return res.status(200).json({ message: "Research file added successfully" });
+                            return res.status(200).json({ message: "Research file added successfully", saveResearch });
 
                         }
                     })

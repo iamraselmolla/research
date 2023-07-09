@@ -1,6 +1,5 @@
 import User from "../../models/User";
 import dbConnect from "../../utils/dbConnect";
-import { toast } from "react-toastify";
 
 export default async function personalDetails(req, res) {
     switch (req.method) {
