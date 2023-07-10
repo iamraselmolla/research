@@ -10,6 +10,7 @@ const ResearchModalCard = ({ showModal, data, setShowModal }) => {
         if (!remarks) {
             return toast.error("Please add a remarks for this research paper")
         }
+        
         setShowModal(false);
 
     }
