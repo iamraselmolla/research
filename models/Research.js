@@ -36,4 +36,14 @@ const ResearchSchema = new Schema(
         timestamps: true
     }
 );
+
+ResearchSchema.virtual('userData', {
+    ref: 'User',
+    localField: 'user',
+    foreignField: '_id',
+    justOne: true,
+  });
+  
+  ResearchSchema.set('toObject', { virtuals: true });
+  ResearchSchema.set('toJSON', { virtuals: true });
 export default mongoose.models.Research || mongoose.model("Research", ResearchSchema)

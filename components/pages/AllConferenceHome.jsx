@@ -58,7 +58,7 @@ const AllConferenceHome = () => {
                     <ResponsiveDrawer />
                     {fetchEnd && !allConference.length > 0 &&
                         <div className="banner">
-                            <h2 className="h2 py-20 text-black text-center min-h-[600px] font-bold text-4xl">
+                            <h2 className="h2 py-20 flex justify-center items-center text-white text-center min-h-[600px] font-bold text-4xl">
                                 No Conference Found
                             </h2>
                         </div>
