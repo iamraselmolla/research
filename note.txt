@@ -1,2 +1,4 @@
 1. after uploading any research then another file is not adding
 2. need to populate user data so can we display uploader name and others info in the research
+3. need to change the cloudinary link and preset
+4. need to change the faculty image in the faculty details page

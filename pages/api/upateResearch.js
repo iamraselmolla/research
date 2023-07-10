@@ -9,8 +9,19 @@ export default async function updateResearchPaper(req, res){
             {
                 try{
                  await dbConnect()
+                 const {id, status} = req.query;
+                 const {remarks} = req.body;
+                //  if(status !== 'approved' || 'rejected'){
+                //    return console.log(status)
+                //  }
+                
                  isAdmin(req, res, async(req, res, next, decoded) => {
-                    const findResearch = await Research.findOneAndUpdate()
+                    const updateStatus = await Research.findByIdAndUpdate(id, {status: status, remarks: remarks},{ new: true, runValidators: true });
+
+                    console.log(updateStatus)
+                    return res.status(200).json({ message: `Research File has been ${status}`, updateStatus });
+
+                    
                  })
                 }
                 catch (err) {
