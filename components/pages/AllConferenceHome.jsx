@@ -7,11 +7,13 @@ import { getAllConferences } from '../services/userServices';
 import { assets } from '../assets';
 import EventCard from '../UI/EventCard';
 import { useSelector } from 'react-redux';
+import Spinner from '../UI/Spinner';
 const AllConferenceHome = () => {
-    const [allConference, setAllConference] = useState(null);
+    const [allConference, setAllConference] = useState([]);
     const [error, setError] = useState(null);
     const [fetchEnd, setFetchEnd] = useState(false)
     const refresh = useSelector(state => state.user.refresh)
+    const [dataLoading, setDataLoading] = useState(false);
 
 
 
@@ -29,10 +31,14 @@ const AllConferenceHome = () => {
                 setFetchEnd(true)
                 setError("No data found")
             }
+            finally {
+                setDataLoading(false);
+            }
 
         }
         getUsers();
     }, [refresh])
+
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -51,15 +57,20 @@ const AllConferenceHome = () => {
                 <>
                     <ResponsiveDrawer />
                     {fetchEnd && !allConference.length > 0 &&
-                        <div className="banner bg-black">
-                            <h2 className="h2 py-20 text-white text-center font-bold text-4xl">
+                        <div className="banner">
+                            <h2 className="h2 py-20 text-black text-center min-h-[600px] font-bold text-4xl">
                                 No Conference Found
                             </h2>
                         </div>
                     }
                     <div className='pt-10 bg-white text-black '>
                         <Container>
-                            {allConference &&
+                            {dataLoading &&
+                             <div className='flex flex-col justify-center items-center h-[600px]'>
+                                <Spinner size={60} />
+                            </div>
+                            }
+                            {allConference && !dataLoading &&
                                 <div className="container py-8 mx-auto px-4">
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                                         {allConference && allConference?.map((conference, index) => (
