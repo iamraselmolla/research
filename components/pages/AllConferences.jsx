@@ -11,6 +11,7 @@ const AllConferences = () => {
   const [allConference, setAllConference] = useState(null);
   const [error, setError] = useState(null)
   const refresh = useSelector(state => state.user.refresh);
+  const [fetchEnd, setFetchEnd] = useState(false)
 
 
 
@@ -19,11 +20,13 @@ const AllConferences = () => {
       try {
         const allConferences = await getAllConferences("admin");
         setAllConference(allConferences?.data)
+        setFetchEnd(true)
 
       }
       catch (err) {
-        setAllConference([]);
+        setAllConference(null);
         setError("No data found")
+        setFetchEnd(true)
       }
 
     }
@@ -69,6 +72,11 @@ const AllConferences = () => {
           <CircularProgress size={50} sx={{ color: 'red' }} />
         </div>
       }
+      {!allConference && fetchEnd && <>
+        <h1 className="text-4xl text-red-500">
+          No Conference Found
+        </h1>
+      </>}
       {
         error && <h1 className="text-red-500 ">
           {error}

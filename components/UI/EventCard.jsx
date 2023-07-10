@@ -5,11 +5,12 @@ import { AccessTimeOutlined, LocationOnOutlined, CheckCircle, NotInterested } fr
 import axios from "axios";
 import { FormControlLabel, Switch } from "@mui/material";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { verifyConferenceByAdmin } from "../services/userServices";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../store/userSlice";
+import AuthContext from "../store/AuthContext";
 const EventCard = ({
     title,
     id,
@@ -24,6 +25,7 @@ const EventCard = ({
 }) => {
     const [approved, setApproved] = useState(status === 'approved' ? true : false);
     const dispatch = useDispatch();
+    const {role} = useContext(AuthContext)
     const handleChange = async () => {
         try{
             if(status !== 'approved'){
@@ -82,9 +84,12 @@ const EventCard = ({
                         Read More
                     </Link>
                 </div>
+                {role === 'admin' && <>
+                
                 <div className="verified-status h-10">
                     <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" /><Switch onChange={handleChange} checked={approved} size="medium" /><CheckCircle className={`${approved ? 'text-green-400' : ''}`} fontSize="small" title="Approved" />
                 </div>
+                </>}
                 <button className="bg-secondary text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90">
                     View
                 </button>
