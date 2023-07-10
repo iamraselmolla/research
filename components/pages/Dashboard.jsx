@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { assets } from "../assets";
 import Image from "next/image";
-import { CalendarMonth, Description, Duo, People, Person, Videocam, WorkspacePremium } from "@mui/icons-material";
+import { CalendarMonth, Description, Duo, People, Person, Videocam, WorkspacePremium, FileOpen } from "@mui/icons-material";
 import { ALL_LINKS } from "../constants/constant";
 import {usePathname} from 'next/navigation'
 import { useSelector } from "react-redux";
@@ -54,7 +54,7 @@ export const menuItems = {
   allResearchesPapers:{
     name: "All Researches",
     pageLink: ALL_LINKS.dashboard+ALL_LINKS.allResearches,
-    icon: <Videocam />,
+    icon: <FileOpen />,
     showAlways: false,
   },
   verification:{
