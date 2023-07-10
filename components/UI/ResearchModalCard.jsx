@@ -1,4 +1,4 @@
-import { Close, OpenInNew } from "@mui/icons-material";
+import { Clear, Close, FilePresentOutlined, OpenInNew, TaskAlt, TrendingFlat } from "@mui/icons-material";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { changeResearchPaperStatus } from "../services/userServices";
@@ -7,12 +7,13 @@ import { userActions } from "../store/userSlice";
 
 const ResearchModalCard = ({ showModal, data, setShowModal }) => {
     const [remarks, setRemarks] = useState(null)
-    const { description, title, file, status, createdAt, _id, user } = data;
+    const { description, title, file, status, createdAt, _id,updatedAt, user, remarks: feedBackRemarks } = data;
     const dispatch = useDispatch()
 
 
     const handleRemarks = (status) => {
-        // if (status === 'approved' || 'rejected') {
+        if (status === 'approved' || status === 'rejected') {
+            console.log(status)
             const handleAsyncAwaitFunc = async () => {
                 if (!remarks) {
                     return toast.error("Please add a remarks for this research paper")
@@ -30,7 +31,9 @@ const ResearchModalCard = ({ showModal, data, setShowModal }) => {
                 setShowModal(false);
             }
             handleAsyncAwaitFunc()
-        // }
+        }else{
+            return toast.warning("Please provide a valid type of status in the handleRemarks function. Only 'approved' and 'rejected' are allowed to use. It's mandatory")
+        }
 
 
     }
@@ -40,10 +43,10 @@ const ResearchModalCard = ({ showModal, data, setShowModal }) => {
             {showModal ? (
                 <>
                     <div
-                        className="bg-blue-200 fixed flex focus:outline-none inset-0 items-center justify-center opacity-80 outline-none overflow-x-hidden overflow-y-auto z-50"
+                        className="bg-blue-200 fixed flex focus:outline-none inset-0 items-center justify-center opacity-95 outline-none overflow-x-hidden overflow-y-auto z-50"
                     >
 
-                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                        <div className="relative md:w-2/3 sm:w-2/3 lg:w-2/3 my-6 mx-auto">
                             <div style={{ top: "-5%", right: "-5%" }} onClick={() => setShowModal(false)} className="bg-red-500 cursor-pointer flex float-right h-12 items-center justify-center absolute right-2 rounded-full text-3xl text-white top-0 w-12 z-10">
                                 <Close></Close>
                             </div>
@@ -75,10 +78,25 @@ const ResearchModalCard = ({ showModal, data, setShowModal }) => {
                                             </button>
                                         </a>
                                     </div>
-                                    <div className="mt-3">
-                                        <p className="font-bold">
-                                            Paper Submitted at: {new Date(createdAt).toLocaleString()}
-                                        </p>
+                                    <div className="mt-20 items-center justify-between flex text-center">
+                                        <div className="font-bold flex justify-center items-center flex-col">
+                                            <div className="w-16 h-16 justify-center items-center flex border-8 border-black rounded-full">
+                                            <FilePresentOutlined fontSize="large" /> 
+                                            </div>
+                                             {new Date(createdAt).toLocaleString()}
+                                        </div>
+                                        <div className="flex justify-center items-center">
+                                            <TrendingFlat fontSize="large"/>
+                                        </div>
+                                       { feedBackRemarks &&  <div className={`font-bold flex flex-col justify-center items-center ${status === 'approved' ? "text-green-500" : (status === 'rejected') ? "text-red-500" : ''}`}>
+                                          
+                                          <div className={`w-16 h-16 justify-center items-center flex border-8 ${status === 'approved' ? 'border-green-600' : status === 'rejected'?
+                                           'border-red-600' : ''} rounded-full`}>
+                                            {status === 'approved'  && <TaskAlt/>}
+                                            {status === 'rejected'  && <Clear fontSize="large" color="error" />}
+                                          </div>
+                                          {new Date(updatedAt).toLocaleString()}
+                                        </div>}
                                     </div>
                                 </div>
                                { status === 'pending' && <div className="px-5">
