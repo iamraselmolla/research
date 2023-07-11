@@ -13,7 +13,7 @@ const userSlice=createSlice({
         setUserDetails:(state,action)=>{
             state.user=action.payload;
         },
-        setUserResearchs: (state, action) => {
+        setUserResearches: (state, action) => {
             state.research=action.payload
         },
         refreshDetails:(state,action)=>{

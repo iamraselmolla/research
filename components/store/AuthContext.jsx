@@ -40,7 +40,7 @@ export const AuthContextProvider = (props) => {
 
         if (role === 'student') {
           const response2 = await getUserResearchFile()
-          dispatch(userActions.setUserResearchs(response2.data))
+          dispatch(userActions.setUserResearches(response2.data))
         }
       }
       catch (err) {

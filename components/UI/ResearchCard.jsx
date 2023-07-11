@@ -8,15 +8,11 @@ import ResearchModal from './ResearchModal';
 
 
 
-const ResearchCard = ({ data, index }) => {
-    const [showModal, setShowModal] = useState(false);
+const ResearchCard = ({ data }) => {
     const { title, description, status, file, createdAt } = data;
     const {role} = useContext(AuthContext)
 
-    const handleModal = () => {
-        setShowModal(true)
-       
-    }
+   
 
 
 
@@ -40,7 +36,7 @@ const ResearchCard = ({ data, index }) => {
                 {role === 'admin' && <>
                     <div className="flex items-center justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
-                        <ResearchModal/>
+                        <ResearchModal data ={data}/>
                     </div>
                 </>}
                 <div className='flex items-center justify-center'>
@@ -50,7 +46,7 @@ const ResearchCard = ({ data, index }) => {
                     <Link target='_blank' download href={file}><OpenInNew ></OpenInNew></Link>
                 </span>
             </div>
-        {showModal && <ResearchModalCard data={data} showModal={showModal} setShowModal={setShowModal}></ResearchModalCard>}
+        {/* {showModal && <ResearchModalCard data={data} showModal={showModal} setShowModal={setShowModal}></ResearchModalCard>} */}
         </div>
 
     );
