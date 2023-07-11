@@ -1,4 +1,4 @@
-import { Clear, Close, FilePresentOutlined, OpenInNew, TaskAlt, TrendingFlat } from "@mui/icons-material";
+import { AccessTime, CalendarMonth, Clear, Close, Done, FilePresentOutlined, OpenInNew, TaskAlt, TrendingFlat } from "@mui/icons-material";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { changeResearchPaperStatus } from "../services/userServices";
@@ -7,10 +7,17 @@ import { userActions } from "../store/userSlice";
 
 const ResearchModalCard = ({ showModal, data, setShowModal }) => {
     const [remarks, setRemarks] = useState(null)
-    const { description, title, file, status, createdAt, _id,updatedAt, user, remarks: feedBackRemarks } = data;
+    const { description, title, file, status, createdAt, _id, updatedAt, user, remarks: feedBackRemarks } = data;
     const dispatch = useDispatch()
 
-
+    const dateofSubmit = new Date(createdAt).toLocaleString().split(",")[0]
+    const timeofSubmit = new Date(createdAt).toLocaleString().split(",")[1]
+    let dateOfStatusChange, timeOfStatusChange
+    if (feedBackRemarks) {
+         dateOfStatusChange = new Date(updatedAt).toLocaleString().split(",")[0]
+         timeOfStatusChange = new Date(updatedAt).toLocaleString().split(",")[1]
+    } 
+    
     const handleRemarks = (status) => {
         if (status === 'approved' || status === 'rejected') {
             console.log(status)
@@ -23,7 +30,7 @@ const ResearchModalCard = ({ showModal, data, setShowModal }) => {
                 }
 
                 const result = await changeResearchPaperStatus(_id, { remarks }, status);
-                if(result.status === 200){
+                if (result.status === 200) {
                     dispatch(userActions.refreshDetails());
                 }
 
@@ -31,7 +38,7 @@ const ResearchModalCard = ({ showModal, data, setShowModal }) => {
                 setShowModal(false);
             }
             handleAsyncAwaitFunc()
-        }else{
+        } else {
             return toast.warning("Please provide a valid type of status in the handleRemarks function. Only 'approved' and 'rejected' are allowed to use. It's mandatory")
         }
 
@@ -78,50 +85,76 @@ const ResearchModalCard = ({ showModal, data, setShowModal }) => {
                                             </button>
                                         </a>
                                     </div>
-                                    <div className="mt-20 items-center justify-between flex text-center">
-                                        <div className="font-bold flex justify-center items-center flex-col">
-                                            <div className="w-16 h-16 justify-center items-center flex border-8 border-black rounded-full">
-                                            <FilePresentOutlined fontSize="large" /> 
-                                            </div>
-                                             {new Date(createdAt).toLocaleString()}
-                                        </div>
-                                        <div className="flex justify-center items-center">
-                                            <TrendingFlat fontSize="large"/>
-                                        </div>
-                                       { feedBackRemarks &&  <div className={`font-bold flex flex-col justify-center items-center ${status === 'approved' ? "text-green-500" : (status === 'rejected') ? "text-red-500" : ''}`}>
-                                          
-                                          <div className={`w-16 h-16 justify-center items-center flex border-8 ${status === 'approved' ? 'border-green-600' : status === 'rejected'?
-                                           'border-red-600' : ''} rounded-full`}>
-                                            {status === 'approved'  && <TaskAlt/>}
-                                            {status === 'rejected'  && <Clear fontSize="large" color="error" />}
-                                          </div>
-                                          {new Date(updatedAt).toLocaleString()}
-                                        </div>}
-                                    </div>
-                                </div>
-                               { status === 'pending' && <div className="px-5">
+                                    {status === 'pending' && <div className=" mt-10">
                                     <h2 className="font-bold">Write Remarks</h2>
                                     <textarea onChange={(e) => setRemarks(e.target.value)} rows={3} className="bg-gray-300 rounded-md w-full"></textarea>
                                 </div>}
+                                    <div className="mt-10 items-center justify-between flex text-center">
+                                        <div className="font-bold flex justify-center items-center flex-col">
+                                            <div className="w-20 h-20 justify-center items-center flex border-8 border-blue-600 rounded-full">
+                                                <FilePresentOutlined className="text-blue-600" fontSize="large" />
+
+                                            </div>
+                                            <h3 className="mt-2 text-2xl">
+                                                Submitted
+                                            </h3>
+                                            <div className="flex mt-3 flex-col text-left">
+                                                <div> <CalendarMonth></CalendarMonth>  {dateofSubmit}</div>
+                                                <div><AccessTime></AccessTime>  {timeofSubmit}</div>
+                                            </div>
+                                        </div>
+                                        {feedBackRemarks && <>
+                                            <div className="flex justify-center items-center">
+                                                <TrendingFlat style={{ fontSize: '100px' }} fontSize="large" />
+                                            </div>
+                                        </>}
+                                        {feedBackRemarks && <div className={`font-bold flex flex-col justify-center items-center ${status === 'approved' ? "text-green-500" : (status === 'rejected') ? "text-red-500" : ''}`}>
+
+                                            <div className={`w-20 h-20 justify-center items-center flex border-8 ${status === 'approved' ? 'border-green-600' : status === 'rejected' ?
+                                                'border-red-600' : ''} rounded-full`}>
+                                                {status === 'approved' && <TaskAlt style={{ fontSize: '100px' }} />}
+                                                {status === 'rejected' && <Clear style={{ fontSize: '100px' }} color="error" />}
+                                            </div>
+                                            <h3 className="mt-2 text-2xl">
+                                                {status === 'approved' ? "Approved" : status === 'rejected' ? 'Rejected' : ''}
+                                            </h3>
+                                            <div className="flex mt-3 flex-col text-left">
+                                                <div> <CalendarMonth></CalendarMonth>  {dateOfStatusChange}</div>
+                                                <div><AccessTime></AccessTime>  {timeOfStatusChange}</div>
+                                            </div>
+                                            
+                                        </div>}
+
+                                        
+                                    </div>
+                                    {feedBackRemarks && <>
+                                            <div className="mt-3 font-bold">
+                                                <p className={`${status === 'approved' ? 'text-green-400' : status === 'rejected' ? 'text-red-500' : ''}`}>
+                                                  Remarks:   {feedBackRemarks}
+                                                </p>
+                                            </div>
+                                        </>}
+                                </div>
+                              
                                 {/*footer*/}
-                                <div className={`flex ${status === 'rejected' && "bg-red-800" } ${status === 'approved' && 'bg-green-600'} items-center justify-between p-6 border-t border-solid border-slate-200 rounded-b`}>
-                                   {status === 'pending' ? <> <button
-                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                <div className={`flex ${status === 'rejected' && "bg-red-800"} ${status === 'approved' && 'bg-green-600'} items-center justify-between p-6 border-t border-solid border-slate-200 rounded-b`}>
+                                    {status === 'pending' ? <> <button
+                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-3 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
                                         onClick={() => handleRemarks("approved")}
                                     >
-                                        ACCEPT
+                                        <Done /> APPROVE
                                     </button>
-                                    <button
-                                        className="background-transparent bg-red-500 duration-150 ease-linear focus:outline-none font-bold mb-1 mr-1 outline-none px-6 py-3  rounded text-sm text-white transition-all uppercase"
-                                        type="button"
-                                        onClick={() => handleRemarks("rejected")}
-                                    >
-                                        REJECT
-                                    </button></> : <>
-                                    
+                                        <button
+                                            className="background-transparent bg-red-500 duration-150 ease-linear focus:outline-none font-bold mb-1 mr-1 outline-none px-3 py-1  rounded text-sm text-white transition-all uppercase"
+                                            type="button"
+                                            onClick={() => handleRemarks("rejected")}
+                                        >
+                                            <Close /> REJECT
+                                        </button></> : <>
+
                                         <span className="text-2xl font-bold text-center w-full text-white">
-                                        {status === 'rejected' ? 'Rejected' : (status === 'approved' ? 'Approved' : '')}
+                                            {status === 'rejected' ? 'Rejected' : (status === 'approved' ? 'Approved' : '')}
                                         </span>
                                     </>}
 
