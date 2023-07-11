@@ -4,6 +4,9 @@ import React, { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
 import ResearchModalCard from './ResearchModalCard';
 import { useState } from 'react';
+import ResearchModal from './ResearchModal';
+
+
 
 const ResearchCard = ({ data, index }) => {
     const [showModal, setShowModal] = useState(false);
@@ -14,6 +17,8 @@ const ResearchCard = ({ data, index }) => {
         setShowModal(true)
        
     }
+
+
 
     return (
 
@@ -34,14 +39,15 @@ const ResearchCard = ({ data, index }) => {
                 </div>
                 {role === 'admin' && <>
                     <div className="flex items-center justify-center cursor-pointer">
-                        <Visibility onClick={handleModal} style={{ fontSize: "45px", color: "black" }}></Visibility>
+                        {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
+                        <ResearchModal/>
                     </div>
                 </>}
                 <div className='flex items-center justify-center'>
                     Submit At : {new Date(createdAt).toLocaleString()}
                 </div>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
-                    <Link target='_blank' download href={file}><OpenInNew style={{ fontSize: "45px", color: "black" }}></OpenInNew></Link>
+                    <Link target='_blank' download href={file}><OpenInNew ></OpenInNew></Link>
                 </span>
             </div>
         {showModal && <ResearchModalCard data={data} showModal={showModal} setShowModal={setShowModal}></ResearchModalCard>}

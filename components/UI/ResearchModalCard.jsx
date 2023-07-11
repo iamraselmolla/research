@@ -50,7 +50,7 @@ const ResearchModalCard = ({ showModal, data, setShowModal }) => {
             {showModal ? (
                 <>
                     <div
-                        className="bg-blue-200 fixed flex focus:outline-none inset-0 items-center justify-center opacity-95 outline-none overflow-x-hidden overflow-y-auto z-50"
+                        className="bg-white fixed flex focus:outline-none inset-0 items-center justify-center opacity-95 outline-none overflow-x-hidden overflow-y-auto z-50"
                     >
 
                         <div className="relative md:w-2/3 sm:w-2/3 lg:w-2/3 my-6 mx-auto">
@@ -87,7 +87,7 @@ const ResearchModalCard = ({ showModal, data, setShowModal }) => {
                                     </div>
                                     {status === 'pending' && <div className=" mt-10">
                                     <h2 className="font-bold">Write Remarks</h2>
-                                    <textarea onChange={(e) => setRemarks(e.target.value)} rows={3} className="bg-gray-300 rounded-md w-full"></textarea>
+                                    <textarea onChange={(e) => setRemarks(e.target.value)} rows={3} className="bg-gray-300 p-2 rounded-md w-full"></textarea>
                                 </div>}
                                     <div className="mt-10 items-center justify-between flex text-center">
                                         <div className="font-bold flex justify-center items-center flex-col">
