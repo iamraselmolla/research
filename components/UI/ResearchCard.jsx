@@ -9,10 +9,10 @@ import ResearchModal from './ResearchModal';
 
 
 const ResearchCard = ({ data }) => {
-    const { title, description, status, file, createdAt } = data;
-    const {role} = useContext(AuthContext)
+    const { title, description, status, file, createdAt, remarks, updatedAt } = data;
+    const { role } = useContext(AuthContext)
 
-   
+
 
 
 
@@ -36,17 +36,25 @@ const ResearchCard = ({ data }) => {
                 {role === 'admin' && <>
                     <div className="flex items-center justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
-                        <ResearchModal data ={data}/>
+                        <ResearchModal data={data} />
                     </div>
                 </>}
-                <div className='flex items-center justify-center'>
-                    Submit At : {new Date(createdAt).toLocaleString()}
+                {remarks && <>
+                    <div className="flex items-center justify-center">
+                        { remarks}
+                    </div>
+                </>}
+                <div className='flex flex-col items-center justify-center'>
+                    <div>Submitted: {new Date(createdAt).toLocaleString()}</div>
+                    {remarks && <div>
+                        {status} : {new Date(updatedAt).toLocaleString()}
+                    </div>}
                 </div>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
                     <Link target='_blank' download href={file}><OpenInNew ></OpenInNew></Link>
                 </span>
             </div>
-        {/* {showModal && <ResearchModalCard data={data} showModal={showModal} setShowModal={setShowModal}></ResearchModalCard>} */}
+            {/* {showModal && <ResearchModalCard data={data} showModal={showModal} setShowModal={setShowModal}></ResearchModalCard>} */}
         </div>
 
     );
