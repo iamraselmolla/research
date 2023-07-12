@@ -5,7 +5,7 @@ import ResponsiveDrawer from "../../components/UI/ResponsiveDrawer";
 import {  CakeOutlined, Email, EscalatorWarning, Handshake, InfoOutlined, People, Person, Phone, School, TempleHindu, Work } from "@mui/icons-material";
 import SplashScreen from "../../components/SplashScreen";
 import Footer from "../../components/UI/Footer";
-import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Container } from "@mui/material";
 import TopCard from "../../components/UI/TopCard";
 import axios from "axios";
 
@@ -64,7 +64,7 @@ const FacultyDetailsPage = () => {
                     
                     <>
                         <TopCard title={faculty?.basicInfo.firstName + ' ' + faculty?.basicInfo.lastName} />
-                    <div className='py-20 bg-white text-black '>
+                    <div className='bg-white text-black '>
                         <Container>
                             {loading && <div className='py-20 '>
                                 <Spinner></Spinner>

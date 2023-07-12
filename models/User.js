@@ -67,11 +67,13 @@ const UserSchema = new Schema({
     verification: {
         img: {
             type: String,
-            status: "pending"
         },
         file: {
             type: String,
-            status: "pending"
+        },
+        status: {
+            type: String,
+            default: 'pending'
         }
     },
     research: [

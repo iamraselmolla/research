@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
-import { CameraAltOutlined, Check, CloudDone, Delete, UploadFile } from '@mui/icons-material'
+import { CameraAltOutlined, Check, CloudDone, Delete, FileOpenOutlined, FileUploadTwoTone, ImageRounded, OpenInNew, UploadFile } from '@mui/icons-material'
 import axios from 'axios';
 import { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
@@ -17,7 +17,8 @@ const Verification = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [FileUploading, setFileUploading] = useState(false)
-  const user=useSelector(state=>state.user.user);
+  const user = useSelector(state => state.user.user);
+  console.log(user)
 
   const handleFileUpload = async () => {
     if (!file) {
@@ -45,6 +46,7 @@ const Verification = () => {
         if (result.status === 200) {
           toast.success('Verification File uploaded successfully');
           setFileUploading(false)
+
         }
       }
     } catch (error) {
@@ -157,6 +159,8 @@ const Verification = () => {
               {!loading ? "SAVE" : <CircularProgress size={16} sx={{ color: 'white' }} />}
             </button>
 
+
+
           </div>
 
           <div className='flex flex-col gap-4'>
@@ -190,6 +194,37 @@ const Verification = () => {
 
 
         </div>
+        {(user?.verification?.img || user?.verification?.file) && <div className='text-center text-black mt-16'>
+          <h2 className="font-bold text-3xl text-black">
+            See previous submitted verification {user?.verification?.img && user?.verification?.file ? 'Image and File' : user?.verification?.img ? 'Image' : user?.verification?.file ? 'File' : ''}
+          </h2>
+          <div className="flex justify-evenly text-center mt-7">
+            {user?.verification?.img && <div className='flex flex-col gap-3 items-center justify-center'>
+              <ImageRounded color='success' fontSize='large'></ImageRounded>
+              <div className={`${user?.verification?.status === 'pending' ? 'bg-blue-400' : ''} text-white px-2 py-1 rounded`}>
+                {user?.verification?.status}
+              </div>
+              <a target='_blank' href={user?.verification?.img}>
+                <button className="px-3 border-2 border-indigo-500 text-black hover:bg-indigo-500 hover:text-white font-bold py-2 rounded">
+                  Open Image <OpenInNew></OpenInNew>
+                </button>
+              </a>
+            </div>}
+           { user?.verification?.file && <div className='flex flex-col gap-3 items-center justify-center'>
+              <FileOpenOutlined color='success' fontSize='large'></FileOpenOutlined>
+              <div className={`${user?.verification?.status === 'pending' ? 'bg-blue-400' : ''} text-white px-2 py-1 rounded`}>
+                {user?.verification?.status}
+              </div>
+              <a target='_blank' href={user?.verification?.file}>
+                <button className="px-3 border-2 border-indigo-500 text-black hover:bg-indigo-500 hover:text-white font-bold py-2 rounded">
+                  Open File <OpenInNew></OpenInNew>
+                </button>
+              </a>
+            </div>}
+          </div>
+        </div>
+
+        }
       </Dashboard>
     </>
   )
