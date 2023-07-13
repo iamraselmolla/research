@@ -7,7 +7,7 @@ import TopCard from '../UI/TopCard';
 import { Container } from '@mui/system';
 import Spinner from '../UI/Spinner';
 import { assets } from '../assets';
-import { CakeOutlined, Email, EscalatorWarning, Handshake, InfoOutlined, LocationOn, People, Person, Phone, School, Share, TempleHindu, Work } from "@mui/icons-material";
+import { AvTimer, CakeOutlined, CalendarToday, Email, EscalatorWarning, Groups2, Handshake, InfoOutlined, LocationOn, MeetingRoom, People, Person, Phone, Place, School, Share, TempleHindu, Work } from "@mui/icons-material";
 import Footer from '../UI/Footer';
 
 
@@ -53,7 +53,7 @@ const ConferenceDetails = () => {
                     {sigleConference &&
 
                         <>
-                            <TopCard title={sigleConference?.conferenceInfo.name} />
+                            <TopCard title={sigleConference?.conferenceInfo?.conferenceName} />
                             <div className='bg-white text-black '>
                                 <Container>
                                     {loading && <div className='py-20 '>
@@ -67,7 +67,10 @@ const ConferenceDetails = () => {
                                             {/* Top Card */}
                                             <div className='col-span-1 sm:col-span-2 bg-white rounded-xl shadow-xl p-4 flex flex-col gap-4'>
                                                 <div className='flex justify-between items-center'>
-                                                    <h3 className='text-black text-2xl font-bold'>dfhdgfhhg </h3>
+                                                    <div className="flex flex-col">
+                                                        <h3 className='text-black text-2xl font-bold'>{sigleConference?.conferenceInfo?.conferenceName} </h3>
+                                                        <p className='text-black text-xl font-bold'>{sigleConference?.conferenceInfo?.conferenceDescription} </p>
+                                                    </div>
                                                     <div className='flex gap-4' >
                                                         <Share fontSize='large' sx={{ color: '#f72151' }} className='cursor-pointer'
 
@@ -75,20 +78,27 @@ const ConferenceDetails = () => {
 
                                                     </div>
                                                 </div>
-                                                <div className='flex gap-4'><Person sx={{ color: '#f72151' }} fontSize='medium' /><h3>fdgdfgdfg years old </h3></div>
-                                                <div className='flex gap-4'><CakeOutlined sx={{ color: '#f72151' }} fontSize='medium' /><h3>dfgfdggfd</h3></div>
-                                                <div className='flex gap-4'><TempleHindu sx={{ color: '#f72151' }} fontSize='medium' /><h3>  ghjhgjhgjhgjhgj</h3></div>
-                                                <div className='flex gap-4'><Work sx={{ color: '#f72151' }} fontSize='medium' /><h3>sdfdsfdsg</h3></div>
-                                                <div className='flex gap-4'><LocationOn sx={{ color: '#f72151' }} fontSize='medium' /><h3>sdfdsfdsf</h3></div>
-                                                <div className='flex gap-4'><Handshake sx={{ color: '#f72151' }} fontSize='medium' /><h3>dfgfdg</h3></div>
+                                                <div className='flex gap-4'><Place sx={{ color: '#f72151' }} fontSize='medium' /><h3> {sigleConference?.conferenceInfo?.conferenceLocation}</h3></div>
+                                                <div className='flex gap-4'><CalendarToday sx={{ color: '#f72151' }} fontSize='medium' /><h3>{new Date(sigleConference?.conferenceInfo?.conferenceDate).toLocaleString()}</h3></div>
+                                                <div className='flex gap-4'><MeetingRoom sx={{ color: '#f72151' }} fontSize='medium' /><h3> {sigleConference?.conferenceInfo?.conferenceType}</h3></div>
+                                                <div className='flex gap-4'><Groups2 sx={{ color: '#f72151' }} fontSize='medium' /><h3>{sigleConference?.conferenceInfo?.conferenceTheme}</h3></div>
+                                                <div className='flex gap-4'><AvTimer sx={{ color: '#f72151' }} fontSize='medium' /><h3>{sigleConference?.conferenceInfo?.startTime} - {sigleConference?.conferenceInfo?.endTime}</h3></div>
+                                                {/* <div className='flex gap-4'><Handshake sx={{ color: '#f72151' }} fontSize='medium' /><h3>dfgfdg</h3></div> */}
                                             </div>
+                                            <CardWrapper title='REGISTRATION DETAILS'>
+                                                <h3>Registration Open : <span className='font-semibold'>{new Date(sigleConference?.registrationInfo?.registrationOpenDate).toLocaleString()}</span></h3>
+                                                <h3>Registration Close : <span className='font-semibold'>{new Date(sigleConference?.registrationInfo?.registrationCloseDate).toLocaleString()}</span></h3>
+                                                <h3>Registration Fee : <span className='font-semibold'>{sigleConference?.registrationInfo?.registrationFee}</span></h3>
+                                                <h3>Registration Link : <span className='font-semibold'>{sigleConference?.registrationInfo?.registrationLink}</span></h3>
+                                              
+                                            </CardWrapper>
+                                            <CardWrapper title='ORGANIZATION DETAILS'>
+                                                <h3>Name : <span className='font-semibold'>{sigleConference?.organisationInfo?.organizationName}</span></h3>
+                                                <h3>Address : <span className='font-semibold'>{sigleConference?.organisationInfo?.organizationAddress}</span></h3>
+                                                <h3>City : <span className='font-semibold'>{sigleConference?.organisationInfo?.organizationCity}</span></h3>
+                                                <h3>State : <span className='font-semibold'>{sigleConference?.organisationInfo?.organizationState}</span></h3>
+                                                <h3>Country : <span className='font-semibold'>{sigleConference?.organisationInfo?.organizationCountry}</span></h3>
 
-                                            Basic Details
-                                            <CardWrapper title='BASIC DETAILS'>
-                                                <h3>Gender : <span className='font-semibold'>fdhggfdhgf</span></h3>
-                                                <h3>DOB : <span className='font-semibold'>fghgfhgfh</span></h3>
-                                                <h3>Height : <span className='font-semibold'></span></h3>
-                                                <h3>Mother Tongue : <span className='font-semibold'></span></h3>
                                                 {/* {
                                             faculty.maritalStatus !== 'Never Married' ? (
                                                 <h3 >No of Children : <span className='font-semibold'>{
@@ -96,59 +106,69 @@ const ConferenceDetails = () => {
                                                 }</span></h3>
                                             ) : null
                                         }   */}
-                                                <h3>Weight : <span className='font-semibold'> Kg</span></h3>
+                                                {/* <h3>Weight : <span className='font-semibold'> Kg</span></h3>
                                                 <h3>Body Type :  <span className='font-semibold'>gffdg</span></h3>
                                                 <h3>Complexion : <span className='font-semibold'>dfgfd</span></h3>
                                                 <h3>Physical Status : <span className='font-semibold'>dfgfdg</span></h3>
                                                 <h3>Blood Group : <span className='font-semibold'>dfgfdg</span></h3>
-                                                <h3>Eating Habits : <span className='font-semibold'>dfgfdg</span></h3>
+                                                <h3>Eating Habits : <span className='font-semibold'>dfgfdg</span></h3> */}
                                             </CardWrapper>
 
-                                            <CardWrapper title='ASTROLOGICAL DETAILS'>
-                                                <h3>Birth Hour : <span className='font-semibold'>dfgfdg</span></h3>
-                                                <h3>Birth Minute : <span className='font-semibold'>dfgfdg</span></h3>
-                                                <h3>Birth Place : <span className='font-semibold'>dfggfd</span></h3>
-                                                <h3>Gotra : <span className='font-semibold'>dfgfd</span></h3>
-                                                <h3>Star : <span className='font-semibold'>dfggfd</span></h3>
-                                                <h3>Raasi / Moon sign : <span className='font-semibold'>dfgfd</span></h3>
-                                                <h3>Manglik : <span className='font-semibold'>dfgfdg</span></h3>
+                                            <CardWrapper title='COMMITTEE DETAILS'>
+                                                <div>
+                                                    <h3>Chairman : <span className='font-semibold'>{sigleConference?.committeeInfo?.committeeChair}</span></h3>
+                                                    <div className="flex gap-3">
+                                                        <div>Member: </div>
+                                                        <div>
+                                                            {sigleConference?.committeeInfo?.committeeMembers?.map((member, index) => {
+                                                                return (
+                                                                    <div>
+                                                                        ({index + 1}) {member}
+                                                                    </div>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </CardWrapper>
 
 
 
                                         </div>
                                         <div>
-                                            <h2 className="col-span-1 mt-5 sm:col-span-2 text-ter text-2xl">Professional Details</h2>
-                                            <h3 className="col-span-1 sm:col-span-2  text-xl ">Education : </h3>
+                                            <h2 className="col-span-1 mt-5 sm:col-span-2 text-ter mb-4 text-2xl">SPEAKERS DETAILS</h2>
                                             <div className="relative overflow-x-auto">
                                                 <table className="w-full text-sm text-center  text-gray-500 dark:text-gray-400">
                                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                         <tr className="text-xl">
                                                             <th scope="col" className="px-6 py-3">
-                                                                Title
+                                                                Name
                                                             </th>
                                                             <th scope="col" className="px-6 py-3">
-                                                                Institue
+                                                                affiliation
                                                             </th>
                                                             <th scope="col" className="px-6 py-3">
-                                                                Completion
+                                                                Bio
                                                             </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
 
-                                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                gfdhfh
-                                                            </th>
-                                                            <td className="px-6 py-4">
-                                                                fghgf
-                                                            </td>
-                                                            <td className="px-6 py-4">
-                                                                fghgfhgfhgf
+                                                        {sigleConference?.speakers?.map(speaker => <>
+                                                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                    {speaker.name}
+                                                                </th>
+                                                                <td className="px-6 py-4">
+                                                                    {speaker.affiliation}
+                                                                </td>
+                                                                <td className="px-6 py-4">
+                                                                    {speaker.bio}
 
-                                                            </td>
-                                                        </tr>
+                                                                </td>
+                                                            </tr>
+                                                        </>)}
 
                                                     </tbody>
                                                 </table>

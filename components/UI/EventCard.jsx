@@ -90,11 +90,9 @@ const EventCard = ({
                         <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" /><Switch onChange={handleChange} checked={approved} size="medium" /><CheckCircle className={`${approved ? 'text-green-400' : ''}`} fontSize="small" title="Approved" />
                     </div>
                 </>}
-                <Link href={`/conferences/${id}`}> 
-                    <button className="bg-secondary text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90">
+                    <Link className="bg-secondary text-center text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90" href={`/conferences/${id}`}>
                         View
-                    </button>
-                </Link>
+                    </Link>
             </div>
 
         </div>
