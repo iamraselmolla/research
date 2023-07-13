@@ -8,10 +8,12 @@ import Footer from "../../components/UI/Footer";
 import { Container } from "@mui/material";
 import TopCard from "../../components/UI/TopCard";
 import axios from "axios";
+import { assets } from "../assets";
 
 const FacultyDetailsPage = () => {
     const [faculty, setFaculty] = useState(null);
     const [loading, setLoading] = useState(true);
+    
 
     const router = useRouter();
     const id = router.query?.id;
@@ -72,7 +74,7 @@ const FacultyDetailsPage = () => {
                             {!loading && faculty?.basicInfo.firstName && <div className='py-20' id="screenshot-element">
                                 <div className='grid grid-cols-1 sm:grid-cols-3 gap-4' >
                                     <div className='col-span-1 h-80 bg-white  rounded-xl overflow-hidden'>
-                                        <img src={"https://images.unsplash.com/photo-1633332755192-727a05c4013d"} className='h-[100%] m-auto' alt='User Image' />
+                                        <img src={assets.whyChoose} className='h-[100%] m-auto' alt='User Image' />
                                     </div>
                                     {/* Top Card */}
                                     <div className='col-span-1 sm:col-span-2 bg-white rounded-xl shadow-xl p-4 flex flex-col gap-4'>
