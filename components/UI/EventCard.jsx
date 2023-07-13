@@ -25,21 +25,21 @@ const EventCard = ({
 }) => {
     const [approved, setApproved] = useState(status === 'approved' ? true : false);
     const dispatch = useDispatch();
-    const {role} = useContext(AuthContext)
+    const { role } = useContext(AuthContext)
     const handleChange = async () => {
-        try{
-            if(status !== 'approved'){
-                const result = await verifyConferenceByAdmin({id});
-                if(result){
+        try {
+            if (status !== 'approved') {
+                const result = await verifyConferenceByAdmin({ id });
+                if (result) {
                     dispatch(userActions.refreshDetails());
                     toast.success("Approved");
                     setApproved(true);
-                }else{
+                } else {
                     toast.error("Something Wrong")
                     return;
                 }
             }
-        }catch(err){
+        } catch (err) {
             console.log(err);
             return
         }
@@ -85,14 +85,16 @@ const EventCard = ({
                     </Link>
                 </div>
                 {role === 'admin' && <>
-                
-                <div className="verified-status h-10">
-                    <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" /><Switch onChange={handleChange} checked={approved} size="medium" /><CheckCircle className={`${approved ? 'text-green-400' : ''}`} fontSize="small" title="Approved" />
-                </div>
+
+                    <div className="verified-status h-10">
+                        <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" /><Switch onChange={handleChange} checked={approved} size="medium" /><CheckCircle className={`${approved ? 'text-green-400' : ''}`} fontSize="small" title="Approved" />
+                    </div>
                 </>}
-                <button className="bg-secondary text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90">
-                    View
-                </button>
+                <Link href={`/conferences/${id}`}> 
+                    <button className="bg-secondary text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90">
+                        View
+                    </button>
+                </Link>
             </div>
 
         </div>
