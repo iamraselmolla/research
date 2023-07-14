@@ -9,6 +9,7 @@ import { CircularProgress, IconButton } from '@mui/material';
 import { verificationFile, verificationImage } from '../services/userServices';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
+import VerificationCard from '../UI/VerificationCard';
 
 const Verification = () => {
   const { localid } = useContext(AuthContext)
@@ -194,36 +195,11 @@ const Verification = () => {
 
 
         </div>
-        {(user?.verification?.img || user?.verification?.file) && <div className='text-center text-black mt-16'>
-          <h2 className="font-bold text-3xl text-black">
-            See previous Submission </h2>
-          <div className="flex justify-evenly text-center mt-7">
-            {user?.verification?.img && <div className='flex flex-col gap-3 items-center justify-center'>
-              <ImageRounded color='success' fontSize='large'></ImageRounded>
-              <div className={`${user?.verification?.status === 'pending' ? 'bg-blue-400' : ''} text-white px-2 py-1 rounded`}>
-                {user?.verification?.status}
-              </div>
-              <a target='_blank' href={user?.verification?.img}>
-                <button className="px-3 border-2 border-indigo-500 text-black hover:bg-indigo-500 hover:text-white font-bold py-2 rounded">
-                  Open Image <OpenInNew></OpenInNew>
-                </button>
-              </a>
-            </div>}
-           { user?.verification?.file && <div className='flex flex-col gap-3 items-center justify-center'>
-              <FileOpenOutlined color='success' fontSize='large'></FileOpenOutlined>
-              <div className={`${user?.verification?.status === 'pending' ? 'bg-blue-400' : ''} text-white px-2 py-1 rounded`}>
-                {user?.verification?.status}
-              </div>
-              <a target='_blank' href={user?.verification?.file}>
-                <button className="px-3 border-2 border-indigo-500 text-black hover:bg-indigo-500 hover:text-white font-bold py-2 rounded">
-                  Open File <OpenInNew></OpenInNew>
-                </button>
-              </a>
-            </div>}
-          </div>
-        </div>
+      { (user?.verification?.img || user?.verification?.file) &&
+      
+       <VerificationCard></VerificationCard>}
 
-        }
+        
       </Dashboard>
     </>
   )

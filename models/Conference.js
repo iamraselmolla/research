@@ -55,6 +55,10 @@ const ConferenceSchema = new Schema({
     enum: ['pending', 'approved', 'rejected'],
 
   },
+  isActive: {
+    type: Boolean,
+    default: false
+  },
   createdAt: {
     type: Date,
     default: Date.now
