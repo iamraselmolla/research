@@ -31,7 +31,7 @@ const FacultiesPage = () => {
     }, []);
 
     return (
-        <div className='relative'>
+        <div className='relative bg-white'>
             {loading ? <SplashScreen /> :
                 <>
                     <ResponsiveDrawer />

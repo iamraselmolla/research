@@ -139,7 +139,7 @@ const Dashboard = ({children}) => {
     <>
     {/* {authCtx.isLoggedIn ? */}
     <ResponsiveDrawer/>
-      <div className="flex flex-row h-[calc(100vh_-_80px)] max-w-[100%] md:h-[calc(100vh_-_80px)]  bg-ligh">
+      <div className="flex flex-row h-[calc(100vh_-_80px)] max-w-[100%] md:h-[calc(100vh_-_80px)]  bg-lightBackground">
         <div className="min-w-[300px]  h-[calc(100vh_-80px)] mdrev:hidden bg-white  overflow-y-auto  ">
           <div className="flex flex-col items-center  p-4 gap-1">
             <div className="bg-white  w-[160px] h-[160px]  rounded-full overflow-hidden shadow-lg">

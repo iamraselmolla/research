@@ -28,16 +28,15 @@ const EventCard = ({
     const { role } = useContext(AuthContext)
     const handleChange = async () => {
         try {
-            if (status !== 'approved') {
-                const result = await verifyConferenceByAdmin({ id });
-                if (result) {
-                    dispatch(userActions.refreshDetails());
-                    toast.success("Approved");
-                    setApproved(true);
-                } else {
-                    toast.error("Something Wrong")
-                    return;
-                }
+
+            const result = await verifyConferenceByAdmin({ id });
+            if (result) {
+                // dispatch(userActions.refreshDetails());
+                toast.success("Toggled");
+                setApproved(!approved);
+            } else {
+                toast.error("Something Wrong")
+                return;
             }
         } catch (err) {
             console.log(err);
@@ -90,9 +89,9 @@ const EventCard = ({
                         <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" /><Switch onChange={handleChange} checked={approved} size="medium" /><CheckCircle className={`${approved ? 'text-green-400' : ''}`} fontSize="small" title="Approved" />
                     </div>
                 </>}
-                    <Link className="bg-secondary text-center text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90" href={`/conferences/${id}`}>
-                        View
-                    </Link>
+                <Link className="bg-secondary text-center text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90" href={`/conferences/${id}`}>
+                    View
+                </Link>
             </div>
 
         </div>
