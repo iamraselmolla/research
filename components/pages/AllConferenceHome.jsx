@@ -6,14 +6,17 @@ import { Container } from '@mui/system';
 import { getAllConferences } from '../services/userServices';
 import { assets } from '../assets';
 import EventCard from '../UI/EventCard';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../UI/Spinner';
+import { userActions } from '../store/userSlice';
 const AllConferenceHome = () => {
-    const [allConference, setAllConference] = useState([]);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [fetchEnd, setFetchEnd] = useState(false)
-    const refresh = useSelector(state => state.user.refresh)
     const [dataLoading, setDataLoading] = useState(false);
+    const {refresh,conferences} = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    console.log(conferences)
 
 
 
@@ -22,12 +25,11 @@ const AllConferenceHome = () => {
             try {
                 // You have to provide either admin or user in the getAllConferences function or api will break
                 const allConferences = await getAllConferences("user");
-                setAllConference(allConferences.data);
+                dispatch(userActions.setAllConference(allConferences?.data))
                 setFetchEnd(true)
 
             }
             catch (err) {
-                setAllConference(null);
                 setFetchEnd(true)
                 setError("No data found")
             }
@@ -39,7 +41,7 @@ const AllConferenceHome = () => {
         getUsers();
     }, [refresh])
 
-    const [loading, setLoading] = useState(true);
+   
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -56,7 +58,7 @@ const AllConferenceHome = () => {
             {loading ? <SplashScreen /> :
                 <>
                     <ResponsiveDrawer />
-                    {fetchEnd && !allConference.length > 0 &&
+                    {fetchEnd && !conferences.length > 0 &&
                         <div className="banner">
                             <h2 className="h2 py-20 flex justify-center items-center text-white text-center min-h-[600px] font-bold text-4xl">
                                 No Conference Found
@@ -66,14 +68,14 @@ const AllConferenceHome = () => {
                     <div className='pt-10 bg-white text-black '>
                         <Container>
                             {dataLoading &&
-                             <div className='flex flex-col justify-center items-center h-[600px]'>
-                                <Spinner size={60} />
-                            </div>
+                                <div className='flex flex-col justify-center items-center h-[600px]'>
+                                    <Spinner size={60} />
+                                </div>
                             }
-                            {allConference && !dataLoading &&
+                            {conferences && !dataLoading &&
                                 <div className="container py-8 mx-auto px-4">
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                                        {allConference && allConference?.map((conference, index) => (
+                                        {conferences && conferences?.map((conference, index) => (
                                             <EventCard
                                                 key={index}
                                                 title={conference.conferenceInfo.conferenceName}

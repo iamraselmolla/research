@@ -400,7 +400,7 @@ export default function ResponsiveDrawer() {
                     Add Conference
                   </Link>
                   <Link
-                    href="/dashboard/conferences"
+                    href="/dashboard/all-conferences"
                     className="p-2 hover:bg-secondary hover:text-white w-full"
                   >
                     All Conferences

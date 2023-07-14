@@ -5,13 +5,17 @@ import { useEffect } from "react";
 import { getAllConferences } from "../services/userServices";
 import EventCard from "../UI/EventCard";
 import { CircularProgress } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../store/userSlice";
 
 const AllConferences = () => {
   const [allConference, setAllConference] = useState(null);
   const [error, setError] = useState(null)
-  const refresh = useSelector(state => state.user.refresh);
+  const {refresh,conferences} = useSelector(state => state.user);
   const [fetchEnd, setFetchEnd] = useState(false)
+  const dispatch = useDispatch();
+
+  console.log(conferences)
 
 
 
@@ -19,7 +23,9 @@ const AllConferences = () => {
     const getUsers = async () => {
       try {
         const allConferences = await getAllConferences("admin");
-        setAllConference(allConferences?.data)
+        setAllConference(allConferences?.data);
+        dispatch(userActions.setAllConference(allConferences?.data))
+        
         setFetchEnd(true)
 
       }
