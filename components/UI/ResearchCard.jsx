@@ -25,6 +25,9 @@ const ResearchCard = ({ data }) => {
                 <p className="text-xl">
                     {description}
                 </p>
+               {remarks && <p>
+                  Remarks:  {remarks}
+                </p>}
             </div>
             <div className='flex justify-between w-full md:w-auto gap-10 '>
                 <div className='flex items-center justify-center'>
@@ -39,16 +42,9 @@ const ResearchCard = ({ data }) => {
                         <ResearchModal data={data} />
                     </div>
                 </>}
-                {remarks && <>
-                    <div className="flex items-center justify-center">
-                        { remarks}
-                    </div>
-                </>}
+               
                 <div className='flex flex-col items-center justify-center'>
                     <div>Submitted: {new Date(createdAt).toLocaleString()}</div>
-                    {remarks && <div>
-                        {status} : {new Date(updatedAt).toLocaleString()}
-                    </div>}
                 </div>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
                     <Link target='_blank' download href={file}><OpenInNew ></OpenInNew></Link>

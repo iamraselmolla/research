@@ -7,11 +7,16 @@ import EventCard from "../UI/EventCard";
 import { CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../store/userSlice";
+import { Search } from "@mui/icons-material";
 
 const AllConferences = () => {
   const [allConference, setAllConference] = useState(null);
   const [error, setError] = useState(null)
-  const {refresh,conferences} = useSelector(state => state.user);
+  const [search, setSearch] = useState({
+    search: '',
+    select: ''
+})
+  const { refresh, conferences } = useSelector(state => state.user);
   const [fetchEnd, setFetchEnd] = useState(false)
   const dispatch = useDispatch();
 
@@ -25,7 +30,7 @@ const AllConferences = () => {
         const allConferences = await getAllConferences("admin");
         setAllConference(allConferences?.data);
         dispatch(userActions.setAllConference(allConferences?.data))
-        
+
         setFetchEnd(true)
 
       }
@@ -56,6 +61,20 @@ const AllConferences = () => {
 
   return (
     <Dashboard>
+      <div className='flex sticky top-0  gap-2 w-full mb-4'>
+        <div className='bg-white rounded-lg px-4 flex-1'>
+          <Search className="text-black" />
+          <input type='text' placeholder="Search with title" className='w-[90%] bg-white p-2 placeholder:text-black  outline-none' />
+        </div>
+        <select value={search.select} onChange={(e) => setSearch({ ...search, select: e.target.value })} className='p-2 bg-white text-black font-bold rounded-lg'>
+          <option disabled>Choose</option>
+          <option value='all'>All</option>
+          <option value='pending'>pending</option>
+          <option value='approved'>Approved</option>
+          <option value='rejected'>Rejected</option>
+        </select>
+      </div>
+
       {allConference && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {allConference && allConference?.map((conference, index) => (
           <EventCard

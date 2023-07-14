@@ -196,8 +196,7 @@ const Verification = () => {
         </div>
         {(user?.verification?.img || user?.verification?.file) && <div className='text-center text-black mt-16'>
           <h2 className="font-bold text-3xl text-black">
-            See previous submitted verification {user?.verification?.img && user?.verification?.file ? 'Image and File' : user?.verification?.img ? 'Image' : user?.verification?.file ? 'File' : ''}
-          </h2>
+            See previous Submission </h2>
           <div className="flex justify-evenly text-center mt-7">
             {user?.verification?.img && <div className='flex flex-col gap-3 items-center justify-center'>
               <ImageRounded color='success' fontSize='large'></ImageRounded>

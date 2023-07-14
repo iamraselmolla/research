@@ -32,22 +32,22 @@ const AllResearches = () => {
         } else if (search.select === 'rejected') {
             const rejectedResearches = allResearches?.filter(research => research?.status === 'rejected')
             setCurrentResearches(rejectedResearches)
-        } else if(search.select === 'pending'){
+        } else if (search.select === 'pending') {
             const pendingResearches = allResearches?.filter(research => research?.status === 'pending')
             setCurrentResearches(pendingResearches)
-        }else{
+        } else {
             setCurrentResearches(allResearches)
         }
     }, [search, allResearches])
-    
+
     return (
         <Dashboard>
-            <div className='flex  gap-2 w-full mb-4'>
+            <div className='flex sticky top-0 gap-2 w-full mb-4'>
                 <div className='bg-white rounded-lg px-4 flex-1'>
-                    <Search />
-                    <input type='text' className='w-[90%] bg-white p-2  outline-none' />
+                    <Search className="text-black" />
+                    <input type='text' placeholder="Search with title" className='w-[90%] bg-white p-2 placeholder:text-black  outline-none' />
                 </div>
-                <select value={search.select} onChange={(e)=>setSearch({...search,select:e.target.value})} className='p-2 bg-white rounded-lg'>
+                <select value={search.select} onChange={(e) => setSearch({ ...search, select: e.target.value })} className='p-2 bg-white text-black font-bold rounded-lg'>
                     <option disabled>Choose</option>
                     <option value='all'>All</option>
                     <option value='pending'>pending</option>
