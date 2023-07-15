@@ -30,6 +30,7 @@ const AllConferences = () => {
         const allConferences = await getAllConferences("admin");
         setAllConference(allConferences?.data);
         dispatch(userActions.setAllConference(allConferences?.data))
+        dispatch(userActions.refreshDetails())
 
         setFetchEnd(true)
 
@@ -64,14 +65,14 @@ const AllConferences = () => {
       <div className='flex sticky top-0  gap-2 w-full mb-4'>
         <div className='bg-white rounded-lg px-4 flex-1'>
           <Search className="text-black" />
-          <input type='text' placeholder="Search with title" className='w-[90%] text-black bg-white p-2 placeholder:text-black  outline-none' />
+          <input type='text' placeholder="Search with title" className='w-[90%] font-bold text-black bg-white p-2 placeholder:text-black  outline-none' />
         </div>
         <select value={search.select} onChange={(e) => setSearch({ ...search, select: e.target.value })} className='p-2 bg-white text-black font-bold rounded-lg'>
           <option disabled>Choose</option>
           <option value='all'>All</option>
           <option value='pending'>pending</option>
           <option value='approved'>Approved</option>
-          <option value='rejected'>Rejected</option>
+          <option value='rejected'>Active</option>
         </select>
       </div>
 
@@ -88,6 +89,7 @@ const AllConferences = () => {
             organiser={conference.organisationInfo.organizationName}
             verified={conference.verified}
             id={conference._id}
+            isActive={conference?.isActive}
             status={conference.status}
           />
         ))}

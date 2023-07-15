@@ -19,13 +19,13 @@ const ResearchCard = ({ data }) => {
     return (
 
 
-        <div className="flex text-black flex-col md:flex-row gap-4 px-4 py-8 mb-3 justify-between items-center bg-white rounded-lg">
+        <div className="flex text-black flex-col md:flex-row gap-4 px-4 py-6 mb-3 justify-between items-center bg-white rounded-lg">
             <div className='flex-1 w-full'>
                 <h5 className="mb-1 text-2xl font-medium text-gray-900">{title}</h5>
                 <p className="text-xl">
                     {description}
                 </p>
-               {remarks && <p>
+               {remarks && <p className='text-cyan-500 mt-2 font-bold'>
                   Remarks:  {remarks}
                 </p>}
             </div>

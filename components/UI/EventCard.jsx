@@ -1,7 +1,7 @@
 
 
 import Image from "next/image";
-import { AccessTimeOutlined, LocationOnOutlined, CheckCircle, NotInterested } from "@mui/icons-material";
+import { AccessTimeOutlined, LocationOnOutlined, CheckCircle, NotInterested, RadioButtonUnchecked, FiberManualRecordOutlined, FiberManualRecord } from "@mui/icons-material";
 import axios from "axios";
 import { FormControlLabel, Switch } from "@mui/material";
 import Link from "next/link";
@@ -21,7 +21,8 @@ const EventCard = ({
     description,
     organiser,
     verified,
-    status
+    status,
+    isActive
 }) => {
     const [approved, setApproved] = useState(status === 'approved' ? true : false);
     const dispatch = useDispatch();
@@ -83,12 +84,28 @@ const EventCard = ({
                         Read More
                     </Link>
                 </div>
-                {role === 'admin' && <>
+                {role === 'admin' && <div className="flex justify-between items-center">
 
-                    <div className="verified-status h-10">
-                        <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" /><Switch onChange={handleChange} checked={approved} size="medium" /><CheckCircle className={`${approved ? 'text-green-400' : ''}`} fontSize="small" title="Approved" />
+                    <div className="verified-status flex flex-col items-center">
+                       <div>
+                       <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" /><Switch onChange={handleChange} checked={approved} size="medium" /><CheckCircle className={`${approved ? 'text-green-400' : ''}`} fontSize="small" title="Approved" />
+                       </div>
+                       <div className="font-extrabold">
+                            Verified
+                        </div>
+
                     </div>
-                </>}
+                  { status !== 'pending' &&  <div className="flex flex-col items-center">
+                        <div>
+                        <RadioButtonUnchecked className="text-slate-400"></RadioButtonUnchecked>
+                        <Switch/>
+                        <FiberManualRecord className="text-green-500"></FiberManualRecord>
+                        </div>
+                        <div className="font-extrabold">
+                            Active
+                        </div>
+                    </div>}
+                </div>}
                 <Link className="bg-secondary text-center text-white drop-shadow-md p-1 font-bold  rounded-sm hover:opacity-90" href={`/conferences/${id}`}>
                     View
                 </Link>

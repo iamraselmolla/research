@@ -45,7 +45,7 @@ const AllResearches = () => {
             <div className='flex sticky top-0 gap-2 w-full mb-4'>
                 <div className='bg-white rounded-lg px-4 flex-1'>
                     <Search className="text-black" />
-                    <input type='text' placeholder="Search with title" className='w-[90%] bg-white p-2 placeholder:text-black  outline-none' />
+                    <input type='text' placeholder="Search with title" className='w-[90%] bg-white p-2 placeholder:text-black text-black font-bold outline-none' />
                 </div>
                 <select value={search.select} onChange={(e) => setSearch({ ...search, select: e.target.value })} className='p-2 bg-white text-black font-bold rounded-lg'>
                     <option disabled>Choose</option>
