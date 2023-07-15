@@ -70,6 +70,10 @@ const ConferenceSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  assign: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 })
 

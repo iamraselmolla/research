@@ -15,7 +15,7 @@ const AllConferences = () => {
   const [search, setSearch] = useState({
     search: '',
     select: ''
-})
+  })
   const { refresh, conferences } = useSelector(state => state.user);
   const [fetchEnd, setFetchEnd] = useState(false)
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const AllConferences = () => {
         const allConferences = await getAllConferences("admin");
         setAllConference(allConferences?.data);
         dispatch(userActions.setAllConference(allConferences?.data))
-        
+
 
         setFetchEnd(true)
 
@@ -58,7 +58,20 @@ const AllConferences = () => {
   //     organiser: "John Doe",
   //   },
   // ];
-
+  // useEffect(() => {
+  //   if (search.select === 'pending') {
+  //     const pendingConference = allConference?.filter(conference => conference?.status === 'pending')
+  //     setAllConference(pendingConference)
+  //   } else if (search.select === 'approved') {
+  //     const approvedConference = allConference?.filter(conference => conference?.status === 'approved')
+  //     setAllConference(approvedConference)
+  //   } else if (search.select === 'active') {
+  //     const activeConference = allConference?.filter(research => research?.isActive)
+  //     setAllConference(activeConference)
+  //   } else {
+  //     setAllConference(allConference)
+  //   }
+  // }, [ allConference])
 
   return (
     <Dashboard>
@@ -72,7 +85,7 @@ const AllConferences = () => {
           <option value='all'>All</option>
           <option value='pending'>pending</option>
           <option value='approved'>Approved</option>
-          <option value='rejected'>Active</option>
+          <option value='active'>Active</option>
         </select>
       </div>
 

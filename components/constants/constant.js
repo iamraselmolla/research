@@ -9,7 +9,8 @@ export const ALL_LINKS={
     verification:'/verification',
     addResearchPaper:'/add-research-paper',
     scheduler:'/scheduler',
-    allResearches : '/all-researches'
+    allResearches : '/all-researches',
+    assignResearches : '/assign-researches'
 }
 
 export const SITE_INFO={

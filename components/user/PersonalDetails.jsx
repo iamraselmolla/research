@@ -5,7 +5,7 @@ import { FieldArray, Form, Formik } from 'formik'
 import InputField from '../UI/InputField'
 import * as Yup from "yup"
 import Gap from '../UI/Gap'
-import { IconButton } from '@mui/material'
+import { CircularProgress, IconButton } from '@mui/material'
 import { Delete } from '@mui/icons-material'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -16,79 +16,80 @@ import { formatDate } from '../utils/Date'
 import { userActions } from '../store/userSlice'
 
 const PersonalDetails = () => {
-  const authCtx=useContext(AuthContext);
-  const dispatch=useDispatch();
-  const user=useSelector(state=>state.user.user);
-  const [fetchedValues,setFetchedValues]=useState({
-    basicInfo:{
+  const authCtx = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false)
+  const user = useSelector(state => state.user.user);
+  const [fetchedValues, setFetchedValues] = useState({
+    basicInfo: {
       firstName: '',
       lastName: '',
       dob: '',
       gender: '',
     },
-    contactInfo:{
+    contactInfo: {
       email: '',
       mobileNo1: '',
-      mobileNo2:''
+      mobileNo2: ''
     },
-    education:[
+    education: [
       {
-        title:'',
-        completion:'',
-        institute:''
+        title: '',
+        completion: '',
+        institute: ''
       }
     ]
   })
   const initialValues = {
-    basicInfo:{
+    basicInfo: {
       firstName: '',
       lastName: '',
       dob: '',
       gender: '',
     },
-    contactInfo:{
+    contactInfo: {
       email: '',
       mobileNo1: '',
-      mobileNo2:''
+      mobileNo2: ''
     },
-    education:[
+    education: [
       {
-        title:'',
-        completion:'',
-        institute:''
+        title: '',
+        completion: '',
+        institute: ''
       }
     ]
   }
-  useEffect(()=>{
-    if(user?.basicInfo?.firstName){
-    setFetchedValues({
-      basicInfo:{
-        ...user.basicInfo,
-        dob:formatDate(user.basicInfo.dob)
-      },
-      contactInfo:user.contactInfo,
-      education:user.education.length>0 ? user.education : 
-      [
-        {
-          title:'',
-          completion:'',
-          institute:''
-        }
-      ]
-    })
-  }
-  },[user])
+  useEffect(() => {
+    if (user?.basicInfo?.firstName) {
+      setFetchedValues({
+        basicInfo: {
+          ...user.basicInfo,
+          dob: formatDate(user.basicInfo.dob)
+        },
+        contactInfo: user.contactInfo,
+        education: user.education.length > 0 ? user.education :
+          [
+            {
+              title: '',
+              completion: '',
+              institute: ''
+            }
+          ]
+      })
+    }
+  }, [user])
 
   const basicInfo = [
-    { placeholder: "First Name", labelName: "First Name", uni: "basicInfo.firstName", type: "text", fieldRequired: true,disabled:true },
-    { placeholder: "Last Name", labelName: "Last Name", uni: "basicInfo.lastName", type: "text", fieldRequired: true,disabled:true },
+    { placeholder: "First Name", labelName: "First Name", uni: "basicInfo.firstName", type: "text", fieldRequired: true, disabled: true },
+    { placeholder: "Last Name", labelName: "Last Name", uni: "basicInfo.lastName", type: "text", fieldRequired: true, disabled: true },
     { placeholder: "DOB", labelName: "DOB", uni: "basicInfo.dob", type: "date", fieldRequired: true },
   ]
 
-  const contactInfo=[
+  const contactInfo = [
     { placeholder: "Email", labelName: "Email", uni: "contactInfo.email", type: "text", fieldRequired: true },
     { placeholder: "Mobile 1", labelName: "Mobile 1", uni: "contactInfo.mobileNo1", type: "number", fieldRequired: true },
-    { placeholder: "Mobile 2", labelName: "Mobile 2", uni: "contactInfo.mobileNo2", type: "number",  },
+    { placeholder: "Mobile 2", labelName: "Mobile 2", uni: "contactInfo.mobileNo2", type: "number", },
   ]
 
 
@@ -113,16 +114,22 @@ const PersonalDetails = () => {
     )
   });
 
-  const onSubmitHandler= async (values,{resetForm})=>{
-    try{
-      const response = await putPersonalDetails({...values});
+  const onSubmitHandler = async (values, { resetForm }) => {
+    try {
+      setLoading(true)
+      const response = await putPersonalDetails({ ...values });
+      if (response.status !== 200) {
+        return toast.error("Error Occured")
+
+      }
       toast.success("Personal details are updated successfully");
       dispatch(userActions.refreshDetails());
-      
+      setLoading(false)
     }
-    catch(err){
-        console.log(err);
-        toast.error("Something Wrong")
+    catch (err) {
+      setLoading(false)
+      console.log(err);
+      toast.error("Something Wrong")
     }
   }
 
@@ -139,30 +146,30 @@ const PersonalDetails = () => {
           validationSchema={validationSchema}
           onSubmit={onSubmitHandler}
           enableReinitialize
-          >
-          {({values})=>
-          <Form className='flex flex-col'>
-            <Gap>Basic Info</Gap>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:my-5' >
-              {basicInfo.map((item, i) => (
-                <InputField key={i} {...item} />
-              ))}
-              <InputField fieldRequired={true} uni={'basicInfo.gender'} labelName={'Gender'} as={'select'} override={true}>
-                <option value='' disabled={true}>Select</option>
-                <option value='Male'>Male</option>
-                <option value='Female'>Female</option>
-                <option value='Other'>Other</option>
-              </InputField>
-            </div>
+        >
+          {({ values }) =>
+            <Form className='flex flex-col'>
+              <Gap>Basic Info</Gap>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:my-5' >
+                {basicInfo.map((item, i) => (
+                  <InputField key={i} {...item} />
+                ))}
+                <InputField fieldRequired={true} uni={'basicInfo.gender'} labelName={'Gender'} as={'select'} override={true}>
+                  <option value='' disabled={true}>Select</option>
+                  <option value='Male'>Male</option>
+                  <option value='Female'>Female</option>
+                  <option value='Other'>Other</option>
+                </InputField>
+              </div>
 
-            <Gap>Contact Info</Gap>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:my-5' >
-              {contactInfo.map((item, i) => (
-                <InputField key={i} {...item} />
-              ))}
-            </div>
+              <Gap>Contact Info</Gap>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:my-5' >
+                {contactInfo.map((item, i) => (
+                  <InputField key={i} {...item} />
+                ))}
+              </div>
 
-            <Gap>Education Details</Gap>
+              <Gap>Education Details</Gap>
               <FieldArray name='education'>
                 {({ push, remove }) =>
                   <div className='flex flex-col'>
@@ -184,8 +191,10 @@ const PersonalDetails = () => {
                 }
               </FieldArray>
 
-            <button type="submit" className=' bg-primary self-end rounded-sm p-1 md: w-28 text-white mt-4'>Submit</button>
-          </Form >
+              <button type="submit" className=' bg-primary self-end rounded-sm p-1 md: w-28 text-white mt-4'>
+                {!loading ? "Submit" : <CircularProgress size={16} sx={{ color: 'white' }} />}
+              </button>
+            </Form >
           }
         </Formik>
       </div>

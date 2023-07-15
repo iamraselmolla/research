@@ -8,8 +8,9 @@ import { toast } from 'react-toastify';
 import { CircularProgress, IconButton } from '@mui/material';
 import { verificationFile, verificationImage } from '../services/userServices';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import VerificationCard from '../UI/VerificationCard';
+import { userActions } from '../store/userSlice';
 
 const Verification = () => {
   const { localid } = useContext(AuthContext)
@@ -19,7 +20,7 @@ const Verification = () => {
   const [loading, setLoading] = useState(false);
   const [FileUploading, setFileUploading] = useState(false)
   const user = useSelector(state => state.user.user);
-  console.log(user)
+  const dispatch = useDispatch()
 
   const handleFileUpload = async () => {
     if (!file) {
@@ -46,7 +47,8 @@ const Verification = () => {
 
         if (result.status === 200) {
           toast.success('Verification File uploaded successfully');
-          setFileUploading(false)
+          setFileUploading(false);
+          dispatch(userActions.refreshDetails())
 
         }
       }
@@ -83,6 +85,7 @@ const Verification = () => {
             verification: response.data.url
           });
         if (result.status === 200) {
+          
           toast.success("Verification Image added successfully");
           setLoading(false)
         }

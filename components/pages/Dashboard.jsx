@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { assets } from "../assets";
 import Image from "next/image";
-import { CalendarMonth, Description, Duo, People, Person, Videocam, WorkspacePremium, FileOpen } from "@mui/icons-material";
+import { CalendarMonth, Description, Duo, People, Person, Videocam, WorkspacePremium, FileOpen, Assignment } from "@mui/icons-material";
 import { ALL_LINKS } from "../constants/constant";
 import {usePathname} from 'next/navigation'
 import { useSelector } from "react-redux";
@@ -63,6 +63,12 @@ export const menuItems = {
     icon: <WorkspacePremium />,
     showAlways: false,
   },
+  assignedPapers:{
+    name: "Assign Research",
+    pageLink: ALL_LINKS.dashboard+ALL_LINKS.assignResearches,
+    icon: <Assignment />,
+    showAlways: false,
+  },
   addResearchPaper:{
     name: "Add Research Paper",
     pageLink: ALL_LINKS.dashboard+ALL_LINKS.addResearchPaper,
@@ -95,7 +101,7 @@ const Dashboard = ({children}) => {
   let menu=[];
   
   if(authCtx.role==='faculty'){
-    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.scheduler,menuItems.addConference, ];
+    menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.scheduler,menuItems.addConference,menuItems.assignedPapers ];
   }
   else if(authCtx.role==='student'){
     menu=[menuItems.dashboard,menuItems.personalDetails,menuItems.verification,menuItems.addResearchPaper];

@@ -79,7 +79,7 @@ const EventCard = ({
             </div>
 
 
-            <Image src={image} className="w-full" />
+            <Image src={image} alt="Event Image" className="w-full" />
             <div className="p-2 gap-2 flex flex-col">
                 <div>
                     <div className="text-slate-500 text-sm">{organiser}</div>
@@ -105,7 +105,9 @@ const EventCard = ({
 
                     <div className="verified-status flex flex-col items-center">
                        <div>
-                       <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" /><Switch onChange={handleChange} checked={approved} size="medium" /><CheckCircle className={`${approved ? 'text-green-400' : ''}`} fontSize="small" title="Approved" />
+                       <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" />
+                       <Switch onChange={handleChange} checked={approved} size="medium" />
+                       <CheckCircle className={`${approved ? 'text-green-700' : ''}`} fontSize="small" title="Approved" />
                        </div>
                        <div className="font-extrabold">
                             Verified
@@ -116,7 +118,7 @@ const EventCard = ({
                         <div>
                         <DoNotDisturbOn className="text-slate-400"></DoNotDisturbOn>
                         <Switch checked={isActive} onClick={handleStatusChange}/>
-                        <FiberManualRecord className={isActive && 'text-green-500'}></FiberManualRecord>
+                        <FiberManualRecord className={isActive ? 'text-green-500' : ''}></FiberManualRecord>
                         </div>
                         <div className="font-extrabold">
                             Active
