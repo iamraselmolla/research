@@ -1,12 +1,12 @@
 
 
 import Image from "next/image";
-import { AccessTimeOutlined, LocationOnOutlined, CheckCircle, NotInterested, RadioButtonUnchecked, FiberManualRecordOutlined, FiberManualRecord } from "@mui/icons-material";
+import { AccessTimeOutlined, LocationOnOutlined, CheckCircle, NotInterested, RadioButtonUnchecked, FiberManualRecordOutlined, FiberManualRecord, DoNotDisturbOn } from "@mui/icons-material";
 import axios from "axios";
 import { FormControlLabel, Switch } from "@mui/material";
 import Link from "next/link";
 import { useContext, useState } from "react";
-import { verifyConferenceByAdmin } from "../services/userServices";
+import { conferenceStatus, verifyConferenceByAdmin } from "../services/userServices";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../store/userSlice";
@@ -35,6 +35,7 @@ const EventCard = ({
                 // dispatch(userActions.refreshDetails());
                 toast.success("Toggled");
                 setApproved(!approved);
+                dispatch(userActions.refreshDetails())
             } else {
                 toast.error("Something Wrong")
                 return;
@@ -46,6 +47,22 @@ const EventCard = ({
 
 
     };
+
+    const handleStatusChange = async () => {
+       
+            try{
+                const getResult = await conferenceStatus({id})
+                if(getResult.status !== 200){
+                    return toast.error("Error Occured")
+                }
+                dispatch(userActions.refreshDetails())
+            }
+            catch (err) {
+                console.log(err);
+            }
+        
+        
+    }
     return (
         <div className="text-black  overflow-hidden rounded-md w-full border-[1px] border-black flex flex-col gap-3">
             <div className="flex justify-between	">
@@ -97,9 +114,9 @@ const EventCard = ({
                     </div>
                   { status !== 'pending' &&  <div className="flex flex-col items-center">
                         <div>
-                        <RadioButtonUnchecked className="text-slate-400"></RadioButtonUnchecked>
-                        <Switch/>
-                        <FiberManualRecord className="text-green-500"></FiberManualRecord>
+                        <DoNotDisturbOn className="text-slate-400"></DoNotDisturbOn>
+                        <Switch checked={isActive} onClick={handleStatusChange}/>
+                        <FiberManualRecord className={isActive && 'text-green-500'}></FiberManualRecord>
                         </div>
                         <div className="font-extrabold">
                             Active

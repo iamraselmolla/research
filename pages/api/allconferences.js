@@ -12,7 +12,7 @@ export default async function getAllConferences(req, res) {
                     const userType = req.query.user;
                     if (userType === 'user') {
 
-                        allConference = await Conference.find({ status: "approved" });
+                        allConference = await Conference.find({ isActive: true });
                         return res.status(200).json(allConference)
                     }
                     if (userType === 'admin') {

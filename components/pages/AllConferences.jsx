@@ -30,7 +30,7 @@ const AllConferences = () => {
         const allConferences = await getAllConferences("admin");
         setAllConference(allConferences?.data);
         dispatch(userActions.setAllConference(allConferences?.data))
-        dispatch(userActions.refreshDetails())
+        
 
         setFetchEnd(true)
 
