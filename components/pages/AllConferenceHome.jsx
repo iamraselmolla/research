@@ -14,7 +14,7 @@ const AllConferenceHome = () => {
     const [loading, setLoading] = useState(true);
     const [fetchEnd, setFetchEnd] = useState(false)
     const [dataLoading, setDataLoading] = useState(false);
-    const {refresh,conferences} = useSelector(state => state.user);
+    const { refresh, conferences } = useSelector(state => state.user);
     const dispatch = useDispatch();
     console.log(conferences)
 
@@ -41,7 +41,7 @@ const AllConferenceHome = () => {
         getUsers();
     }, [refresh])
 
-   
+
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -87,6 +87,7 @@ const AllConferenceHome = () => {
                                                 organiser={conference.organisationInfo.organizationName}
                                                 verified={conference.verified}
                                                 id={conference._id}
+                                                isActive={conference?.isActive}
                                                 status={conference.status}
                                             />
                                         ))}

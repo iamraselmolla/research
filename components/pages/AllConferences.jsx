@@ -20,7 +20,7 @@ const AllConferences = () => {
   const [fetchEnd, setFetchEnd] = useState(false)
   const dispatch = useDispatch();
 
-  console.log(conferences)
+
 
 
 

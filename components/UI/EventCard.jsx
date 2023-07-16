@@ -26,15 +26,19 @@ const EventCard = ({
 }) => {
     const [approved, setApproved] = useState(status === 'approved' ? true : false);
     const dispatch = useDispatch();
-    const { role } = useContext(AuthContext)
+    const { role } = useContext(AuthContext);
+    const {allUser} = useSelector(state => state.user);
+    
     const handleChange = async () => {
         try {
-
+            if (approved) {
+                return
+            }
             const result = await verifyConferenceByAdmin({ id });
             if (result) {
                 // dispatch(userActions.refreshDetails());
-                toast.success("Toggled");
-                setApproved(!approved);
+
+                
                 dispatch(userActions.refreshDetails())
             } else {
                 toast.error("Something Wrong")
@@ -49,19 +53,19 @@ const EventCard = ({
     };
 
     const handleStatusChange = async () => {
-       
-            try{
-                const getResult = await conferenceStatus({id})
-                if(getResult.status !== 200){
-                    return toast.error("Error Occured")
-                }
-                dispatch(userActions.refreshDetails())
+
+        try {
+            const getResult = await conferenceStatus({ id })
+            if (getResult.status !== 200) {
+                return toast.error("Error Occured")
             }
-            catch (err) {
-                console.log(err);
-            }
-        
-        
+            dispatch(userActions.refreshDetails())
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+
     }
     return (
         <div className="text-black  overflow-hidden rounded-md w-full border-[1px] border-black flex flex-col gap-3">
@@ -104,21 +108,21 @@ const EventCard = ({
                 {role === 'admin' && <div className="flex justify-between items-center">
 
                     <div className="verified-status flex flex-col items-center">
-                       <div>
-                       <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" />
-                       <Switch onChange={handleChange} checked={approved} size="medium" />
-                       <CheckCircle className={`${approved ? 'text-green-700' : ''}`} fontSize="small" title="Approved" />
-                       </div>
-                       <div className="font-extrabold">
+                        <div>
+                            <NotInterested className={`${!approved ? "text-red-700" : 'ok'}`} fontSize="medium" />
+                            <Switch onChange={handleChange} checked={approved} size="medium" />
+                            <CheckCircle className={`${approved ? 'text-green-700' : ''}`} fontSize="small" title="Approved" />
+                        </div>
+                        <div className="font-extrabold">
                             Verified
                         </div>
 
                     </div>
-                  { status !== 'pending' &&  <div className="flex flex-col items-center">
+                    {status !== 'pending' && <div className="flex flex-col items-center">
                         <div>
-                        <DoNotDisturbOn className="text-slate-400"></DoNotDisturbOn>
-                        <Switch checked={isActive} onClick={handleStatusChange}/>
-                        <FiberManualRecord className={isActive ? 'text-green-500' : ''}></FiberManualRecord>
+                            <DoNotDisturbOn className="text-slate-400"></DoNotDisturbOn>
+                            <Switch checked={isActive} onClick={handleStatusChange} />
+                            <FiberManualRecord className={isActive ? 'text-green-500' : ''}></FiberManualRecord>
                         </div>
                         <div className="font-extrabold">
                             Active

@@ -10,7 +10,6 @@ export default async function markConferenceStatus(req, res) {
                     isAdmin(req, res, async (req,res) => {
                         await dbConnect();
                         const { id } = req.body;
-                        console.log(id)
                         if (id) {
                             const findConference = await Conference.findById(id);
                             

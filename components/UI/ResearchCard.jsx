@@ -5,17 +5,14 @@ import AuthContext from '../store/AuthContext';
 import ResearchModalCard from './ResearchModalCard';
 import { useState } from 'react';
 import ResearchModal from './ResearchModal';
+import AssignModal from './AssignModal';
 
 
 
 const ResearchCard = ({ data }) => {
-    const { title, description, status, file, createdAt, remarks, updatedAt } = data;
-    const { role } = useContext(AuthContext)
-
-
-
-
-
+    const { title, description, status, file, createdAt, remarks } = data;
+    const { role } = useContext(AuthContext);
+    
     return (
 
 
@@ -40,12 +37,13 @@ const ResearchCard = ({ data }) => {
                     <div className="flex items-center gap-6 justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
                         <ResearchModal data={data} />
-                        <div className="flex bg-green-500 px-5 py-3 text-white font-bold  rounded justify-center items-center">
+                        <AssignModal/>
+                        {/* <div className="flex bg-green-500 px-5 py-3 text-white font-bold  rounded justify-center items-center">
                             <button className="mr-3 rounded">
                                 Assign to
                             </button>
                         <Forward></Forward>
-                        </div>
+                        </div> */}
                     </div>
 
                 </>}
