@@ -7,20 +7,24 @@ import BlockIcon from "@mui/icons-material/Block";
 import { fetchAllUsers } from "../services/userServices";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../store/userSlice";
 const AllUsers = () => {
-  const { token } = useContext(AuthContext);
 
 
-  const [allUsers, setAllUser] = useState(null);
-  const [loading, setLoading] = useState(false)
+  const {allUser} = useSelector(state => state.user);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
 
       setLoading(true)
 
       try {
-        const getUsers = await fetchAllUsers();
-        setAllUser(getUsers.data);
+        const getData = await fetchAllUsers();
+        dispatch(userActions.setAllUsers(getData?.data));
+       
+       
         setLoading(false)
       } catch (error) {
         setLoading(false)
@@ -37,7 +41,7 @@ const AllUsers = () => {
 
   return (
     <Dashboard>
-      {!loading && allUsers &&
+      {!loading && allUser &&
         <div className="w-full">
           <table className="w-full bg-white border border-black overflow-auto">
             <thead>
@@ -51,7 +55,7 @@ const AllUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {allUsers && allUsers.length > 0 && allUsers.map((user, index) => {
+              {allUser && allUser.length > 0 && allUser.map((user, index) => {
                 return (
                   <tr key={index}>
                     <td className="px-4 py-2 text-black border border-black text-center align-middle">{index + 1}</td>

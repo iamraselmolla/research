@@ -1,23 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState={
-    user:{},
+const initialState = {
+    user: {},
     research: [],
     conferences: [],
-    refresh:0,
-    singleConference: {}
+    refresh: 0,
+    singleConference: {},
+    allUser: []
 }
 
-const userSlice=createSlice({
-    name:"user",
-    initialState:initialState,
-    reducers:{
-        setUserDetails:(state,action)=>{
-            state.user=action.payload;
+const userSlice = createSlice({
+    name: "user",
+    initialState: initialState,
+    reducers: {
+        setUserDetails: (state, action) => {
+            state.user = action.payload;
         },
-        
+
         setAllConference: (state, action) => {
-                state.conferences = action.payload
+            state.conferences = action.payload
         },
         setSingleConference: (state, action) => {
             if (state.conferences?.length > 0) {
@@ -32,10 +33,13 @@ const userSlice=createSlice({
                 }
             }
         },
-        setUserResearches: (state, action) => {
-            state.research=action.payload
+        setAllUsers: (state, action) => {
+            state.allUser = action.payload
         },
-        refreshDetails:(state,action)=>{
+        setUserResearches: (state, action) => {
+            state.research = action.payload
+        },
+        refreshDetails: (state, action) => {
             state.refresh++;
         }
 
@@ -43,4 +47,4 @@ const userSlice=createSlice({
 })
 
 export default userSlice;
-export const userActions=userSlice.actions;
+export const userActions = userSlice.actions;

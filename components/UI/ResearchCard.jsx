@@ -1,4 +1,4 @@
-import { DownloadForOffline, OpenInNew, Visibility } from '@mui/icons-material';
+import { DownloadForOffline, Forward, OpenInNew, Visibility } from '@mui/icons-material';
 import Link from 'next/link';
 import React, { useContext } from 'react';
 import AuthContext from '../store/AuthContext';
@@ -37,10 +37,17 @@ const ResearchCard = ({ data }) => {
                                 : ''}`}> {status}</span>
                 </div>
                 {role === 'admin' && <>
-                    <div className="flex items-center justify-center cursor-pointer">
+                    <div className="flex items-center gap-6 justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
                         <ResearchModal data={data} />
+                        <div className="flex bg-green-500 px-5 py-3 text-white font-bold  rounded justify-center items-center">
+                            <button className="mr-3 rounded">
+                                Assign to
+                            </button>
+                        <Forward></Forward>
+                        </div>
                     </div>
+
                 </>}
                
                 <div className='flex flex-col items-center justify-center'>
