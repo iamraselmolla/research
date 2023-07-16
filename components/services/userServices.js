@@ -17,13 +17,16 @@ const BASE_URL={
     getAllResearches : '/api/allResearchPapers',
     researchPaperStatusChange: '/api/upateResearch',
     conferenceStatus: '/api/activeConference',
+    assignResearch: '/api/assignResearch'
   }
 
 
 // export function submitResearchFile (data) {
 //   return http.post(cloudinaryAPILink, data)
 // }
-
+export function handleAssignResearch  (values){
+return http.put(BASE_URL.assignResearch, values)
+}
 export function conferenceStatus (values){
   return http.put(BASE_URL.conferenceStatus, values);
 }

@@ -57,7 +57,7 @@ const UserSchema = new Schema({
     ],
     profilePic: {
         type: String,
-        default: 'https://asset.cloudinary.com/iamraselmolla/818d2a0829113ba5da7de419bdd11094'
+        default: 'https://i.ibb.co/2WCmDt0/people19.png'
     },
 
     role: {

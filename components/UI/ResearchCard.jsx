@@ -37,7 +37,7 @@ const ResearchCard = ({ data }) => {
                     <div className="flex items-center gap-6 justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
                         <ResearchModal data={data} />
-                        <AssignModal/>
+                        <AssignModal data = {data}/>
                         {/* <div className="flex bg-green-500 px-5 py-3 text-white font-bold  rounded justify-center items-center">
                             <button className="mr-3 rounded">
                                 Assign to
