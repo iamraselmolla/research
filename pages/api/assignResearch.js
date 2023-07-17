@@ -12,12 +12,10 @@ export default async function handleAssignPaper(req, res) {
                     try {
                         await dbConnect();
                         const {userId, researchId} = req.body
-                        console.log(userId,researchId)
                         const findAndUpdate = await Research.findByIdAndUpdate(researchId, {
                             assigned: userId
                         },{ new: true, runValidators: true });
 
-                        console.log(findAndUpdate)
                         return res.status(200).json(findAndUpdate)
                     }
                     catch (err) {

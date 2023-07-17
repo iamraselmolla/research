@@ -6,12 +6,18 @@ import ResearchModalCard from './ResearchModalCard';
 import { useState } from 'react';
 import ResearchModal from './ResearchModal';
 import AssignModal from './AssignModal';
+import { useSelector } from 'react-redux';
 
 
 
 const ResearchCard = ({ data }) => {
-    const { title, description, status, file, createdAt, remarks,assigned } = data;
+    const { title, description, status, file, createdAt, remarks, assigned } = data;
     const { role } = useContext(AuthContext);
+    const { allUser } = useSelector(state => state.user);
+    let assignedFaculty;
+    if (assigned) {
+        assignedFaculty = allUser?.find(user => user?._id === assigned);
+    }
 
     return (
 
@@ -33,16 +39,19 @@ const ResearchCard = ({ data }) => {
                             : status === 'rejected' ? 'bg-red-500'
                                 : ''}`}> {status}</span>
                 </div>
-                {(role === 'admin' || role === 'faculty') &&<>
+                {(role === 'admin' || role === 'faculty') && <>
                     <div className="flex items-center gap-6 justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
-                       <ResearchModal data={data} />
-                        {!assigned ?
+                        <ResearchModal data={data} />
+                        {!assigned &&
 
-                            <AssignModal data={data} /> : <p className="font-bold">
-                                Assigned
-                            </p>
+                            <AssignModal data={data} /> 
                         }
+
+                            { role === 'admin' ? <p className="font-bold">
+                                Assigned: <a target='_blank' className='text-blue-500' href={`/faculties/${assignedFaculty?._id}`}>{assignedFaculty?.basicInfo.firstName} {assignedFaculty?.basicInfo.lastName}</a>
+                            </p> : ''}
+                        
                         {/* <div className="flex bg-green-500 px-5 py-3 text-white font-bold  rounded justify-center items-center">
                             <button className="mr-3 rounded">
                                 Assign to

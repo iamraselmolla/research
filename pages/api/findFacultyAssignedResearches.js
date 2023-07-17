@@ -15,7 +15,6 @@ export default async function facultyAssignedResearch(req, res) {
                         const id = decoded.id
                        
                         const findFacultyAssignResearches = await Research.find({assigned: id});
-                        console.log(findFacultyAssignResearches)
 
                         return res.status(200).json(findFacultyAssignResearches);
                     })

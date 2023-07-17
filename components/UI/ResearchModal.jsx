@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { changeResearchPaperStatus } from '../services/userServices';
 import { toast } from 'react-toastify';
 import { userActions } from '../store/userSlice';
+import AuthContext from '../store/AuthContext';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -54,8 +55,9 @@ export default function ResearchModal({ data }) {
   const [open, setOpen] = React.useState(false);
   const [remarks, setRemarks] = React.useState(null)
 
-  const { description, title, file, status, createdAt, _id, updatedAt, user, remarks: feedBackRemarks } = data;
-  const dispatch = useDispatch()
+  const { description, title, file, status, createdAt, _id, updatedAt, user, assigned, remarks: feedBackRemarks } = data;
+  const dispatch = useDispatch();
+  const {role} = React.useContext(AuthContext)
 
   const dateofSubmit = new Date(createdAt).toLocaleString().split(",")[0]
   const timeofSubmit = new Date(createdAt).toLocaleString().split(",")[1]
@@ -130,7 +132,7 @@ export default function ResearchModal({ data }) {
                 </button>
               </a>
             </div>
-            {status === 'pending' && <div className=" mt-10">
+            {((status === 'pending' && role === 'admin' && !assigned) || (assigned && role === 'faculty')) && <div className=" mt-10">
               <h2 className="font-bold">Write Remarks</h2>
               <textarea onChange={(e) => setRemarks(e.target.value)} rows={3} className="bg-gray-300 p-2 rounded-md w-full"></textarea>
             </div>}
@@ -181,28 +183,30 @@ export default function ResearchModal({ data }) {
             </>}
           </div>
         </div>
-        <div className={`flex ${status === 'rejected' && "bg-red-800"} ${status === 'approved' && 'bg-green-600'} items-center justify-between p-6 border-t border-solid border-slate-200 rounded-b`}>
-          {status === 'pending' ? <> <button
-            className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-3 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button"
-            onClick={() => handleRemarks("approved")}
-          >
-            <Done /> APPROVE
-          </button>
-            <button
-              className="background-transparent bg-red-500 duration-150 ease-linear focus:outline-none font-bold mb-1 mr-1 outline-none px-3 py-1  rounded text-sm text-white transition-all uppercase"
+        {((status === 'pending' && role === 'admin' && !assigned) || (assigned && role === 'faculty' && status === 'pending')) && <>
+          <div className={`flex ${status === 'rejected' && "bg-red-800"} ${status === 'approved' && 'bg-green-600'} items-center justify-between p-6 border-t border-solid border-slate-200 rounded-b`}>
+            {status === 'pending' ? <> <button
+              className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-3 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
-              onClick={() => handleRemarks("rejected")}
+              onClick={() => handleRemarks("approved")}
             >
-              <Close /> REJECT
-            </button></> : <>
+              <Done /> APPROVE
+            </button>
+              <button
+                className="background-transparent bg-red-500 duration-150 ease-linear focus:outline-none font-bold mb-1 mr-1 outline-none px-3 py-1  rounded text-sm text-white transition-all uppercase"
+                type="button"
+                onClick={() => handleRemarks("rejected")}
+              >
+                <Close /> REJECT
+              </button></> : <>
 
-            <span className="text-2xl font-bold text-center w-full text-white">
-              {status === 'rejected' ? 'Rejected' : (status === 'approved' ? 'Approved' : '')}
-            </span>
-          </>}
+              <span className="text-2xl font-bold text-center w-full text-white">
+                {status === 'rejected' ? 'Rejected' : (status === 'approved' ? 'Approved' : '')}
+              </span>
+            </>}
 
-        </div>
+          </div>
+        </>}
       </BootstrapDialog>
     </div>
   );
