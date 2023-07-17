@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchUserDetails, getUserResearchFile } from "../services/userServices";
+import { fetchUserDetails, findFacultyAssignedResearch, getUserResearchFile } from "../services/userServices";
 import { userActions } from "./userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -41,6 +41,11 @@ export const AuthContextProvider = (props) => {
         if (role === 'student') {
           const response2 = await getUserResearchFile()
           dispatch(userActions.setUserResearches(response2.data))
+        }
+        if(role === 'faculty'){
+          const response3 = await findFacultyAssignedResearch();
+
+          dispatch(userActions.setFacultyAssignedResearch(response3?.data));
         }
       }
       catch (err) {

@@ -33,7 +33,7 @@ const ResearchCard = ({ data }) => {
                             : status === 'rejected' ? 'bg-red-500'
                                 : ''}`}> {status}</span>
                 </div>
-                {role === 'admin' && <>
+                {(role === 'admin' || role === 'faculty') &&<>
                     <div className="flex items-center gap-6 justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
                         <ResearchModal data={data} />

@@ -32,7 +32,11 @@ const AllResearches = () => {
         } else if (search.select === 'rejected') {
             const rejectedResearches = allResearches?.filter(research => research?.status === 'rejected')
             setCurrentResearches(rejectedResearches)
-        } else if (search.select === 'pending') {
+        } else if (search.select === 'assigned') {
+            const assignResearches = allResearches?.filter(research => research?.assigned)
+            setCurrentResearches(assignResearches)
+        } 
+        else if (search.select === 'pending') {
             const pendingResearches = allResearches?.filter(research => research?.status === 'pending')
             setCurrentResearches(pendingResearches)
         } else {
@@ -51,6 +55,7 @@ const AllResearches = () => {
                     <option disabled>Choose</option>
                     <option value='all'>All</option>
                     <option value='pending'>pending</option>
+                    <option value='assigned'>Assigned to</option>
                     <option value='approved'>Approved</option>
                     <option value='rejected'>Rejected</option>
                 </select>

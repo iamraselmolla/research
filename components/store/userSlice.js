@@ -6,7 +6,8 @@ const initialState = {
     conferences: [],
     refresh: 0,
     singleConference: {},
-    allUser: []
+    allUser: [],
+    assignResearch: []
 }
 
 const userSlice = createSlice({
@@ -41,6 +42,9 @@ const userSlice = createSlice({
         },
         refreshDetails: (state, action) => {
             state.refresh++;
+        },
+        setFacultyAssignedResearch: (state, action) => {
+            state.assignResearch = action.payload
         }
 
     }
