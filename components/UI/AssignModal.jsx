@@ -57,6 +57,7 @@ export default function AssignModal({ data }) {
     const allFaculty = allUser?.filter(faculty => faculty?.role === 'faculty')
     const [faculty, setFaculty] = React.useState(null);
     const [facultyData, setFacultyData] = React.useState(null)
+    const dispacth = useDispatch()
 
 
     React.useEffect(() => {
@@ -83,13 +84,17 @@ export default function AssignModal({ data }) {
         return Math.abs(age_dt.getUTCFullYear() - 1970);
     }
     const hanldleAssign = async () => {
-        if(!facultyData){
-           return toast.error("Please select a faculty to assign")
+        if (!facultyData) {
+            return toast.error("Please select a faculty to assign")
         }
-        // const getResult = await handleAssignResearch({ userId: facultyData?._id, researchId : data?._id });
-        // console.log(getResult)
-        // setOpen(false);
-        // setFacultyData(null)
+        const getResult = await handleAssignResearch({ userId: facultyData?._id, researchId: data?._id });
+        if (getResult?.status !== 200) {
+            return toast.error("Error Occured when assigning")
+        }
+        toast.success(`Research Paper assigned to faculty ${facultyData?.basicInfo.firstName} ${facultyData?.basicInfo.lastName}`);
+        dispacth(userActions.refreshDetails())
+        setOpen(false);
+        setFacultyData(null)
     }
 
     return (

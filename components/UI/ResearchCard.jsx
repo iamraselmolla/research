@@ -10,9 +10,9 @@ import AssignModal from './AssignModal';
 
 
 const ResearchCard = ({ data }) => {
-    const { title, description, status, file, createdAt, remarks } = data;
+    const { title, description, status, file, createdAt, remarks,assigned } = data;
     const { role } = useContext(AuthContext);
-    
+
     return (
 
 
@@ -22,8 +22,8 @@ const ResearchCard = ({ data }) => {
                 <p className="text-xl">
                     {description}
                 </p>
-               {remarks && <p className='text-cyan-500 mt-2 font-bold'>
-                  Remarks:  {remarks}
+                {remarks && <p className='text-cyan-500 mt-2 font-bold'>
+                    Remarks:  {remarks}
                 </p>}
             </div>
             <div className='flex justify-between w-full md:w-auto gap-10 '>
@@ -37,7 +37,12 @@ const ResearchCard = ({ data }) => {
                     <div className="flex items-center gap-6 justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
                         <ResearchModal data={data} />
-                        <AssignModal data = {data}/>
+                        {!assigned ?
+
+                            <AssignModal data={data} /> : <p className="font-bold">
+                                Assigned to Faculty
+                            </p>
+                        }
                         {/* <div className="flex bg-green-500 px-5 py-3 text-white font-bold  rounded justify-center items-center">
                             <button className="mr-3 rounded">
                                 Assign to
@@ -47,7 +52,7 @@ const ResearchCard = ({ data }) => {
                     </div>
 
                 </>}
-               
+
                 <div className='flex flex-col items-center justify-center'>
                     <div>Submitted: {new Date(createdAt).toLocaleString()}</div>
                 </div>

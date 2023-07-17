@@ -28,7 +28,11 @@ const ResearchSchema = new Schema(
               },
               remarks: {
                 type: String
-              }
+              },
+              assigned: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+              },
 
         },
     ],
@@ -46,4 +50,4 @@ ResearchSchema.virtual('userData', {
   
   ResearchSchema.set('toObject', { virtuals: true });
   ResearchSchema.set('toJSON', { virtuals: true });
-export default mongoose.models.Research || mongoose.model("Research", ResearchSchema)
+export default mongoose.models.Research || mongoose.model("Research", ResearchSchema) 

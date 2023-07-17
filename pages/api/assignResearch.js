@@ -13,8 +13,12 @@ export default async function handleAssignPaper(req, res) {
                         await dbConnect();
                         const {userId, researchId} = req.body
                         console.log(userId,researchId)
-                        // const findAndUpdate = await Research.findByIdAndUpdate(researchId)
-                        return res.status(200).json(findAllUsers)
+                        const findAndUpdate = await Research.findByIdAndUpdate(researchId, {
+                            assigned: userId
+                        },{ new: true, runValidators: true });
+
+                        console.log(findAndUpdate)
+                        return res.status(200).json(findAndUpdate)
                     }
                     catch (err) {
                         return res.status(500).json({ message: 'Server error' })
