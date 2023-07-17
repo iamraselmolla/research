@@ -5,9 +5,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { AccessTime, CalendarMonth, Clear, Close, Done, FilePresentOutlined, OpenInNew, TaskAlt, TrendingFlat, Visibility } from '@mui/icons-material';
+import { AccessTime, AssignmentReturned, CalendarMonth, Clear, Close, Done, FilePresentOutlined, OpenInNew, Person, School, TaskAlt, TrendingFlat, Visibility } from '@mui/icons-material';
 import { Divider } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeResearchPaperStatus } from '../services/userServices';
 import { toast } from 'react-toastify';
 import { userActions } from '../store/userSlice';
@@ -57,7 +57,12 @@ export default function ResearchModal({ data }) {
 
   const { description, title, file, status, createdAt, _id, updatedAt, user, assigned, remarks: feedBackRemarks } = data;
   const dispatch = useDispatch();
-  const {role} = React.useContext(AuthContext)
+  const { role } = React.useContext(AuthContext)
+  const { allUser } = useSelector(state => state.user);
+  let assignedFaculty;
+  if (assigned) {
+    assignedFaculty = allUser?.find(user => user?._id === assigned);
+  }
 
   const dateofSubmit = new Date(createdAt).toLocaleString().split(",")[0]
   const timeofSubmit = new Date(createdAt).toLocaleString().split(",")[1]
@@ -138,11 +143,11 @@ export default function ResearchModal({ data }) {
             </div>}
             <div className="mt-10 items-center justify-between flex text-center">
               <div className="font-bold flex justify-center items-center flex-col">
-                <div className="w-20 h-20 justify-center items-center flex border-8 border-blue-600 rounded-full">
-                  <FilePresentOutlined className="text-blue-600" fontSize="large" />
+                <div className="w-20 h-20 justify-center items-center flex border-8 border-black rounded-full">
+                  <FilePresentOutlined  fontSize="large" />
 
                 </div>
-                <h3 className="mt-2 text-2xl">
+                <h3 className="mt-2 text-xl">
                   Submitted
                 </h3>
                 <div className="flex mt-3 flex-col text-left">
@@ -150,27 +155,55 @@ export default function ResearchModal({ data }) {
                   <div><AccessTime></AccessTime>  {timeofSubmit}</div>
                 </div>
               </div>
-              {feedBackRemarks && <>
+              {assignedFaculty && <>
                 <div className="flex justify-center items-center">
                   <TrendingFlat />
                 </div>
               </>}
-              {feedBackRemarks && <div className={`font-bold flex flex-col justify-center items-center ${status === 'approved' ? "text-green-500" : (status === 'rejected') ? "text-red-500" : ''}`}>
+              {assignedFaculty &&
 
-                <div className={`w-20 h-20 justify-center items-center flex border-8 ${status === 'approved' ? 'border-green-600' : status === 'rejected' ?
-                  'border-red-600' : ''} rounded-full`}>
-                  {status === 'approved' && <TaskAlt />}
-                  {status === 'rejected' && <Clear color="error" />}
-                </div>
-                <h3 className="mt-2 text-2xl">
-                  {status === 'approved' ? "Approved" : status === 'rejected' ? 'Rejected' : ''}
-                </h3>
-                <div className="flex mt-3 flex-col text-left">
-                  <div> <CalendarMonth></CalendarMonth>  {dateOfStatusChange}</div>
-                  <div><AccessTime></AccessTime>  {timeOfStatusChange}</div>
+                <div className={`font-bold flex flex-col justify-center items-center text-lime-500`}>
+
+                  <div className={`w-20 h-20 justify-center items-center flex border-8  border-lime-500
+                'border-red-600'  rounded-full`}>
+                    <AssignmentReturned></AssignmentReturned>
+                  </div>
+                  <h3 className="mt-2 text-xl">
+                    Assigned
+                  </h3>
+                  <div className="flex mt-3 flex-col text-left">
+                    <div> <Person></Person> {assignedFaculty?.basicInfo.firstName} {assignedFaculty?.basicInfo.firstName}</div>
+                    <div><School></School>  {assignedFaculty.role}</div>
+                  </div>
+
+
+
                 </div>
 
+
+              }
+              {(status === 'approved' || status === 'rejected') && 
+              <div className="flex justify-center items-center">
+                <TrendingFlat />
               </div>}
+
+              {feedBackRemarks &&
+                <div className={`font-bold flex flex-col justify-center items-center ${status === 'approved' ? "text-green-500" : (status === 'rejected') ? "text-red-500" : ''}`}>
+
+                  <div className={`w-20 h-20 justify-center items-center flex border-8 ${status === 'approved' ? 'border-green-600' : status === 'rejected' ?
+                    'border-red-600' : ''} rounded-full`}>
+                    {status === 'approved' && <TaskAlt />}
+                    {status === 'rejected' && <Clear color="error" />}
+                  </div>
+                  <h3 className="mt-2 text-xl">
+                    {status === 'approved' ? "Approved" : status === 'rejected' ? 'Rejected' : ''}
+                  </h3>
+                  <div className="flex mt-3 flex-col text-left">
+                    <div> <CalendarMonth></CalendarMonth>  {dateOfStatusChange}</div>
+                    <div><AccessTime></AccessTime>  {timeOfStatusChange}</div>
+                  </div>
+
+                </div>}
 
 
             </div>

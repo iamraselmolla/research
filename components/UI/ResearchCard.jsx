@@ -43,7 +43,7 @@ const ResearchCard = ({ data }) => {
                     <div className="flex items-center gap-6 justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
                         <ResearchModal data={data} />
-                        {!assigned &&
+                        {!assigned && status === 'pending' && 
 
                             <AssignModal data={data} /> 
                         }
