@@ -36,7 +36,7 @@ const ResearchCard = ({ data }) => {
                 {(role === 'admin' || role === 'faculty') &&<>
                     <div className="flex items-center gap-6 justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
-                        <ResearchModal data={data} />
+                        {(assigned && role === 'faculty' ) && <ResearchModal data={data} />}
                         {!assigned ?
 
                             <AssignModal data={data} /> : <p className="font-bold">

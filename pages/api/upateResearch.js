@@ -1,4 +1,4 @@
-import { isAdmin } from "../../middlewares/user";
+import {  isAdminOrFaculty } from "../../middlewares/user";
 import Research from "../../models/Research";
 import dbConnect from "../../utils/dbConnect";
 
@@ -15,7 +15,7 @@ export default async function updateResearchPaper(req, res){
                 //    return console.log(status)
                 //  }
                 
-                 isAdmin(req, res, async(req, res, next, decoded) => {
+                isAdminOrFaculty(req, res, async(req, res, next, decoded) => {
                     const updateStatus = await Research.findByIdAndUpdate(id, {status: status, remarks: remarks},{ new: true, runValidators: true });
 
                     console.log(updateStatus)
