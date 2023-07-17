@@ -39,7 +39,8 @@ const ResearchCard = ({ data }) => {
                             : status === 'rejected' ? 'bg-red-500'
                                 : ''}`}> {status}</span>
                 </div>
-                {(role === 'admin' || role === 'faculty') && <>
+                {/* {(role === 'admin' || role === 'faculty') && */}
+                 <>
                     <div className="flex items-center gap-6 justify-center cursor-pointer">
                         {/* <Visibility onClick={handleModal} sx={{ color: "black" }}></Visibility> */}
                         <ResearchModal data={data} />
@@ -60,7 +61,8 @@ const ResearchCard = ({ data }) => {
                         </div> */}
                     </div>
 
-                </>}
+                </>
+                {/* } */}
 
                 <div className='flex flex-col items-center justify-center'>
                     <div>Submitted: {new Date(createdAt).toLocaleString()}</div>

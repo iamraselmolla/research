@@ -59,22 +59,12 @@ const ConferenceSchema = new Schema({
     type: Boolean,
     default: false
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
-  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  },
-  assign: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
   }
+}, {
+  timestamps: true
 })
 
 export default mongoose.models.Conference || mongoose.model('Conference', ConferenceSchema);

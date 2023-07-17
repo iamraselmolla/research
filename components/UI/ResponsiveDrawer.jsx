@@ -375,6 +375,9 @@ export default function ResponsiveDrawer() {
               <Link className="hover:underline" href="/faculties">
                 ALL FACULTY
               </Link>
+              <Link className="hover:underline" href="/add-conference">
+                ADD CONFERENCE
+              </Link>
               <div className="group/parent">
                 <Link href="/dashboard" className="flex group/item">
                   <div>ACCOUNT</div>
