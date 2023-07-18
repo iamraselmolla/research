@@ -137,14 +137,16 @@ export default function ResearchModal({ data }) {
                 </button>
               </a>
             </div>
-            {((status === 'pending' && role === 'admin' && !assigned) || (assigned && role === 'faculty')) && <div className=" mt-10">
-              <h2 className="font-bold">Write Remarks</h2>
-              <textarea onChange={(e) => setRemarks(e.target.value)} rows={3} className="bg-gray-300 p-2 rounded-md w-full"></textarea>
-            </div>}
+            {
+              ((status === 'pending' && role === 'admin' && !assigned) || (assigned && role === 'faculty')) &&
+              <div className=" mt-10">
+                <h2 className="font-bold">Write Remarks</h2>
+                <textarea onChange={(e) => setRemarks(e.target.value)} rows={3} className="bg-gray-300 p-2 rounded-md w-full"></textarea>
+              </div>}
             <div className="mt-10 items-center justify-between flex text-center">
               <div className="font-bold flex justify-center items-center flex-col">
                 <div className="w-20 h-20 justify-center items-center flex border-8 border-black rounded-full">
-                  <FilePresentOutlined  fontSize="large" />
+                  <FilePresentOutlined fontSize="large" />
 
                 </div>
                 <h3 className="mt-2 text-xl">
@@ -160,7 +162,7 @@ export default function ResearchModal({ data }) {
                   <TrendingFlat />
                 </div>
               </>}
-              {assignedFaculty &&
+              {assignedFaculty && 
 
                 <div className={`font-bold flex flex-col justify-center items-center text-lime-500`}>
 
@@ -173,7 +175,7 @@ export default function ResearchModal({ data }) {
                   </h3>
                   <div className="flex mt-3 flex-col text-left">
                     <div> <Person></Person> {assignedFaculty?.basicInfo.firstName} {assignedFaculty?.basicInfo.firstName}</div>
-                    <div><School></School>  {assignedFaculty.role}</div>
+                    <div><School></School>  {assignedFaculty?.role}</div>
                   </div>
 
 
@@ -181,13 +183,13 @@ export default function ResearchModal({ data }) {
                 </div>
 
 
-              }
-              {(status === 'approved' || status === 'rejected') && 
-              <div className="flex justify-center items-center">
-                <TrendingFlat />
-              </div>}
+               } 
+              {(status === 'approved' || status === 'rejected') &&
+                <div className="flex justify-center items-center">
+                  <TrendingFlat />
+                </div>}
 
-              {feedBackRemarks &&
+              {feedBackRemarks && ((status === 'approved' || status === 'rejected')) &&
                 <div className={`font-bold flex flex-col justify-center items-center ${status === 'approved' ? "text-green-500" : (status === 'rejected') ? "text-red-500" : ''}`}>
 
                   <div className={`w-20 h-20 justify-center items-center flex border-8 ${status === 'approved' ? 'border-green-600' : status === 'rejected' ?

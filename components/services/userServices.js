@@ -18,7 +18,8 @@ const BASE_URL={
     researchPaperStatusChange: '/api/upateResearch',
     conferenceStatus: '/api/activeConference',
     assignResearch: '/api/assignResearch',
-    assginedFacultyResearch : '/api/findFacultyAssignedResearches'
+    assginedFacultyResearch : '/api/findFacultyAssignedResearches',
+    assignedFaculty : '/api/findAssignedFaculty'
   }
 
 
@@ -27,6 +28,9 @@ const BASE_URL={
 // }
 export function findFacultyAssignedResearch(){
   return http.get(BASE_URL.assginedFacultyResearch);
+}
+export function findAssignedFaculty (id){
+  return http.get(BASE_URL.assignedFaculty + `?id=${id}`)
 }
 export function handleAssignResearch  (values){
 return http.put(BASE_URL.assignResearch, values)
