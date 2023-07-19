@@ -52,7 +52,7 @@ const ResearchCard = ({ data }) => {
                         Assigned: <br/>
                         <a target='_blank' className='text-blue-500' href={`/faculties/${assignedFaculty?._id}`}>{assignedFaculty?.basicInfo.firstName} {assignedFaculty?.basicInfo.lastName}</a>
                     </p> : ''}
-                    {!assigned && status === 'pending' && role === 'admin' &&
+                    {status === 'pending' && role === 'admin' &&
 
                         <AssignModal data={data} />
                     }
