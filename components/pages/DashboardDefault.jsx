@@ -4,7 +4,8 @@ import Dashboard from './Dashboard';
 import AuthContext from '../store/AuthContext'
 import { useSelector } from 'react-redux';
 import StudentDashboard from "../UI/StudentDashboard";
-import AdminDashboard from "../UI/AdminDashboard";
+import AdminDashboard from "./adminDashboard/AdminDashboard";
+import FacultyDashboard from "./facultyDashboard/FacultyDashboard";
 const DashboardDefault = () => {
   const { role } = useContext(AuthContext)
   const { user } = useSelector(state => state.user)
@@ -18,8 +19,9 @@ const DashboardDefault = () => {
           Welcome our {role}, {user?.basicInfo?.firstName} {user?.basicInfo?.lastName}
         </h1>
       </div>
-      {role === 'student' && <StudentDashboard></StudentDashboard>}
-      {role === 'admin' && <AdminDashboard></AdminDashboard>}
+      {role === 'student' && <StudentDashboard/>}
+      {role === 'admin' && <AdminDashboard/> }
+      {role === 'faculty' && <FacultyDashboard/>}
       
     </Dashboard>
   )
