@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 const AdminDashboard = () => {
   const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
-  const { allUser, conferences } = useSelector(state => state.user);
+  const { allUser, conferences, allResearches } = useSelector(state => state.user);
 
   // user Information
   const admin = allUser?.filter(singleUser => singleUser.role === 'admin').length;
@@ -36,9 +36,29 @@ const AdminDashboard = () => {
 
   const conferenceData2 = [
     { name: 'Active', value: activeConference },
-    { name: 'Not Active', value: (conferences?.length - activeConference) }
+    { name: 'Not Active', value: (verifiedConferences - activeConference) }
   ]
-console.log(verifiedConferences, activeConference, conferences.length)
+
+
+  // Research Paper asssigned
+  const pendingResearches = allResearches?.filter(research => research.status === 'pending').length;
+  const approvedResearches = allResearches?.filter(research => research.status === 'approved').length;
+  const rejectedResearches = allResearches?.filter(research => research.status === 'rejected').length;
+  const assginedResearches = allResearches?.filter(research => research?.assigned).length;
+
+  console.log(pendingResearches, approvedResearches, rejectedResearches, assginedResearches)
+
+  const researchData1 = [
+    { name: 'Pending', value: pendingResearches },
+    { name: 'Accpted', value: approvedResearches },
+    { name: 'Pending', value: rejectedResearches }
+  ];
+
+  const researchData2 = [
+    { name: 'Not assigned', value: (allResearches?.length - assginedResearches) },
+    { name: 'Assigned to Faculties', value: assginedResearches },
+  ]
+
   // useEffect(() => {
   //   setuserData1([
   //     { name: 'Admin', value: admin },
@@ -137,6 +157,49 @@ console.log(verifiedConferences, activeConference, conferences.length)
                 }]
               }}
               series={conferenceData2.map(item => item.value)}
+              type="pie"
+              width={380}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="pt-5">
+        <h2 className="text-3xl my-5 text-black font-bold">
+          Research paper Information
+        </h2>
+        <div className='grid md:grid-cols-2 sm:grid-cols-1'>
+          <div>
+            <ApexChart
+              options={{
+                labels: researchData1.map(item => item.name),
+                responsive: [{
+                  breakpoint: 480,
+                  options: {
+                    legend: {
+                      position: 'top'
+                    }
+                  }
+                }]
+              }}
+              series={researchData1.map(item => item.value)}
+              type="pie"
+              width={380}
+            />
+          </div>
+          <div>
+            <ApexChart
+              options={{
+                labels: researchData2.map(item => item.name),
+                responsive: [{
+                  breakpoint: 480,
+                  options: {
+                    legend: {
+                      position: 'top'
+                    }
+                  }
+                }]
+              }}
+              series={researchData2.map(item => item.value)}
               type="pie"
               width={380}
             />

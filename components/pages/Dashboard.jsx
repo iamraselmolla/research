@@ -18,7 +18,7 @@ import { CalendarMonth, Description, Duo, People, Person, Videocam, WorkspacePre
 import { ALL_LINKS } from "../constants/constant";
 import { usePathname } from 'next/navigation'
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUsers, getAllConferences } from "../services/userServices";
+import { fetchAllResearchs, fetchAllUsers, getAllConferences } from "../services/userServices";
 import { userActions } from "../store/userSlice";
 
 export const menuItems = {
@@ -99,7 +99,7 @@ const Dashboard = ({ children }) => {
   const route = useRouter();
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const [loading, setLoading] = useState(true);
-  const { user, allUser } = useSelector(state => state.user);
+  const { user, allUser, refresh } = useSelector(state => state.user);
   const dispatch = useDispatch()
 
   let menu = [];
@@ -143,7 +143,9 @@ const Dashboard = ({ children }) => {
           const getData = await fetchAllUsers();
           dispatch(userActions.setAllUsers(getData?.data));
           const allConferences = await getAllConferences("admin");
-          dispatch(userActions.setAllConference(allConferences?.data))
+          dispatch(userActions.setAllConference(allConferences?.data));
+          const findAllResearches = await fetchAllResearchs();
+          dispatch(userActions?.setAllResearch(findAllResearches?.data))
         }
 
 
@@ -154,7 +156,7 @@ const Dashboard = ({ children }) => {
     };
 
     fetchData();
-  }, [])
+  }, [refresh])
 
   const PAGES = [
 

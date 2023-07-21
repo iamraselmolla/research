@@ -2,28 +2,20 @@ import React, { use } from 'react';
 import Dashboard from './Dashboard';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { fetchAllResearchs } from '../services/userServices';
 import { useSelector } from 'react-redux';
 import ResearchCard from '../UI/ResearchCard';
 import { Search } from '@mui/icons-material';
 
 const AllResearches = () => {
-    const [allResearches, setAllResearches] = useState([]);
     const [currentResearches, setCurrentResearches] = useState([])
-    const refresh = useSelector(state => state.user.refresh)
+    const {allResearches} = useSelector(state => state.user)
     const [search, setSearch] = useState({
         search: '',
         select: ''
     })
 
 
-    useEffect(() => {
-        const fetchAllResearchpapers = async () => {
-            const allResearches = await fetchAllResearchs();
-            setAllResearches(allResearches?.data)
-        }
-        fetchAllResearchpapers()
-    }, [refresh])
+
 
     useEffect(() => {
         if (search.select === 'approved') {

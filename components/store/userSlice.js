@@ -8,7 +8,8 @@ const initialState = {
     singleConference: {},
     allUser: [],
     assignResearch: [],
-    assignedFaculty: {}
+    assignedFaculty: {},
+    allResearches: [],
 }
 
 const userSlice = createSlice({
@@ -17,6 +18,9 @@ const userSlice = createSlice({
     reducers: {
         setUserDetails: (state, action) => {
             state.user = action.payload;
+        },
+        setAllResearch: (state, action) => {
+            state.allResearches = action.payload
         },
         findAssignedFaculty: (state, action) => {
             state.assignedFaculty = action.payload

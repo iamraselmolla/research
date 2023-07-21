@@ -14,7 +14,7 @@ const DashboardDefault = () => {
   return (
     <Dashboard>
       <div className="user_dashboard text-black py-7">
-        <h1 className="text-3xl font-bold text-center">
+        <h1 className="text-4xl font-extrabold text-center">
           Welcome our {role}, {user?.basicInfo?.firstName} {user?.basicInfo?.lastName}
         </h1>
       </div>
