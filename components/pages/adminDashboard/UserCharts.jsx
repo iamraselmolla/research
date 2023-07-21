@@ -9,7 +9,7 @@ const UserCharts = () => {
     const admin = allUser?.filter(singleUser => singleUser.role === 'admin').length;
     const faculty = allUser?.filter(singleUser => singleUser.role === 'faculty').length;
     const student = allUser?.filter(singleUser => singleUser.role === 'student').length;
-    const verifiedStudent = allUser?.filter(checkStudent =>
+    const pendingverifyStudent = allUser?.filter(checkStudent =>
         checkStudent?.role === 'student' && checkStudent?.verification?.status === 'pending'
     ).length;
 
@@ -20,8 +20,8 @@ const UserCharts = () => {
     ];
 
     const userData2 = [
-        { name: 'Verified Student', value: verifiedStudent },
-        { name: 'Not Verified', value: (student - verifiedStudent) }
+        { name: 'Not Verified Student', value: pendingverifyStudent },
+        { name: 'Verified', value: (student - pendingverifyStudent) }
     ];
     return (
         <div className="pt-5">

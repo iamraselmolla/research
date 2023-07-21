@@ -78,6 +78,13 @@ export const menuItems = {
     icon: <Description />,
     showAlways: false,
   },
+  studentVerification: {
+    name: "Student Verification",
+    pageLink: ALL_LINKS.dashboard + ALL_LINKS.studentVerificationCorner,
+    icon: <Description />,
+    showAlways: false,
+  },
+
   scheduler: {
     name: "Scheduler",
     pageLink: ALL_LINKS.dashboard + ALL_LINKS.scheduler,
@@ -111,7 +118,7 @@ const Dashboard = ({ children }) => {
     menu = [menuItems.dashboard, menuItems.personalDetails, menuItems.verification, menuItems.addResearchPaper];
   }
   else if (authCtx.role === 'admin') {
-    menu = [menuItems.dashboard, menuItems.allUsers, menuItems.allConferences, menuItems.allResearchesPapers];
+    menu = [menuItems.dashboard, menuItems.allUsers, menuItems.allConferences, menuItems.allResearchesPapers, menuItems.studentVerification];
   } else {
 
   }
