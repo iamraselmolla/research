@@ -18,11 +18,11 @@ import { CalendarMonth, Description, Duo, People, Person, Videocam, WorkspacePre
 import { ALL_LINKS } from "../constants/constant";
 import { usePathname } from 'next/navigation'
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUsers } from "../services/userServices";
+import { fetchAllUsers, getAllConferences } from "../services/userServices";
 import { userActions } from "../store/userSlice";
 
 export const menuItems = {
-  
+
 
   dashboard: {
     name: "Dashboard",
@@ -99,7 +99,7 @@ const Dashboard = ({ children }) => {
   const route = useRouter();
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const [loading, setLoading] = useState(true);
-  const {user, allUser} = useSelector(state => state.user);
+  const { user, allUser } = useSelector(state => state.user);
   const dispatch = useDispatch()
 
   let menu = [];
@@ -136,14 +136,18 @@ const Dashboard = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
 
-     
+
 
       try {
-        const getData = await fetchAllUsers();
-        dispatch(userActions.setAllUsers(getData?.data));
+        if (authCtx.role === 'admin') {
+          const getData = await fetchAllUsers();
+          dispatch(userActions.setAllUsers(getData?.data));
+          const allConferences = await getAllConferences("admin");
+          dispatch(userActions.setAllConference(allConferences?.data))
+        }
 
 
-       
+
       } catch (error) {
         toast.error(error.response.data);
       }

@@ -10,40 +10,17 @@ import { userActions } from "../store/userSlice";
 import { Search } from "@mui/icons-material";
 
 const AllConferences = () => {
-  const [allConference, setAllConference] = useState(null);
   const [error, setError] = useState(null)
   const [search, setSearch] = useState({
     search: '',
     select: ''
   })
-  const { refresh, conferences } = useSelector(state => state.user);
-  const [fetchEnd, setFetchEnd] = useState(false)
-  const dispatch = useDispatch();
+  const { conferences } = useSelector(state => state.user);
 
 
 
 
 
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const allConferences = await getAllConferences("admin");
-        setAllConference(allConferences?.data);
-        dispatch(userActions.setAllConference(allConferences?.data))
-
-
-        setFetchEnd(true)
-
-      }
-      catch (err) {
-        setAllConference(null);
-        setError("No data found")
-        setFetchEnd(true)
-      }
-
-    }
-    getUsers();
-  }, [refresh])
 
 
   // const eventList = [
@@ -89,8 +66,8 @@ const AllConferences = () => {
         </select>
       </div>
 
-      {allConference && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-        {allConference && allConference?.map((conference, index) => (
+      {conferences && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+        {conferences && conferences?.map((conference, index) => (
           <EventCard
             key={index}
             title={conference.conferenceInfo.conferenceName}
@@ -107,12 +84,14 @@ const AllConferences = () => {
           />
         ))}
       </div>}
-      {!allConference &&
+      {!conferences &&
         <div className="flex justify-center overflow-hidden">
           <CircularProgress size={50} sx={{ color: 'red' }} />
         </div>
       }
-      {!allConference && fetchEnd && <>
+      {!conferences?.length>0 && 
+      // fetchEnd &&
+       <>
         <h1 className="text-4xl text-red-500">
           No Conference Found
         </h1>

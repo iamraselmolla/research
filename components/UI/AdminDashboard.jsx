@@ -1,97 +1,150 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import dynamic from 'next/dynamic';
 
 const AdminDashboard = () => {
-    const { allUser,conferences } = useSelector(state => state.user);
-    
+  const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
+  const { allUser, conferences } = useSelector(state => state.user);
 
-    const admin = allUser?.filter(singleUser => singleUser.role === 'admin').length;
-    const faculty = allUser?.filter(singleUser => singleUser.role === 'faculty').length;
-    const student = allUser?.filter(singleUser => singleUser.role === 'student').length;
+  // user Information
+  const admin = allUser?.filter(singleUser => singleUser.role === 'admin').length;
+  const faculty = allUser?.filter(singleUser => singleUser.role === 'faculty').length;
+  const student = allUser?.filter(singleUser => singleUser.role === 'student').length;
+  const verifiedStudent = allUser?.filter(checkStudent =>
+    checkStudent?.role === 'student' && checkStudent?.verification?.status === 'pending'
+  ).length;
 
-    
+  const userData1 = [
+    { name: 'Admin', value: admin },
+    { name: 'Faculty', value: faculty },
+    { name: 'Student', value: student }
+  ];
 
-    const data1 = [
-        { name: 'A', value: admin },
-        { name: 'B', value: faculty },
-        { name: 'C', value: student }
-    ];
+  const userData2 = [
+    { name: 'Verified Student', value: verifiedStudent },
+    { name: 'Not Verified', value: (student - verifiedStudent) }
+  ];
+
+  // Conference Information
+  const verifiedConferences = conferences?.filter(conference => conference.status === 'approved').length;
+  const activeConference = conferences?.filter(conference => conference.status === 'approved' && conference.isActive).length
+
+  const conferenceData1 = [
+    { name: 'Pending', value: (conferences?.length - verifiedConferences) },
+    { name: 'Accepted', value: verifiedConferences }
+  ]
+
+  const conferenceData2 = [
+    { name: 'Active', value: activeConference },
+    { name: 'Not Active', value: (conferences?.length - activeConference) }
+  ]
+console.log(verifiedConferences, activeConference, conferences.length)
+  // useEffect(() => {
+  //   setuserData1([
+  //     { name: 'Admin', value: admin },
+  //     { name: 'Faculty', value: faculty },
+  //     { name: 'Student', value: student }
+  //   ]);
+
+  //   setData2([
+  //     { name: 'Verified Student', value: verifiedStudent },
+  //     { name: 'Not Verified', value: (student - verifiedStudent) }
+  //   ]);
+  // }, [admin, faculty, student, verifiedStudent]);
 
 
-    // const data2 = [
-    //     { name: 'X', value: assigned },
-    //     { name: 'Y', value: (total - assigned) }
-    // ];
 
-    const COLORS = ['#3B82F6', '#22C55E', '#EF4444'];
-    // const COLORS2 = ['#8884d8', '#82ca9d'];
-
-    return (
-        <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                    <PieChart width={400} height={400}>
-                        <Pie
-                            data={data1}
-                            cx={200}
-                            cy={200}
-                            labelLine={false}
-                            label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-                                const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-                                const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
-                                const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
-
-                                return (
-                                    <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central">
-                                        {`${(percent * 100).toFixed(0)}%`}
-                                    </text>
-                                );
-                            }}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            dataKey="value"
-                        >
-                            {data1.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                        </Pie>
-                    </PieChart>
-                </div>
-                {/* <div>
-                    <ResponsiveContainer width="100%" height={500}>
-                        <PieChart>
-                            <Pie
-                                data={data2}
-                                cx={200}
-                                cy={200}
-                                labelLine={false}
-                                label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-                                    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-                                    const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
-                                    const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
-
-                                    return (
-                                        <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central">
-                                            {`${(percent * 100).toFixed(0)}%`}
-                                        </text>
-                                    );
-                                }}
-                                outerRadius={80}
-                                fill="#8884d8"
-                                dataKey="value"
-                            >
-                                {data2.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS2[index % COLORS.length]} />
-                                ))}
-                                
-                            </Pie>
-                        </PieChart>
-                    </ResponsiveContainer>
-                </div> */}
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="pt-5">
+        <h2 className="text-3xl my-5 text-black font-bold">
+          User Information
+        </h2>
+        <div className='grid md:grid-cols-2 sm:grid-cols-1'>
+          {/* Pie Chart 1 */}
+          <div>
+            <ApexChart
+              options={{
+                labels: userData1.map(item => item.name),
+                responsive: [{
+                  breakpoint: 480,
+                  options: {
+                    legend: {
+                      position: 'top'
+                    }
+                  }
+                }]
+              }}
+              series={userData1.map(item => item.value)}
+              type="pie"
+              width={380}
+            />
+          </div>
+          <div>
+            <ApexChart
+              options={{
+                labels: userData2.map(item => item.name),
+                responsive: [{
+                  breakpoint: 480,
+                  options: {
+                    legend: {
+                      position: 'bottom'
+                    }
+                  }
+                }]
+              }}
+              series={userData2.map(item => item.value)}
+              type="pie"
+              width={380}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="pt-5">
+        <h2 className="text-3xl my-5 text-black font-bold">
+          Conference Information
+        </h2>
+        <div className='grid md:grid-cols-2 sm:grid-cols-1'>
+          <div>
+            <ApexChart
+              options={{
+                labels: conferenceData1.map(item => item.name),
+                responsive: [{
+                  breakpoint: 480,
+                  options: {
+                    legend: {
+                      position: 'top'
+                    }
+                  }
+                }]
+              }}
+              series={conferenceData1.map(item => item.value)}
+              type="pie"
+              width={380}
+            />
+          </div>
+          <div>
+            <ApexChart
+              options={{
+                labels: conferenceData2.map(item => item.name),
+                responsive: [{
+                  breakpoint: 480,
+                  options: {
+                    legend: {
+                      position: 'top'
+                    }
+                  }
+                }]
+              }}
+              series={conferenceData2.map(item => item.value)}
+              type="pie"
+              width={380}
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default AdminDashboard;
