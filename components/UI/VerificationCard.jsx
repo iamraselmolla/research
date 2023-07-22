@@ -19,6 +19,7 @@ const VerificationCard = () => {
                             : verification.status === 'rejected' ? 'bg-red-500'
                                 : ''}`}> {verification.status}</span>
                 </div>
+             
 
                 <div className="flex gap-4">
                     {verification?.img &&
@@ -36,7 +37,7 @@ const VerificationCard = () => {
                         </a>
                     }
                 </div>
-               
+
             </div>
             {/* {showModal && <ResearchModalCard data={data} showModal={showModal} setShowModal={setShowModal}></ResearchModalCard>} */}
         </div>

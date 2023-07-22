@@ -220,7 +220,8 @@ export default function ResearchModal({ data }) {
         </div>
         {((status === 'pending' && role === 'admin' && !assigned) || (assigned && role === 'faculty' && status === 'pending')) && <>
           <div className={`flex ${status === 'rejected' && "bg-red-800"} ${status === 'approved' && 'bg-green-600'} items-center justify-between p-6 border-t border-solid border-slate-200 rounded-b`}>
-            {status === 'pending' ? <> <button
+            {status === 'pending' ? <> 
+            <button
               className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-3 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
               onClick={() => handleRemarks("approved")}
@@ -233,7 +234,8 @@ export default function ResearchModal({ data }) {
                 onClick={() => handleRemarks("rejected")}
               >
                 <Close /> REJECT
-              </button></> : <>
+              </button>
+              </> : <>
 
               <span className="text-2xl font-bold text-center w-full text-white">
                 {status === 'rejected' ? 'Rejected' : (status === 'approved' ? 'Approved' : '')}
