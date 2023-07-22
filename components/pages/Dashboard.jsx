@@ -142,9 +142,6 @@ const Dashboard = ({ children }) => {
   }, []);
   useEffect(() => {
     const fetchData = async () => {
-
-
-
       try {
         if (authCtx.role === 'admin') {
           const getData = await fetchAllUsers();
@@ -154,9 +151,6 @@ const Dashboard = ({ children }) => {
           const findAllResearches = await fetchAllResearchs();
           dispatch(userActions?.setAllResearch(findAllResearches?.data))
         }
-
-
-
       } catch (error) {
         toast.error(error.response.data);
       }

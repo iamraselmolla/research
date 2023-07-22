@@ -28,11 +28,11 @@ const StudentDashboard = () => {
     return (
 
         <div className="pt-5">
-            <h2 className="text-3xl my-5 text-black font-bold">
+            <h2 className="text-3xl my-8 text-black font-bold text-center">
                 Research Paper Information
             </h2>
-            <div className="grid md:grid-cols-2 sm:grid-cols-1">
-                <div>
+            <div className='grid md:grid-cols-2 gap-6 sm:grid-cols-1'>
+                <div className='bg-white rounded-lg px-5 py-8'>
                     <ApexChart
                         options={{
                             labels: researchData1.map(item => item.name),
@@ -50,7 +50,7 @@ const StudentDashboard = () => {
                         width={380}
                     />
                 </div>
-                <div>
+                <div className='bg-white rounded-lg px-5 py-8'>
                     <ApexChart
                         options={{
                             labels: researchData2.map(item => item.name),

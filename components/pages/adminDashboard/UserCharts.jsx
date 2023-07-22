@@ -25,12 +25,11 @@ const UserCharts = () => {
     ];
     return (
         <div className="pt-5">
-            <h2 className="text-3xl my-5 text-black font-bold">
+            <h2 className="text-3xl my-8 text-black font-bold text-center">
                 User Information
             </h2>
-            <div className='grid md:grid-cols-2 sm:grid-cols-1'>
-                {/* Pie Chart 1 */}
-                <div>
+            <div className='grid md:grid-cols-2 gap-6 sm:grid-cols-1'>
+                <div className='bg-white rounded-lg px-5 py-8'>
                     <ApexChart
                         options={{
                             labels: userData1.map(item => item.name),
@@ -48,7 +47,8 @@ const UserCharts = () => {
                         width={380}
                     />
                 </div>
-                <div>
+                <div className='bg-white rounded-lg px-5 py-8'>
+
                     <ApexChart
                         options={{
                             labels: userData2.map(item => item.name),
