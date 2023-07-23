@@ -27,7 +27,6 @@ const EventCard = ({
     const [approved, setApproved] = useState(status === 'approved' ? true : false);
     const dispatch = useDispatch();
     const { role } = useContext(AuthContext);
-    const {allUser} = useSelector(state => state.user);
     
     const handleChange = async () => {
         try {
@@ -39,7 +38,8 @@ const EventCard = ({
                 // dispatch(userActions.refreshDetails());
 
                 
-                dispatch(userActions.refreshDetails())
+                dispatch(userActions.refreshDetails());
+                setApproved(true)
             } else {
                 toast.error("Something Wrong")
                 return;
