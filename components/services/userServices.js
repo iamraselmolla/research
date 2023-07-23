@@ -19,13 +19,19 @@ const BASE_URL={
     conferenceStatus: '/api/activeConference',
     assignResearch: '/api/assignResearch',
     assginedFacultyResearch : '/api/findFacultyAssignedResearches',
-    assignedFaculty : '/api/findAssignedFaculty'
+    assignedFaculty : '/api/findAssignedFaculty',
+    studentVerification: '/api/studentVerification'
   }
 
 
 // export function submitResearchFile (data) {
 //   return http.post(cloudinaryAPILink, data)
 // }
+
+export function studentVerificationByAdmin(values){
+  console.log(values)
+  return http.put(BASE_URL.studentVerification, values)
+}
 export function findFacultyAssignedResearch(){
   return http.get(BASE_URL.assginedFacultyResearch);
 }

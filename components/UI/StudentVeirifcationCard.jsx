@@ -1,7 +1,26 @@
 import { Close, Done, OpenInNew } from '@mui/icons-material';
 import React from 'react';
+import { studentVerificationByAdmin } from '../services/userServices';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { userActions } from '../store/userSlice';
 
 const StudentVeirifcationCard = ({ data }) => {
+    const dispatch = useDispatch()
+    const handleStudentVerification = async (id, verificationOrder) => {
+       
+       
+       const result = await studentVerificationByAdmin({id,verificationOrder});
+       if(result.status === 200){
+        if(verificationOrder === 'approved'){
+            toast.success(`${data?.basicInfo?.firstName} ${data?.basicInfo?.lastName} has been ${verificationOrder}`)
+        }
+        if(verificationOrder === 'rejected'){
+            toast.error(`${data?.basicInfo?.firstName} ${data?.basicInfo?.lastName} has been ${verificationOrder}`)
+        }
+       }
+       dispatch(userActions.refreshDetails());
+    }
     return (
         <div className="grid md:grid-cols-3 sm:grid-cols-1 mt-5 text-black gap-4 px-4 py-8 mb-3 justify-between items-center bg-white rounded-lg">
             <div className='flex-1 w-full'>
@@ -37,14 +56,14 @@ const StudentVeirifcationCard = ({ data }) => {
                     <button
                         className="background-transparent bg-red-500 duration-150 ease-linear focus:outline-none font-bold mb-1 mr-1 outline-none px-3 py-1  rounded text-sm text-white transition-all uppercase"
                         type="button"
-                        onClick={() => handleRemarks("rejected")}
+                        onClick={() => handleStudentVerification(data?._id, "rejected")}
                     >
                         <Close /> REJECT
                     </button>
                     <button
                         className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-3 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
-                        onClick={() => handleRemarks("approved")}
+                        onClick={() => handleStudentVerification(data?._id, "approved")}
                     >
                         <Done /> APPROVE
                     </button>
