@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  pageDataCollectionTimeout: 1200000,
   images:{
     remotePatterns:[{
       protocol:'https',
@@ -9,5 +10,5 @@ const nextConfig = {
       port:'',
       pathname: '/iamraselmolla/**',
     }]
-  }
+  } 
 }
