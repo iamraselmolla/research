@@ -18,6 +18,7 @@ export default async function signup(req, res) {
                         if (userFound) {
                             if (req.query.type === "file") {
                                 userFound.verification.file = verification;
+                                userFound.verification.status = 'pending';
 
                                 // Save the updated user
                                 await userFound.save();
@@ -25,6 +26,7 @@ export default async function signup(req, res) {
                                 return res.status(200).json({ message: "User verification added successfully", data: userFound });
                             } else {
                                 userFound.verification.img = verification;
+                                userFound.verification.status = 'pending';
 
                                 // Save the updated user
                                 await userFound.save();
