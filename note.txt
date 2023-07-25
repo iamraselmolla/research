@@ -1,3 +1,3 @@
 1. need to make logic if student didn't upload any research then show that you didn't have uploaded any kind of research papers
-2. need to set verification status pending after submitting any kind of file again
-3. need tp hide remakrs textarea after also reject or approve in faculty account
+2. need to set verification status pending after submitting any kind of file again / done
+3. need tp hide remakrs textarea after also reject or approve in faculty account /done

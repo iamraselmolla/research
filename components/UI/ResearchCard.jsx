@@ -17,7 +17,7 @@ const ResearchCard = ({ data }) => {
         assignedFaculty = allUser?.find(user => user?._id === assigned);
     }
 
-    
+
 
     return (
 
@@ -49,12 +49,14 @@ const ResearchCard = ({ data }) => {
                 </div>
                 <div>
                     {assigned ? <p className="font-bold flex justify-center items-center flex-col">
-                        Assigned: <br/>
+                        Assigned: <br />
                         <a target='_blank' className='text-blue-500' href={`/faculties/${assignedFaculty?._id}`}>{assignedFaculty?.basicInfo.firstName} {assignedFaculty?.basicInfo.lastName}</a>
                     </p> : ''}
                     {status === 'pending' && role === 'admin' &&
 
-                        <AssignModal data={data} />
+                        <div className="flex justify-center">
+                            <AssignModal data={data} />
+                        </div>
                     }
                 </div>
                 <span className="text-sm text-gray-500 flex items-center justify-center dark:text-gray-400">
