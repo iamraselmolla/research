@@ -1,4 +1,3 @@
-1. after uploading any research then another file is not adding
-2. need to populate user data so can we display uploader name and others info in the research
-3. need to change the cloudinary link and preset
-4. need to change the faculty image in the faculty details page
+1. need to make logic if student didn't upload any research then show that you didn't have uploaded any kind of research papers
+2. need to set verification status pending after submitting any kind of file again
+3. need tp hide remakrs textarea after also reject or approve in faculty account

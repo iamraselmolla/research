@@ -138,7 +138,7 @@ export default function ResearchModal({ data }) {
               </a>
             </div>
             {
-              ((status === 'pending' && role === 'admin' && !assigned) || (assigned && role === 'faculty')) &&
+              ((status === 'pending' && role === 'admin' && !assigned) || (assigned && role === 'faculty' && status === 'pending')) &&
               <div className=" mt-10">
                 <h2 className="font-bold">Write Remarks</h2>
                 <textarea onChange={(e) => setRemarks(e.target.value)} rows={3} className="bg-gray-300 p-2 rounded-md w-full"></textarea>
