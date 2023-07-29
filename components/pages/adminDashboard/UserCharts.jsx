@@ -29,26 +29,8 @@ const UserCharts = () => {
                 User Information
             </h2>
             <div className='grid md:grid-cols-2 gap-6 sm:grid-cols-1'>
+                
                 <div className='bg-white rounded-lg px-5 py-8'>
-                    <ApexChart
-                        options={{
-                            labels: userData1.map(item => item.name),
-                            responsive: [{
-                                breakpoint: 480,
-                                options: {
-                                    legend: {
-                                        position: 'top'
-                                    }
-                                }
-                            }]
-                        }}
-                        series={userData1.map(item => item.value)}
-                        type="pie"
-                        width={380}
-                    />
-                </div>
-                <div className='bg-white rounded-lg px-5 py-8'>
-
                     <ApexChart
                         options={{
                             labels: userData2.map(item => item.name),
@@ -62,6 +44,24 @@ const UserCharts = () => {
                             }]
                         }}
                         series={userData2.map(item => item.value)}
+                        type="pie"
+                        width={380}
+                    />
+                </div>
+                <div className='bg-white rounded-lg px-5 py-8'>
+                    <ApexChart
+                        options={{
+                            labels: userData1.map(item => item.name),
+                            responsive: [{
+                                breakpoint: 480,
+                                options: {
+                                    legend: {
+                                        position: 'bottom'
+                                    }
+                                }
+                            }]
+                        }}
+                        series={userData1.map(item => item.value)}
                         type="pie"
                         width={380}
                     />

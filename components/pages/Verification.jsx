@@ -88,6 +88,7 @@ const Verification = () => {
           
           toast.success("Verification Image added successfully");
           setLoading(false)
+          dispatch(userActions.refreshDetails())
         }
 
       }
