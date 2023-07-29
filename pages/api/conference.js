@@ -10,9 +10,9 @@ export default async function conferenceCreate(req, res) {
             {
                 try {
 
-                    isFaculty(req, res, async () => {
+                    // isFaculty(req, res, async () => {
                         await dbConnect();
-                        const { organizationName, organizationAddress, organizationCity, organizationState, organizationCountry, conferenceName, conferenceLocation, conferenceDescription, conferenceDate, startTime, endTime, conferenceType, conferenceTheme, committeeChair, committeeMembers, speakers, registrationOpenDate, registrationCloseDate, registrationFee, registrationLink, userId } = req.body;
+                        const { organizationName, organizationAddress, organizationCity, organizationState, organizationCountry, conferenceName, conferenceLocation, conferenceDescription, conferenceDate, startTime, endTime, conferenceType, conferenceTheme, committeeChair, committeeMembers, speakers, registrationOpenDate, registrationCloseDate, registrationFee, registrationLink } = req.body;
 
                         const organisationInfo = {
                             organizationName, organizationAddress, organizationCity, organizationState, organizationCountry
@@ -27,12 +27,12 @@ export default async function conferenceCreate(req, res) {
                         const registrationInfo = {
                             registrationOpenDate, registrationCloseDate, registrationFee, registrationLink
                         }
-                        const newEvent = new Conference({ organisationInfo, conferenceInfo, committeeInfo, speakers, registrationInfo, verified: false, status: 'pending', user: userId });
+                        const newEvent = new Conference({ organisationInfo, conferenceInfo, committeeInfo, speakers, registrationInfo, verified: false, status: 'pending' });
                         const result = await newEvent.save();
 
 
                         return res.status(200).json({ message: "Conference Submitted Successfully", data: result });
-                    })
+                    // })
 
                 }
                 catch (err) {

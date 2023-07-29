@@ -1,11 +1,13 @@
 import dbConnect from "../../utils/dbConnect";
 import User from "../../models/User";
+import { isAdmin } from "../../middlewares/user";
 
 export default async function studentVerification(req, res) {
     switch (req.method) {
         case "PUT":
             {
                 try {
+                    isAdmin(req,res,async(req,res,next,decoded)=>{
                     await dbConnect();
                     const { id, verificationOrder } = req.body;
                     console.log(id, verificationOrder)
@@ -20,6 +22,8 @@ export default async function studentVerification(req, res) {
                         }
                     }
                     return res.status(200).json({ message: "Student has been verified" });
+                   }
+                    )
 
                 }
                 catch (err) {
