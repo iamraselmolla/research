@@ -6,7 +6,7 @@ const BASE_URL={
     allUsers:'/api/allusers',
     verificationFileLink: '/api/verification?type=file',
     verificationImageLink: '/api/verification',
-    addConference: '/api/conference',
+    conference: '/api/conference',
     allConferences: '/api/allconferences',
     getAllFaculty : '/api/allfaculty',
     reserchPaper:'/api/addresearch',
@@ -93,7 +93,11 @@ export function verificationImage (data){
   return http.put(BASE_URL.verificationImageLink, data)
 }
 export function addConferenceFromForm (data){
-  return http.post(BASE_URL.addConference, data)
+  return http.post(BASE_URL.conference, data)
+}
+export function deleteConference (id){
+  console.log(id)
+  return http.delete(BASE_URL.conference + `?id=${id}`)
 }
 
 

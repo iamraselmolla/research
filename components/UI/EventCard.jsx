@@ -1,12 +1,12 @@
 
 
 import Image from "next/image";
-import { AccessTimeOutlined, LocationOnOutlined, CheckCircle, NotInterested, RadioButtonUnchecked, FiberManualRecordOutlined, FiberManualRecord, DoNotDisturbOn } from "@mui/icons-material";
+import { AccessTimeOutlined, LocationOnOutlined, CheckCircle, NotInterested, RadioButtonUnchecked, FiberManualRecordOutlined, FiberManualRecord, DoNotDisturbOn, DeleteForever } from "@mui/icons-material";
 import axios from "axios";
 import { FormControlLabel, Switch } from "@mui/material";
 import Link from "next/link";
 import { useContext, useState } from "react";
-import { conferenceStatus, verifyConferenceByAdmin } from "../services/userServices";
+import { conferenceStatus, deleteConference, verifyConferenceByAdmin } from "../services/userServices";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../store/userSlice";
@@ -27,7 +27,18 @@ const EventCard = ({
     const [approved, setApproved] = useState(status === 'approved' ? true : false);
     const dispatch = useDispatch();
     const { role } = useContext(AuthContext);
-    
+    const handleDeleteConference = async () => {
+        if (window.confirm(`Do you want to delete conference ${title}?`)) {
+            const deleteConferencebyAdmin = await deleteConference(id);
+            if(deleteConferencebyAdmin.status === 200){
+                    toast.success("Conference Deleted Successfully");
+                    dispatch(userActions.refreshDetails())
+            }
+        }else{
+            console.log("not")
+        }
+    };
+
     const handleChange = async () => {
         try {
             if (approved) {
@@ -37,7 +48,7 @@ const EventCard = ({
             if (result) {
                 // dispatch(userActions.refreshDetails());
 
-                
+
                 dispatch(userActions.refreshDetails());
                 setApproved(true)
             } else {
@@ -83,7 +94,17 @@ const EventCard = ({
             </div>
 
 
-            <Image src={image} alt="Event Image" className="w-full" />
+            <div className="relative">
+                <Image src={image} alt="Event Image" className="w-full" />
+                {role === 'admin' ? <>
+                    <div onClick={handleDeleteConference} className="h-10 cursor-pointer w-10 rounded-full bg-red-600 flex justify-center items-center absolute -bottom-5 right-1 text-white">
+
+                        <DeleteForever></DeleteForever>
+
+                    </div>
+                </> : ''}
+            </div>
+
             <div className="p-2 gap-2 flex flex-col">
                 <div>
                     <div className="text-slate-500 text-sm">{organiser}</div>

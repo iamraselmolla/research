@@ -78,7 +78,7 @@ const AllConferences = () => {
             description={conference.conferenceInfo.conferenceDescription}
             organiser={conference.organisationInfo.organizationName}
             verified={conference.verified}
-            id={conference._id}
+            id={conference?._id}
             isActive={conference?.isActive}
             status={conference.status}
           />

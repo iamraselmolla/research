@@ -102,7 +102,7 @@ export default function AssignModal({ data }) {
             <IconButton onClick={handleClickOpen}>
                 <div className="flex text-lg bg-green-500 px-2 py-1 text-white  rounded justify-center items-center">
                     <div className='mr-2'>
-                        {data?.assigned ? "Re-assign" : 'Assign to'}
+                        {data?.assigned ? "Reassign" : 'Assign to'}
                     </div>
                     <Forward></Forward>
                 </div>
