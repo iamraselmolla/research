@@ -5,7 +5,7 @@ const dbConnect=async()=>{
         return;
     }
 
-    return mongoose.connect('mongodb+srv://3plwarehouseservicez:zZTZ6PzvqNlSldod@cluster0.pmxzwjj.mongodb.net/3plwarehouseservicez?retryWrites=true&w=majority',{
+    return mongoose.connect('mongodb+srv://rasel:rasel@cluster0.q37bxqk.mongodb.net/research',{
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
